@@ -1,0 +1,4 @@
+require 'uri'
+
+
+str = ""

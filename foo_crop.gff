@@ -1,0 +1,224 @@
+##gff-version	3
+##feature-ontology	so.obo
+##attribute-ontology	gff3_attributes.obo
+##sequence-region	apidb|M76611	1	5967
+##sequence-region	apidb|PFC10_API_IRAB	1	34242
+##sequence-region	apidb|Pf3D7_01	1	643292
+##sequence-region	apidb|Pf3D7_02	1	947102
+##sequence-region	apidb|Pf3D7_03	1	1060087
+##sequence-region	apidb|Pf3D7_04	1	1204112
+##sequence-region	apidb|Pf3D7_05	1	1343552
+##sequence-region	apidb|Pf3D7_06	1	1418244
+##sequence-region	apidb|Pf3D7_07	1	1501717
+##sequence-region	apidb|Pf3D7_08	1	1419563
+##sequence-region	apidb|Pf3D7_09	1	1541723
+##sequence-region	apidb|Pf3D7_10	1	1687655
+##sequence-region	apidb|Pf3D7_11	1	2038337
+##sequence-region	apidb|Pf3D7_12	1	2271478
+##sequence-region	apidb|Pf3D7_13	1	2895605
+##sequence-region	apidb|Pf3D7_14	1	3291871
+apidb|M76611	ApiDB	supercontig	1	5967	.	+	.	ID=apidb|M76611;Name=M76611;description=M76611;size=5967;web_id=M76611;molecule_type=dsDNA;organism_name=Plasmodium falciparum;translation_table=11;topology=linear;localization=nuclear;Dbxref=ApiDB_PlasmoDB:M76611,taxon:36329
+apidb|PFC10_API_IRAB	ApiDB	supercontig	1	34242	.	+	.	ID=apidb|PFC10_API_IRAB;Name=PFC10_API_IRAB;description=PFC10_API_IRAB;size=34242;web_id=PFC10_API_IRAB;molecule_type=dsDNA;organism_name=Plasmodium falciparum;translation_table=11;topology=linear;localization=nuclear;Dbxref=ApiDB_PlasmoDB:PFC10_API_IRAB,taxon:36329
+apidb|Pf3D7_01	ApiDB	supercontig	1	643292	.	+	.	ID=apidb|Pf3D7_01;Name=Pf3D7_01;description=Pf3D7_01;size=643292;web_id=Pf3D7_01;molecule_type=dsDNA;organism_name=Plasmodium falciparum;translation_table=11;topology=linear;localization=nuclear;Dbxref=ApiDB_PlasmoDB:Pf3D7_01,taxon:36329
+apidb|Pf3D7_02	ApiDB	supercontig	1	947102	.	+	.	ID=apidb|Pf3D7_02;Name=Pf3D7_02;description=Pf3D7_02;size=947102;web_id=Pf3D7_02;molecule_type=dsDNA;organism_name=Plasmodium falciparum;translation_table=11;topology=linear;localization=nuclear;Dbxref=ApiDB_PlasmoDB:Pf3D7_02,taxon:36329
+apidb|Pf3D7_03	ApiDB	supercontig	1	1060087	.	+	.	ID=apidb|Pf3D7_03;Name=Pf3D7_03;description=Pf3D7_03;size=1060087;web_id=Pf3D7_03;molecule_type=dsDNA;organism_name=Plasmodium falciparum;translation_table=11;topology=linear;localization=nuclear;Dbxref=ApiDB_PlasmoDB:Pf3D7_03,taxon:36329
+apidb|Pf3D7_04	ApiDB	supercontig	1	1204112	.	+	.	ID=apidb|Pf3D7_04;Name=Pf3D7_04;description=Pf3D7_04;size=1204112;web_id=Pf3D7_04;molecule_type=dsDNA;organism_name=Plasmodium falciparum;translation_table=11;topology=linear;localization=nuclear;Dbxref=ApiDB_PlasmoDB:Pf3D7_04,taxon:36329
+apidb|Pf3D7_05	ApiDB	supercontig	1	1343552	.	+	.	ID=apidb|Pf3D7_05;Name=Pf3D7_05;description=Pf3D7_05;size=1343552;web_id=Pf3D7_05;molecule_type=dsDNA;organism_name=Plasmodium falciparum;translation_table=11;topology=linear;localization=nuclear;Dbxref=ApiDB_PlasmoDB:Pf3D7_05,taxon:36329
+apidb|Pf3D7_06	ApiDB	supercontig	1	1418244	.	+	.	ID=apidb|Pf3D7_06;Name=Pf3D7_06;description=Pf3D7_06;size=1418244;web_id=Pf3D7_06;molecule_type=dsDNA;organism_name=Plasmodium falciparum;translation_table=11;topology=linear;localization=nuclear;Dbxref=ApiDB_PlasmoDB:Pf3D7_06,taxon:36329
+apidb|Pf3D7_07	ApiDB	supercontig	1	1501717	.	+	.	ID=apidb|Pf3D7_07;Name=Pf3D7_07;description=Pf3D7_07;size=1501717;web_id=Pf3D7_07;molecule_type=dsDNA;organism_name=Plasmodium falciparum;translation_table=11;topology=linear;localization=nuclear;Dbxref=ApiDB_PlasmoDB:Pf3D7_07,taxon:36329
+apidb|Pf3D7_08	ApiDB	supercontig	1	1419563	.	+	.	ID=apidb|Pf3D7_08;Name=Pf3D7_08;description=Pf3D7_08;size=1419563;web_id=Pf3D7_08;molecule_type=dsDNA;organism_name=Plasmodium falciparum;translation_table=11;topology=linear;localization=nuclear;Dbxref=ApiDB_PlasmoDB:Pf3D7_08,taxon:36329
+apidb|Pf3D7_09	ApiDB	supercontig	1	1541723	.	+	.	ID=apidb|Pf3D7_09;Name=Pf3D7_09;description=Pf3D7_09;size=1541723;web_id=Pf3D7_09;molecule_type=dsDNA;organism_name=Plasmodium falciparum;translation_table=11;topology=linear;localization=nuclear;Dbxref=ApiDB_PlasmoDB:Pf3D7_09,taxon:36329
+apidb|Pf3D7_10	ApiDB	supercontig	1	1687655	.	+	.	ID=apidb|Pf3D7_10;Name=Pf3D7_10;description=Pf3D7_10;size=1687655;web_id=Pf3D7_10;molecule_type=dsDNA;organism_name=Plasmodium falciparum;translation_table=11;topology=linear;localization=nuclear;Dbxref=ApiDB_PlasmoDB:Pf3D7_10,taxon:36329
+apidb|Pf3D7_11	ApiDB	supercontig	1	2038337	.	+	.	ID=apidb|Pf3D7_11;Name=Pf3D7_11;description=Pf3D7_11;size=2038337;web_id=Pf3D7_11;molecule_type=dsDNA;organism_name=Plasmodium falciparum;translation_table=11;topology=linear;localization=nuclear;Dbxref=ApiDB_PlasmoDB:Pf3D7_11,taxon:36329
+apidb|Pf3D7_12	ApiDB	supercontig	1	2271478	.	+	.	ID=apidb|Pf3D7_12;Name=Pf3D7_12;description=Pf3D7_12;size=2271478;web_id=Pf3D7_12;molecule_type=dsDNA;organism_name=Plasmodium falciparum;translation_table=11;topology=linear;localization=nuclear;Dbxref=ApiDB_PlasmoDB:Pf3D7_12,taxon:36329
+apidb|Pf3D7_13	ApiDB	supercontig	1	2895605	.	+	.	ID=apidb|Pf3D7_13;Name=Pf3D7_13;description=Pf3D7_13;size=2895605;web_id=Pf3D7_13;molecule_type=dsDNA;organism_name=Plasmodium falciparum;translation_table=11;topology=linear;localization=nuclear;Dbxref=ApiDB_PlasmoDB:Pf3D7_13,taxon:36329
+apidb|Pf3D7_14	ApiDB	supercontig	1	3291871	.	+	.	ID=apidb|Pf3D7_14;Name=Pf3D7_14;description=Pf3D7_14;size=3291871;web_id=Pf3D7_14;molecule_type=dsDNA;organism_name=Plasmodium falciparum;translation_table=11;topology=linear;localization=nuclear;Dbxref=ApiDB_PlasmoDB:Pf3D7_14,taxon:36329
+apidb|Pf3D7_14	ApiDB	gene	1546167	1546240	.	+	.	ID=apidb|1396.pre-tRNA-Met-1:tRNA;Name=1396.pre-tRNA-Met-1%3AtRNA;description=1396.pre-tRNA-Met-1%3AtRNA;size=74;web_id=1396.pre-tRNA-Met-1:tRNA;locus_tag=1396.pre-tRNA-Met-1:tRNA;size=74
+apidb|Pf3D7_14	ApiDB	tRNA	1546167	1546240	.	+	.	ID=apidb|rna_1396.pre-tRNA-Met-1:tRNA-1;Name=1396.pre-tRNA-Met-1%3AtRNA-1;description=1396.pre-tRNA-Met-1%3AtRNA-1;size=74;Parent=apidb|1396.pre-tRNA-Met-1:tRNA;Dbxref=ApiDB_PlasmoDB:1396.pre-tRNA-Met-1:tRNA,Sanger:1396.pre-tRNA-Met-1:tRNA,taxon:36329
+apidb|Pf3D7_14	ApiDB	exon	1546167	1546240	.	+	.	ID=apidb|exon_1396.pre-tRNA-Met-1:tRNA-1;Name=exon;description=exon;size=74;Parent=apidb|rna_1396.pre-tRNA-Met-1:tRNA-1
+apidb|Pf3D7_14	ApiDB	gene	778091	778162	.	+	.	ID=apidb|1396.pre-tRNA-Pro-1:rRNA;Name=1396.pre-tRNA-Pro-1%3ArRNA;description=1396.pre-tRNA-Pro-1%3ArRNA;size=72;web_id=1396.pre-tRNA-Pro-1:rRNA;locus_tag=1396.pre-tRNA-Pro-1:rRNA;size=72
+apidb|Pf3D7_14	ApiDB	rRNA	778091	778162	.	+	.	ID=apidb|rna_1396.pre-tRNA-Pro-1:rRNA-1;Name=1396.pre-tRNA-Pro-1%3ArRNA-1;description=1396.pre-tRNA-Pro-1%3ArRNA-1;size=72;Parent=apidb|1396.pre-tRNA-Pro-1:rRNA;Dbxref=ApiDB_PlasmoDB:1396.pre-tRNA-Pro-1:rRNA,Sanger:1396.pre-tRNA-Pro-1:rRNA,taxon:36329
+apidb|Pf3D7_14	ApiDB	exon	778091	778162	.	+	.	ID=apidb|exon_1396.pre-tRNA-Pro-1:rRNA-1;Name=exon;description=exon;size=72;Parent=apidb|rna_1396.pre-tRNA-Pro-1:rRNA-1
+apidb|Pf3D7_11	ApiDB	gene	143354	143426	.	+	.	ID=apidb|1399.pre-tRNA-Gly-1:tRNA;Name=1399.pre-tRNA-Gly-1%3AtRNA;description=1399.pre-tRNA-Gly-1%3AtRNA;size=73;web_id=1399.pre-tRNA-Gly-1:tRNA;locus_tag=1399.pre-tRNA-Gly-1:tRNA;size=73
+apidb|Pf3D7_11	ApiDB	tRNA	143354	143426	.	+	.	ID=apidb|rna_1399.pre-tRNA-Gly-1:tRNA-1;Name=1399.pre-tRNA-Gly-1%3AtRNA-1;description=1399.pre-tRNA-Gly-1%3AtRNA-1;size=73;Parent=apidb|1399.pre-tRNA-Gly-1:tRNA;Dbxref=ApiDB_PlasmoDB:1399.pre-tRNA-Gly-1:tRNA,Sanger:1399.pre-tRNA-Gly-1:tRNA,taxon:36329
+apidb|Pf3D7_11	ApiDB	exon	143354	143426	.	+	.	ID=apidb|exon_1399.pre-tRNA-Gly-1:tRNA-1;Name=exon;description=exon;size=73;Parent=apidb|rna_1399.pre-tRNA-Gly-1:tRNA-1
+apidb|Pf3D7_11	ApiDB	gene	144842	144940	.	-	.	ID=apidb|1399.pre-tRNA-Leu-1:tRNA;Name=1399.pre-tRNA-Leu-1%3AtRNA;description=1399.pre-tRNA-Leu-1%3AtRNA;size=99;web_id=1399.pre-tRNA-Leu-1:tRNA;locus_tag=1399.pre-tRNA-Leu-1:tRNA;size=99
+apidb|Pf3D7_11	ApiDB	tRNA	144842	144940	.	-	.	ID=apidb|rna_1399.pre-tRNA-Leu-1:tRNA-1;Name=1399.pre-tRNA-Leu-1%3AtRNA-1;description=1399.pre-tRNA-Leu-1%3AtRNA-1;size=99;Parent=apidb|1399.pre-tRNA-Leu-1:tRNA;Dbxref=ApiDB_PlasmoDB:1399.pre-tRNA-Leu-1:tRNA,Sanger:1399.pre-tRNA-Leu-1:tRNA,taxon:36329
+apidb|Pf3D7_11	ApiDB	exon	144842	144940	.	-	.	ID=apidb|exon_1399.pre-tRNA-Leu-1:tRNA-1;Name=exon;description=exon;size=99;Parent=apidb|rna_1399.pre-tRNA-Leu-1:tRNA-1
+apidb|Pf3D7_02	ApiDB	gene	164269	164340	.	+	.	ID=apidb|1400.pre-tRNA-Gln-1:tRNA;Name=1400.pre-tRNA-Gln-1%3AtRNA;description=1400.pre-tRNA-Gln-1%3AtRNA;size=72;web_id=1400.pre-tRNA-Gln-1:tRNA;locus_tag=1400.pre-tRNA-Gln-1:tRNA;size=72
+apidb|Pf3D7_02	ApiDB	tRNA	164269	164340	.	+	.	ID=apidb|rna_1400.pre-tRNA-Gln-1:tRNA-1;Name=1400.pre-tRNA-Gln-1%3AtRNA-1;description=1400.pre-tRNA-Gln-1%3AtRNA-1;size=72;Parent=apidb|1400.pre-tRNA-Gln-1:tRNA;Dbxref=ApiDB_PlasmoDB:1400.pre-tRNA-Gln-1:tRNA,Sanger:1400.pre-tRNA-Gln-1:tRNA,taxon:36329
+apidb|Pf3D7_02	ApiDB	exon	164269	164340	.	+	.	ID=apidb|exon_1400.pre-tRNA-Gln-1:tRNA-1;Name=exon;description=exon;size=72;Parent=apidb|rna_1400.pre-tRNA-Gln-1:tRNA-1
+apidb|Pf3D7_12	ApiDB	gene	2113716	2113787	.	-	.	ID=apidb|2277.pre-tRNA-Glu-1:tRNA;Name=2277.pre-tRNA-Glu-1%3AtRNA;description=2277.pre-tRNA-Glu-1%3AtRNA;size=72;web_id=2277.pre-tRNA-Glu-1:tRNA;locus_tag=2277.pre-tRNA-Glu-1:tRNA;size=72
+apidb|Pf3D7_12	ApiDB	tRNA	2113716	2113787	.	-	.	ID=apidb|rna_2277.pre-tRNA-Glu-1:tRNA-1;Name=2277.pre-tRNA-Glu-1%3AtRNA-1;description=2277.pre-tRNA-Glu-1%3AtRNA-1;size=72;Parent=apidb|2277.pre-tRNA-Glu-1:tRNA;Dbxref=ApiDB_PlasmoDB:2277.pre-tRNA-Glu-1:tRNA,Sanger:2277.pre-tRNA-Glu-1:tRNA,taxon:36329
+apidb|Pf3D7_12	ApiDB	exon	2113716	2113787	.	-	.	ID=apidb|exon_2277.pre-tRNA-Glu-1:tRNA-1;Name=exon;description=exon;size=72;Parent=apidb|rna_2277.pre-tRNA-Glu-1:tRNA-1
+apidb|Pf3D7_12	ApiDB	gene	666877	666948	.	+	.	ID=apidb|2277.pre-tRNA-Pro-1:tRNA;Name=2277.pre-tRNA-Pro-1%3AtRNA;description=2277.pre-tRNA-Pro-1%3AtRNA;size=72;web_id=2277.pre-tRNA-Pro-1:tRNA;locus_tag=2277.pre-tRNA-Pro-1:tRNA;size=72
+apidb|Pf3D7_12	ApiDB	tRNA	666877	666948	.	+	.	ID=apidb|rna_2277.pre-tRNA-Pro-1:tRNA-1;Name=2277.pre-tRNA-Pro-1%3AtRNA-1;description=2277.pre-tRNA-Pro-1%3AtRNA-1;size=72;Parent=apidb|2277.pre-tRNA-Pro-1:tRNA;Dbxref=ApiDB_PlasmoDB:2277.pre-tRNA-Pro-1:tRNA,Sanger:2277.pre-tRNA-Pro-1:tRNA,taxon:36329
+apidb|Pf3D7_12	ApiDB	exon	666877	666948	.	+	.	ID=apidb|exon_2277.pre-tRNA-Pro-1:tRNA-1;Name=exon;description=exon;size=72;Parent=apidb|rna_2277.pre-tRNA-Pro-1:tRNA-1
+apidb|Pf3D7_12	ApiDB	gene	2112864	2112936	.	+	.	ID=apidb|2277.pre-tRNA-Val-1:tRNA;Name=2277.pre-tRNA-Val-1%3AtRNA;description=2277.pre-tRNA-Val-1%3AtRNA;size=73;web_id=2277.pre-tRNA-Val-1:tRNA;locus_tag=2277.pre-tRNA-Val-1:tRNA;size=73
+apidb|Pf3D7_12	ApiDB	tRNA	2112864	2112936	.	+	.	ID=apidb|rna_2277.pre-tRNA-Val-1:tRNA-1;Name=2277.pre-tRNA-Val-1%3AtRNA-1;description=2277.pre-tRNA-Val-1%3AtRNA-1;size=73;Parent=apidb|2277.pre-tRNA-Val-1:tRNA;Dbxref=ApiDB_PlasmoDB:2277.pre-tRNA-Val-1:tRNA,Sanger:2277.pre-tRNA-Val-1:tRNA,taxon:36329
+apidb|Pf3D7_12	ApiDB	exon	2112864	2112936	.	+	.	ID=apidb|exon_2277.pre-tRNA-Val-1:tRNA-1;Name=exon;description=exon;size=73;Parent=apidb|rna_2277.pre-tRNA-Val-1:tRNA-1
+apidb|Pf3D7_14	ApiDB	gene	2171805	2172491	.	-	.	ID=apidb|DUP1-PF14_0504;Name=DUP1-PF14_0504;description=conserved+Plasmodium+protein%2C+unknown+function;size=687;web_id=DUP1-PF14_0504;locus_tag=DUP1-PF14_0504;size=687
+apidb|Pf3D7_14	ApiDB	mRNA	2171805	2172491	.	-	.	ID=apidb|rna_DUP1-PF14_0504-1;Name=DUP1-PF14_0504-1;description=conserved+Plasmodium+protein%2C+unknown+function;size=687;Parent=apidb|DUP1-PF14_0504;Ontology_term=GO:0008150,GO:0016020,GO:0003674;Dbxref=ApiDB_PlasmoDB:DUP1-PF14_0504,Sanger:DUP1-PF14_0504,taxon:36329
+apidb|Pf3D7_14	ApiDB	CDS	2171805	2172491	.	-	0	ID=apidb|cds_DUP1-PF14_0504-1;Name=cds;description=.;size=687;Parent=apidb|rna_DUP1-PF14_0504-1
+apidb|Pf3D7_14	ApiDB	exon	2171805	2172491	.	-	.	ID=apidb|exon_DUP1-PF14_0504-1;Name=exon;description=exon;size=687;Parent=apidb|rna_DUP1-PF14_0504-1
+apidb|Pf3D7_05	ApiDB	gene	116451	119969	.	-	.	ID=apidb|DUP1-PFE0130c;Name=DUP1-PFE0130c;description=conserved+Plasmodium+protein%2C+unknown+function;size=3519;web_id=DUP1-PFE0130c;locus_tag=DUP1-PFE0130c;size=3519
+apidb|Pf3D7_05	ApiDB	mRNA	116451	119969	.	-	.	ID=apidb|rna_DUP1-PFE0130c-1;Name=DUP1-PFE0130c-1;description=conserved+Plasmodium+protein%2C+unknown+function;size=3519;Parent=apidb|DUP1-PFE0130c;Dbxref=ApiDB_PlasmoDB:DUP1-PFE0130c,Sanger:DUP1-PFE0130c,taxon:36329
+apidb|Pf3D7_05	ApiDB	CDS	119522	119969	.	-	0	ID=apidb|cds_DUP1-PFE0130c-1;Name=cds;description=.;size=448;Parent=apidb|rna_DUP1-PFE0130c-1
+apidb|Pf3D7_05	ApiDB	CDS	119358	119429	.	-	2	ID=apidb|cds_DUP1-PFE0130c-1;Name=cds;description=.;size=72;Parent=apidb|rna_DUP1-PFE0130c-1
+apidb|Pf3D7_05	ApiDB	CDS	119033	119248	.	-	2	ID=apidb|cds_DUP1-PFE0130c-1;Name=cds;description=.;size=216;Parent=apidb|rna_DUP1-PFE0130c-1
+apidb|Pf3D7_05	ApiDB	CDS	117250	118856	.	-	2	ID=apidb|cds_DUP1-PFE0130c-1;Name=cds;description=.;size=1607;Parent=apidb|rna_DUP1-PFE0130c-1
+apidb|Pf3D7_05	ApiDB	CDS	117017	117091	.	-	0	ID=apidb|cds_DUP1-PFE0130c-1;Name=cds;description=.;size=75;Parent=apidb|rna_DUP1-PFE0130c-1
+apidb|Pf3D7_05	ApiDB	CDS	116818	116919	.	-	0	ID=apidb|cds_DUP1-PFE0130c-1;Name=cds;description=.;size=102;Parent=apidb|rna_DUP1-PFE0130c-1
+apidb|Pf3D7_05	ApiDB	CDS	116599	116715	.	-	0	ID=apidb|cds_DUP1-PFE0130c-1;Name=cds;description=.;size=117;Parent=apidb|rna_DUP1-PFE0130c-1
+apidb|Pf3D7_05	ApiDB	CDS	116451	116483	.	-	0	ID=apidb|cds_DUP1-PFE0130c-1;Name=cds;description=.;size=33;Parent=apidb|rna_DUP1-PFE0130c-1
+apidb|Pf3D7_05	ApiDB	exon	119522	119969	.	-	.	ID=apidb|exon_DUP1-PFE0130c-1;Name=exon;description=exon;size=448;Parent=apidb|rna_DUP1-PFE0130c-1
+apidb|Pf3D7_05	ApiDB	exon	119358	119429	.	-	.	ID=apidb|exon_DUP1-PFE0130c-2;Name=exon;description=exon;size=72;Parent=apidb|rna_DUP1-PFE0130c-1
+apidb|Pf3D7_05	ApiDB	exon	119033	119248	.	-	.	ID=apidb|exon_DUP1-PFE0130c-3;Name=exon;description=exon;size=216;Parent=apidb|rna_DUP1-PFE0130c-1
+apidb|Pf3D7_05	ApiDB	exon	117250	118856	.	-	.	ID=apidb|exon_DUP1-PFE0130c-4;Name=exon;description=exon;size=1607;Parent=apidb|rna_DUP1-PFE0130c-1
+apidb|Pf3D7_05	ApiDB	exon	117017	117091	.	-	.	ID=apidb|exon_DUP1-PFE0130c-5;Name=exon;description=exon;size=75;Parent=apidb|rna_DUP1-PFE0130c-1
+apidb|Pf3D7_05	ApiDB	exon	116818	116919	.	-	.	ID=apidb|exon_DUP1-PFE0130c-6;Name=exon;description=exon;size=102;Parent=apidb|rna_DUP1-PFE0130c-1
+apidb|Pf3D7_05	ApiDB	exon	116599	116715	.	-	.	ID=apidb|exon_DUP1-PFE0130c-7;Name=exon;description=exon;size=117;Parent=apidb|rna_DUP1-PFE0130c-1
+apidb|Pf3D7_05	ApiDB	exon	116451	116483	.	-	.	ID=apidb|exon_DUP1-PFE0130c-8;Name=exon;description=exon;size=33;Parent=apidb|rna_DUP1-PFE0130c-1
+apidb|Pf3D7_06	ApiDB	gene	521223	521933	.	+	.	ID=apidb|DUP1-PFF0600w{pep};Name=DUP1-PFF0600w%7Bpep%7D;description=conserved+Plasmodium+protein%2C+unknown+function;size=711;web_id=DUP1-PFF0600w{pep};locus_tag=DUP1-PFF0600w{pep};size=711
+apidb|Pf3D7_06	ApiDB	mRNA	521223	521933	.	+	.	ID=apidb|rna_DUP1-PFF0600w{pep}-1;Name=DUP1-PFF0600w%7Bpep%7D-1;description=conserved+Plasmodium+protein%2C+unknown+function;size=711;Parent=apidb|DUP1-PFF0600w{pep};Ontology_term=GO:0006412,GO:0004045;Dbxref=ApiDB_PlasmoDB:DUP1-PFF0600w{pep},Sanger:DUP1-PFF0600w{pep},taxon:36329
+apidb|Pf3D7_06	ApiDB	CDS	521223	521933	.	+	0	ID=apidb|cds_DUP1-PFF0600w{pep}-1;Name=cds;description=.;size=711;Parent=apidb|rna_DUP1-PFF0600w{pep}-1
+apidb|Pf3D7_06	ApiDB	exon	521223	521933	.	+	.	ID=apidb|exon_DUP1-PFF0600w{pep}-1;Name=exon;description=exon;size=711;Parent=apidb|rna_DUP1-PFF0600w{pep}-1
+apidb|Pf3D7_09	ApiDB	gene	1323883	1324689	.	+	.	ID=apidb|DUP1-PFI1615w;Name=DUP1-PFI1615w;description=conserved+Plasmodium+protein%2C+unknown+function;size=807;web_id=DUP1-PFI1615w;locus_tag=DUP1-PFI1615w;size=807
+apidb|Pf3D7_09	ApiDB	mRNA	1323883	1324689	.	+	.	ID=apidb|rna_DUP1-PFI1615w-1;Name=DUP1-PFI1615w-1;description=conserved+Plasmodium+protein%2C+unknown+function;size=807;Parent=apidb|DUP1-PFI1615w;Dbxref=ApiDB_PlasmoDB:DUP1-PFI1615w,Sanger:DUP1-PFI1615w,taxon:36329
+apidb|Pf3D7_09	ApiDB	CDS	1323883	1324689	.	+	0	ID=apidb|cds_DUP1-PFI1615w-1;Name=cds;description=.;size=807;Parent=apidb|rna_DUP1-PFI1615w-1
+apidb|Pf3D7_09	ApiDB	exon	1323883	1324689	.	+	.	ID=apidb|exon_DUP1-PFI1615w-1;Name=exon;description=exon;size=807;Parent=apidb|rna_DUP1-PFI1615w-1
+apidb|Pf3D7_11	ApiDB	gene	1925939	1933147	.	+	.	ID=apidb|MAL11_rRNA:rRNA;Name=MAL11_rRNA%3ArRNA;description=MAL11_rRNA%3ArRNA;size=7209;web_id=MAL11_rRNA:rRNA;locus_tag=MAL11_rRNA:rRNA;size=7209
+apidb|Pf3D7_11	ApiDB	rRNA	1925939	1933147	.	+	.	ID=apidb|rna_MAL11_rRNA:rRNA-1;Name=MAL11_rRNA%3ArRNA-1;description=MAL11_rRNA%3ArRNA-1;size=7209;Parent=apidb|MAL11_rRNA:rRNA;Dbxref=ApiDB_PlasmoDB:MAL11_rRNA:rRNA,Sanger:MAL11_rRNA:rRNA,taxon:36329
+apidb|Pf3D7_11	ApiDB	exon	1925939	1933147	.	+	.	ID=apidb|exon_MAL11_rRNA:rRNA-1;Name=exon;description=exon;size=7209;Parent=apidb|rna_MAL11_rRNA:rRNA-1
+apidb|Pf3D7_13	ApiDB	gene	21467	28890	.	+	.	ID=apidb|MAL13P1.1;Name=MAL13P1.1;description=erythrocyte+membrane+protein+1%2C+PfEMP1;size=7424;web_id=MAL13P1.1;locus_tag=MAL13P1.1;size=7424;Alias=PF13_0001
+apidb|Pf3D7_13	ApiDB	mRNA	21467	28890	.	+	.	ID=apidb|rna_MAL13P1.1-1;Name=MAL13P1.1-1;description=erythrocyte+membrane+protein+1%2C+PfEMP1;size=7424;Parent=apidb|MAL13P1.1;Ontology_term=GO:0009405,GO:0016021,GO:0004872;Dbxref=ApiDB_PlasmoDB:MAL13P1.1,NCBI_gi:124512764,NCBI_gi:23615155,Sanger:MAL13P1.1,taxon:36329
+apidb|Pf3D7_13	ApiDB	CDS	21467	26641	.	+	0	ID=apidb|cds_MAL13P1.1-1;Name=cds;description=.;size=5175;Parent=apidb|rna_MAL13P1.1-1
+apidb|Pf3D7_13	ApiDB	CDS	27577	28890	.	+	0	ID=apidb|cds_MAL13P1.1-1;Name=cds;description=.;size=1314;Parent=apidb|rna_MAL13P1.1-1
+apidb|Pf3D7_13	ApiDB	exon	21467	26641	.	+	.	ID=apidb|exon_MAL13P1.1-1;Name=exon;description=exon;size=5175;Parent=apidb|rna_MAL13P1.1-1
+apidb|Pf3D7_13	ApiDB	exon	27577	28890	.	+	.	ID=apidb|exon_MAL13P1.1-2;Name=exon;description=exon;size=1314;Parent=apidb|rna_MAL13P1.1-1
+apidb|Pf3D7_13	ApiDB	gene	768250	769851	.	+	.	ID=apidb|MAL13P1.100;Name=MAL13P1.100;description=conserved+Plasmodium+protein%2C+unknown+function;size=1602;web_id=MAL13P1.100;locus_tag=MAL13P1.100;size=1602
+apidb|Pf3D7_13	ApiDB	mRNA	768250	769851	.	+	.	ID=apidb|rna_MAL13P1.100-1;Name=MAL13P1.100-1;description=conserved+Plasmodium+protein%2C+unknown+function;size=1602;Parent=apidb|MAL13P1.100;Ontology_term=GO:0045454;Dbxref=ApiDB_PlasmoDB:MAL13P1.100,Sanger:MAL13P1.100,taxon:36329
+apidb|Pf3D7_13	ApiDB	CDS	768250	769851	.	+	0	ID=apidb|cds_MAL13P1.100-1;Name=cds;description=.;size=1602;Parent=apidb|rna_MAL13P1.100-1
+apidb|Pf3D7_13	ApiDB	exon	768250	769851	.	+	.	ID=apidb|exon_MAL13P1.100-1;Name=exon;description=exon;size=1602;Parent=apidb|rna_MAL13P1.100-1
+apidb|Pf3D7_13	ApiDB	gene	770847	773096	.	-	.	ID=apidb|MAL13P1.102;Name=MAL13P1.102;description=conserved+Plasmodium+protein%2C+unknown+function;size=2250;web_id=MAL13P1.102;locus_tag=MAL13P1.102;size=2250
+apidb|Pf3D7_13	ApiDB	mRNA	770847	773096	.	-	.	ID=apidb|rna_MAL13P1.102-1;Name=MAL13P1.102-1;description=conserved+Plasmodium+protein%2C+unknown+function;size=2250;Parent=apidb|MAL13P1.102;Dbxref=ApiDB_PlasmoDB:MAL13P1.102,NCBI_gi:124513134,NCBI_gi:23615340,Sanger:MAL13P1.102,taxon:36329
+apidb|Pf3D7_13	ApiDB	CDS	770847	773096	.	-	0	ID=apidb|cds_MAL13P1.102-1;Name=cds;description=.;size=2250;Parent=apidb|rna_MAL13P1.102-1
+apidb|Pf3D7_13	ApiDB	exon	770847	773096	.	-	.	ID=apidb|exon_MAL13P1.102-1;Name=exon;description=exon;size=2250;Parent=apidb|rna_MAL13P1.102-1
+apidb|Pf3D7_13	ApiDB	gene	801913	806230	.	+	.	ID=apidb|MAL13P1.103;Name=MAL13P1.103;description=conserved+Plasmodium+protein%2C+unknown+function;size=4318;web_id=MAL13P1.103;locus_tag=MAL13P1.103;size=4318
+apidb|Pf3D7_13	ApiDB	mRNA	801913	806230	.	+	.	ID=apidb|rna_MAL13P1.103-1;Name=MAL13P1.103-1;description=conserved+Plasmodium+protein%2C+unknown+function;size=4318;Parent=apidb|MAL13P1.103;Dbxref=ApiDB_PlasmoDB:MAL13P1.103,NCBI_gi:124513148,NCBI_gi:23615347,Sanger:MAL13P1.103,taxon:36329
+apidb|Pf3D7_13	ApiDB	CDS	801913	804064	.	+	0	ID=apidb|cds_MAL13P1.103-1;Name=cds;description=.;size=2152;Parent=apidb|rna_MAL13P1.103-1
+apidb|Pf3D7_13	ApiDB	CDS	804194	804264	.	+	2	ID=apidb|cds_MAL13P1.103-1;Name=cds;description=.;size=71;Parent=apidb|rna_MAL13P1.103-1
+apidb|Pf3D7_13	ApiDB	CDS	804423	804569	.	+	0	ID=apidb|cds_MAL13P1.103-1;Name=cds;description=.;size=147;Parent=apidb|rna_MAL13P1.103-1
+apidb|Pf3D7_13	ApiDB	CDS	804663	804788	.	+	0	ID=apidb|cds_MAL13P1.103-1;Name=cds;description=.;size=126;Parent=apidb|rna_MAL13P1.103-1
+apidb|Pf3D7_13	ApiDB	CDS	804950	805115	.	+	0	ID=apidb|cds_MAL13P1.103-1;Name=cds;description=.;size=166;Parent=apidb|rna_MAL13P1.103-1
+apidb|Pf3D7_13	ApiDB	CDS	805197	805277	.	+	2	ID=apidb|cds_MAL13P1.103-1;Name=cds;description=.;size=81;Parent=apidb|rna_MAL13P1.103-1
+apidb|Pf3D7_13	ApiDB	CDS	805391	805476	.	+	2	ID=apidb|cds_MAL13P1.103-1;Name=cds;description=.;size=86;Parent=apidb|rna_MAL13P1.103-1
+apidb|Pf3D7_13	ApiDB	CDS	805587	805642	.	+	0	ID=apidb|cds_MAL13P1.103-1;Name=cds;description=.;size=56;Parent=apidb|rna_MAL13P1.103-1
+apidb|Pf3D7_13	ApiDB	CDS	805730	805811	.	+	1	ID=apidb|cds_MAL13P1.103-1;Name=cds;description=.;size=82;Parent=apidb|rna_MAL13P1.103-1
+apidb|Pf3D7_13	ApiDB	CDS	805985	806230	.	+	0	ID=apidb|cds_MAL13P1.103-1;Name=cds;description=.;size=246;Parent=apidb|rna_MAL13P1.103-1
+apidb|Pf3D7_13	ApiDB	exon	801913	804064	.	+	.	ID=apidb|exon_MAL13P1.103-1;Name=exon;description=exon;size=2152;Parent=apidb|rna_MAL13P1.103-1
+apidb|Pf3D7_13	ApiDB	exon	804194	804264	.	+	.	ID=apidb|exon_MAL13P1.103-2;Name=exon;description=exon;size=71;Parent=apidb|rna_MAL13P1.103-1
+apidb|Pf3D7_13	ApiDB	exon	804423	804569	.	+	.	ID=apidb|exon_MAL13P1.103-3;Name=exon;description=exon;size=147;Parent=apidb|rna_MAL13P1.103-1
+apidb|Pf3D7_13	ApiDB	exon	804663	804788	.	+	.	ID=apidb|exon_MAL13P1.103-4;Name=exon;description=exon;size=126;Parent=apidb|rna_MAL13P1.103-1
+apidb|Pf3D7_13	ApiDB	exon	804950	805115	.	+	.	ID=apidb|exon_MAL13P1.103-5;Name=exon;description=exon;size=166;Parent=apidb|rna_MAL13P1.103-1
+apidb|Pf3D7_13	ApiDB	exon	805197	805277	.	+	.	ID=apidb|exon_MAL13P1.103-6;Name=exon;description=exon;size=81;Parent=apidb|rna_MAL13P1.103-1
+apidb|Pf3D7_13	ApiDB	exon	805391	805476	.	+	.	ID=apidb|exon_MAL13P1.103-7;Name=exon;description=exon;size=86;Parent=apidb|rna_MAL13P1.103-1
+apidb|Pf3D7_13	ApiDB	exon	805587	805642	.	+	.	ID=apidb|exon_MAL13P1.103-8;Name=exon;description=exon;size=56;Parent=apidb|rna_MAL13P1.103-1
+apidb|Pf3D7_13	ApiDB	exon	805730	805811	.	+	.	ID=apidb|exon_MAL13P1.103-9;Name=exon;description=exon;size=82;Parent=apidb|rna_MAL13P1.103-1
+apidb|Pf3D7_13	ApiDB	exon	805985	806230	.	+	.	ID=apidb|exon_MAL13P1.103-10;Name=exon;description=exon;size=246;Parent=apidb|rna_MAL13P1.103-1
+apidb|Pf3D7_13	ApiDB	gene	816023	818599	.	-	.	ID=apidb|MAL13P1.105;Name=MAL13P1.105;description=ser%2Fthr+protein+phosphatase+2A+reulatory+subunit+A+homologue;size=2577;web_id=MAL13P1.105;locus_tag=MAL13P1.105;size=2577
+apidb|Pf3D7_13	ApiDB	mRNA	816023	818599	.	-	.	ID=apidb|rna_MAL13P1.105-1;Name=MAL13P1.105-1;description=ser%2Fthr+protein+phosphatase+2A+reulatory+subunit+A+homologue;size=2577;Parent=apidb|MAL13P1.105;Ontology_term=GO:0005488;Dbxref=ApiDB_PlasmoDB:MAL13P1.105,EC:3.1.3.16,NCBI_gi:124513154,NCBI_gi:23615350,Sanger:MAL13P1.105,taxon:36329
+apidb|Pf3D7_13	ApiDB	CDS	816023	818599	.	-	0	ID=apidb|cds_MAL13P1.105-1;Name=cds;description=.;size=2577;Parent=apidb|rna_MAL13P1.105-1
+apidb|Pf3D7_13	ApiDB	exon	816023	818599	.	-	.	ID=apidb|exon_MAL13P1.105-1;Name=exon;description=exon;size=2577;Parent=apidb|rna_MAL13P1.105-1
+apidb|Pf3D7_13	ApiDB	gene	820942	821379	.	+	.	ID=apidb|MAL13P1.106;Name=MAL13P1.106;description=probable+protein%2C+unknown+function;size=438;web_id=MAL13P1.106;locus_tag=MAL13P1.106;size=438
+apidb|Pf3D7_13	ApiDB	mRNA	820942	821379	.	+	.	ID=apidb|rna_MAL13P1.106-1;Name=MAL13P1.106-1;description=probable+protein%2C+unknown+function;size=438;Parent=apidb|MAL13P1.106;Dbxref=ApiDB_PlasmoDB:MAL13P1.106,NCBI_gi:124513156,NCBI_gi:23615351,Sanger:MAL13P1.106,taxon:36329
+apidb|Pf3D7_13	ApiDB	CDS	820942	821379	.	+	0	ID=apidb|cds_MAL13P1.106-1;Name=cds;description=.;size=438;Parent=apidb|rna_MAL13P1.106-1
+apidb|Pf3D7_13	ApiDB	exon	820942	821379	.	+	.	ID=apidb|exon_MAL13P1.106-1;Name=exon;description=exon;size=438;Parent=apidb|rna_MAL13P1.106-1
+apidb|Pf3D7_13	ApiDB	gene	822279	826739	.	-	.	ID=apidb|MAL13P1.107;Name=MAL13P1.107;description=conserved+Plasmodium+protein%2C+unknown+function;size=4461;web_id=MAL13P1.107;locus_tag=MAL13P1.107;size=4461
+apidb|Pf3D7_13	ApiDB	mRNA	822279	826739	.	-	.	ID=apidb|rna_MAL13P1.107-1;Name=MAL13P1.107-1;description=conserved+Plasmodium+protein%2C+unknown+function;size=4461;Parent=apidb|MAL13P1.107;Dbxref=ApiDB_PlasmoDB:MAL13P1.107,NCBI_gi:124513158,NCBI_gi:23615352,Sanger:MAL13P1.107,taxon:36329
+apidb|Pf3D7_13	ApiDB	CDS	822279	826739	.	-	0	ID=apidb|cds_MAL13P1.107-1;Name=cds;description=.;size=4461;Parent=apidb|rna_MAL13P1.107-1
+apidb|Pf3D7_13	ApiDB	exon	822279	826739	.	-	.	ID=apidb|exon_MAL13P1.107-1;Name=exon;description=exon;size=4461;Parent=apidb|rna_MAL13P1.107-1
+apidb|Pf3D7_13	ApiDB	gene	68587	69514	.	-	.	ID=apidb|MAL13P1.11;Name=MAL13P1.11;description=Plasmodium+exported+protein+%28PHISTa%29%2C+unknown+function;size=928;web_id=MAL13P1.11;locus_tag=MAL13P1.11;size=928;Alias=MAL13P1.11a
+apidb|Pf3D7_13	ApiDB	mRNA	68587	69514	.	-	.	ID=apidb|rna_MAL13P1.11-1;Name=MAL13P1.11-1;description=Plasmodium+exported+protein+%28PHISTa%29%2C+unknown+function;size=928;Parent=apidb|MAL13P1.11;Dbxref=ApiDB_PlasmoDB:MAL13P1.11,Sanger:MAL13P1.11,taxon:36329
+apidb|Pf3D7_13	ApiDB	CDS	69383	69514	.	-	0	ID=apidb|cds_MAL13P1.11-1;Name=cds;description=.;size=132;Parent=apidb|rna_MAL13P1.11-1
+apidb|Pf3D7_13	ApiDB	CDS	68587	69288	.	-	0	ID=apidb|cds_MAL13P1.11-1;Name=cds;description=.;size=702;Parent=apidb|rna_MAL13P1.11-1
+apidb|Pf3D7_13	ApiDB	exon	69383	69514	.	-	.	ID=apidb|exon_MAL13P1.11-1;Name=exon;description=exon;size=132;Parent=apidb|rna_MAL13P1.11-1
+apidb|Pf3D7_13	ApiDB	exon	68587	69288	.	-	.	ID=apidb|exon_MAL13P1.11-2;Name=exon;description=exon;size=702;Parent=apidb|rna_MAL13P1.11-1
+apidb|Pf3D7_13	ApiDB	gene	834381	835509	.	-	.	ID=apidb|MAL13P1.111;Name=MAL13P1.111;description=ATP-dependent+Clp+protease+adaptor+protein+ClpS+containing+protein;size=1129;web_id=MAL13P1.111;locus_tag=MAL13P1.111;size=1129
+apidb|Pf3D7_13	ApiDB	mRNA	834381	835509	.	-	.	ID=apidb|rna_MAL13P1.111-1;Name=MAL13P1.111-1;description=ATP-dependent+Clp+protease+adaptor+protein+ClpS+containing+protein;size=1129;Parent=apidb|MAL13P1.111;Ontology_term=GO:0030163;Dbxref=ApiDB_PlasmoDB:MAL13P1.111,NCBI_gi:124513168,NCBI_gi:23615357,Sanger:MAL13P1.111,taxon:36329
+apidb|Pf3D7_13	ApiDB	CDS	835336	835509	.	-	0	ID=apidb|cds_MAL13P1.111-1;Name=cds;description=.;size=174;Parent=apidb|rna_MAL13P1.111-1
+apidb|Pf3D7_13	ApiDB	CDS	835040	835107	.	-	0	ID=apidb|cds_MAL13P1.111-1;Name=cds;description=.;size=68;Parent=apidb|rna_MAL13P1.111-1
+apidb|Pf3D7_13	ApiDB	CDS	834788	834907	.	-	1	ID=apidb|cds_MAL13P1.111-1;Name=cds;description=.;size=120;Parent=apidb|rna_MAL13P1.111-1
+apidb|Pf3D7_13	ApiDB	CDS	834554	834699	.	-	1	ID=apidb|cds_MAL13P1.111-1;Name=cds;description=.;size=146;Parent=apidb|rna_MAL13P1.111-1
+apidb|Pf3D7_13	ApiDB	CDS	834381	834451	.	-	2	ID=apidb|cds_MAL13P1.111-1;Name=cds;description=.;size=71;Parent=apidb|rna_MAL13P1.111-1
+apidb|Pf3D7_13	ApiDB	exon	835336	835509	.	-	.	ID=apidb|exon_MAL13P1.111-1;Name=exon;description=exon;size=174;Parent=apidb|rna_MAL13P1.111-1
+apidb|Pf3D7_13	ApiDB	exon	835040	835107	.	-	.	ID=apidb|exon_MAL13P1.111-2;Name=exon;description=exon;size=68;Parent=apidb|rna_MAL13P1.111-1
+apidb|Pf3D7_13	ApiDB	exon	834788	834907	.	-	.	ID=apidb|exon_MAL13P1.111-3;Name=exon;description=exon;size=120;Parent=apidb|rna_MAL13P1.111-1
+apidb|Pf3D7_13	ApiDB	exon	834554	834699	.	-	.	ID=apidb|exon_MAL13P1.111-4;Name=exon;description=exon;size=146;Parent=apidb|rna_MAL13P1.111-1
+apidb|Pf3D7_13	ApiDB	exon	834381	834451	.	-	.	ID=apidb|exon_MAL13P1.111-5;Name=exon;description=exon;size=71;Parent=apidb|rna_MAL13P1.111-1
+apidb|Pf3D7_13	ApiDB	gene	839049	841166	.	-	.	ID=apidb|MAL13P1.112;Name=MAL13P1.112;description=conserved+Plasmodium+protein%2C+unknown+function;size=2118;web_id=MAL13P1.112;locus_tag=MAL13P1.112;size=2118
+apidb|Pf3D7_13	ApiDB	mRNA	839049	841166	.	-	.	ID=apidb|rna_MAL13P1.112-1;Name=MAL13P1.112-1;description=conserved+Plasmodium+protein%2C+unknown+function;size=2118;Parent=apidb|MAL13P1.112;Dbxref=ApiDB_PlasmoDB:MAL13P1.112,Sanger:MAL13P1.112,taxon:36329
+apidb|Pf3D7_13	ApiDB	CDS	839049	841166	.	-	0	ID=apidb|cds_MAL13P1.112-1;Name=cds;description=.;size=2118;Parent=apidb|rna_MAL13P1.112-1
+apidb|Pf3D7_13	ApiDB	exon	839049	841166	.	-	.	ID=apidb|exon_MAL13P1.112-1;Name=exon;description=exon;size=2118;Parent=apidb|rna_MAL13P1.112-1
+apidb|Pf3D7_13	ApiDB	gene	843840	845312	.	+	.	ID=apidb|MAL13P1.113;Name=MAL13P1.113;description=SNARE+protein%2C+putative;size=1473;web_id=MAL13P1.113;locus_tag=MAL13P1.113;size=1473;Alias=PfSNAP23
+apidb|Pf3D7_13	ApiDB	mRNA	843840	845312	.	+	.	ID=apidb|rna_MAL13P1.113-1;Name=MAL13P1.113-1;description=SNARE+protein%2C+putative;size=1473;Parent=apidb|MAL13P1.113;Dbxref=ApiDB_PlasmoDB:MAL13P1.113,Sanger:MAL13P1.113,taxon:36329
+apidb|Pf3D7_13	ApiDB	CDS	843840	843887	.	+	0	ID=apidb|cds_MAL13P1.113-1;Name=cds;description=.;size=48;Parent=apidb|rna_MAL13P1.113-1
+apidb|Pf3D7_13	ApiDB	CDS	844166	844280	.	+	0	ID=apidb|cds_MAL13P1.113-1;Name=cds;description=.;size=115;Parent=apidb|rna_MAL13P1.113-1
+apidb|Pf3D7_13	ApiDB	CDS	844531	844797	.	+	2	ID=apidb|cds_MAL13P1.113-1;Name=cds;description=.;size=267;Parent=apidb|rna_MAL13P1.113-1
+apidb|Pf3D7_13	ApiDB	CDS	844875	844930	.	+	2	ID=apidb|cds_MAL13P1.113-1;Name=cds;description=.;size=56;Parent=apidb|rna_MAL13P1.113-1
+apidb|Pf3D7_13	ApiDB	CDS	845051	845113	.	+	0	ID=apidb|cds_MAL13P1.113-1;Name=cds;description=.;size=63;Parent=apidb|rna_MAL13P1.113-1
+apidb|Pf3D7_13	ApiDB	CDS	845226	845312	.	+	0	ID=apidb|cds_MAL13P1.113-1;Name=cds;description=.;size=87;Parent=apidb|rna_MAL13P1.113-1
+apidb|Pf3D7_13	ApiDB	exon	843840	843887	.	+	.	ID=apidb|exon_MAL13P1.113-1;Name=exon;description=exon;size=48;Parent=apidb|rna_MAL13P1.113-1
+apidb|Pf3D7_13	ApiDB	exon	844166	844280	.	+	.	ID=apidb|exon_MAL13P1.113-2;Name=exon;description=exon;size=115;Parent=apidb|rna_MAL13P1.113-1
+apidb|Pf3D7_13	ApiDB	exon	844531	844797	.	+	.	ID=apidb|exon_MAL13P1.113-3;Name=exon;description=exon;size=267;Parent=apidb|rna_MAL13P1.113-1
+apidb|Pf3D7_13	ApiDB	exon	844875	844930	.	+	.	ID=apidb|exon_MAL13P1.113-4;Name=exon;description=exon;size=56;Parent=apidb|rna_MAL13P1.113-1
+apidb|Pf3D7_13	ApiDB	exon	845051	845113	.	+	.	ID=apidb|exon_MAL13P1.113-5;Name=exon;description=exon;size=63;Parent=apidb|rna_MAL13P1.113-1
+apidb|Pf3D7_13	ApiDB	exon	845226	845312	.	+	.	ID=apidb|exon_MAL13P1.113-6;Name=exon;description=exon;size=87;Parent=apidb|rna_MAL13P1.113-1
+apidb|Pf3D7_13	ApiDB	gene	861643	872533	.	-	.	ID=apidb|MAL13P1.114;Name=MAL13P1.114;description=conserved+Plasmodium+protein%2C+unknown+function;size=10891;web_id=MAL13P1.114;locus_tag=MAL13P1.114;size=10891
+apidb|Pf3D7_13	ApiDB	mRNA	861643	872533	.	-	.	ID=apidb|rna_MAL13P1.114-1;Name=MAL13P1.114-1;description=conserved+Plasmodium+protein%2C+unknown+function;size=10891;Parent=apidb|MAL13P1.114;Ontology_term=GO:0006468,GO:0016020,GO:0020011,GO:0004672,GO:0005524;Dbxref=ApiDB_PlasmoDB:MAL13P1.114,Sanger:MAL13P1.114,taxon:36329
+apidb|Pf3D7_13	ApiDB	CDS	871375	872533	.	-	0	ID=apidb|cds_MAL13P1.114-1;Name=cds;description=.;size=1159;Parent=apidb|rna_MAL13P1.114-1
+apidb|Pf3D7_13	ApiDB	CDS	862459	871097	.	-	2	ID=apidb|cds_MAL13P1.114-1;Name=cds;description=.;size=8639;Parent=apidb|rna_MAL13P1.114-1
+apidb|Pf3D7_13	ApiDB	CDS	861874	862347	.	-	0	ID=apidb|cds_MAL13P1.114-1;Name=cds;description=.;size=474;Parent=apidb|rna_MAL13P1.114-1
+apidb|Pf3D7_13	ApiDB	CDS	861643	861714	.	-	0	ID=apidb|cds_MAL13P1.114-1;Name=cds;description=.;size=72;Parent=apidb|rna_MAL13P1.114-1
+apidb|Pf3D7_13	ApiDB	exon	871375	872533	.	-	.	ID=apidb|exon_MAL13P1.114-1;Name=exon;description=exon;size=1159;Parent=apidb|rna_MAL13P1.114-1
+apidb|Pf3D7_13	ApiDB	exon	862459	871097	.	-	.	ID=apidb|exon_MAL13P1.114-2;Name=exon;description=exon;size=8639;Parent=apidb|rna_MAL13P1.114-1
+apidb|Pf3D7_13	ApiDB	exon	861874	862347	.	-	.	ID=apidb|exon_MAL13P1.114-3;Name=exon;description=exon;size=474;Parent=apidb|rna_MAL13P1.114-1
+apidb|Pf3D7_13	ApiDB	exon	861643	861714	.	-	.	ID=apidb|exon_MAL13P1.114-4;Name=exon;description=exon;size=72;Parent=apidb|rna_MAL13P1.114-1
+apidb|Pf3D7_13	ApiDB	gene	875466	876048	.	+	.	ID=apidb|MAL13P1.115;Name=MAL13P1.115;description=conserved+protein%2C+unknown+function;size=583;web_id=MAL13P1.115;locus_tag=MAL13P1.115;size=583
+apidb|Pf3D7_13	ApiDB	mRNA	875466	876048	.	+	.	ID=apidb|rna_MAL13P1.115-1;Name=MAL13P1.115-1;description=conserved+protein%2C+unknown+function;size=583;Parent=apidb|MAL13P1.115;Dbxref=ApiDB_PlasmoDB:MAL13P1.115,NCBI_gi:124513190,NCBI_gi:23615368,Sanger:MAL13P1.115,taxon:36329
+apidb|Pf3D7_13	ApiDB	CDS	875466	875489	.	+	0	ID=apidb|cds_MAL13P1.115-1;Name=cds;description=.;size=24;Parent=apidb|rna_MAL13P1.115-1
+apidb|Pf3D7_13	ApiDB	CDS	875656	875751	.	+	0	ID=apidb|cds_MAL13P1.115-1;Name=cds;description=.;size=96;Parent=apidb|rna_MAL13P1.115-1
+apidb|Pf3D7_13	ApiDB	CDS	875932	876048	.	+	0	ID=apidb|cds_MAL13P1.115-1;Name=cds;description=.;size=117;Parent=apidb|rna_MAL13P1.115-1
+apidb|Pf3D7_13	ApiDB	exon	875466	875489	.	+	.	ID=apidb|exon_MAL13P1.115-1;Name=exon;description=exon;size=24;Parent=apidb|rna_MAL13P1.115-1
+apidb|Pf3D7_13	ApiDB	exon	875656	875751	.	+	.	ID=apidb|exon_MAL13P1.115-2;Name=exon;description=exon;size=96;Parent=apidb|rna_MAL13P1.115-1
+apidb|Pf3D7_13	ApiDB	exon	875932	876048	.	+	.	ID=apidb|exon_MAL13P1.115-3;Name=exon;description=exon;size=117;Parent=apidb|rna_MAL13P1.115-1
+apidb|Pf3D7_13	ApiDB	gene	876422	886465	.	-	.	ID=apidb|MAL13P1.116;Name=MAL13P1.116;description=conserved+Plasmodium+membrane+protein%2C+unknown+function;size=10044;web_id=MAL13P1.116;locus_tag=MAL13P1.116;size=10044
+apidb|Pf3D7_13	ApiDB	mRNA	876422	886465	.	-	.	ID=apidb|rna_MAL13P1.116-1;Name=MAL13P1.116-1;description=conserved+Plasmodium+membrane+protein%2C+unknown+function;size=10044;Parent=apidb|MAL13P1.116;Dbxref=ApiDB_PlasmoDB:MAL13P1.116,NCBI_gi:124513192,NCBI_gi:23615369,Sanger:MAL13P1.116,taxon:36329
+apidb|Pf3D7_13	ApiDB	CDS	876422	886465	.	-	0	ID=apidb|cds_MAL13P1.116-1;Name=cds;description=.;size=10044;Parent=apidb|rna_MAL13P1.116-1
+apidb|Pf3D7_13	ApiDB	exon	876422	886465	.	-	.	ID=apidb|exon_MAL13P1.116-1;Name=exon;description=exon;size=10044;Parent=apidb|rna_MAL13P1.116-1
+apidb|Pf3D7_13	ApiDB	gene	887472	889900	.	+	.	ID=apidb|MAL13P1.117;Name=MAL13P1.117;description=DHHC-type+zinc+finger+protein%2C+putative;size=2429;web_id=MAL13P1.117;locus_tag=MAL13P1.117;size=2429
+apidb|Pf3D7_13	ApiDB	mRNA	887472	889900	.	+	.	ID=apidb|rna_MAL13P1.117-1;Name=MAL13P1.117-1;description=DHHC-type+zinc+finger+protein%2C+putative;size=2429;Parent=apidb|MAL13P1.117;Ontology_term=GO:0008270;Dbxref=ApiDB_PlasmoDB:MAL13P1.117,NCBI_gi:124513194,NCBI_gi:23615370,Sanger:MAL13P1.117,taxon:36329
+apidb|Pf3D7_13	ApiDB	CDS	887472	887523	.	+	0	ID=apidb|cds_MAL13P1.117-1;Name=cds;description=.;size=52;Parent=apidb|rna_MAL13P1.117-1
+apidb|Pf3D7_13	ApiDB	CDS	887676	887796	.	+	2	ID=apidb|cds_MAL13P1.117-1;Name=cds;description=.;size=121;Parent=apidb|rna_MAL13P1.117-1
+apidb|Pf3D7_13	ApiDB	CDS	888031	888144	.	+	1	ID=apidb|cds_MAL13P1.117-1;Name=cds;description=.;size=114;Parent=apidb|rna_MAL13P1.117-1
+apidb|Pf3D7_13	ApiDB	CDS	888254	888300	.	+	1	ID=apidb|cds_MAL13P1.117-1;Name=cds;description=.;size=47;Parent=apidb|rna_MAL13P1.117-1
+apidb|Pf3D7_13	ApiDB	CDS	888389	888442	.	+	2	ID=apidb|cds_MAL13P1.117-1;Name=cds;description=.;size=54;Parent=apidb|rna_MAL13P1.117-1
+apidb|Pf3D7_13	ApiDB	CDS	888549	888636	.	+	2	ID=apidb|cds_MAL13P1.117-1;Name=cds;description=.;size=88;Parent=apidb|rna_MAL13P1.117-1
+apidb|Pf3D7_13	ApiDB	CDS	888732	888840	.	+	1	ID=apidb|cds_MAL13P1.117-1;Name=cds;description=.;size=109;Parent=apidb|rna_MAL13P1.117-1
+apidb|Pf3D7_13	ApiDB	CDS	888977	889050	.	+	0	ID=apidb|cds_MAL13P1.117-1;Name=cds;description=.;size=74;Parent=apidb|rna_MAL13P1.117-1
+apidb|Pf3D7_13	ApiDB	CDS	889248	889390	.	+	1	ID=apidb|cds_MAL13P1.117-1;Name=cds;description=.;size=143;Parent=apidb|rna_MAL13P1.117-1
+apidb|Pf3D7_13	ApiDB	CDS	889494	889542	.	+	2	ID=apidb|cds_MAL13P1.117-1;Name=cds;description=.;size=49;Parent=apidb|rna_MAL13P1.117-1
+apidb|Pf3D7_13	ApiDB	CDS	889632	889659	.	+	1	ID=apidb|cds_MAL13P1.117-1;Name=cds;description=.;size=28;Parent=apidb|rna_MAL13P1.117-1
+apidb|Pf3D7_13	ApiDB	CDS	889838	889900	.	+	0	ID=apidb|cds_MAL13P1.117-1;Name=cds;description=.;size=63;Parent=apidb|rna_MAL13P1.117-1
+apidb|Pf3D7_13	ApiDB	exon	887472	887523	.	+	.	ID=apidb|exon_MAL13P1.117-1;Name=exon;description=exon;size=52;Parent=apidb|rna_MAL13P1.117-1
+apidb|Pf3D7_13	ApiDB	exon	887676	887796	.	+	.	ID=apidb|exon_MAL13P1.117-2;Name=exon;description=exon;size=121;Parent=apidb|rna_MAL13P1.117-1
+apidb|Pf3D7_13	ApiDB	exon	888031	888144	.	+	.	ID=apidb|exon_MAL13P1.117-3;Name=exon;description=exon;size=114;Parent=apidb|rna_MAL13P1.117-1
+apidb|Pf3D7_13	ApiDB	exon	888254	888300	.	+	.	ID=apidb|exon_MAL13P1.117-4;Name=exon;description=exon;size=47;Parent=apidb|rna_MAL13P1.117-1
+apidb|Pf3D7_13	ApiDB	exon	888389	888442	.	+	.	ID=apidb|exon_MAL13P1.117-5;Name=exon;description=exon;size=54;Parent=apidb|rna_MAL13P1.117-1
+apidb|Pf3D7_13	ApiDB	exon	888549	888636	.	+	.	ID=apidb|exon_MAL13P1.117-6;Name=exon;description=exon;size=88;Parent=apidb|rna_MAL13P1.117-1
+apidb|Pf3D7_13	ApiDB	exon	888732	888840	.	+	.	ID=apidb|exon_MAL13P1.117-7;Name=exon;description=exon;size=109;Parent=apidb|rna_MAL13P1.117-1
+apidb|Pf3D7_13	ApiDB	exon	888977	889050	.	+	.	ID=apidb|exon_MAL13P1.117-8;Name=exon;description=exon;size=74;Parent=apidb|rna_MAL13P1.117-1
+apidb|Pf3D7_13	ApiDB	exon	889248	889390	.	+	.	ID=apidb|exon_MAL13P1.117-9;Name=exon;description=exon;size=143;Parent=apidb|rna_MAL13P1.117-1
+apidb|Pf3D7_13	ApiDB	exon	889494	889542	.	+	.	ID=apidb|exon_MAL13P1.117-10;Name=exon;description=exon;size=49;Parent=apidb|rna_MAL13P1.117-1
+apidb|Pf3D7_13	ApiDB	exon	889632	889659	.	+	.	ID=apidb|exon_MAL13P1.117-11;Name=exon;description=exon;size=28;Parent=apidb|rna_MAL13P1.117-1
+apidb|Pf3D7_13	ApiDB	exon	889838	889900	.	+	.	ID=apidb|exon_MAL13P1.117-12;Name=exon;description=exon;size=63;Parent=apidb|rna_MAL13P1.117-1
