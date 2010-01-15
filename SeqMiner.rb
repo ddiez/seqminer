@@ -1,15 +1,17 @@
 require 'Pathname'
+
 #require 'FileUtils'
 require 'Taxon'
 require 'Ortholog'
 require 'Search'
 require 'Result'
+require 'Download'
 
 module SeqMiner
 	class Config
 		# Directories.
 		attr_accessor :dir_home
-		attr_reader :dir_source, :dir_genome, :dir_model, :dir_db, :dir_config, :dir_result_base, :dir_result
+		attr_reader :dir_source, :dir_sequence, :dir_model, :dir_pfam, :dir_config, :dir_result_base, :dir_result
 		# Tools directories.
 		attr_accessor :dir_hmmer, :dir_blast
 		# Files.
@@ -17,7 +19,7 @@ module SeqMiner
 
 		def initialize
 			# Basedir.
-			@dir_home = Pathname.new("/Volumes/Biodev/projects/vardb")
+			@dir_home = Pathname.new("/Volumes/Biodev/projects/vardb/sm")
 			update
 		end
 		
@@ -28,10 +30,10 @@ module SeqMiner
 			@file_ortholog = dir_config + "ortholog.txt"
 			
 			# Databases.
-			@dir_db = dir_home + "db"
-			@dir_genome = dir_db + "genome"
-			@dir_model = dir_db + "model"
-			@dir_source = dir_db + "source"
+			@dir_source = dir_home + "source"
+			@dir_sequence = dir_home + "sequence"
+			@dir_model = dir_home + "model"
+			@dir_pfam = dir_home + "pfam"
 			
 			# Results.
 			@dir_result_base = dir_home + "result"
@@ -61,33 +63,59 @@ module SeqMiner
 		end
 	end
 	
-	class Install < Config
-		attr_reader :project
+	class Install
+		attr_reader :project, :config, :taxon, :ortholog
 
-		def initialize
-			super
+		def initialize(options = {:config => nil})
+			
+			if ! options[:config]
+				@config = Config.new
+			else
+				@config = options[:config]
+			end
+			
+			@taxon = Taxon::Set.new(options = {:config => config})
+			@ortholog = Ortholog::Set.new(options = {:config => config})
 		end
 		
 		def install
 			create_dir_structure
+			update_databases
 		end
 		
 		def create_dir_structure
 			create_base_dir
-			dir_source.mkpath
-			dir_model.mkpath
-			dir_genome.mkpath
-			dir_result_base.mkpath
+			config.dir_source.mkpath
+			config.dir_model.mkpath
+			config.dir_sequence.mkpath
+			config.dir_pfam.mkpath
+			config.dir_result_base.mkpath
+			config.dir_config.mkpath
 		end
 		
 		def create_base_dir
-			if dir_home.exist?
+			if config.dir_home.exist?
 				warn "ERROR: target directory already exists. Incompatible with instalation."
 				exit
 			else
-				warn "* creating dir_home: " + dir_home
-				dir_home.mkpath
+				warn "* creating dir_home: " + config.dir_home
+				config.dir_home.mkpath
 			end
+		end
+		
+		def update_databases
+			update_pfam
+			update_sequences
+		end
+		
+		def update_pfam
+			d = Download::Pfam.new(options = {:config => config})
+			d.update
+		end
+		
+		def update_sequences
+			d = Download::Set.new(taxon, options = {:config => config})
+			d.download
 		end
 	end
 	

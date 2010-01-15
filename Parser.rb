@@ -20,6 +20,7 @@ module Parser
 		def parse
 			genome = Genome::Set.new(name, options = {:empty => true})
 
+			warn "* processing GFF file: " + file
 			p = Bio::GFF::GFF3.new(File.open(file, "r"))
 			
 			@sequences = {} 

@@ -1,6 +1,6 @@
 require 'SeqMiner'
 
 sm = SeqMiner::Install.new
-
-sm.basedir = "~/vardb"
-sm.install
+#sm.install
+#sm.update_pfam
+sm.update_sequences

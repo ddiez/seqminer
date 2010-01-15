@@ -129,7 +129,7 @@ module Search
 				warn "* search id: " + search.id
 				hr = Tools::Hmmer.new(options = {config => config})
 				hr.tool = "hmmsearch"
-				hr.infile = config.dir_genome + search.taxon.name + (search.type.name + ".fa")
+				hr.infile = config.dir_sequence + search.taxon.name + (search.type.name + ".fa")
 				hr.model = config.dir_model + "hmm" + search.ortholog.hmm
 				hr.outfile = config.dir_result + "genome/search" + search.ortholog.name + (search.id + ".log")
 				hr.debug

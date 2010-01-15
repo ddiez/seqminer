@@ -1,6 +1,11 @@
-a = ["a", "e", "c"]
-
-b = a.sort do |x,y|
-	y <=> x
+module A
+	class B
+		attr_reader :a
+		def initialize
+			@a = 10
+		end
+	end
 end
-puts b
+
+a = A::B.new
+puts a.a

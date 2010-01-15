@@ -9,7 +9,6 @@ module Download
 
 	class Set < Set
 		attr_reader :config
-
 		def initialize(ts = nil, options = {:empty => false, :config => nil})
 			super()
 
@@ -18,7 +17,6 @@ module Download
 			else
 				@config = options[:config]
 			end
-
 
 			if ! options[:empty]
 				if ts.nil?
@@ -34,7 +32,7 @@ module Download
 
 		def download
 			each_value do |d|
-				d.execute if d.taxon.type == "spp"
+				d.execute
 			end
 		end
 	end
@@ -42,7 +40,6 @@ module Download
 	class Download < Item
 		attr_accessor :taxon
 		attr_reader :config
-
 		# Config here is required and inherited from the Set.
 		def initialize(id, config)
 			super(id)
@@ -54,9 +51,10 @@ module Download
 			when "spp"
 				download_spp
 			when "clade"
+				download_clade
 			end
 		end
-		
+
 		def download_spp
 			puts "* downloading spp " + id
 			case taxon.source
@@ -68,31 +66,31 @@ module Download
 				download_refseq
 			end
 		end
-		
+
 		def download_clade
-			puts "* downloading clade " + id
+			#puts "* downloading clade " + id
 		end
-		
-		def download_plasmodb			
+
+		def download_plasmodb
 			release = "6.3"
 			host = "plasmodb.org"
 			dir = "common/downloads/release-" + release + "/" + taxon.short_name
 			file = taxon.short_name + "_PlasmoDB-" + release + ".gff"
-			
+
 			outdir = config.dir_source + taxon.name
 			outdir.mkpath if ! outdir.exist?
 			#outfile = config.dir_source + taxon.name + file
 			outfile = config.dir_source + taxon.name + (taxon.name + ".gff")
-			
+
 			http_download(host, dir, file, outfile)
 			eupathdb_process_source(outfile)
 		end
-		
+
 		def download_tritrypdb
 			release = "2.0"
 			host = "tritrypdb.org"
 			dir = "common/downloads/release-" + release + "/" + taxon.short_name
-			
+
 			if taxon.name.match(/trypanosoma/)
 				if taxon.name.match(/cruzi/)
 				else
@@ -101,76 +99,148 @@ module Download
 			else
 				file = taxon.short_name + "_TriTrypDB-" + release + ".gff"
 			end
-			
+
 			outdir = config.dir_source + taxon.name
 			outdir.mkpath if ! outdir.exist?
 			outfile = config.dir_source + taxon.name + (taxon.name + ".gff")
-			
-			#http_download(host, dir, file, outfile)
+
+			http_download(host, dir, file, outfile)
 			eupathdb_process_source(outfile)
 		end
-		
+
 		def download_refseq
-			puts "  > downloading from refseq"
 			Bio::NCBI.default_email = "diez@kuicr.kyoto-u.ac.jp"
 			ncbi = Bio::NCBI::REST.new
+
+			outdir = config.dir_source + taxon.name
+			outdir.mkpath if ! outdir.exist?
+			outfile = config.dir_source + taxon.name + (taxon.name + ".gb")
+			outfile.unlink
 			
 			#term = taxon.binomial.sub(/\./, " ") + " " + taxon.strain + "[Organism]"
 			term = "txid" + taxon.id
-			puts "  > search term [taxid]: " + term
+#			puts "  > search term [taxid]: " + term
 			gpid = ncbi.esearch(term, {:db => "genome", :rettype => "gb", :retmode => "txt"})
 			gpid.each do |gid|
-				puts "  + found " + gid
-				#of = File.new("tmp/" + gid + ".gb", "w")
-				#genome = ncbi.efetch(gid, {"db"=>"genome", "rettype"=>"gbwithparts", "retmode" => "txt"})
-				#of.puts genome
-				#of.close
+				of = File.new(outfile, "a")
+				genome = ncbi.efetch(gid, {"db"=>"genome", "rettype"=>"gbwithparts", "retmode" => "txt"})
+				of.puts genome
+				of.close
 			end
+			refseq_process_source
 		end
-		
+
 		def http_download(host, dir, file, outfile)
-			puts "* downloading: " + file
-			puts "* host: " + host
-			puts "* dir: " + dir
-			puts "* file: " + file
-			puts "* url: http://" + host + "/" + dir + "/" + file
-			puts "* outfile: " + outfile
+#			puts "* downloading: " + file
+#			puts "* host: " + host
+#			puts "* dir: " + dir
+#			puts "* file: " + file
+#			puts "* url: http://" + host + "/" + dir + "/" + file
+#			puts "* outfile: " + outfile
 			Net::HTTP.start(host) do |http|
 				#resp = http.get("/" + dir + "/" + file)
 				req = Net::HTTP::Get.new("/" + dir + "/" + file)
-				alreadyDL = 0
+				transferred = 0
 				http.request(req) do |resp|
-					pBar = ProgressBar.new(file, 100)
-					size = resp.content_length
+					pb = ProgressBar.new(file, 100)
+					filesize = resp.content_length
 					File.open(outfile, 'w') do |f|
-						resp.read_body do |segment|
-							alreadyDL += segment.length
-							if(alreadyDL != 0)
-								aPercent = (alreadyDL * 100) / size
-								pBar.set(aPercent)
+						resp.read_body do |data|
+							transferred += data.size
+							if(transferred != 0)
+								percent_finished = 100 * (transferred.to_f / filesize.to_f)
+								pb.set(percent_finished)
 							end
-							f.write(segment)
+							f.write(data)
 						end
 					end
-					pBar.finish
+					pb.finish
 				end
 			end
 		end
-		
+
 		def eupathdb_process_source(infile)
-			p = Parser::Eupathdb.new(infile, config, taxon)
+			p = Parser::Eupathdb.new(infile, taxon.name, options = {:config => config})
 			g = p.parse
-#			g.print_fasta('gene')
-#			g.print_fasta('nucleotide')
-#			g.print_fasta('protein')
-#			g.print_fasta('genome')
-#			g.print_gff
-			
-			
+
+			outdir = config.dir_sequence + taxon.name
+			outdir.mkpath if ! outdir.exist?
+
+			g.write_fasta('gene', outdir + "gene.fa")
+			g.write_fasta('cds', outdir + "cds.fa")
+			g.write_fasta('protein', outdir + "protein.fa")
+			#g.write_fasta('genome')
+			#g.write_gff
 		end
-		
+
 		def debug
 			puts "* download id: " + id
+		end
+	end
+
+	class Pfam
+		require 'net/ftp'
+
+		attr_accessor :host, :base_dir, :release, :dir, :files
+		attr_reader :config
+
+		def initialize(options = {:config => nil})
+			@host = 'ftp.sanger.ac.uk'
+			@base_dir = '/pub/databases/Pfam/releases/'
+			@release = 'Pfam24.0'
+			@files = [
+				'Pfam-A.seed.gz',
+				'Pfam-A.full.gz',
+				'Pfam-A.hmm.gz',
+				'Pfam-B.gz',
+				'relnotes.txt',
+				'userman.txt'
+			]
+
+			if options[:config]
+				@config = options[:config]
+			else
+				@config = SeqMiner::Config.new
+			end
+		end
+
+		# Runs un update job to get the Pfam version specified.
+		# TODO: check Pfam version.
+		def update
+			ftp = Net::FTP.new(host)
+			ftp.login
+			ftp.chdir(base_dir + "/" + release)
+			
+			# Check directory exists.
+			dir_pfam = config.dir_pfam + release
+			dir_pfam.mkpath if ! dir_pfam.exist?
+			
+			# Download files (with progress bar).
+			files.each do |file|
+				filesize = ftp.size(file)
+				transferred = 0
+				pb = ProgressBar.new(file, 100)
+				ftp.getbinaryfile(file, dir_pfam + file, 1024) do |data|
+					transferred += data.size
+					if transferred != 0
+						percent_finished = 100 * (transferred.to_f / filesize.to_f)
+						pb.set(percent_finished)
+					end
+				end
+				pb.finish
+			end
+			ftp.close
+
+			# Gunzip files.
+			files.each do |file|
+				if file.match(/.gz$/)
+					outfile = dir_pfam + file
+					system("gunzip #{outfile}")
+				end
+			end
+			
+			# Press hmm files.
+			system("hmmpress #{dir_pfam}/Pfam-A.hmm")
 		end
 	end
 end

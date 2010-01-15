@@ -12,9 +12,9 @@ ts.debug
 
 ts.items.each do |taxon|
 	taxon.debug
-	outfile = sm.dir_genome + taxon.name + "/nucleotide.fa"
+	outfile = sm.dir_sequence + taxon.name + "/nucleotide.fa"
 	fo = File.new(outfile, "w")
-	infile = sm.dir_genome + taxon.name + "/gene.fa"
+	infile = sm.dir_sequence + taxon.name + "/gene.fa"
 	fi = Bio::FastaFormat.open(infile)
 	fi.each do |entry|
 		s = entry.to_biosequence

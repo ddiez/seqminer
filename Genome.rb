@@ -36,7 +36,7 @@ module Genome
 			else
 				gdb = Sequence::Set.new(name, "gene")
 	
-				file = config.dir_genome + name + "genome.gff"
+				file = config.dir_sequence + name + "genome.gff"
 				@file = file
 	
 				fi = File.open(file, "r")
@@ -111,9 +111,13 @@ module Genome
 			end
 		end
 		
-		def write_fasta(type)
+		def write_fasta(type, file = nil)
+			if file
+				fo = File.new(file, "w")
+			else
+				fo = $stdout
+			end
 			items.each_value do |gene|
-				gene.debug
 				case type
 				when 'gene'
 					seq = gene.sequence
@@ -122,8 +126,9 @@ module Genome
 				when 'protein'
 					seq = gene.translation
 				end
-				puts seq.to_fasta(gene.id + " " + gene.description, 60)
+				fo.puts seq.to_fasta(gene.id + " " + gene.description, 60)
 			end
+			fo.close
 		end
 
 

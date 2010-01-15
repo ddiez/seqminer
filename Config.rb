@@ -3,7 +3,7 @@ require 'Pathname'
 module Config
 	# Directories.
 	attr_accessor :dir_home
-	attr_reader :dir_source, :dir_genome, :dir_model, :dir_db, :dir_config, :dir_result_base, :dir_result
+	attr_reader :dir_source, :dir_sequence, :dir_model, :dir_db, :dir_config, :dir_result_base, :dir_result
 	# Tools directories.
 	attr_accessor :dir_hmmer, :dir_blast
 	# Files.
@@ -23,7 +23,7 @@ module Config
 		
 		# Databases.
 		@dir_db = dir_home + "db"
-		@dir_genome = dir_db + "genome"
+		@dir_sequence = dir_db + "genome"
 		@dir_model = dir_db + "model"
 		@dir_source = dir_db + "source"
 		

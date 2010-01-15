@@ -17,7 +17,7 @@ module Sequence
 			else
 				@config = options[:config]
 			end
-			@dir = config.dir_genome + name
+			@dir = config.dir_sequence + name
 			@type = type
 			@file = @dir + (type + ".fa")
 			fi = Bio::FastaFormat.open(@file)
