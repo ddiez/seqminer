@@ -3,9 +3,8 @@ require 'uri'
 require 'Genome'
 
 module Parser
-	class Eupathdb
-		attr_reader :file, :name, :config, :sequences
-		
+	class Refseq
+		attr_reader :file, :name, :config, :sequence
 		def initialize(file, name, options = {:config => nil})
 			@file = file
 			@name = name
@@ -16,24 +15,136 @@ module Parser
 				@config = options[:config]
 			end
 		end
-		
+
+		def parse
+			genome = Genome::Set.new(name, options = {:empty => true})
+
+			warn "* processing Genbank file: " + file
+			p = Bio::GenBank.open(file)
+
+			p.each_entry do |gb|
+				puts gb.accession
+				puts gb.organism
+				puts gb.definition
+
+				@sequence = gb.seq
+				gb.features.each do |feat|
+					if feat.feature == "gene"
+						h = feat.to_hash
+						id = h['locus_tag']
+						gene = genome.get_gene_by_acc(id[0])
+						if gene.nil?
+							gene = Genome::Gene.new(id[0])
+							gene.strand = feat.locations[0].strand
+							gene.from = feat.locations[0].from
+							gene.to = feat.locations[0].to
+							gene.sequence = sequence.subseq(gene.from, gene.to)
+							gene.description = ""
+							gene.source = "refseq"
+							gene.chromosome = gb.accession
+							genome << gene
+
+							if h['pseudo']
+								gene.pseudogene = 1
+								exon = Genome::Exon.new(gene.length + 1)
+								exon.strand = feat.locations[0].strand
+								exon.from = feat.locations[0].from
+								exon.to = feat.locations[0].to
+								gene << exon
+							end
+						end
+					elsif feat.feature == "CDS"
+						h = feat.to_hash
+						id = h['locus_tag']
+						gene = genome.get_gene_by_acc(id[0])
+						if gene.nil?
+							warn "ERROR: gene #{id} not found for this CDS!"
+						else
+							gene.description = h['product'][0] if h['product']
+
+							locs = feat.locations
+							locs.each do |loc|
+								exon = Genome::Exon.new(gene.length + 1)
+								exon.strand = loc.strand
+								exon.from = loc.from
+								exon.to = loc.to
+								gene << exon
+							end
+						end
+					elsif feat.feature == "tRNA"
+						h = feat.to_hash
+						id = h['locus_tag']
+						gene = genome.get_gene_by_acc(id[0])
+						if gene.nil?
+							warn "ERROR: gene #{id} not found for this CDS!"
+						else
+							gene.description = h['product'][0] if h['product']
+
+							locs = feat.locations
+							locs.each do |loc|
+								exon = Genome::Exon.new(gene.length + 1)
+								exon.strand = loc.strand
+								exon.from = loc.from
+								exon.to = loc.to
+								gene << exon
+							end
+						end
+					elsif feat.feature == "rRNA"
+						h = feat.to_hash
+						id = h['locus_tag']
+						gene = genome.get_gene_by_acc(id[0])
+						if gene.nil?
+							warn "ERROR: gene #{id} not found for this CDS!"
+						else
+							gene.description = h['product'][0] if h['product']
+
+							locs = feat.locations
+							locs.each do |loc|
+								exon = Genome::Exon.new(gene.length + 1)
+								exon.strand = loc.strand
+								exon.from = loc.from
+								exon.to = loc.to
+								gene << exon
+							end
+						end
+					end
+				end
+			end
+
+			genome
+		end
+	end
+
+	class Eupathdb
+		attr_reader :file, :name, :config, :sequences
+		def initialize(file, name, options = {:config => nil})
+			@file = file
+			@name = name
+
+			if ! options[:config]
+				@config = SeqMiner::Config.new
+			else
+				@config = options[:config]
+			end
+		end
+
 		def parse
 			genome = Genome::Set.new(name, options = {:empty => true})
 
 			warn "* processing GFF file: " + file
 			p = Bio::GFF::GFF3.new(File.open(file, "r"))
-			
-			@sequences = {} 
+
+			@sequences = {}
 			p.sequences.each do |seq|
 				seq.na
 				@sequences[seq.entry_id] = seq
 			end
-			
+
 			p.records.each do |record|
 				if record.feature == "gene"
 					chr = record.seqname.sub(/.+\|(.+)/, '\1')
 					(id, desc, pseudo) = _parse_gene_attributes(record.attributes)
-					
+
 					gene = Genome::Gene.new(id)
 					gene.chromosome = chr
 					gene.source = record.source
@@ -43,7 +154,7 @@ module Parser
 					gene.description = desc
 					gene.pseudogene = pseudo
 					gene.sequence = sequences[record.seqname].subseq(record.start, record.end)
-					
+
 					genome << gene
 				elsif record.feature == "exon"
 					parent_id = _parse_exon_attributes(record.attributes)
@@ -63,13 +174,13 @@ module Parser
 			end
 			genome
 		end
-		
+
 		def _unescape(str)
 			str = URI.unescape(str)
 			str.gsub!(/\+/, ' ')
 			str
 		end
-		
+
 		def _get_strand(s)
 			if s == "+"
 				return 1
@@ -79,7 +190,7 @@ module Parser
 				return nil
 			end
 		end
-		
+
 		def _parse_gene_attributes(c)
 			id = nil
 			desc = ""
@@ -91,16 +202,16 @@ module Parser
 			pseudo = 1 if desc.match("pseudogene")
 			[id, desc, pseudo]
 		end
-		
+
 		def _parse_exon_attributes(c)
 			parent = nil
 			c = _array2hash(c)
-			
+
 			parent = c["ID"]
 			parent.sub!(/.+exon_(.+)-.+$/, '\1')
 			parent
 		end
-		
+
 		def _array2hash(a)
 			h = {}
 			a.each do |val|

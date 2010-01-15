@@ -59,9 +59,9 @@ module Download
 			puts "* downloading spp " + id
 			case taxon.source
 			when "plasmodb"
-				download_plasmodb
+				#download_plasmodb
 			when "tritrypdb"
-				download_tritrypdb
+				#download_tritrypdb
 			when "ncbi"
 				download_refseq
 			end
@@ -115,11 +115,9 @@ module Download
 			outdir = config.dir_source + taxon.name
 			outdir.mkpath if ! outdir.exist?
 			outfile = config.dir_source + taxon.name + (taxon.name + ".gb")
-			outfile.unlink
-			
-			#term = taxon.binomial.sub(/\./, " ") + " " + taxon.strain + "[Organism]"
+			outfile.unlink if outfile.exist?
+
 			term = "txid" + taxon.id
-#			puts "  > search term [taxid]: " + term
 			gpid = ncbi.esearch(term, {:db => "genome", :rettype => "gb", :retmode => "txt"})
 			gpid.each do |gid|
 				of = File.new(outfile, "a")
@@ -131,14 +129,7 @@ module Download
 		end
 
 		def http_download(host, dir, file, outfile)
-#			puts "* downloading: " + file
-#			puts "* host: " + host
-#			puts "* dir: " + dir
-#			puts "* file: " + file
-#			puts "* url: http://" + host + "/" + dir + "/" + file
-#			puts "* outfile: " + outfile
 			Net::HTTP.start(host) do |http|
-				#resp = http.get("/" + dir + "/" + file)
 				req = Net::HTTP::Get.new("/" + dir + "/" + file)
 				transferred = 0
 				http.request(req) do |resp|
@@ -163,6 +154,20 @@ module Download
 			p = Parser::Eupathdb.new(infile, taxon.name, options = {:config => config})
 			g = p.parse
 
+			outdir = config.dir_sequence + taxon.name
+			outdir.mkpath if ! outdir.exist?
+
+			g.write_fasta('gene', outdir + "gene.fa")
+			g.write_fasta('cds', outdir + "cds.fa")
+			g.write_fasta('protein', outdir + "protein.fa")
+			#g.write_fasta('genome')
+			#g.write_gff
+		end
+		
+		def refseq_process_source(infile)
+			p = Parser::Refseq.new(infile, taxon.name, option = {:config => config})
+			g = p.parse
+			
 			outdir = config.dir_sequence + taxon.name
 			outdir.mkpath if ! outdir.exist?
 

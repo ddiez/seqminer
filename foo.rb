@@ -1,11 +1,7 @@
-module A
-	class B
-		attr_reader :a
-		def initialize
-			@a = 10
-		end
-	end
-end
+a = ["a", "b"]
+b = ["f"]
 
-a = A::B.new
-puts a.a
+puts a
+puts a.reverse
+puts b
+puts b.reverse
