@@ -20,12 +20,12 @@ ts.items.each do |taxon|
 		s = entry.to_biosequence
 		s.na
 		if s.length >= 3
-			fo.puts s.translate(1).to_fasta(s.definition + " [strand=1;phase=1]", 60)
-			fo.puts s.translate(2).to_fasta(s.definition + " [strand=1;phase=2]", 60)
-			fo.puts s.translate(3).to_fasta(s.definition + " [strand=1;phase=3]", 60)
-			fo.puts s.complement.translate(1).to_fasta(s.definition + " [strand=-1;phase=1]", 60)
-			fo.puts s.complement.translate(2).to_fasta(s.definition + " [strand=-1;phase=2]", 60)
-			fo.puts s.complement.translate(3).to_fasta(s.definition + " [strand=-1;phase=3]", 60)
+			fo.puts s.translate(1).to_fasta(s.definition + " [strand=1;frame=1]", 60)
+			fo.puts s.translate(2).to_fasta(s.definition + " [strand=1;frame=2]", 60)
+			fo.puts s.translate(3).to_fasta(s.definition + " [strand=1;frame=3]", 60)
+			fo.puts s.complement.translate(1).to_fasta(s.definition + " [strand=-1;frame=1]", 60)
+			fo.puts s.complement.translate(2).to_fasta(s.definition + " [strand=-1;frame=2]", 60)
+			fo.puts s.complement.translate(3).to_fasta(s.definition + " [strand=-1;frame=3]", 60)
 		end
 	end
 	fi.close

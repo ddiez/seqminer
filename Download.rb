@@ -51,7 +51,7 @@ module Download
 			when "spp"
 				download_spp
 			when "clade"
-				download_clade
+				#download_clade
 			end
 		end
 
@@ -59,16 +59,52 @@ module Download
 			puts "* downloading spp " + id
 			case taxon.source
 			when "plasmodb"
-				#download_plasmodb
+				download_plasmodb
 			when "tritrypdb"
-				#download_tritrypdb
+				download_tritrypdb
+			when "giardiadb"
+				download_giardiadb
+			when "broad"
+				download_broad
 			when "ncbi"
 				download_refseq
 			end
 		end
 
 		def download_clade
-			#puts "* downloading clade " + id
+			puts "* downloading clade (nuccore)" + id
+			download_nuccore
+			puts "* downloading clade (nucest)" + id
+			download_nucest
+		end
+
+		def download_nuccore
+			Bio::NCBI.default_email = "diez@kuicr.kyoto-u.ac.jp"
+			ncbi = Bio::NCBI::REST.new
+
+			outdir = config.dir_source + taxon.name + "_nuccore"
+			outdir.mkpath if ! outdir.exist?
+			outfile = config.dir_source + taxon.name + (taxon.name + "_nuccore.gb")
+			outfile.unlink if outfile.exist?
+
+			term = "txid" + taxon.id
+			gpid = ncbi.esearch(term, {:db => "nuccore", :rettype => "gb", :retmode => "txt"})
+			puts gpid.length
+
+			#gpid.each do |gid|
+				#of = File.new(outfile, "a")
+				#genome = ncbi.efetch(gid, {"db"=>"genome", "rettype"=>"gbwithparts", "retmode" => "txt"})
+				#of.puts genome
+				#of.close
+			#end
+			#refseq_process_source(outfile)
+		end
+
+		def download_nucest
+		end
+
+		def download_broad
+			# TODO: not implemented.
 		end
 
 		def download_plasmodb
@@ -87,18 +123,40 @@ module Download
 		end
 
 		def download_tritrypdb
-			release = "2.0"
+			release = "1.3"
 			host = "tritrypdb.org"
 			dir = "common/downloads/release-" + release + "/" + taxon.short_name
-
-			if taxon.name.match(/trypanosoma/)
-				if taxon.name.match(/cruzi/)
-				else
+			
+			# Hacks to fix name inconsistencies.
+			if taxon.name.match(/trypanosoma.bruzi/)
 					file = taxon.short_name + taxon.strain.capitalize + "_TriTrypDB-" + release + ".gff"
+			elsif taxon.name.match(/leishmania.major_Friedlin/)
+				if release == "1.3"
+					file = taxon.short_name + "_TriTryDB-" + release + ".gff"
 				end
 			else
 				file = taxon.short_name + "_TriTrypDB-" + release + ".gff"
 			end
+
+			outdir = config.dir_source + taxon.name
+			outdir.mkpath if ! outdir.exist?
+			outfile = config.dir_source + taxon.name + (taxon.name + ".gff")
+
+			http_download(host, dir, file, outfile)
+			eupathdb_process_source(outfile)
+		end
+		
+		def download_giardiadb
+			release = "2.1"
+			host = "giardiadb.org"
+			dir = "common/downloads/release-" + release + "/" + taxon.short_name
+			
+			# Hacks to fix name inconsistencies.
+			if taxon.name == "giardia.lamblia_ATCC_50803"
+				dir = "common/downloads/release-" + release + "/" + "GintestinalisAssemblageA"
+			end
+			
+			file = taxon.short_name + "_GiardiaDB-" + release + ".gff"
 
 			outdir = config.dir_source + taxon.name
 			outdir.mkpath if ! outdir.exist?
@@ -119,13 +177,17 @@ module Download
 
 			term = "txid" + taxon.id
 			gpid = ncbi.esearch(term, {:db => "genome", :rettype => "gb", :retmode => "txt"})
+
+			gpid = gpid[0] if taxon.id == "254945"
+			
 			gpid.each do |gid|
 				of = File.new(outfile, "a")
 				genome = ncbi.efetch(gid, {"db"=>"genome", "rettype"=>"gbwithparts", "retmode" => "txt"})
 				of.puts genome
 				of.close
 			end
-			refseq_process_source
+			# FIXME: what if several files are obtained!?
+			refseq_process_source(outfile)
 		end
 
 		def http_download(host, dir, file, outfile)
@@ -160,8 +222,9 @@ module Download
 			g.write_fasta('gene', outdir + "gene.fa")
 			g.write_fasta('cds', outdir + "cds.fa")
 			g.write_fasta('protein', outdir + "protein.fa")
-			#g.write_fasta('genome')
-			#g.write_gff
+			g.write_fasta('6frame', outdir + "6frame.fa")
+			g.write_fasta('genome', outdir + "genome.fa")
+			g.write_gff(outdir + "genome.gff")
 		end
 		
 		def refseq_process_source(infile)
@@ -174,8 +237,9 @@ module Download
 			g.write_fasta('gene', outdir + "gene.fa")
 			g.write_fasta('cds', outdir + "cds.fa")
 			g.write_fasta('protein', outdir + "protein.fa")
-			#g.write_fasta('genome')
-			#g.write_gff
+			g.write_fasta('6frame', outdir + "6frame.fa")
+			g.write_fasta('genome', outdir + "genome.fa")
+			g.write_gff(outdir + "genome.gff")
 		end
 
 		def debug

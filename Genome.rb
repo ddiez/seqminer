@@ -18,23 +18,25 @@ module Genome
 	# * contains taxon information
 	# * is is derived from class Set in module Item
 	class Set < Set
+		attr_accessor :chromosome
 		attr_reader :config, :name, :file
 
 		def initialize(name, options = {:empty => false, :config => nil})
 			super()
 			
 			@name = name
+			@chromosome = {}
 
-			if ! options[:config]
-				@config = SeqMiner::Config.new
-			else
+			if options[:config]
 				@config = options[:config]
+			else
+				@config = SeqMiner::Config.new
 			end
 
 			if options[:empty]
 				@file = "_undef_"
 			else
-				gdb = Sequence::Set.new(name, "gene")
+				gdb = Sequence::Set.new(name, "gene", options = {:config => config})
 	
 				file = config.dir_sequence + name + "genome.gff"
 				@file = file
@@ -117,17 +119,83 @@ module Genome
 			else
 				fo = $stdout
 			end
-			items.each_value do |gene|
-				case type
-				when 'gene'
+			
+			case type
+			when 'gene'
+				items.each_value do |gene|
 					seq = gene.sequence
-				when 'cds'
-					seq = gene.cds
-				when 'protein'
-					seq = gene.translation
+					fo.puts seq.to_fasta(gene.id + " " + gene.description, 60)
 				end
-				fo.puts seq.to_fasta(gene.id + " " + gene.description, 60)
+			when 'cds'
+				items.each_value do |gene|
+					seq = gene.cds
+					fo.puts seq.to_fasta(gene.id + " " + gene.description, 60)
+				end
+			when 'protein'
+				items.each_value do |gene|
+					seq = gene.translation
+					fo.puts seq.to_fasta(gene.id + " " + gene.description, 60)
+				end
+			when '6frame'
+				items.each_value do |gene|
+					next if gene.size < 1
+					seq = gene.translation(1)
+					fo.puts seq.to_fasta(gene.id + " " + gene.description + " [strand=#{gene.strand};frame=1]", 60)
+					seq = gene.translation(2)
+					fo.puts seq.to_fasta(gene.id + " " + gene.description + " [strand=#{gene.strand};frame=2]", 60)
+					seq = gene.translation(3)
+					fo.puts seq.to_fasta(gene.id + " " + gene.description + " [strand=#{gene.strand};frame=3]", 60)
+					seq = gene.translation(4)
+					fo.puts seq.to_fasta(gene.id + " " + gene.description + " [strand=#{gene.strand * -1};frame=1]", 60)
+					seq = gene.translation(5)
+					fo.puts seq.to_fasta(gene.id + " " + gene.description + " [strand=#{gene.strand * -1};frame=2]", 60)
+					seq = gene.translation(6)
+					fo.puts seq.to_fasta(gene.id + " " + gene.description + " [strand=#{gene.strand * -1};frame=3]", 60)
+				end
+			when 'genome'
+				chromosome.each_pair do |id, chr|
+					fo.puts chr.to_fasta(id, 60)
+				end
 			end
+			fo.close
+		end
+
+		def write_gff(file = nil)
+			if file
+				fo = File.new(file, "w")
+			else
+				fo = $stdout
+			end
+
+			items.each_value do |gene|
+				desc = []
+				desc << "description=" + gene.description
+				desc << "type=" + gene.type
+				desc << "pseudogene=" + gene.pseudogene.to_s
+				desc = desc.join(";")
+
+				fo.puts gene.id + "\t" + \
+					gene.source + "\t" + \
+					"gene" + "\t" + \
+					gene.chromosome + "\t" + \
+					gene.strand.to_s + "\t" + \
+					gene.from.to_s + "\t" + \
+					gene.to.to_s + "\t" + \
+					"-" + "\t" + \
+					desc
+				gene.oitems.each do |exon|
+					fo.puts gene.id + "\t" + \
+						gene.source + "\t" + \
+						"exon" + "\t" + \
+						"-" + "\t" + \
+						exon.strand.to_s + "\t" + \
+						exon.from.to_s + "\t" + \
+						exon.to.to_s + "\t" + \
+						exon.id.to_s + "\t" + \
+						"-"
+				end
+			end
+
 			fo.close
 		end
 
@@ -141,21 +209,26 @@ module Genome
 	end
 	
 	class Gene < Item
-		attr_accessor :source, :chromosome, :strand, :from, :to, :description, :pseudogene, :sequence
-		attr_reader :oitems
+		attr_accessor :source, :chromosome, :strand, :from, :to, :description, :pseudogene, :sequence, :trans_table, :type
+		attr_reader :oitems, :size
 
 		def initialize(id)
 			super
 			@pseudogene = 0
+			@trans_table = 1 # assume the default and pray we can get the information somewhere.
 			@oitems = []
 		end
 
 		def cds
 			sequence.splice(splicing)
 		end
+
+		def size
+			to.to_i - from.to_i
+		end
 		
-		def translation(phase = 1)
-			cds.translate(phase)
+		def translation(frame = 1)
+			cds.translate(frame, trans_table)
 		end
 
 #		def splicing_old
@@ -228,6 +301,7 @@ module Genome
 			warn "* strand: " + strand.to_s
 			warn "* location: [" + from.to_s + " - " + to.to_s + "]"
 			warn "* splicing: " + splicing
+			warn "* size: " + size.to_s
 			#warn "* splicing_ori: " + splicing_original
 			warn "* pseudogene: " + pseudogene.to_s
 		end

@@ -22,12 +22,16 @@ module Parser
 			warn "* processing Genbank file: " + file
 			p = Bio::GenBank.open(file)
 
+			chr = {}
+			genome.chromosome = chr
 			p.each_entry do |gb|
-				puts gb.accession
-				puts gb.organism
-				puts gb.definition
+				#puts gb.accession
+				#puts gb.organism
+				#puts gb.definition
 
 				@sequence = gb.seq
+				chr[gb.accession] = sequence
+
 				gb.features.each do |feat|
 					if feat.feature == "gene"
 						h = feat.to_hash
@@ -46,6 +50,8 @@ module Parser
 
 							if h['pseudo']
 								gene.pseudogene = 1
+								gene.type = "CDS" # or make another category?
+								
 								exon = Genome::Exon.new(gene.length + 1)
 								exon.strand = feat.locations[0].strand
 								exon.from = feat.locations[0].from
@@ -57,10 +63,12 @@ module Parser
 						h = feat.to_hash
 						id = h['locus_tag']
 						gene = genome.get_gene_by_acc(id[0])
+						gene.trans_table = h['trans_table'] if h['trans_table']
 						if gene.nil?
 							warn "ERROR: gene #{id} not found for this CDS!"
 						else
 							gene.description = h['product'][0] if h['product']
+							gene.type = feat.feature
 
 							locs = feat.locations
 							locs.each do |loc|
@@ -71,46 +79,37 @@ module Parser
 								gene << exon
 							end
 						end
-					elsif feat.feature == "tRNA"
+					elsif feat.feature == "tRNA" or feat.feature == "rRNA" or feat.feature == "tmRNA" or feat.feature == "misc_RNA" or feat.feature == "ncRNA" or feat.feature == "misc_feature"
 						h = feat.to_hash
-						id = h['locus_tag']
-						gene = genome.get_gene_by_acc(id[0])
-						if gene.nil?
-							warn "ERROR: gene #{id} not found for this CDS!"
-						else
-							gene.description = h['product'][0] if h['product']
+						if h['locus_tag']
+							id = h['locus_tag']
+							gene = genome.get_gene_by_acc(id[0])
+							if gene.nil?
+								warn "ERROR: gene #{id} not found for this CDS!"
+							else
+								if h['produc']
+									gene.description = h['product'][0]
+								elsif h['gene']
+									gene.description = h['gene'][0]
+								elsif h['note']
+									gene.description = h['note'][0]
+								end
+								gene.type = feat.feature
 
-							locs = feat.locations
-							locs.each do |loc|
-								exon = Genome::Exon.new(gene.length + 1)
-								exon.strand = loc.strand
-								exon.from = loc.from
-								exon.to = loc.to
-								gene << exon
-							end
-						end
-					elsif feat.feature == "rRNA"
-						h = feat.to_hash
-						id = h['locus_tag']
-						gene = genome.get_gene_by_acc(id[0])
-						if gene.nil?
-							warn "ERROR: gene #{id} not found for this CDS!"
-						else
-							gene.description = h['product'][0] if h['product']
-
-							locs = feat.locations
-							locs.each do |loc|
-								exon = Genome::Exon.new(gene.length + 1)
-								exon.strand = loc.strand
-								exon.from = loc.from
-								exon.to = loc.to
-								gene << exon
+								locs = feat.locations
+								locs.each do |loc|
+									exon = Genome::Exon.new(gene.length + 1)
+									exon.strand = loc.strand
+									exon.from = loc.from
+									exon.to = loc.to
+									gene << exon
+								end
 							end
 						end
 					end
 				end
 			end
-
+			genome.chromosome = chr
 			genome
 		end
 	end
@@ -135,6 +134,7 @@ module Parser
 			p = Bio::GFF::GFF3.new(File.open(file, "r"))
 
 			@sequences = {}
+			chrs = {}
 			p.sequences.each do |seq|
 				seq.na
 				@sequences[seq.entry_id] = seq
@@ -168,10 +168,26 @@ module Parser
 					else
 						raise "ERROR: gene #{parent_id} not found for exon #{parent_id}"
 					end
+				elsif record.feature == "CDS" or record.feature == "tRNA" or record.feature == "rRNA"
+					parent_id = _parse_exon_attributes(record.attributes)
+					gene = genome.get_gene_by_acc(parent_id)
+					if ! gene.nil?
+						gene.type = record.feature
+					else
+						raise "ERROR: gene #{parent_id} not found for exon #{parent_id}"
+					end
+				elsif record.feature == "mRNA"
+					# skip this.
+				elsif record.feature == "transcript"
+					gene.type = "CDS"
 				elsif record.feature == "supercontig"
-					# TODO: do I need this?
+					# TODO: add extra info (start, end)
+					chrs[record.seqname.sub(/^.+?\|(.+)/, '\1')] = sequences[record.seqname]
+				else
+					$stderr.puts "%%%%%%% " + record.feature
 				end
 			end
+			genome.chromosome = chrs
 			genome
 		end
 
@@ -196,10 +212,11 @@ module Parser
 			desc = ""
 			pseudo = 0
 			f = _array2hash(c)
-			id = f["ID"]
-			id.sub!(/.+\|/, '')
-			desc = _unescape(f["description"])
-			pseudo = 1 if desc.match("pseudogene")
+			#id = f["ID"]
+			#id.sub!(/^.+\|/, '')
+			id = f['locus_tag']
+			desc = _unescape(f['description'])
+			pseudo = 1 if desc.match('pseudogene')
 			[id, desc, pseudo]
 		end
 
@@ -207,8 +224,13 @@ module Parser
 			parent = nil
 			c = _array2hash(c)
 
-			parent = c["ID"]
-			parent.sub!(/.+exon_(.+)-.+$/, '\1')
+			#if name.match("plasmodium.vivax_salvador1") 
+				parent = c["ID"]
+				parent.sub!(/.+?_(.+)-.+$/, '\1')
+			#else
+				#parent = c["Parent"]
+				#parent.sub!(/^.+?_(.+)-.+$/, '\1')
+			#end
 			parent
 		end
 

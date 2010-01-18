@@ -59,6 +59,7 @@ module SeqMiner
 
 		def debug
 			puts "+ Config +"
+			puts "* dir_home: " + dir_home
 			puts "* dir_result: " + dir_result
 		end
 	end

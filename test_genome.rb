@@ -1,11 +1,10 @@
-require 'Taxon'
 require 'Genome'
 
-ts = Taxon::Set.new
-t = ts.get_taxon_by_name("plasmodium.falciparum_3d7")
-t.debug
+config = SeqMiner::Config.new
+config.basedir = "/Volumes/Biodev/projects/vardb/"
+config.debug
 
-gdb = Genome::Set.new(t)
+gdb = Genome::Set.new("plasmodium.falciparum_3d7", options = {:config => config})
 gdb.debug
 #g = gdb.get_gene_by_acc("PFD1155w")
 g = gdb.get_gene_by_acc("MAL13P1.105")
@@ -26,3 +25,5 @@ puts g.translation(5).to_fasta("protein", 300)
 puts
 puts g.translation(6).to_fasta("protein", 300)
 puts
+
+#gdb.write_fasta("6frame")

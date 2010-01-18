@@ -27,10 +27,10 @@ module Result
 	end
 
 	# Class: SubHit
-	# Purpose: Store information about sequence matches to different strand/phase
+	# Purpose: Store information about sequence matches to different strand/frame
 	# Date: 6/1/2010
 	class SubHit < Item
-		attr_accessor :score, :eval, :type, :desc, :target_name, :target_acc, :target_length, :query_name, :query_acc, :query_length, :strand, :phase
+		attr_accessor :score, :eval, :type, :desc, :target_name, :target_acc, :target_length, :query_name, :query_acc, :query_length, :strand, :frame
 		def initialize(id)
 			super
 		end
@@ -86,7 +86,7 @@ module Result
 			warn "* id: " + id
 			warn "* eval: " + eval.to_s
 			warn "* score: " + score.to_s
-			warn "* phase: " + phase.to_s
+			warn "* frame: " + frame.to_s
 			warn "* strand: " + strand.to_s
 		end
 	end
@@ -142,7 +142,7 @@ module Result
 			each_value do |subhit|
 				if subhit.type == "nucleotide"
 					s << subhit.strand
-					p << subhit.phase
+					p << subhit.frame
 				end
 			end
 
@@ -473,7 +473,7 @@ module Result
 				if type == "nucleotide"
 					sp = _parse_line(line)
 					if sp.nil?
-						raise "ERROR: nucleotide result does not contain strand/phase information"
+						raise "ERROR: nucleotide result does not contain strand/frame information"
 					else
 						sid = tid + "[" + sp[0] + "|" + sp[1] + "]"
 					end
@@ -494,8 +494,8 @@ module Result
 					sh.query_length = qlen.to_i
 					sh.type = type
 					sh.strand = sp[0]
-					sh.phase = sp[1]
-					h.add(sh)
+					sh.frame = sp[1]
+					h << sh
 				end
 				dom = Domain.new(sh.length + 1)
 				dom.hmm_from = hf.to_i
@@ -522,14 +522,14 @@ module Result
 			if ! tmp.nil?
 				tmp = tmp[0]
 				tmp.gsub!(/\[|\]/, "")
-				strand, phase = tmp.split(';')
+				strand, frame = tmp.split(';')
 				strand.sub!(/strand=/, "")
-				phase.sub!(/phase=/, "")
+				frame.sub!(/frame=/, "")
 
 				#warn "* strand: " + strand
-				#warn "* phase: " + phase
+				#warn "* frame: " + frame
 				
-				return [strand, phase]
+				return [strand, frame]
 			end
 			return nil
 		end

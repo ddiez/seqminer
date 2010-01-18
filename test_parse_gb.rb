@@ -14,6 +14,7 @@ g.each_value do |gene|
 	puts gene.id if gene.length == 0
 end
 
-g.write_fasta("gene", "foo.txt")
-g.write_fasta("cds", "foo2.txt")
-g.write_fasta("protein", "foo3.txt")
+#g.write_fasta("gene", "foo.txt")
+#g.write_fasta("cds", "foo2.txt")
+#g.write_fasta("protein", "foo3.txt")
+g.write_fasta("genome", "genome2.txt")
