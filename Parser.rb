@@ -3,17 +3,27 @@ require 'uri'
 require 'Genome'
 
 module Parser
-	class Refseq
-		attr_reader :file, :name, :config, :sequence
-		def initialize(file, name, options = {:config => nil})
-			@file = file
-			@name = name
-
+	class Common
+		attr_accessor :file, :name
+		attr_reader :config
+		
+		def initialize(taxon, options = {:config => nil})
 			if ! options[:config]
 				@config = SeqMiner::Config.new
 			else
 				@config = options[:config]
 			end
+			
+			@name = taxon.name
+		end
+	end
+
+	class Refseq < Common
+		
+		def initialize(taxon, options = {:config => nil})
+			super
+			
+			file = config.dir_source + taxon.name + (taxon.name + ".gb")
 		end
 
 		def parse
@@ -114,30 +124,26 @@ module Parser
 		end
 	end
 
-	class Eupathdb
-		attr_reader :file, :name, :config, :sequences
-		def initialize(file, name, options = {:config => nil})
-			@file = file
-			@name = name
+	class Eupathdb < Common
 
-			if ! options[:config]
-				@config = SeqMiner::Config.new
-			else
-				@config = options[:config]
-			end
+		def initialize(taxon, options = {:config => nil})
+			super
+			
+			@file = config.dir_source + taxon.name + (taxon.name + ".gff")
 		end
 
 		def parse
+			puts "* file: " + file
 			genome = Genome::Set.new(name, options = {:empty => true})
 
 			warn "* processing GFF file: " + file
 			p = Bio::GFF::GFF3.new(File.open(file, "r"))
 
-			@sequences = {}
+			sequences = {}
 			chrs = {}
 			p.sequences.each do |seq|
 				seq.na
-				@sequences[seq.entry_id] = seq
+				sequences[seq.entry_id] = seq
 			end
 
 			p.records.each do |record|
@@ -168,7 +174,7 @@ module Parser
 					else
 						raise "ERROR: gene #{parent_id} not found for exon #{parent_id}"
 					end
-				elsif record.feature == "CDS" or record.feature == "tRNA" or record.feature == "rRNA"
+				elsif record.feature == "CDS" or record.feature == "tRNA" or record.feature == "rRNA" or record.feature == "snRNA"
 					parent_id = _parse_exon_attributes(record.attributes)
 					gene = genome.get_gene_by_acc(parent_id)
 					if ! gene.nil?

@@ -11,7 +11,7 @@ module SeqMiner
 	class Config
 		# Directories.
 		attr_accessor :dir_home
-		attr_reader :dir_source, :dir_sequence, :dir_model, :dir_pfam, :dir_config, :dir_result_base, :dir_result
+		attr_reader :dir_source, :dir_sequence, :dir_model, :dir_pfam, :dir_pfam_current, :dir_config, :dir_result_base, :dir_result
 		# Tools directories.
 		attr_accessor :dir_hmmer, :dir_blast
 		# Files.
@@ -34,6 +34,7 @@ module SeqMiner
 			@dir_sequence = dir_home + "sequence"
 			@dir_model = dir_home + "model"
 			@dir_pfam = dir_home + "pfam"
+			@dir_pfam_current = @dir_pfam + "current"
 			
 			# Results.
 			@dir_result_base = dir_home + "result"
@@ -106,7 +107,9 @@ module SeqMiner
 		
 		def update_databases
 			update_pfam
+			process_pfam
 			update_sequences
+			process_sequences
 		end
 		
 		def update_pfam
@@ -117,6 +120,72 @@ module SeqMiner
 		def update_sequences
 			d = Download::Set.new(taxon, options = {:config => config})
 			d.download
+		end
+		
+		def process_pfam
+			# Gunzip .gz files.
+			config.dir_pfam_current.each_entry do |entry|
+				file = config.dir_pfam_current + entry
+				if file.file?
+					if file.extname == ".gz"
+						puts "* gunzip: " + file
+						res = system("gunzip #{file}")
+					end
+				end
+			end
+			
+			# Press .hmm files.
+			config.dir_pfam_current.each_entry do |entry|
+				file = config.dir_pfam_current + entry
+				if file.file?
+					if file.extname == ".hmm"
+						puts "* hmmpress: " + file
+						ok = system("hmmpress #{file} 1 > /dev/null")
+						if ! ok
+							puts "WARNING: trying to overwrite previous pressing [SKIPPED]."
+						end
+					end
+				end
+			end
+		end
+		
+		def process_sequences
+			taxon.each_value do |t|
+				case t.type
+				when 'spp'
+					process_spp(t)
+				when 'clade'
+					process_clade(t)
+				end
+			end
+		end
+		
+		def process_spp(t)
+			puts "* source: " + t.source
+			puts "* dir: " + config.dir_source + t.name
+			
+			case t.source
+			when "plasmodb", "giardiadb", "tritrypdb"
+				puts "* parser: eupathdb"
+				p = Parser::Eupathdb.new(t, options = {:config => config})
+			when "ncbi"
+				puts "* parser: refseq"
+				#p = Parser::Refseq.new(t, options = {:config => config})
+			end
+			g = p.parse
+			g.debug
+			
+			outdir = config.dir_sequence + t.name
+			outdir.mkpath if ! outdir.exist?
+			g.write_fasta("gene", outdir + "gene.fa")
+			g.write_fasta("cds", outdir + "cds.fa")
+			g.write_fasta("protein", outdir + "protein.fa")
+			g.write_fasta("6frame", outdir + "6frame.fa")
+			g.write_fasta("genome", outdir + "genome.fa")
+			g.write_gff(outdir + "genome.gff")
+		end
+		
+		def process_taxon(t)
 		end
 	end
 	
