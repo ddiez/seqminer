@@ -108,13 +108,13 @@ sequence matches to different strand/frame Date: 6/1/2010
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000163">debug</a>&nbsp;&nbsp;
-      <a href="#M000160">has_complete?</a>&nbsp;&nbsp;
-      <a href="#M000159">has_fragment?</a>&nbsp;&nbsp;
-      <a href="#M000158">localization</a>&nbsp;&nbsp;
-      <a href="#M000161">max_completeness</a>&nbsp;&nbsp;
-      <a href="#M000162">min_completeness</a>&nbsp;&nbsp;
-      <a href="#M000157">new</a>&nbsp;&nbsp;
+      <a href="#M000166">debug</a>&nbsp;&nbsp;
+      <a href="#M000163">has_complete?</a>&nbsp;&nbsp;
+      <a href="#M000162">has_fragment?</a>&nbsp;&nbsp;
+      <a href="#M000161">localization</a>&nbsp;&nbsp;
+      <a href="#M000164">max_completeness</a>&nbsp;&nbsp;
+      <a href="#M000165">min_completeness</a>&nbsp;&nbsp;
+      <a href="#M000160">new</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -204,24 +204,24 @@ sequence matches to different strand/frame Date: 6/1/2010
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000157" class="method-detail">
-        <a name="M000157"></a>
+      <div id="method-M000160" class="method-detail">
+        <a name="M000160"></a>
 
         <div class="method-heading">
-          <a href="#M000157" class="method-signature">
+          <a href="#M000160" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(id)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000157-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000157-source">
+            onclick="toggleCode('M000160-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000160-source">
 <pre>
 <span class="ruby-comment cmt"># File Result.rb, line 34</span>
-        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>)
-            <span class="ruby-keyword kw">super</span>
-        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>)
+                        <span class="ruby-keyword kw">super</span>
+                <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -229,39 +229,39 @@ sequence matches to different strand/frame Date: 6/1/2010
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000163" class="method-detail">
-        <a name="M000163"></a>
+      <div id="method-M000166" class="method-detail">
+        <a name="M000166"></a>
 
         <div class="method-heading">
-          <a href="#M000163" class="method-signature">
+          <a href="#M000166" class="method-signature">
           <span class="method-name">debug</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000163-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000163-source">
+            onclick="toggleCode('M000166-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000166-source">
 <pre>
 <span class="ruby-comment cmt"># File Result.rb, line 84</span>
-        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
-            <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ SubHit +&quot;</span>
-            <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
-            <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* eval: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">eval</span>.<span class="ruby-identifier">to_s</span>
-            <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* score: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">score</span>.<span class="ruby-identifier">to_s</span>
-            <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* frame: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">frame</span>.<span class="ruby-identifier">to_s</span>
-            <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* strand: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">strand</span>.<span class="ruby-identifier">to_s</span>
-        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ SubHit +&quot;</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* eval: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">eval</span>.<span class="ruby-identifier">to_s</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* score: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">score</span>.<span class="ruby-identifier">to_s</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* frame: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">frame</span>.<span class="ruby-identifier">to_s</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* strand: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">strand</span>.<span class="ruby-identifier">to_s</span>
+                <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000160" class="method-detail">
-        <a name="M000160"></a>
+      <div id="method-M000163" class="method-detail">
+        <a name="M000163"></a>
 
         <div class="method-heading">
-          <a href="#M000160" class="method-signature">
+          <a href="#M000163" class="method-signature">
           <span class="method-name">has_complete?</span><span class="method-args">(cut = 1)</span>
           </a>
         </div>
@@ -272,111 +272,16 @@ Checks whether there is any <a href="Domain.html">Domain</a>
 <b>complete</b> in the <a href="Hit.html">Hit</a>. See complete?.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000160-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000160-source">
+            onclick="toggleCode('M000163-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000163-source">
 <pre>
 <span class="ruby-comment cmt"># File Result.rb, line 57</span>
-        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">has_complete?</span>(<span class="ruby-identifier">cut</span> = <span class="ruby-value">1</span>)
-            <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">domain</span><span class="ruby-operator">|</span>
-                <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">domain</span>.<span class="ruby-identifier">complete?</span>(<span class="ruby-identifier">cut</span>)
-            <span class="ruby-keyword kw">end</span>
-            <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
-        <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000159" class="method-detail">
-        <a name="M000159"></a>
-
-        <div class="method-heading">
-          <a href="#M000159" class="method-signature">
-          <span class="method-name">has_fragment?</span><span class="method-args">(cut = 1)</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-Checks whether there is any <a href="Domain.html">Domain</a> <b>not
-complete</b> (fragment) in the <a href="Hit.html">Hit</a>.
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000159-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000159-source">
-<pre>
-<span class="ruby-comment cmt"># File Result.rb, line 49</span>
-        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">has_fragment?</span>(<span class="ruby-identifier">cut</span> = <span class="ruby-value">1</span>)
-            <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">domain</span><span class="ruby-operator">|</span>
-                <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">domain</span>.<span class="ruby-identifier">complete?</span>(<span class="ruby-identifier">cut</span>)
-            <span class="ruby-keyword kw">end</span>
-            <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
-        <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000158" class="method-detail">
-        <a name="M000158"></a>
-
-        <div class="method-heading">
-          <a href="#M000158" class="method-signature">
-          <span class="method-name">localization</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-Returnsa string with the <a href="SubHit.html#M000158">localization</a> in
-the sequence of the different domains in the <a
-href="SubHit.html">SubHit</a>.
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000158-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000158-source">
-<pre>
-<span class="ruby-comment cmt"># File Result.rb, line 39</span>
-        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">localization</span>
-            <span class="ruby-identifier">loc</span> = []
-            <span class="ruby-comment cmt"># we have to sort the hash in this case.</span>
-            <span class="ruby-ivar">@items</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
-                <span class="ruby-identifier">loc</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@items</span>[<span class="ruby-identifier">index</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>].<span class="ruby-identifier">aln_from</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;..&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@items</span>[<span class="ruby-identifier">index</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>].<span class="ruby-identifier">aln_to</span>.<span class="ruby-identifier">to_s</span>
-            <span class="ruby-keyword kw">end</span>
-            <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;,&quot;</span>)
-        <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000161" class="method-detail">
-        <a name="M000161"></a>
-
-        <div class="method-heading">
-          <a href="#M000161" class="method-signature">
-          <span class="method-name">max_completeness</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-Obtains the maximum completeness found in any of the Domains within the <a
-href="SubHit.html">SubHit</a>.
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000161-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000161-source">
-<pre>
-<span class="ruby-comment cmt"># File Result.rb, line 65</span>
-        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">max_completeness</span>
-            <span class="ruby-identifier">mc</span> = <span class="ruby-value">0</span>
-            <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">domain</span><span class="ruby-operator">|</span>
-                <span class="ruby-identifier">smc</span> = <span class="ruby-identifier">domain</span>.<span class="ruby-identifier">completeness</span>
-                <span class="ruby-identifier">mc</span> = <span class="ruby-identifier">smc</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">smc</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">mc</span>
-            <span class="ruby-keyword kw">end</span>
-            <span class="ruby-identifier">mc</span>
-        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">has_complete?</span>(<span class="ruby-identifier">cut</span> = <span class="ruby-value">1</span>)
+                        <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">domain</span><span class="ruby-operator">|</span>
+                                <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">domain</span>.<span class="ruby-identifier">complete?</span>(<span class="ruby-identifier">cut</span>)
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+                <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -387,6 +292,101 @@ href="SubHit.html">SubHit</a>.
 
         <div class="method-heading">
           <a href="#M000162" class="method-signature">
+          <span class="method-name">has_fragment?</span><span class="method-args">(cut = 1)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Checks whether there is any <a href="Domain.html">Domain</a> <b>not
+complete</b> (fragment) in the <a href="Hit.html">Hit</a>.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000162-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000162-source">
+<pre>
+<span class="ruby-comment cmt"># File Result.rb, line 49</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">has_fragment?</span>(<span class="ruby-identifier">cut</span> = <span class="ruby-value">1</span>)
+                        <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">domain</span><span class="ruby-operator">|</span>
+                                <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">domain</span>.<span class="ruby-identifier">complete?</span>(<span class="ruby-identifier">cut</span>)
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+                <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000161" class="method-detail">
+        <a name="M000161"></a>
+
+        <div class="method-heading">
+          <a href="#M000161" class="method-signature">
+          <span class="method-name">localization</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returnsa string with the <a href="SubHit.html#M000161">localization</a> in
+the sequence of the different domains in the <a
+href="SubHit.html">SubHit</a>.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000161-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000161-source">
+<pre>
+<span class="ruby-comment cmt"># File Result.rb, line 39</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">localization</span>
+                        <span class="ruby-identifier">loc</span> = []
+                        <span class="ruby-comment cmt"># we have to sort the hash in this case.</span>
+                        <span class="ruby-ivar">@items</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
+                                <span class="ruby-identifier">loc</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@items</span>[<span class="ruby-identifier">index</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>].<span class="ruby-identifier">aln_from</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;..&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@items</span>[<span class="ruby-identifier">index</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>].<span class="ruby-identifier">aln_to</span>.<span class="ruby-identifier">to_s</span>
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;,&quot;</span>)
+                <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000164" class="method-detail">
+        <a name="M000164"></a>
+
+        <div class="method-heading">
+          <a href="#M000164" class="method-signature">
+          <span class="method-name">max_completeness</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Obtains the maximum completeness found in any of the Domains within the <a
+href="SubHit.html">SubHit</a>.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000164-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000164-source">
+<pre>
+<span class="ruby-comment cmt"># File Result.rb, line 65</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">max_completeness</span>
+                        <span class="ruby-identifier">mc</span> = <span class="ruby-value">0</span>
+                        <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">domain</span><span class="ruby-operator">|</span>
+                                <span class="ruby-identifier">smc</span> = <span class="ruby-identifier">domain</span>.<span class="ruby-identifier">completeness</span>
+                                <span class="ruby-identifier">mc</span> = <span class="ruby-identifier">smc</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">smc</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">mc</span>
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-identifier">mc</span>
+                <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000165" class="method-detail">
+        <a name="M000165"></a>
+
+        <div class="method-heading">
+          <a href="#M000165" class="method-signature">
           <span class="method-name">min_completeness</span><span class="method-args">()</span>
           </a>
         </div>
@@ -397,18 +397,18 @@ Obtains the minimum completeness found in any of the Domains within the <a
 href="SubHit.html">SubHit</a>.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000162-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000162-source">
+            onclick="toggleCode('M000165-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000165-source">
 <pre>
 <span class="ruby-comment cmt"># File Result.rb, line 75</span>
-        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">min_completeness</span>
-            <span class="ruby-identifier">mc</span> = <span class="ruby-value">1</span>
-            <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">domain</span><span class="ruby-operator">|</span>
-                <span class="ruby-identifier">smc</span> = <span class="ruby-identifier">domain</span>.<span class="ruby-identifier">completeness</span>
-                <span class="ruby-identifier">mc</span> = <span class="ruby-identifier">smc</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">smc</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">mc</span>
-            <span class="ruby-keyword kw">end</span>
-            <span class="ruby-identifier">mc</span>
-        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">min_completeness</span>
+                        <span class="ruby-identifier">mc</span> = <span class="ruby-value">1</span>
+                        <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">domain</span><span class="ruby-operator">|</span>
+                                <span class="ruby-identifier">smc</span> = <span class="ruby-identifier">domain</span>.<span class="ruby-identifier">completeness</span>
+                                <span class="ruby-identifier">mc</span> = <span class="ruby-identifier">smc</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">smc</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">mc</span>
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-identifier">mc</span>
+                <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

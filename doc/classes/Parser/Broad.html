@@ -5,7 +5,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Class: Item::Item</title>
+  <title>Class: Parser::Broad</title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
   <meta http-equiv="Content-Script-Type" content="text/javascript" />
   <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
@@ -50,13 +50,13 @@
         <table class="header-table">
         <tr class="top-aligned-row">
           <td><strong>Class</strong></td>
-          <td class="class-name-in-header">Item::Item</td>
+          <td class="class-name-in-header">Parser::Broad</td>
         </tr>
         <tr class="top-aligned-row">
             <td><strong>In:</strong></td>
             <td>
-                <a href="../../files/Item_rb.html">
-                Item.rb
+                <a href="../../files/Parser_rb.html">
+                Parser.rb
                 </a>
         <br />
             </td>
@@ -65,8 +65,8 @@
         <tr class="top-aligned-row">
             <td><strong>Parent:</strong></td>
             <td>
-                <a href="Set.html">
-                Set
+                <a href="Common.html">
+                Common
                </a>
             </td>
         </tr>
@@ -81,11 +81,13 @@
   <div id="contextContent">
     <div id="diagram">
       <map id="map" name="map">
-  <area shape="rect" coords="51,51,123,99"      href="Set.html" alt="Set" />
-  <area shape="rect" coords="51,147,123,195"      href="Item.html" alt="Item" />
-  <area shape="rect" coords="16,16,133,205"      href="../Item.html" alt="Item" />
+  <area shape="rect" coords="123,51,195,99"      href="Common.html" alt="Common" />
+  <area shape="rect" coords="27,147,99,195"      href="Refseq.html" alt="Refseq" />
+  <area shape="rect" coords="123,147,195,195"      href="Broad.html" alt="Broad" />
+  <area shape="rect" coords="219,147,299,195"      href="Eupathdb.html" alt="Eupathdb" />
+  <area shape="rect" coords="16,16,309,205"      href="../Parser.html" alt="Parser" />
 </map>
-<img src="../../dot/f_2.png" usemap="#map" border="0" alt="dot/f_2.png">
+<img src="../../dot/f_4.png" usemap="#map" border="0" alt="dot/f_4.png">
     </div>
 
 
@@ -96,8 +98,8 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000121">debug</a>&nbsp;&nbsp;
-      <a href="#M000120">new</a>&nbsp;&nbsp;
+      <a href="#M000016">new</a>&nbsp;&nbsp;
+      <a href="#M000017">parse</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -112,19 +114,6 @@
 
 
 
-    <div id="attribute-list">
-      <h3 class="section-bar">Attributes</h3>
-
-      <div class="name-list">
-        <table>
-        <tr class="top-aligned-row context-row">
-          <td class="context-item-name">id</td>
-          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
-          <td class="context-item-desc"></td>
-        </tr>
-        </table>
-      </div>
-    </div>
       
 
 
@@ -132,24 +121,25 @@
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000120" class="method-detail">
-        <a name="M000120"></a>
+      <div id="method-M000016" class="method-detail">
+        <a name="M000016"></a>
 
         <div class="method-heading">
-          <a href="#M000120" class="method-signature">
-          <span class="method-name">new</span><span class="method-args">(id)</span>
+          <a href="#M000016" class="method-signature">
+          <span class="method-name">new</span><span class="method-args">(taxon, options = {:config =&gt; nil})</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000120-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000120-source">
+            onclick="toggleCode('M000016-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000016-source">
 <pre>
-<span class="ruby-comment cmt"># File Item.rb, line 69</span>
-                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span> (<span class="ruby-identifier">id</span>)
-                        <span class="ruby-keyword kw">super</span>()
-                        <span class="ruby-ivar">@id</span> = <span class="ruby-identifier">id</span>
+<span class="ruby-comment cmt"># File Parser.rb, line 157</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">taxon</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
+                        <span class="ruby-keyword kw">super</span>
+                        
+                        <span class="ruby-ivar">@file</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gb&quot;</span>)
                 <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
@@ -158,23 +148,22 @@
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000121" class="method-detail">
-        <a name="M000121"></a>
+      <div id="method-M000017" class="method-detail">
+        <a name="M000017"></a>
 
         <div class="method-heading">
-          <a href="#M000121" class="method-signature">
-          <span class="method-name">debug</span><span class="method-args">()</span>
+          <a href="#M000017" class="method-signature">
+          <span class="method-name">parse</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000121-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000121-source">
+            onclick="toggleCode('M000017-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000017-source">
 <pre>
-<span class="ruby-comment cmt"># File Item.rb, line 74</span>
-                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
-                        <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;id: #{@id} =&gt; #{self}&quot;</span>
+<span class="ruby-comment cmt"># File Parser.rb, line 163</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parse</span>
                 <span class="ruby-keyword kw">end</span>
 </pre>
           </div>

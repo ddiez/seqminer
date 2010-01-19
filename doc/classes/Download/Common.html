@@ -97,9 +97,9 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000062">ftp_download</a>&nbsp;&nbsp;
-      <a href="#M000063">http_download</a>&nbsp;&nbsp;
-      <a href="#M000064">ncbi_download</a>&nbsp;&nbsp;
+      <a href="#M000063">ftp_download</a>&nbsp;&nbsp;
+      <a href="#M000064">http_download</a>&nbsp;&nbsp;
+      <a href="#M000065">ncbi_download</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -121,11 +121,11 @@
     <div id="methods">
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000062" class="method-detail">
-        <a name="M000062"></a>
+      <div id="method-M000063" class="method-detail">
+        <a name="M000063"></a>
 
         <div class="method-heading">
-          <a href="#M000062" class="method-signature">
+          <a href="#M000063" class="method-signature">
           <span class="method-name">ftp_download</span><span class="method-args">(host, dir, file, ofile)</span>
           </a>
         </div>
@@ -149,38 +149,38 @@ This method downloads a file using the FTP protocol. Parametes:
 </li>
 </ul>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000062-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000062-source">
+            onclick="toggleCode('M000063-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000063-source">
 <pre>
 <span class="ruby-comment cmt"># File Download.rb, line 19</span>
-        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">ftp_download</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">dir</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">ofile</span>)
-            <span class="ruby-identifier">ftp</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">FTP</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">host</span>)
-            <span class="ruby-identifier">ftp</span>.<span class="ruby-identifier">login</span>
-            <span class="ruby-identifier">ftp</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-identifier">dir</span>)
-                    
-            <span class="ruby-identifier">filesize</span> = <span class="ruby-identifier">ftp</span>.<span class="ruby-identifier">size</span>(<span class="ruby-identifier">file</span>)
-            <span class="ruby-identifier">transferred</span> = <span class="ruby-value">0</span>
-            <span class="ruby-identifier">pb</span> = <span class="ruby-constant">ProgressBar</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>, <span class="ruby-value">100</span>)
-            <span class="ruby-identifier">ftp</span>.<span class="ruby-identifier">getbinaryfile</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">ofile</span>, <span class="ruby-value">1024</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">data</span><span class="ruby-operator">|</span>
-                <span class="ruby-identifier">transferred</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">size</span>
-                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">transferred</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
-                    <span class="ruby-identifier">percent_finished</span> = <span class="ruby-value">100</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">transferred</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">filesize</span>.<span class="ruby-identifier">to_f</span>)
-                    <span class="ruby-identifier">pb</span>.<span class="ruby-identifier">set</span>(<span class="ruby-identifier">percent_finished</span>)
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">ftp_download</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">dir</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">ofile</span>)
+                        <span class="ruby-identifier">ftp</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">FTP</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">host</span>)
+                        <span class="ruby-identifier">ftp</span>.<span class="ruby-identifier">login</span>
+                        <span class="ruby-identifier">ftp</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-identifier">dir</span>)
+                                        
+                        <span class="ruby-identifier">filesize</span> = <span class="ruby-identifier">ftp</span>.<span class="ruby-identifier">size</span>(<span class="ruby-identifier">file</span>)
+                        <span class="ruby-identifier">transferred</span> = <span class="ruby-value">0</span>
+                        <span class="ruby-identifier">pb</span> = <span class="ruby-constant">ProgressBar</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>, <span class="ruby-value">100</span>)
+                        <span class="ruby-identifier">ftp</span>.<span class="ruby-identifier">getbinaryfile</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">ofile</span>, <span class="ruby-value">1024</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">data</span><span class="ruby-operator">|</span>
+                                <span class="ruby-identifier">transferred</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">size</span>
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">transferred</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
+                                        <span class="ruby-identifier">percent_finished</span> = <span class="ruby-value">100</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">transferred</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">filesize</span>.<span class="ruby-identifier">to_f</span>)
+                                        <span class="ruby-identifier">pb</span>.<span class="ruby-identifier">set</span>(<span class="ruby-identifier">percent_finished</span>)
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-identifier">pb</span>.<span class="ruby-identifier">finish</span>
+                        <span class="ruby-identifier">ftp</span>.<span class="ruby-identifier">close</span>
                 <span class="ruby-keyword kw">end</span>
-            <span class="ruby-keyword kw">end</span>
-            <span class="ruby-identifier">pb</span>.<span class="ruby-identifier">finish</span>
-            <span class="ruby-identifier">ftp</span>.<span class="ruby-identifier">close</span>
-        <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000063" class="method-detail">
-        <a name="M000063"></a>
+      <div id="method-M000064" class="method-detail">
+        <a name="M000064"></a>
 
         <div class="method-heading">
-          <a href="#M000063" class="method-signature">
+          <a href="#M000064" class="method-signature">
           <span class="method-name">http_download</span><span class="method-args">(host, dir, file, ofile)</span>
           </a>
         </div>
@@ -204,45 +204,45 @@ This method downloads a file using the HTTP protocol. Parametes:
 </li>
 </ul>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000063-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000063-source">
+            onclick="toggleCode('M000064-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000064-source">
 <pre>
 <span class="ruby-comment cmt"># File Download.rb, line 44</span>
-        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">http_download</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">dir</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">ofile</span>)
-            <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* host: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">host</span>
-            <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* dir: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir</span>
-            <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* file: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">file</span>
-            <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* ofile: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ofile</span>
-            <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">start</span>(<span class="ruby-identifier">host</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">http</span><span class="ruby-operator">|</span>
-                <span class="ruby-identifier">req</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Get</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;/&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;/&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">file</span>)
-                <span class="ruby-identifier">transferred</span> = <span class="ruby-value">0</span>
-                <span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>(<span class="ruby-identifier">req</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">resp</span><span class="ruby-operator">|</span>
-                    <span class="ruby-identifier">pb</span> = <span class="ruby-constant">ProgressBar</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>, <span class="ruby-value">100</span>)
-                    <span class="ruby-identifier">filesize</span> = <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">content_length</span>
-                    <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">ofile</span>, <span class="ruby-value str">'w'</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
-                        <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">read_body</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">data</span><span class="ruby-operator">|</span>
-                            <span class="ruby-identifier">transferred</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">size</span>
-                            <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">transferred</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>)
-                                <span class="ruby-identifier">percent_finished</span> = <span class="ruby-value">100</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">transferred</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">filesize</span>.<span class="ruby-identifier">to_f</span>)
-                                <span class="ruby-identifier">pb</span>.<span class="ruby-identifier">set</span>(<span class="ruby-identifier">percent_finished</span>)
-                            <span class="ruby-keyword kw">end</span>
-                            <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">data</span>)
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">http_download</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">dir</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">ofile</span>)
+                        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* host: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">host</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* dir: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* file: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">file</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* ofile: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ofile</span>
+                        
+                        <span class="ruby-identifier">http</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">start</span>(<span class="ruby-identifier">host</span>)
+                        <span class="ruby-identifier">req</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Get</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;/&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;/&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">file</span>)
+                        <span class="ruby-identifier">transferred</span> = <span class="ruby-value">0</span>
+                        <span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>(<span class="ruby-identifier">req</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">resp</span><span class="ruby-operator">|</span>
+                                <span class="ruby-identifier">pb</span> = <span class="ruby-constant">ProgressBar</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>, <span class="ruby-value">100</span>)
+                                <span class="ruby-identifier">filesize</span> = <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">content_length</span>
+                                <span class="ruby-identifier">f</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">ofile</span>, <span class="ruby-value str">'w'</span>)
+                                <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">read_body</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">data</span><span class="ruby-operator">|</span>
+                                        <span class="ruby-identifier">transferred</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">size</span>
+                                        <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">transferred</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>)
+                                                <span class="ruby-identifier">percent_finished</span> = <span class="ruby-value">100</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">transferred</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">filesize</span>.<span class="ruby-identifier">to_f</span>)
+                                                <span class="ruby-identifier">pb</span>.<span class="ruby-identifier">set</span>(<span class="ruby-identifier">percent_finished</span>)
+                                        <span class="ruby-keyword kw">end</span>
+                                        <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">data</span>)
+                                <span class="ruby-keyword kw">end</span>
+                                <span class="ruby-identifier">f</span>.<span class="ruby-identifier">close</span>
+                                <span class="ruby-identifier">pb</span>.<span class="ruby-identifier">finish</span>
                         <span class="ruby-keyword kw">end</span>
-                    <span class="ruby-keyword kw">end</span>
-                    <span class="ruby-identifier">pb</span>.<span class="ruby-identifier">finish</span>
                 <span class="ruby-keyword kw">end</span>
-            <span class="ruby-keyword kw">end</span>
-        <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000064" class="method-detail">
-        <a name="M000064"></a>
+      <div id="method-M000065" class="method-detail">
+        <a name="M000065"></a>
 
         <div class="method-heading">
-          <a href="#M000064" class="method-signature">
+          <a href="#M000065" class="method-signature">
           <span class="method-name">ncbi_download</span><span class="method-args">(term, db, ofile)</span>
           </a>
         </div>
@@ -265,28 +265,28 @@ output with Bioruby. Parametes:
 </li>
 </ul>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000064-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000064-source">
+            onclick="toggleCode('M000065-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000065-source">
 <pre>
 <span class="ruby-comment cmt"># File Download.rb, line 77</span>
-        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">ncbi_download</span>(<span class="ruby-identifier">term</span>, <span class="ruby-identifier">db</span>, <span class="ruby-identifier">ofile</span>)
-            <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NCBI</span>.<span class="ruby-identifier">default_email</span> = <span class="ruby-value str">&quot;diez@kuicr.kyoto-u.ac.jp&quot;</span>
-            <span class="ruby-identifier">ncbi</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NCBI</span><span class="ruby-operator">::</span><span class="ruby-constant">REST</span>.<span class="ruby-identifier">new</span>
-            
-            <span class="ruby-identifier">system</span>(<span class="ruby-node">&quot;./ncbi_download.pl #{term} #{db} #{ofile}&quot;</span>)
-            
-            <span class="ruby-comment cmt"># TODO: how to do it in ruby??</span>
-            <span class="ruby-comment cmt">#gpid = ncbi.esearch(term, {:db =&gt; &quot;nuccore&quot;, :rettype =&gt; &quot;gb&quot;, :retmode =&gt; &quot;txt&quot;, :usehistory =&gt; 'y'})</span>
-            <span class="ruby-comment cmt">#puts gpid.length</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">ncbi_download</span>(<span class="ruby-identifier">term</span>, <span class="ruby-identifier">db</span>, <span class="ruby-identifier">ofile</span>)
+                        <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NCBI</span>.<span class="ruby-identifier">default_email</span> = <span class="ruby-value str">&quot;diez@kuicr.kyoto-u.ac.jp&quot;</span>
+                        <span class="ruby-identifier">ncbi</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NCBI</span><span class="ruby-operator">::</span><span class="ruby-constant">REST</span>.<span class="ruby-identifier">new</span>
+                        
+                        <span class="ruby-identifier">system</span>(<span class="ruby-node">&quot;./ncbi_download.pl \&quot;#{term}\&quot; #{db} #{ofile}&quot;</span>)
+                        
+                        <span class="ruby-comment cmt"># TODO: how to do it in ruby??</span>
+                        <span class="ruby-comment cmt">#gpid = ncbi.esearch(term, {:db =&gt; &quot;nuccore&quot;, :rettype =&gt; &quot;gb&quot;, :retmode =&gt; &quot;txt&quot;, :usehistory =&gt; 'y'})</span>
+                        <span class="ruby-comment cmt">#puts gpid.length</span>
 
-            <span class="ruby-comment cmt">#gpid.each do |gid|</span>
-                <span class="ruby-comment cmt">#of = File.new(outfile, &quot;a&quot;)</span>
-                <span class="ruby-comment cmt">#genome = ncbi.efetch(gid, {&quot;db&quot;=&gt;&quot;genome&quot;, &quot;rettype&quot;=&gt;&quot;gbwithparts&quot;, &quot;retmode&quot; =&gt; &quot;txt&quot;})</span>
-                <span class="ruby-comment cmt">#of.puts genome</span>
-                <span class="ruby-comment cmt">#of.close</span>
-            <span class="ruby-comment cmt">#end</span>
-            <span class="ruby-comment cmt">#refseq_process_source(outfile)</span>
-        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-comment cmt">#gpid.each do |gid|</span>
+                                <span class="ruby-comment cmt">#of = File.new(outfile, &quot;a&quot;)</span>
+                                <span class="ruby-comment cmt">#genome = ncbi.efetch(gid, {&quot;db&quot;=&gt;&quot;genome&quot;, &quot;rettype&quot;=&gt;&quot;gbwithparts&quot;, &quot;retmode&quot; =&gt; &quot;txt&quot;})</span>
+                                <span class="ruby-comment cmt">#of.puts genome</span>
+                                <span class="ruby-comment cmt">#of.close</span>
+                        <span class="ruby-comment cmt">#end</span>
+                        <span class="ruby-comment cmt">#refseq_process_source(outfile)</span>
+                <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

@@ -97,9 +97,9 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000057">debug</a>&nbsp;&nbsp;
-      <a href="#M000056">filter_by_name</a>&nbsp;&nbsp;
-      <a href="#M000055">new</a>&nbsp;&nbsp;
+      <a href="#M000058">debug</a>&nbsp;&nbsp;
+      <a href="#M000057">filter_by_name</a>&nbsp;&nbsp;
+      <a href="#M000056">new</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -134,87 +134,12 @@
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000055" class="method-detail">
-        <a name="M000055"></a>
-
-        <div class="method-heading">
-          <a href="#M000055" class="method-signature">
-          <span class="method-name">new</span><span class="method-args">(options = {:empty =&gt; false, :config =&gt; nil})</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000055-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000055-source">
-<pre>
-<span class="ruby-comment cmt"># File Ortholog.rb, line 9</span>
-        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:empty</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
-            <span class="ruby-keyword kw">super</span>()
-
-            <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
-                <span class="ruby-ivar">@config</span> = <span class="ruby-constant">SeqMiner</span><span class="ruby-operator">::</span><span class="ruby-constant">Config</span>.<span class="ruby-identifier">new</span>
-            <span class="ruby-keyword kw">else</span>
-                <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
-            <span class="ruby-keyword kw">end</span>
-            
-            <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:empty</span>]
-                <span class="ruby-identifier">of</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">file_ortholog</span>
-                <span class="ruby-identifier">file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">of</span>)
-                <span class="ruby-identifier">file</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-                    <span class="ruby-identifier">line</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp</span>
-                    <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;&quot;</span>
-                    <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^#/</span>
-                    <span class="ruby-identifier">name</span>, <span class="ruby-identifier">hmm</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">&quot;\t&quot;</span>)
-                    <span class="ruby-comment cmt">#warn &quot;* Ortholog: &quot; + name</span>
-    
-                    <span class="ruby-identifier">ortholog</span> = <span class="ruby-constant">Ortholog</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">hmm</span>)
-                    <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">ortholog</span>)
-                <span class="ruby-keyword kw">end</span>
-                <span class="ruby-identifier">file</span>.<span class="ruby-identifier">close</span>
-            <span class="ruby-keyword kw">end</span>
-        <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <h3 class="section-bar">Public Instance methods</h3>
-
-      <div id="method-M000057" class="method-detail">
-        <a name="M000057"></a>
-
-        <div class="method-heading">
-          <a href="#M000057" class="method-signature">
-          <span class="method-name">debug</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000057-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000057-source">
-<pre>
-<span class="ruby-comment cmt"># File Ortholog.rb, line 39</span>
-        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
-            <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Ortholog Set+&quot;</span>
-            <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* length: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
-            <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ortholog</span><span class="ruby-operator">|</span>
-                <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">debug</span>
-            <span class="ruby-keyword kw">end</span>
-            <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;&quot;</span>
-        <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
       <div id="method-M000056" class="method-detail">
         <a name="M000056"></a>
 
         <div class="method-heading">
           <a href="#M000056" class="method-signature">
-          <span class="method-name">filter_by_name</span><span class="method-args">(filter)</span>
+          <span class="method-name">new</span><span class="method-args">(options = {:empty =&gt; false, :config =&gt; nil})</span>
           </a>
         </div>
       
@@ -223,10 +148,85 @@
             onclick="toggleCode('M000056-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000056-source">
 <pre>
+<span class="ruby-comment cmt"># File Ortholog.rb, line 9</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:empty</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
+                        <span class="ruby-keyword kw">super</span>()
+
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+                                <span class="ruby-ivar">@config</span> = <span class="ruby-constant">SeqMiner</span><span class="ruby-operator">::</span><span class="ruby-constant">Config</span>.<span class="ruby-identifier">new</span>
+                        <span class="ruby-keyword kw">else</span>
+                                <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+                        <span class="ruby-keyword kw">end</span>
+                        
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:empty</span>]
+                                <span class="ruby-identifier">of</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">file_ortholog</span>
+                                <span class="ruby-identifier">file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">of</span>)
+                                <span class="ruby-identifier">file</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+                                        <span class="ruby-identifier">line</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp</span>
+                                        <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;&quot;</span>
+                                        <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^#/</span>
+                                        <span class="ruby-identifier">name</span>, <span class="ruby-identifier">hmm</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">&quot;\t&quot;</span>)
+                                        <span class="ruby-comment cmt">#warn &quot;* Ortholog: &quot; + name</span>
+        
+                                        <span class="ruby-identifier">ortholog</span> = <span class="ruby-constant">Ortholog</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">hmm</span>)
+                                        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">ortholog</span>)
+                                <span class="ruby-keyword kw">end</span>
+                                <span class="ruby-identifier">file</span>.<span class="ruby-identifier">close</span>
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000058" class="method-detail">
+        <a name="M000058"></a>
+
+        <div class="method-heading">
+          <a href="#M000058" class="method-signature">
+          <span class="method-name">debug</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000058-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000058-source">
+<pre>
+<span class="ruby-comment cmt"># File Ortholog.rb, line 39</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Ortholog Set+&quot;</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* length: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
+                        <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ortholog</span><span class="ruby-operator">|</span>
+                                <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">debug</span>
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;&quot;</span>
+                <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000057" class="method-detail">
+        <a name="M000057"></a>
+
+        <div class="method-heading">
+          <a href="#M000057" class="method-signature">
+          <span class="method-name">filter_by_name</span><span class="method-args">(filter)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000057-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000057-source">
+<pre>
 <span class="ruby-comment cmt"># File Ortholog.rb, line 35</span>
-        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filter_by_name</span>(<span class="ruby-identifier">filter</span>)
-            <span class="ruby-identifier">items</span>.<span class="ruby-identifier">delete_if</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">ortholog</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">match</span>(<span class="ruby-node">/#{filter}/</span>) }
-        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filter_by_name</span>(<span class="ruby-identifier">filter</span>)
+                        <span class="ruby-identifier">items</span>.<span class="ruby-identifier">delete_if</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">ortholog</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">match</span>(<span class="ruby-node">/#{filter}/</span>) }
+                <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

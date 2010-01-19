@@ -100,11 +100,11 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000037">debug</a>&nbsp;&nbsp;
-      <a href="#M000035">name</a>&nbsp;&nbsp;
-      <a href="#M000034">name=</a>&nbsp;&nbsp;
-      <a href="#M000033">new</a>&nbsp;&nbsp;
-      <a href="#M000036">validate_type</a>&nbsp;&nbsp;
+      <a href="#M000039">debug</a>&nbsp;&nbsp;
+      <a href="#M000037">name</a>&nbsp;&nbsp;
+      <a href="#M000036">name=</a>&nbsp;&nbsp;
+      <a href="#M000035">new</a>&nbsp;&nbsp;
+      <a href="#M000038">validate_type</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -126,63 +126,12 @@
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000033" class="method-detail">
-        <a name="M000033"></a>
-
-        <div class="method-heading">
-          <a href="#M000033" class="method-signature">
-          <span class="method-name">new</span><span class="method-args">(id, type)</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000033-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000033-source">
-<pre>
-<span class="ruby-comment cmt"># File Search.rb, line 28</span>
-        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">type</span>)
-            <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">id</span>)
-            <span class="ruby-ivar">@valid_types</span> = [<span class="ruby-value str">&quot;nucleotide&quot;</span>, <span class="ruby-value str">&quot;protein&quot;</span>]
-            <span class="ruby-ivar">@type</span> = <span class="ruby-identifier">validate_type</span>(<span class="ruby-identifier">type</span>)
-        <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <h3 class="section-bar">Public Instance methods</h3>
-
-      <div id="method-M000037" class="method-detail">
-        <a name="M000037"></a>
-
-        <div class="method-heading">
-          <a href="#M000037" class="method-signature">
-          <span class="method-name">debug</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000037-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000037-source">
-<pre>
-<span class="ruby-comment cmt"># File Search.rb, line 54</span>
-        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
-            <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Parameter Type +&quot;</span>
-            <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* type: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name</span>
-        <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
       <div id="method-M000035" class="method-detail">
         <a name="M000035"></a>
 
         <div class="method-heading">
           <a href="#M000035" class="method-signature">
-          <span class="method-name">name</span><span class="method-args">()</span>
+          <span class="method-name">new</span><span class="method-args">(id, type)</span>
           </a>
         </div>
       
@@ -191,37 +140,61 @@
             onclick="toggleCode('M000035-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000035-source">
 <pre>
-<span class="ruby-comment cmt"># File Search.rb, line 42</span>
-        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">name</span>
-            <span class="ruby-ivar">@type</span>
-        <span class="ruby-keyword kw">end</span>
+<span class="ruby-comment cmt"># File Search.rb, line 28</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">type</span>)
+                        <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">id</span>)
+                        <span class="ruby-ivar">@valid_types</span> = [<span class="ruby-value str">&quot;nucleotide&quot;</span>, <span class="ruby-value str">&quot;protein&quot;</span>]
+                        <span class="ruby-ivar">@type</span> = <span class="ruby-identifier">validate_type</span>(<span class="ruby-identifier">type</span>)
+                <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000034" class="method-detail">
-        <a name="M000034"></a>
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000039" class="method-detail">
+        <a name="M000039"></a>
 
         <div class="method-heading">
-          <a href="#M000034" class="method-signature">
-          <span class="method-name">name=</span><span class="method-args">(val)</span>
+          <a href="#M000039" class="method-signature">
+          <span class="method-name">debug</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000034-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000034-source">
+            onclick="toggleCode('M000039-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000039-source">
 <pre>
-<span class="ruby-comment cmt"># File Search.rb, line 34</span>
-        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">name=</span>(<span class="ruby-identifier">val</span>)
-            <span class="ruby-ivar">@type</span> = <span class="ruby-identifier">validate_type</span>(<span class="ruby-identifier">val</span>)
-            <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@type</span>.<span class="ruby-identifier">nil?</span>
-                <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Invalid value for 'type' #{val}.&quot;</span>
-                <span class="ruby-identifier">exit</span>
-            <span class="ruby-keyword kw">end</span>
-        <span class="ruby-keyword kw">end</span>
+<span class="ruby-comment cmt"># File Search.rb, line 54</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Parameter Type +&quot;</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* type: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name</span>
+                <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000037" class="method-detail">
+        <a name="M000037"></a>
+
+        <div class="method-heading">
+          <a href="#M000037" class="method-signature">
+          <span class="method-name">name</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000037-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000037-source">
+<pre>
+<span class="ruby-comment cmt"># File Search.rb, line 42</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">name</span>
+                        <span class="ruby-ivar">@type</span>
+                <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -232,7 +205,7 @@
 
         <div class="method-heading">
           <a href="#M000036" class="method-signature">
-          <span class="method-name">validate_type</span><span class="method-args">(val)</span>
+          <span class="method-name">name=</span><span class="method-args">(val)</span>
           </a>
         </div>
       
@@ -241,14 +214,41 @@
             onclick="toggleCode('M000036-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000036-source">
 <pre>
+<span class="ruby-comment cmt"># File Search.rb, line 34</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">name=</span>(<span class="ruby-identifier">val</span>)
+                        <span class="ruby-ivar">@type</span> = <span class="ruby-identifier">validate_type</span>(<span class="ruby-identifier">val</span>)
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@type</span>.<span class="ruby-identifier">nil?</span>
+                                <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Invalid value for 'type' #{val}.&quot;</span>
+                                <span class="ruby-identifier">exit</span>
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000038" class="method-detail">
+        <a name="M000038"></a>
+
+        <div class="method-heading">
+          <a href="#M000038" class="method-signature">
+          <span class="method-name">validate_type</span><span class="method-args">(val)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000038-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000038-source">
+<pre>
 <span class="ruby-comment cmt"># File Search.rb, line 46</span>
-        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_type</span>(<span class="ruby-identifier">val</span>)
-            <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@valid_types</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">val</span>)
-                <span class="ruby-identifier">val</span>
-            <span class="ruby-keyword kw">else</span>
-                <span class="ruby-keyword kw">nil</span>
-            <span class="ruby-keyword kw">end</span>
-        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_type</span>(<span class="ruby-identifier">val</span>)
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@valid_types</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">val</span>)
+                                <span class="ruby-identifier">val</span>
+                        <span class="ruby-keyword kw">else</span>
+                                <span class="ruby-keyword kw">nil</span>
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
