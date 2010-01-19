@@ -154,14 +154,112 @@ module Parser
 	end
 	
 	class Broad < Common
+		attr_reader :gff_file, :annot_file
+		
 		def initialize(taxon, options = {:config => nil})
 			super
 			
 			@file = config.dir_source + taxon.name + (taxon.name + ".gb")
+			@gff_file = config.dir_source + taxon.name + (taxon.name + ".gff")
+			@annot_file = config.dir_source + taxon.name + (taxon.name + ".txt")
 		end
 
 		def parse
+			puts "* file: " + file
+			puts "* gff_file: " + gff_file
+			puts "* annotation_file: " + annot_file
+			
+			genome = Genome::Set.new(name, options = {:empty => true})
+			
+			puts "* reading genbank file"
+			p1 = Bio::GenBank.open(file)
+			
+			chrs = {}
+			map = {}
+			p1.each_entry do |gb|
+				chrs[gb.accession] = gb.seq
+				id = gb.definition
+				if id.match(/(supercont.+?) /)
+					id = id.match(/(supercont.+?) /)[0].strip
+					map[id] = gb.accession
+				else
+					map[gb.accession] = gb.accession
+				end
+			end
+			puts "* subpercontigs: " + chrs.length.to_s
+			
+			puts "* reading GFF file"
+			p2 = Bio::GFF.new(File.open(gff_file, "r"))
+			p2.records.each do |record|
+				if record.feature == "exon"
+					# skip aberrant features.
+					next if record.start.to_i == record.end.to_i
+					
+					chr = record.seqname
+					chr.sub!(/(supercont1..+?)\%.+/, '\1')
+					puts chr
+					chr = map[chr]
+					puts chr
+					
+					attr = _parse_attributes(record.attributes)
+					
+					gene = genome.get_gene_by_acc(attr[:id])
+					if gene.nil?
+						gene = Genome::Gene.new(attr[:id])
+						gene.chromosome = chr
+						gene.source = record.source
+						gene.strand = _get_strand(record.strand).to_i
+						#gene.from = record.start.to_i
+						#gene.to = record.end.to_i
+						gene.description = attr[:desc]
+						gene.pseudogene = attr[:pseudo]
+						genome << gene
+					else
+						exon = Genome::Exon.new(gene.length + 1)
+					end
+				end
+			end
+			
+			puts "* reading annotation file"
+			f = File.open(annot_file, "r")
+			f.each_line do |line|
+				id, symbol, synonim, length, start, stop, strand, name, chr, annot, name = line.split(/\t/)
+				gene = genome.get_gene_by_acc(id)
+				if gene.nil?
+					raise "WTF: I cannot find the damn gene!"
+				end
+				gene.description = name
+			end
+			f.close
+			genome
 		end
+		
+		def _parse_attributes(c)
+			f = _array2hash(c)
+			h = {
+				:id => f["gene_id"],
+			}
+			h
+		end
+
+		def _array2hash(a)
+			h = {}
+			a.each do |val|
+				h[val[0]] = val[1]
+			end
+			h
+		end
+		
+		def _get_strand(s)
+			if s == "+"
+				return 1
+			elsif s == "-"
+				return -1
+			else
+				return nil
+			end
+		end
+
 	end
 
 	class Eupathdb < Common

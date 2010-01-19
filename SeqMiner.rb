@@ -172,6 +172,8 @@ module SeqMiner
 				else
 					p = Parser::Eupathdb.new(t, options = {:config => config})
 				end
+			when "broad"
+				p = Parser::Broad.new(t, options = {:config => config})
 			when "ncbi"
 				puts "* parser: refseq"
 				p = Parser::Refseq.new(t, options = {:config => config})
@@ -181,12 +183,12 @@ module SeqMiner
 			
 			outdir = config.dir_sequence + t.name
 			outdir.mkpath if ! outdir.exist?
-			g.write_fasta("gene", outdir + "gene.fa")
-			g.write_fasta("cds", outdir + "cds.fa")
-			g.write_fasta("protein", outdir + "protein.fa")
-			g.write_fasta("6frame", outdir + "6frame.fa")
-			g.write_fasta("genome", outdir + "genome.fa")
-			g.write_gff(outdir + "genome.gff")
+#			g.write_fasta("gene", outdir + "gene.fa")
+#			g.write_fasta("cds", outdir + "cds.fa")
+#			g.write_fasta("protein", outdir + "protein.fa")
+#			g.write_fasta("6frame", outdir + "6frame.fa")
+#			g.write_fasta("genome", outdir + "genome.fa")
+#			g.write_gff(outdir + "genome.gff")
 		end
 		
 		def process_taxon(t)

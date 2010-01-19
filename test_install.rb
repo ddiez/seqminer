@@ -3,7 +3,7 @@ require 'SeqMiner'
 sm = SeqMiner::Install.new
 #sm.install
 
-#sm.taxon.filter_by_name("babesia.bovis_T2Bo")
+sm.taxon.filter_by_name("plasmodium.falciparum_hb3")
 #sm.taxon.filter_by_source("ncbi")
 sm.taxon.filter_by_type("spp")
 #sm.taxon.debug
