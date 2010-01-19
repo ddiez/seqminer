@@ -5,15 +5,22 @@ require 'Genome'
 module Parser
 	class Common
 		attr_accessor :file, :name
-		attr_reader :config
+		attr_reader :config, :taxon, :subtype
 		
 		def initialize(taxon, options = {:config => nil})
-			if ! options[:config]
-				@config = SeqMiner::Config.new
+			if options[:subtype]
+				@subtype = options[:subtype]
 			else
-				@config = options[:config]
+				@subtype = nil
 			end
 			
+			if options[:config]
+				@config = options[:config]
+			else
+				@config = SeqMiner::Config.new
+			end
+		
+			@taxon = taxon	
 			@name = taxon.name
 		end
 	end
@@ -23,7 +30,7 @@ module Parser
 		def initialize(taxon, options = {:config => nil})
 			super
 			
-			file = config.dir_source + taxon.name + (taxon.name + ".gb")
+			@file = config.dir_source + taxon.name + (taxon.name + ".gb")
 		end
 
 		def parse
@@ -39,9 +46,10 @@ module Parser
 				#puts gb.organism
 				#puts gb.definition
 
-				@sequence = gb.seq
-				chr[gb.accession] = sequence
+				chr[gb.accession] = gb.seq
 
+				
+				u = {}
 				gb.features.each do |feat|
 					if feat.feature == "gene"
 						h = feat.to_hash
@@ -52,7 +60,7 @@ module Parser
 							gene.strand = feat.locations[0].strand
 							gene.from = feat.locations[0].from
 							gene.to = feat.locations[0].to
-							gene.sequence = sequence.subseq(gene.from, gene.to)
+							gene.sequence = gb.seq.subseq(gene.from, gene.to)
 							gene.description = ""
 							gene.source = "refseq"
 							gene.chromosome = gb.accession
@@ -89,7 +97,12 @@ module Parser
 								gene << exon
 							end
 						end
-					elsif feat.feature == "tRNA" or feat.feature == "rRNA" or feat.feature == "tmRNA" or feat.feature == "misc_RNA" or feat.feature == "ncRNA" or feat.feature == "misc_feature"
+					elsif feat.feature == "tRNA" or feat.feature == "rRNA" or feat.feature == "tmRNA" or \
+						feat.feature == "misc_RNA" or feat.feature == "ncRNA" or feat.feature == "misc_feature" or \
+						feat.feature == "mRNA"
+						
+						next if taxon.name == "ehrlichia.ruminantium_welgevonden" and feat.feature == "misc_feature"
+						
 						h = feat.to_hash
 						if h['locus_tag']
 							id = h['locus_tag']
@@ -97,13 +110,16 @@ module Parser
 							if gene.nil?
 								warn "ERROR: gene #{id} not found for this CDS!"
 							else
-								if h['produc']
+								if h['product']
 									gene.description = h['product'][0]
 								elsif h['gene']
 									gene.description = h['gene'][0]
 								elsif h['note']
 									gene.description = h['note'][0]
 								end
+								
+								next if feat.feature == "mRNA"
+
 								gene.type = feat.feature
 
 								locs = feat.locations
@@ -116,11 +132,35 @@ module Parser
 								end
 							end
 						end
+					elsif feat.feature == "repeat_region" or \
+						feat.feature == "RBS" or feat.feature == "source"
+						# skip.
+					else
+						if u.has_key?(feat.feature) 
+							u[feat.feature] += 1
+						else
+							u[feat.feature] = 1
+						end
 					end
+				end
+				puts "+++ " + gb.accession if u.length > 0
+				u.each_pair do |feat, count|
+					puts "+++ " + feat + ": " + count.to_s
 				end
 			end
 			genome.chromosome = chr
 			genome
+		end
+	end
+	
+	class Broad < Common
+		def initialize(taxon, options = {:config => nil})
+			super
+			
+			@file = config.dir_source + taxon.name + (taxon.name + ".gb")
+		end
+
+		def parse
 		end
 	end
 
@@ -129,11 +169,16 @@ module Parser
 		def initialize(taxon, options = {:config => nil})
 			super
 			
-			@file = config.dir_source + taxon.name + (taxon.name + ".gff")
+			if subtype
+				@file = config.dir_source + taxon.name + (taxon.name + "-" + subtype + ".gff")
+			else
+				@file = config.dir_source + taxon.name + (taxon.name + ".gff")
+			end
 		end
 
 		def parse
 			puts "* file: " + file
+			
 			genome = Genome::Set.new(name, options = {:empty => true})
 
 			warn "* processing GFF file: " + file
@@ -149,22 +194,21 @@ module Parser
 			p.records.each do |record|
 				if record.feature == "gene"
 					chr = record.seqname.sub(/.+\|(.+)/, '\1')
-					(id, desc, pseudo) = _parse_gene_attributes(record.attributes)
+					attr = _parse_attributes(record.attributes, record.feature)
 
-					gene = Genome::Gene.new(id)
+					gene = Genome::Gene.new(attr[:id])
 					gene.chromosome = chr
 					gene.source = record.source
 					gene.strand = _get_strand(record.strand)
 					gene.from = record.start.to_i
 					gene.to = record.end.to_i
-					gene.description = desc
-					gene.pseudogene = pseudo
+					gene.description = attr[:desc]
+					gene.pseudogene = attr[:pseudo]
 					gene.sequence = sequences[record.seqname].subseq(record.start, record.end)
-
 					genome << gene
 				elsif record.feature == "exon"
-					parent_id = _parse_exon_attributes(record.attributes)
-					gene = genome.get_gene_by_acc(parent_id)
+					attr = _parse_attributes(record.attributes, record.feature)
+					gene = genome.get_gene_by_acc(attr[:parent])
 					if ! gene.nil?
 						exon = Genome::Exon.new(gene.length + 1)
 						exon.strand = _get_strand(record.strand)
@@ -172,23 +216,31 @@ module Parser
 						exon.to = record.end.to_i
 						gene << exon
 					else
-						raise "ERROR: gene #{parent_id} not found for exon #{parent_id}"
+						raise "ERROR: parent " + attr[:parent] + " not found for child " + attr[:id]
 					end
-				elsif record.feature == "CDS" or record.feature == "tRNA" or record.feature == "rRNA" or record.feature == "snRNA"
-					parent_id = _parse_exon_attributes(record.attributes)
-					gene = genome.get_gene_by_acc(parent_id)
+				elsif record.feature == "CDS" or record.feature == "tRNA" or record.feature == "rRNA" or \
+					record.feature == "snRNA" or record.feature == "transcript" or record.feature == "ncRNA" or \
+					record.feature == "scRNA_encoding"
+					
+					attr = _parse_attributes(record.attributes, record.feature)
+					gene = genome.get_gene_by_acc(attr[:parent])
 					if ! gene.nil?
-						gene.type = record.feature
+						if record.feature == "transcript"
+							gene.type = "CDS"
+						else
+							gene.type = record.feature
+						end
 					else
-						raise "ERROR: gene #{parent_id} not found for exon #{parent_id}"
+						raise "ERROR: parent " + attr[:parent] + " not found for child " + attr[:id]
 					end
 				elsif record.feature == "mRNA"
 					# skip this.
-				elsif record.feature == "transcript"
-					gene.type = "CDS"
+				#elsif record.feature == "transcript"
+					#gene.type = "CDS"
 				elsif record.feature == "supercontig"
 					# TODO: add extra info (start, end)
-					chrs[record.seqname.sub(/^.+?\|(.+)/, '\1')] = sequences[record.seqname]
+					id = record.seqname.sub(/^.+\|(.+)/, '\1')
+					chrs[id] = sequences[record.seqname]
 				else
 					$stderr.puts "%%%%%%% " + record.feature
 				end
@@ -213,31 +265,44 @@ module Parser
 			end
 		end
 
-		def _parse_gene_attributes(c)
-			id = nil
-			desc = ""
-			pseudo = 0
+		def _parse_attributes(c, type)
 			f = _array2hash(c)
-			#id = f["ID"]
-			#id.sub!(/^.+\|/, '')
-			id = f['locus_tag']
-			desc = _unescape(f['description'])
-			pseudo = 1 if desc.match('pseudogene')
-			[id, desc, pseudo]
-		end
+			h = {
+				:id => nil,
+				:parent => nil,
+				:desc => "",
+				:pseudo => 0
+			}
 
-		def _parse_exon_attributes(c)
-			parent = nil
-			c = _array2hash(c)
+			h[:id] = f["ID"]
+			h[:id].sub!(/^.+\|/, "")
 
-			#if name.match("plasmodium.vivax_salvador1") 
-				parent = c["ID"]
-				parent.sub!(/.+?_(.+)-.+$/, '\1')
-			#else
-				#parent = c["Parent"]
-				#parent.sub!(/^.+?_(.+)-.+$/, '\1')
-			#end
-			parent
+			if f["Parent"]
+				h[:parent] = f["Parent"]
+				h[:parent].sub!(/^.+\|/, "")
+			end
+
+			if taxon.name == "plasmodium.vivax_salvador1"
+				h[:parent] = f["ID"]
+				h[:parent].sub!(/^.+?_(.+)-.+$/, '\1')
+			end
+			
+			case type
+			when "supercontig", "gene"
+			when "tRNA", "mRNA", "transcript", "ncRNA", "scRNA_encoding"
+				h[:id].sub!(/^.+?_(.+)-.+$/, '\1')
+			when "exon", "CDS"
+				h[:id].sub!(/^.+?_(.+)-.+$/, '\1')
+				h[:parent].sub!(/^.+?_(.+)-.+$/, '\1')
+			end			
+		
+			if f["description"]
+				h[:desc] = _unescape(f["description"])
+			end
+
+			h[:pseudo] = 1 if h[:desc].match('pseudogene')
+			
+			h
 		end
 
 		def _array2hash(a)

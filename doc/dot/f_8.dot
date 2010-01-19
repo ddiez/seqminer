@@ -1,0 +1,53 @@
+digraph TopLevel {
+    label = "TopLevel"
+    compound = true
+    fontname = Arial
+    fontsize = 8
+    bgcolor = lightcyan1
+    node [
+        color = black,
+        fontname = Arial,
+        fontsize = 8
+    ]
+
+    Sequence__Set -> Sequence__Set [
+
+    ]
+
+    subgraph cluster_Sequence {
+        label = "Sequence"
+        fillcolor = palegreen1
+        URL = "classes/Sequence.html"
+        color = blue
+        fontname = Arial
+        style = filled
+        Sequence [
+            shape = plaintext,
+            height = 0.01,
+            width = 0.01,
+            label = ""
+        ]
+
+        Sequence__Set [
+            fontcolor = black,
+            shape = ellipse,
+            URL = "classes/Sequence/Set.html",
+            color = palegoldenrod,
+            style = filled,
+            label = "Set"
+        ]
+
+    }
+
+    Item [
+        shape = box,
+        URL = "classes/Item.html",
+        label = "Item"
+    ]
+
+    Item -> Sequence [
+        lhead = cluster_Sequence
+    ]
+
+}
+

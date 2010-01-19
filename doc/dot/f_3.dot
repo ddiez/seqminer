@@ -1,0 +1,65 @@
+digraph TopLevel {
+    label = "TopLevel"
+    compound = true
+    fontname = Arial
+    fontsize = 8
+    bgcolor = lightcyan1
+    node [
+        color = black,
+        fontname = Arial,
+        fontsize = 8
+    ]
+
+    Ortholog__Set -> Ortholog__Set [
+
+    ]
+
+    Item [
+        URL = "classes/Item.html",
+        label = "Item"
+    ]
+
+    Item -> Ortholog__Ortholog [
+
+    ]
+
+    subgraph cluster_Ortholog {
+        label = "Ortholog"
+        fillcolor = palegreen1
+        URL = "classes/Ortholog.html"
+        color = blue
+        fontname = Arial
+        style = filled
+        Ortholog [
+            shape = plaintext,
+            height = 0.01,
+            width = 0.01,
+            label = ""
+        ]
+
+        Ortholog__Set [
+            fontcolor = black,
+            shape = ellipse,
+            URL = "classes/Ortholog/Set.html",
+            color = palegoldenrod,
+            style = filled,
+            label = "Set"
+        ]
+
+        Ortholog__Ortholog [
+            fontcolor = black,
+            shape = ellipse,
+            URL = "classes/Ortholog/Ortholog.html",
+            color = palegoldenrod,
+            style = filled,
+            label = "Ortholog"
+        ]
+
+    }
+
+    Item -> Ortholog [
+        lhead = cluster_Ortholog
+    ]
+
+}
+

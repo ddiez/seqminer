@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Result::SubHit</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Result::SubHit</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/Result_rb.html">
+                Result.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="../Item.html">
+                Item
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+    <div id="diagram">
+      <map id="map" name="map">
+  <area shape="rect" coords="560,101,632,149"      href="Set.html" alt="Set" />
+  <area shape="rect" coords="272,5,344,53"      href="../Item.html" alt="Item" />
+  <area shape="rect" coords="464,101,536,149"      href="Domain.html" alt="Domain" />
+  <area shape="rect" coords="368,101,440,149"      href="Result.html" alt="Result" />
+  <area shape="rect" coords="272,101,344,149"      href="Hit.html" alt="Hit" />
+  <area shape="rect" coords="176,101,248,149"      href="SubHit.html" alt="SubHit" />
+  <area shape="rect" coords="27,101,128,149"      href="HmmerParser.html" alt="HmmerParser" />
+  <area shape="rect" coords="16,67,667,160"      href="../Result.html" alt="Result" />
+</map>
+<img src="../../dot/f_5.png" usemap="#map" border="0" alt="dot/f_5.png">
+    </div>
+
+    <div id="description">
+      <p>
+Class: <a href="SubHit.html">SubHit</a> Purpose: Store information about
+sequence matches to different strand/frame Date: 6/1/2010
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000163">debug</a>&nbsp;&nbsp;
+      <a href="#M000160">has_complete?</a>&nbsp;&nbsp;
+      <a href="#M000159">has_fragment?</a>&nbsp;&nbsp;
+      <a href="#M000158">localization</a>&nbsp;&nbsp;
+      <a href="#M000161">max_completeness</a>&nbsp;&nbsp;
+      <a href="#M000162">min_completeness</a>&nbsp;&nbsp;
+      <a href="#M000157">new</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">desc</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">eval</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">frame</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">query_acc</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">query_length</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">query_name</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">score</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">strand</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">target_acc</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">target_length</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">target_name</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">type</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000157" class="method-detail">
+        <a name="M000157"></a>
+
+        <div class="method-heading">
+          <a href="#M000157" class="method-signature">
+          <span class="method-name">new</span><span class="method-args">(id)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000157-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000157-source">
+<pre>
+<span class="ruby-comment cmt"># File Result.rb, line 34</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>)
+            <span class="ruby-keyword kw">super</span>
+        <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000163" class="method-detail">
+        <a name="M000163"></a>
+
+        <div class="method-heading">
+          <a href="#M000163" class="method-signature">
+          <span class="method-name">debug</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000163-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000163-source">
+<pre>
+<span class="ruby-comment cmt"># File Result.rb, line 84</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+            <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ SubHit +&quot;</span>
+            <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
+            <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* eval: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">eval</span>.<span class="ruby-identifier">to_s</span>
+            <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* score: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">score</span>.<span class="ruby-identifier">to_s</span>
+            <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* frame: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">frame</span>.<span class="ruby-identifier">to_s</span>
+            <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* strand: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">strand</span>.<span class="ruby-identifier">to_s</span>
+        <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000160" class="method-detail">
+        <a name="M000160"></a>
+
+        <div class="method-heading">
+          <a href="#M000160" class="method-signature">
+          <span class="method-name">has_complete?</span><span class="method-args">(cut = 1)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Checks whether there is any <a href="Domain.html">Domain</a>
+<b>complete</b> in the <a href="Hit.html">Hit</a>. See complete?.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000160-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000160-source">
+<pre>
+<span class="ruby-comment cmt"># File Result.rb, line 57</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">has_complete?</span>(<span class="ruby-identifier">cut</span> = <span class="ruby-value">1</span>)
+            <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">domain</span><span class="ruby-operator">|</span>
+                <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">domain</span>.<span class="ruby-identifier">complete?</span>(<span class="ruby-identifier">cut</span>)
+            <span class="ruby-keyword kw">end</span>
+            <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+        <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000159" class="method-detail">
+        <a name="M000159"></a>
+
+        <div class="method-heading">
+          <a href="#M000159" class="method-signature">
+          <span class="method-name">has_fragment?</span><span class="method-args">(cut = 1)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Checks whether there is any <a href="Domain.html">Domain</a> <b>not
+complete</b> (fragment) in the <a href="Hit.html">Hit</a>.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000159-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000159-source">
+<pre>
+<span class="ruby-comment cmt"># File Result.rb, line 49</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">has_fragment?</span>(<span class="ruby-identifier">cut</span> = <span class="ruby-value">1</span>)
+            <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">domain</span><span class="ruby-operator">|</span>
+                <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">domain</span>.<span class="ruby-identifier">complete?</span>(<span class="ruby-identifier">cut</span>)
+            <span class="ruby-keyword kw">end</span>
+            <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+        <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000158" class="method-detail">
+        <a name="M000158"></a>
+
+        <div class="method-heading">
+          <a href="#M000158" class="method-signature">
+          <span class="method-name">localization</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returnsa string with the <a href="SubHit.html#M000158">localization</a> in
+the sequence of the different domains in the <a
+href="SubHit.html">SubHit</a>.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000158-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000158-source">
+<pre>
+<span class="ruby-comment cmt"># File Result.rb, line 39</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">localization</span>
+            <span class="ruby-identifier">loc</span> = []
+            <span class="ruby-comment cmt"># we have to sort the hash in this case.</span>
+            <span class="ruby-ivar">@items</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">loc</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@items</span>[<span class="ruby-identifier">index</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>].<span class="ruby-identifier">aln_from</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;..&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@items</span>[<span class="ruby-identifier">index</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>].<span class="ruby-identifier">aln_to</span>.<span class="ruby-identifier">to_s</span>
+            <span class="ruby-keyword kw">end</span>
+            <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;,&quot;</span>)
+        <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000161" class="method-detail">
+        <a name="M000161"></a>
+
+        <div class="method-heading">
+          <a href="#M000161" class="method-signature">
+          <span class="method-name">max_completeness</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Obtains the maximum completeness found in any of the Domains within the <a
+href="SubHit.html">SubHit</a>.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000161-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000161-source">
+<pre>
+<span class="ruby-comment cmt"># File Result.rb, line 65</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">max_completeness</span>
+            <span class="ruby-identifier">mc</span> = <span class="ruby-value">0</span>
+            <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">domain</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">smc</span> = <span class="ruby-identifier">domain</span>.<span class="ruby-identifier">completeness</span>
+                <span class="ruby-identifier">mc</span> = <span class="ruby-identifier">smc</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">smc</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">mc</span>
+            <span class="ruby-keyword kw">end</span>
+            <span class="ruby-identifier">mc</span>
+        <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000162" class="method-detail">
+        <a name="M000162"></a>
+
+        <div class="method-heading">
+          <a href="#M000162" class="method-signature">
+          <span class="method-name">min_completeness</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Obtains the minimum completeness found in any of the Domains within the <a
+href="SubHit.html">SubHit</a>.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000162-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000162-source">
+<pre>
+<span class="ruby-comment cmt"># File Result.rb, line 75</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">min_completeness</span>
+            <span class="ruby-identifier">mc</span> = <span class="ruby-value">1</span>
+            <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">domain</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">smc</span> = <span class="ruby-identifier">domain</span>.<span class="ruby-identifier">completeness</span>
+                <span class="ruby-identifier">mc</span> = <span class="ruby-identifier">smc</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">smc</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">mc</span>
+            <span class="ruby-keyword kw">end</span>
+            <span class="ruby-identifier">mc</span>
+        <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

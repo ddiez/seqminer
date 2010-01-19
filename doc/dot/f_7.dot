@@ -1,0 +1,57 @@
+digraph TopLevel {
+    label = "TopLevel"
+    compound = true
+    fontname = Arial
+    fontsize = 8
+    bgcolor = lightcyan1
+    node [
+        color = black,
+        fontname = Arial,
+        fontsize = 8
+    ]
+
+    subgraph cluster_SeqMiner {
+        label = "SeqMiner"
+        fillcolor = palegreen1
+        URL = "classes/SeqMiner.html"
+        color = blue
+        fontname = Arial
+        style = filled
+        SeqMiner [
+            shape = plaintext,
+            height = 0.01,
+            width = 0.01,
+            label = ""
+        ]
+
+        SeqMiner__Pipeline [
+            fontcolor = black,
+            shape = ellipse,
+            URL = "classes/SeqMiner/Pipeline.html",
+            color = palegoldenrod,
+            style = filled,
+            label = "Pipeline"
+        ]
+
+        SeqMiner__Config [
+            fontcolor = black,
+            shape = ellipse,
+            URL = "classes/SeqMiner/Config.html",
+            color = palegoldenrod,
+            style = filled,
+            label = "Config"
+        ]
+
+        SeqMiner__Install [
+            fontcolor = black,
+            shape = ellipse,
+            URL = "classes/SeqMiner/Install.html",
+            color = palegoldenrod,
+            style = filled,
+            label = "Install"
+        ]
+
+    }
+
+}
+

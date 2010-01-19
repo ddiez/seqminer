@@ -1,0 +1,88 @@
+digraph TopLevel {
+    label = "TopLevel"
+    compound = true
+    fontname = Arial
+    fontsize = 8
+    bgcolor = lightcyan1
+    node [
+        color = black,
+        fontname = Arial,
+        fontsize = 8
+    ]
+
+    Download__Set -> Download__Set [
+
+    ]
+
+    Download__Common -> Download__Download [
+
+    ]
+
+    Download__Common -> Download__Pfam [
+
+    ]
+
+    subgraph cluster_Download {
+        label = "Download"
+        fillcolor = palegreen1
+        URL = "classes/Download.html"
+        color = blue
+        fontname = Arial
+        style = filled
+        Download [
+            shape = plaintext,
+            height = 0.01,
+            width = 0.01,
+            label = ""
+        ]
+
+        Download__Set [
+            fontcolor = black,
+            shape = ellipse,
+            URL = "classes/Download/Set.html",
+            color = palegoldenrod,
+            style = filled,
+            label = "Set"
+        ]
+
+        Download__Common [
+            fontcolor = black,
+            shape = ellipse,
+            URL = "classes/Download/Common.html",
+            color = palegoldenrod,
+            style = filled,
+            label = "Common"
+        ]
+
+        Download__Download [
+            fontcolor = black,
+            shape = ellipse,
+            URL = "classes/Download/Download.html",
+            color = palegoldenrod,
+            style = filled,
+            label = "Download"
+        ]
+
+        Download__Pfam [
+            fontcolor = black,
+            shape = ellipse,
+            URL = "classes/Download/Pfam.html",
+            color = palegoldenrod,
+            style = filled,
+            label = "Pfam"
+        ]
+
+    }
+
+    Item [
+        shape = box,
+        URL = "classes/Item.html",
+        label = "Item"
+    ]
+
+    Item -> Download [
+        lhead = cluster_Download
+    ]
+
+}
+

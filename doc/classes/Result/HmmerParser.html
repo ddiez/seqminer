@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Result::HmmerParser</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Result::HmmerParser</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/Result_rb.html">
+                Result.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+    <div id="diagram">
+      <map id="map" name="map">
+  <area shape="rect" coords="560,101,632,149"      href="Set.html" alt="Set" />
+  <area shape="rect" coords="272,5,344,53"      href="../Item.html" alt="Item" />
+  <area shape="rect" coords="464,101,536,149"      href="Domain.html" alt="Domain" />
+  <area shape="rect" coords="368,101,440,149"      href="Result.html" alt="Result" />
+  <area shape="rect" coords="272,101,344,149"      href="Hit.html" alt="Hit" />
+  <area shape="rect" coords="176,101,248,149"      href="SubHit.html" alt="SubHit" />
+  <area shape="rect" coords="27,101,128,149"      href="HmmerParser.html" alt="HmmerParser" />
+  <area shape="rect" coords="16,67,667,160"      href="../Result.html" alt="Result" />
+</map>
+<img src="../../dot/f_5.png" usemap="#map" border="0" alt="dot/f_5.png">
+    </div>
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000127">_parse_line</a>&nbsp;&nbsp;
+      <a href="#M000128">debug</a>&nbsp;&nbsp;
+      <a href="#M000125">new</a>&nbsp;&nbsp;
+      <a href="#M000126">parse</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">config</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">file</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">result_id</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">type</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000125" class="method-detail">
+        <a name="M000125"></a>
+
+        <div class="method-heading">
+          <a href="#M000125" class="method-signature">
+          <span class="method-name">new</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Check whether a valid type is assign to the <a
+href="../Result.html">Result</a> object.
+</p>
+<pre>
+      def is_valid?(type)
+          valid = ['nucleotide', 'protein']
+          valid.include?(type)
+      end
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000125-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000125-source">
+<pre>
+<span class="ruby-comment cmt"># File Result.rb, line 451</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
+            <span class="ruby-ivar">@config</span> = <span class="ruby-keyword kw">nil</span>
+        <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000127" class="method-detail">
+        <a name="M000127"></a>
+
+        <div class="method-heading">
+          <a href="#M000127" class="method-signature">
+          <span class="method-name">_parse_line</span><span class="method-args">(line)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000127-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000127-source">
+<pre>
+<span class="ruby-comment cmt"># File Result.rb, line 520</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_parse_line</span>(<span class="ruby-identifier">line</span>)
+            <span class="ruby-identifier">tmp</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/\[(.+)\]$/</span>)
+            <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">nil?</span>
+                <span class="ruby-identifier">tmp</span> = <span class="ruby-identifier">tmp</span>[<span class="ruby-value">0</span>]
+                <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/\[|\]/</span>, <span class="ruby-value str">&quot;&quot;</span>)
+                <span class="ruby-identifier">strand</span>, <span class="ruby-identifier">frame</span> = <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">';'</span>)
+                <span class="ruby-identifier">strand</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/strand=/</span>, <span class="ruby-value str">&quot;&quot;</span>)
+                <span class="ruby-identifier">frame</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/frame=/</span>, <span class="ruby-value str">&quot;&quot;</span>)
+
+                <span class="ruby-comment cmt">#warn &quot;* strand: &quot; + strand</span>
+                <span class="ruby-comment cmt">#warn &quot;* frame: &quot; + frame</span>
+                
+                <span class="ruby-keyword kw">return</span> [<span class="ruby-identifier">strand</span>, <span class="ruby-identifier">frame</span>]
+            <span class="ruby-keyword kw">end</span>
+            <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span>
+        <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000128" class="method-detail">
+        <a name="M000128"></a>
+
+        <div class="method-heading">
+          <a href="#M000128" class="method-signature">
+          <span class="method-name">debug</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Prints some information for debugging.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000128-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000128-source">
+<pre>
+<span class="ruby-comment cmt"># File Result.rb, line 538</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+            <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ HmmerParser +&quot;</span>
+            <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* file: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@file</span>
+            <span class="ruby-identifier">result</span>.<span class="ruby-identifier">debug</span>
+        <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000126" class="method-detail">
+        <a name="M000126"></a>
+
+        <div class="method-heading">
+          <a href="#M000126" class="method-signature">
+          <span class="method-name">parse</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000126-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000126-source">
+<pre>
+<span class="ruby-comment cmt"># File Result.rb, line 456</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parse</span>
+            <span class="ruby-identifier">result</span> = <span class="ruby-constant">Result</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">result_id</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+            
+            <span class="ruby-identifier">fi</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">file</span>)
+            <span class="ruby-identifier">fi</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+                <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^#/</span>
+                <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp</span>
+                <span class="ruby-identifier">tid</span>, <span class="ruby-identifier">tacc</span>, <span class="ruby-identifier">tlen</span>, <span class="ruby-identifier">qid</span>, <span class="ruby-identifier">qacc</span>, <span class="ruby-identifier">qlen</span>, <span class="ruby-identifier">seval</span>, <span class="ruby-identifier">sscore</span>,
+                <span class="ruby-identifier">sbias</span>, <span class="ruby-identifier">dn</span>, <span class="ruby-identifier">dtot</span>, <span class="ruby-identifier">dceval</span>, <span class="ruby-identifier">dieval</span>, <span class="ruby-identifier">dscore</span>, <span class="ruby-identifier">dbias</span>, <span class="ruby-identifier">hf</span>, <span class="ruby-identifier">ht</span>,
+                <span class="ruby-identifier">af</span>, <span class="ruby-identifier">at</span>, <span class="ruby-identifier">ef</span>, <span class="ruby-identifier">et</span>, <span class="ruby-identifier">acc</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">' '</span>)
+                <span class="ruby-identifier">h</span> = <span class="ruby-identifier">result</span>.<span class="ruby-identifier">get_item_by_id</span>(<span class="ruby-identifier">tid</span>)
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">h</span>.<span class="ruby-identifier">nil?</span>
+                    <span class="ruby-identifier">h</span> = <span class="ruby-constant">Hit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">tid</span>)
+                    <span class="ruby-identifier">result</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">h</span>)
+                <span class="ruby-keyword kw">end</span>
+            
+                <span class="ruby-identifier">sp</span> = [] 
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;nucleotide&quot;</span>
+                    <span class="ruby-identifier">sp</span> = <span class="ruby-identifier">_parse_line</span>(<span class="ruby-identifier">line</span>)
+                    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">sp</span>.<span class="ruby-identifier">nil?</span>
+                        <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;ERROR: nucleotide result does not contain strand/frame information&quot;</span>
+                    <span class="ruby-keyword kw">else</span>
+                        <span class="ruby-identifier">sid</span> = <span class="ruby-identifier">tid</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;[&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">sp</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;|&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">sp</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;]&quot;</span>
+                    <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">else</span>
+                    <span class="ruby-identifier">sid</span> = <span class="ruby-identifier">tid</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-comment cmt">#warn &quot;* subhit id: &quot; + sid</span>
+                <span class="ruby-identifier">sh</span> = <span class="ruby-identifier">h</span>.<span class="ruby-identifier">get_item_by_id</span>(<span class="ruby-identifier">sid</span>)
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">nil?</span>
+                    <span class="ruby-identifier">sh</span> = <span class="ruby-constant">SubHit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">sid</span>)
+                    <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">score</span> = <span class="ruby-identifier">sscore</span>.<span class="ruby-identifier">to_f</span>
+                    <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">eval</span> = <span class="ruby-identifier">seval</span>.<span class="ruby-identifier">to_f</span>
+                    <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">target_name</span> = <span class="ruby-identifier">tid</span>
+                    <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">target_acc</span> = <span class="ruby-identifier">tacc</span>
+                    <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">target_length</span> = <span class="ruby-identifier">tlen</span>.<span class="ruby-identifier">to_i</span>
+                    <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">query_name</span> = <span class="ruby-identifier">qid</span>
+                    <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">query_acc</span> = <span class="ruby-identifier">qacc</span>
+                    <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">query_length</span> = <span class="ruby-identifier">qlen</span>.<span class="ruby-identifier">to_i</span>
+                    <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">type</span> = <span class="ruby-identifier">type</span>
+                    <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">strand</span> = <span class="ruby-identifier">sp</span>[<span class="ruby-value">0</span>]
+                    <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">frame</span> = <span class="ruby-identifier">sp</span>[<span class="ruby-value">1</span>]
+                    <span class="ruby-identifier">h</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">sh</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-identifier">dom</span> = <span class="ruby-constant">Domain</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">sh</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
+                <span class="ruby-identifier">dom</span>.<span class="ruby-identifier">hmm_from</span> = <span class="ruby-identifier">hf</span>.<span class="ruby-identifier">to_i</span>
+                <span class="ruby-identifier">dom</span>.<span class="ruby-identifier">hmm_to</span> = <span class="ruby-identifier">ht</span>.<span class="ruby-identifier">to_i</span>
+                <span class="ruby-identifier">dom</span>.<span class="ruby-identifier">aln_from</span> = <span class="ruby-identifier">af</span>.<span class="ruby-identifier">to_i</span>
+                <span class="ruby-identifier">dom</span>.<span class="ruby-identifier">aln_to</span> = <span class="ruby-identifier">at</span>.<span class="ruby-identifier">to_i</span>
+                <span class="ruby-identifier">dom</span>.<span class="ruby-identifier">env_from</span> = <span class="ruby-identifier">ef</span>.<span class="ruby-identifier">to_i</span>
+                <span class="ruby-identifier">dom</span>.<span class="ruby-identifier">env_to</span> = <span class="ruby-identifier">et</span>.<span class="ruby-identifier">to_i</span>
+                <span class="ruby-identifier">dom</span>.<span class="ruby-identifier">ceval</span> = <span class="ruby-identifier">dceval</span>
+                <span class="ruby-identifier">dom</span>.<span class="ruby-identifier">ieval</span> = <span class="ruby-identifier">dieval</span>
+                <span class="ruby-identifier">dom</span>.<span class="ruby-identifier">score</span> = <span class="ruby-identifier">dscore</span>
+                <span class="ruby-identifier">dom</span>.<span class="ruby-identifier">bias</span> = <span class="ruby-identifier">dbias</span>
+                <span class="ruby-comment cmt"># TODO: may be better to do this by referencing the parent class?</span>
+                <span class="ruby-identifier">dom</span>.<span class="ruby-identifier">query_length</span> = <span class="ruby-identifier">qlen</span>.<span class="ruby-identifier">to_i</span>
+                <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">dom</span>)
+            <span class="ruby-keyword kw">end</span>
+            <span class="ruby-identifier">fi</span>.<span class="ruby-identifier">close</span>
+
+            <span class="ruby-identifier">result</span>
+        <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

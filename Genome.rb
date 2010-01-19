@@ -49,9 +49,10 @@ module Genome
 						gene = Gene.new(acc)
 						gene.source = source
 						gene.chromosome= chr
-						gene.strand = _get_strand(strand)
-						gene.from = s0
-						gene.to = s1
+						#gene.strand = _get_strand(strand)
+						gene.strand = strand.to_i
+						gene.from = s0.to_i
+						gene.to = s1.to_i
 						
 						if desc.nil?
 							desc = ""
@@ -72,7 +73,8 @@ module Genome
 						gene = get_gene_by_acc(acc)
 						if ! gene.nil?
 							exon = Exon.new(gene.length + 1)
-							exon.strand = _get_strand(strand)
+							#exon.strand = _get_strand(strand)
+							exon.strand = strand.to_i
 							exon.from = s0.to_i
 							exon.to = s1.to_i
 							gene << exon
@@ -103,15 +105,15 @@ module Genome
 			get_item_by_id(acc)
 		end
 		
-		def _get_strand(s)
-			if s == "+"
-				return 1
-			elsif s == "-"
-				return -1
-			else
-				return nil
-			end
-		end
+#		def _get_strand(s)
+#			if s == "+"
+#				return 1
+#			elsif s == "-"
+#				return -1
+#			else
+#				return nil
+#			end
+#		end
 		
 		def write_fasta(type, file = nil)
 			if file
@@ -220,6 +222,7 @@ module Genome
 		end
 
 		def cds
+			#debug(verbose = TRUE)
 			sequence.splice(splicing)
 		end
 
@@ -227,27 +230,11 @@ module Genome
 			to.to_i - from.to_i
 		end
 		
-		def translation(frame = 1)
-			cds.translate(frame, trans_table)
+		def translation(frame = 1, tt = nil)
+			tt = trans_table if ! tt
+			cds.translate(frame, tt)
 		end
-
-#		def splicing_old
-#			loc = []
-#			f0 = 0
-#			items.sort.each_index do |index|
-#				if (index == 0)
-#					f0 = items[index+1].from
-#				end
-#				x0 = items[index+1].from - f0 + 1
-#				x1 = items[index+1].to - f0 + 1
-#				loc << x0.to_s + ".." + x1.to_s
-#			end
-#			loc = loc.join(",")
-#			loc = "join(" + loc + ")" if length > 1
-#			loc = "complement(" + loc + ")" if strand == -1 # in the current version this is not needed.
-#			loc
-#		end
-		
+	
 		def splicing
 			loc =[]
 			
@@ -266,7 +253,7 @@ module Genome
 			end
 			loc = loc.join(",")
 			loc = "join(" + loc + ")" if length > 1
-			loc = "complement(" + loc + ")" if strand == -1 # in the current version this is not needed.
+			loc = "complement(" + loc + ")" if strand == -1
 			loc
 		end
 		
@@ -292,7 +279,7 @@ module Genome
 			super(exon)
 		end
 
-		def debug
+		def debug(verbose = false)
 			warn "+ Gene +"
 			warn "* id: " + id
 			warn "* description: " + description
@@ -300,10 +287,16 @@ module Genome
 			warn "* chromosome: " + chromosome
 			warn "* strand: " + strand.to_s
 			warn "* location: [" + from.to_s + " - " + to.to_s + "]"
+			warn "* exons: " + length.to_s
 			warn "* splicing: " + splicing
 			warn "* size: " + size.to_s
 			#warn "* splicing_ori: " + splicing_original
 			warn "* pseudogene: " + pseudogene.to_s
+			if verbose
+				each_value do |exon|
+					exon.debug
+				end
+			end
 		end
 	end
 

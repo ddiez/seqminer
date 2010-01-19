@@ -190,7 +190,7 @@ module Download
 		end
 
 		def download_broad
-			# TODO: not implemented.
+			download_ncbi
 		end
 		
 		def download_eupathdb(db)

@@ -162,15 +162,19 @@ module SeqMiner
 		
 		def process_spp(t)
 			puts "* source: " + t.source
-			puts "* dir: " + config.dir_source + t.name
+			puts "* dir: " + (config.dir_source + t.name)
 			
 			case t.source
 			when "plasmodb", "giardiadb", "tritrypdb"
 				puts "* parser: eupathdb"
-				p = Parser::Eupathdb.new(t, options = {:config => config})
+				if t.name == "trypanosoma.cruzi_CL_Brener"
+					p = Parser::Eupathdb.new(t, options = {:config => config, :subtype => "Esmeraldo"})
+				else
+					p = Parser::Eupathdb.new(t, options = {:config => config})
+				end
 			when "ncbi"
 				puts "* parser: refseq"
-				#p = Parser::Refseq.new(t, options = {:config => config})
+				p = Parser::Refseq.new(t, options = {:config => config})
 			end
 			g = p.parse
 			g.debug
