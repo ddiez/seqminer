@@ -3,9 +3,11 @@ require 'SeqMiner'
 sm = SeqMiner::Install.new
 #sm.install
 
-sm.taxon.filter_by_name("plasmodium.falciparum_hb3")
+#sm.taxon.filter_by_name("anaplasma.marginale")
+sm.taxon.filter_by_name("plasmodium.falciparum")
+#sm.taxon.filter_by_name("anaplasma.phagocytophilum")
 #sm.taxon.filter_by_source("ncbi")
-sm.taxon.filter_by_type("spp")
+sm.taxon.filter_by_type("clade")
 #sm.taxon.debug
 
 #sm.update_pfam

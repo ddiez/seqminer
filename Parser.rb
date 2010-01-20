@@ -1,6 +1,7 @@
 require 'bio'
 require 'uri'
 require 'Genome'
+require 'Isolate'
 
 module Parser
 	class Common
@@ -22,6 +23,246 @@ module Parser
 		
 			@taxon = taxon	
 			@name = taxon.name
+		end
+	end
+	
+	class GenbankIsolate < Common
+		attr_reader :files
+			
+		def initialize(taxon, options = {:config => nil})
+			super
+			
+			@files = {
+				:nuccore => config.dir_source + taxon.name + (taxon.name + "_nuccore.gb"),
+				:nucest => config.dir_source + taxon.name + (taxon.name + "_nucest.gb")
+			}
+		end
+
+		def parse
+			is = Isolate::Set.new(name, options = {:empty => true})
+			
+			files.each_pair do |type, file|
+				next if ! file.exist?
+				warn "* processing Genbank [" + type.to_s + "] file: " + file
+
+				p = Bio::GenBank.open(file)
+
+				skip = File.new(config.dir_source + taxon.name + (type.to_s + "_skip.txt"), "w")
+				pass = File.new(config.dir_source + taxon.name + (type.to_s + "_pass.txt"), "w")
+				size = File.new(config.dir_source + taxon.name + (type.to_s + "_size.txt"), "w")
+				iso = File.new(config.dir_source + taxon.name + (type.to_s + "_isolate.txt"), "w")
+				str = File.new(config.dir_source + taxon.name + (type.to_s + "_strain.txt"), "w")
+				con = File.new(config.dir_source + taxon.name + (type.to_s + "_country.txt"), "w")
+				clo = File.new(config.dir_source + taxon.name + (type.to_s + "_clone.txt"), "w")
+				notype = File.new(config.dir_source + taxon.name + (type.to_s + "_notype.txt"), "w")
+				susp = File.new(config.dir_source + taxon.name + (type.to_s + "_susp.txt"), "w")
+				
+				skip.puts "Accession\tLength\tWhy\tIsolate\tStrain\tCountry\tClone"
+				pass.puts "Accession\tLength\tIsolate\tStrain\tCountry\tClone"
+				iso.puts "Accession\tLength\tIsolate"
+				str.puts "Accession\tLength\tStrain"
+				con.puts "Accession\tLength\tCountry"
+				clo.puts "Accession\tLength\tClone"
+				notype.puts "Accession\tLength"
+				susp.puts "Accession\tLength\tLocus\tIsolate\tStrain\tCountry\tClone"
+				feats = []
+				p.each_entry do |gb|
+					#warn "* processing: " + gb.accession
+					size.puts gb.accession + "\t" + gb.length.to_s
+					strain = _check_in_source(gb, "strain")
+					isolate = _check_in_source(gb, "isolate")
+					country = _check_in_source(gb, "country")
+					clone = _check_in_source(gb, "clone")
+
+					ok, why = _filter_entry(gb)
+					if ok
+						pass.puts gb.accession + "\t" + gb.length.to_s + "\t" + isolate.to_s + "\t" + strain.to_s + "\t" + country.to_s + "\t" + clone.to_s
+						if isolate
+							iso.puts gb.accession + "\t" + gb.length.to_s + "\t" + isolate.to_s
+						elsif strain
+							str.puts gb.accession + "\t" + gb.length.to_s + "\t" + strain.to_s
+						elsif country
+							con.puts gb.accession + "\t" + gb.length.to_s + "\t" + country.to_s
+						elsif clone
+							clo.puts gb.accession + "\t" + gb.length.to_s + "\t" + clone.to_s
+						else
+							notype.puts gb.accession + "\t" + gb.length.to_s
+						end
+						fa = 0
+						gb.features.each do |feat|
+							feats << feat.feature
+							if feat.feature == "gene"
+								h = feat.to_hash
+								if h['locus_tag']
+									id = h['locus_tag'][0]
+									susp.puts gb.accession + "\t" + gb.length.to_s + "\t" + id + "\t" + isolate.to_s + "\t" + strain.to_s + "\t" + country.to_s + "\t" + clone.to_s 
+								end
+								
+								if h['gene']
+									id = gb.accession + "." + h['gene'][0]
+									#seq = is.get_seq_by_acc(id)
+									seq = is.get_seq_by_subid(id)
+									if seq.nil?
+										seq = Isolate::Seq.new(gb.accession + "-" + (fa + 1).to_s)
+										seq.subid = id
+										seq.strand = feat.locations[0].strand.to_i
+										seq.from = feat.locations[0].from.to_i
+										seq.to = feat.locations[0].to.to_i
+										seq.locus = gb.accession
+										seq.source = type.to_s
+										if h['note']
+											seq.description = h['note'][0]
+										else
+											seq.description = ""
+										end
+										seq.type = "gene"
+										is << seq
+										fa += 1
+									end
+									seq.pseudogene = 1 if h['pseudo']
+								else
+									warn "++++++ Not usefull id for gene feature in " + gb.accession
+								end
+							elsif feat.feature == "CDS"
+								h = feat.to_hash
+								if h['gene']
+									id = gb.accession + "." + h['gene'][0]
+									seq = is.get_seq_by_subid(id)
+									if seq.nil?
+										if h['protein_id']
+											id = h['protein_id'][0]
+											seq = Isolate::Seq.new(gb.accession + "-" + (fa + 1).to_s)
+											seq.subid = id
+											seq.strand = feat.locations[0].strand.to_i
+											seq.from = feat.locations[0].from.to_i
+											seq.to = feat.locations[0].to.to_i
+											seq.locus = gb.accession
+											seq.source = type.to_s
+											if h['note']
+												seq.description = h['note'][0]
+											else
+												seq.description = ""
+											end
+											seq.type = "CDS"
+											is << seq
+											fa += 1
+										else
+											warn "@@@@@@@@@@@ gene tag / no assoc gene / and no protein_id for CDS in " + gb.accession
+										end
+									else
+										if h['product']
+											seq.description = h['product'][0]
+										elsif h['note']
+											seq.description = h['note'][0]
+										end
+									end
+								elsif h['protein_id']
+									id = h['protein_id'][0]
+									seq = Isolate::Seq.new(gb.accession + "-" + (fa + 1).to_s)
+									seq.subid = id
+									seq.strand = feat.locations[0].strand.to_i
+									seq.from = feat.locations[0].from.to_i
+									seq.to = feat.locations[0].to.to_i
+									seq.locus = gb.accession
+									seq.source = type.to_s
+									if h['note']
+										seq.description = h['note'][0]
+									else
+										seq.description = ""
+									end
+									seq.type = "CDS"
+									is << seq
+									fa += 1
+								else
+									warn ">>>>>>>>>> NOT VALID tag for CDS in " + gb.accession
+								end
+							else
+							end
+						end
+					else
+						skip.puts gb.accession + "\t" + gb.length.to_s + "\t" + why + "\t" + isolate.to_s + "\t" + strain.to_s + "\t" + country.to_s + "\t" + clone.to_s 
+					end
+				end
+				skip.close
+				size.close
+				pass.close
+				iso.close
+				str.close
+				con.close
+				clo.close
+				notype.close
+				susp.close
+				feats.uniq.each do |u|
+					warn u
+				end
+			end
+			
+			is.each_value do |seq|
+				puts seq.locus
+			end
+			is
+		end
+		
+		def _check_in_source(entry, what)
+			tmp = nil
+			entry.features.each do |feat|
+				if feat.feature == "source"
+					h = feat.to_hash
+					tmp = h[what]
+					break
+				end
+			end
+			tmp
+		end
+		
+##		def _check_isolate(entry)
+##			iso = false
+##			entry.features.each do |feat|
+##				if feat.feature == "source"
+##					iso = _check_isolate_from_feat(feat)
+##					break
+##				end
+##			end
+##			iso
+##		end
+##		
+##		def _check_isolate_from_feature(f)
+##				h = f.to_hash
+##				iso = false
+##				isolate = ""
+##				if h["isolate"]
+##					iso = true
+##					isolate = h["isolate"][0]
+##				end
+##				[iso, isolate]
+##		end
+#		
+#		def _check_strain_from_feature(f)
+#				h = f.to_hash
+#				h["strain"] if h["strain"]
+#		end
+#		
+		def _filter_entry(entry)
+			ok = true
+			why = []
+			if entry.definition.match(/complete genome/)
+				ok = false
+				why << "complete genome"
+			end
+			
+			if entry.definition.match(/chromosome/)
+				ok = false
+				why << "chromosome"
+			end
+			
+			if entry.keywords
+				if entry.keywords[0] == "WGS"
+					ok = false
+					why << "WGS"
+				end
+			end
+						
+			[ok, why.join("|")]
 		end
 	end
 
@@ -197,9 +438,7 @@ module Parser
 					
 					chr = record.seqname
 					chr.sub!(/(supercont1..+?)\%.+/, '\1')
-					puts chr
 					chr = map[chr]
-					puts chr
 					
 					attr = _parse_attributes(record.attributes)
 					
@@ -207,37 +446,45 @@ module Parser
 					if gene.nil?
 						gene = Genome::Gene.new(attr[:id])
 						gene.chromosome = chr
-						gene.source = record.source
+						gene.source = "broad"
 						gene.strand = _get_strand(record.strand).to_i
-						#gene.from = record.start.to_i
-						#gene.to = record.end.to_i
 						gene.description = attr[:desc]
 						gene.pseudogene = attr[:pseudo]
+						gene.type = "CDS"
 						genome << gene
-					else
-						exon = Genome::Exon.new(gene.length + 1)
 					end
+					exon = Genome::Exon.new(gene.length + 1)
+					exon.strand = _get_strand(record.strand).to_i
+					exon.from = record.start.to_i
+					exon.to = record.end.to_i
+					gene << exon
 				end
 			end
 			
 			puts "* reading annotation file"
 			f = File.open(annot_file, "r")
 			f.each_line do |line|
-				id, symbol, synonim, length, start, stop, strand, name, chr, annot, name = line.split(/\t/)
+				next if line.match(/^LOCUS/)
+				id, symbol, synonim, length, start, stop, strand, name, chr, annot = line.split(/\t/)
 				gene = genome.get_gene_by_acc(id)
 				if gene.nil?
 					raise "WTF: I cannot find the damn gene!"
 				end
 				gene.description = name
+				gene.strand = _get_strand(strand)
+				gene.from = start.to_i
+				gene.to = stop.to_i
+				gene.sequence = chrs[gene.chromosome].subseq(gene.from, gene.to)
 			end
 			f.close
+			
 			genome
 		end
 		
 		def _parse_attributes(c)
 			f = _array2hash(c)
 			h = {
-				:id => f["gene_id"],
+				:id => f["gene_id"].gsub!(/\"/, "")
 			}
 			h
 		end
