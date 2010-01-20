@@ -44,9 +44,8 @@ module Parser
 			files.each_pair do |type, file|
 				next if ! file.exist?
 				warn "* processing Genbank [" + type.to_s + "] file: " + file
-
 				p = Bio::GenBank.open(file)
-
+				
 				skip = File.new(config.dir_source + taxon.name + (type.to_s + "_skip.txt"), "w")
 				pass = File.new(config.dir_source + taxon.name + (type.to_s + "_pass.txt"), "w")
 				size = File.new(config.dir_source + taxon.name + (type.to_s + "_size.txt"), "w")
@@ -91,75 +90,27 @@ module Parser
 						fa = 0
 						gb.features.each do |feat|
 							feats << feat.feature
-							if feat.feature == "gene"
-								h = feat.to_hash
-								if h['locus_tag']
-									id = h['locus_tag'][0]
-									susp.puts gb.accession + "\t" + gb.length.to_s + "\t" + id + "\t" + isolate.to_s + "\t" + strain.to_s + "\t" + country.to_s + "\t" + clone.to_s 
-								end
-								
-								if h['gene']
-									id = gb.accession + "." + h['gene'][0]
-									#seq = is.get_seq_by_acc(id)
-									seq = is.get_seq_by_subid(id)
-									if seq.nil?
-										seq = Isolate::Seq.new(gb.accession + "-" + (fa + 1).to_s)
-										seq.subid = id
-										seq.strand = feat.locations[0].strand.to_i
-										seq.from = feat.locations[0].from.to_i
-										seq.to = feat.locations[0].to.to_i
-										seq.locus = gb.accession
-										seq.source = type.to_s
-										if h['note']
-											seq.description = h['note'][0]
-										else
-											seq.description = ""
-										end
-										seq.type = "gene"
-										is << seq
-										fa += 1
-									end
-									seq.pseudogene = 1 if h['pseudo']
-								else
-									warn "++++++ Not usefull id for gene feature in " + gb.accession
-								end
-							elsif feat.feature == "CDS"
-								h = feat.to_hash
-								if h['gene']
-									id = gb.accession + "." + h['gene'][0]
-									seq = is.get_seq_by_subid(id)
-									if seq.nil?
-										if h['protein_id']
-											id = h['protein_id'][0]
-											seq = Isolate::Seq.new(gb.accession + "-" + (fa + 1).to_s)
-											seq.subid = id
-											seq.strand = feat.locations[0].strand.to_i
-											seq.from = feat.locations[0].from.to_i
-											seq.to = feat.locations[0].to.to_i
-											seq.locus = gb.accession
-											seq.source = type.to_s
-											if h['note']
-												seq.description = h['note'][0]
-											else
-												seq.description = ""
-											end
-											seq.type = "CDS"
-											is << seq
-											fa += 1
-										else
-											warn "@@@@@@@@@@@ gene tag / no assoc gene / and no protein_id for CDS in " + gb.accession
-										end
+							if type == :nuccore
+								if feat.feature == "gene"
+									h = feat.to_hash
+									
+									id = nil
+									acc = ""
+									if h['locus_tag']
+										id = gb.accession + "|" + h['locus_tag'][0]
+										acc = h['locus_tag'][0]
+										susp.puts gb.accession + "\t" + gb.length.to_s + "\t" + id + "\t" + isolate.to_s + "\t" + strain.to_s + "\t" + country.to_s + "\t" + clone.to_s
+									elsif h['gene']
+										id = gb.accession + "|" + h['gene'][0]
+										acc = h['gene'][0]
 									else
-										if h['product']
-											seq.description = h['product'][0]
-										elsif h['note']
-											seq.description = h['note'][0]
-										end
+										warn "******* NOT VALID TAG TO CREATE <gene> ENTRY IN LOCUS: " + gb.accession
+										next
 									end
-								elsif h['protein_id']
-									id = h['protein_id'][0]
+									
 									seq = Isolate::Seq.new(gb.accession + "-" + (fa + 1).to_s)
 									seq.subid = id
+									seq.accession = acc
 									seq.strand = feat.locations[0].strand.to_i
 									seq.from = feat.locations[0].from.to_i
 									seq.to = feat.locations[0].to.to_i
@@ -170,13 +121,87 @@ module Parser
 									else
 										seq.description = ""
 									end
-									seq.type = "CDS"
+									seq.type = "gene"
+									seq.pseudogene = 1 if h['pseudo']
 									is << seq
 									fa += 1
+								elsif feat.feature == "CDS"
+									h = feat.to_hash
+									
+									seq = nil
+									if h['locus_tag']
+										id = gb.accession + "|" + h['locus_tag'][0]
+										seq = is.get_seq_by_subid(id)
+									elsif h['gene']
+										id = gb.accession + "|" + h['gene'][0]
+										seq = is.get_seq_by_subid(id)
+									end
+									
+									if ! seq
+										if h['protein_id']
+											id = gb.accession + "|" + h['protein_id'][0]
+											
+											seq = Isolate::Seq.new(gb.accession + "-" + (fa + 1).to_s)
+											seq.subid = id
+											seq.accession = h['protein_id'][0]
+											seq.strand = feat.locations[0].strand.to_i
+											seq.from = feat.locations[0].from.to_i
+											seq.to = feat.locations[0].to.to_i
+											seq.locus = gb.accession
+											seq.source = type.to_s
+											seq.type = "CDS"
+											is << seq
+											fa += 1
+										else
+											id = gb.accession + "-" + (fa + 1).to_s
+											
+											seq = Isolate::Seq.new(id)
+											seq.subid = ""
+											seq.accession = ""
+											seq.strand = feat.locations[0].strand.to_i
+											seq.from = feat.locations[0].from.to_i
+											seq.to = feat.locations[0].to.to_i
+											seq.locus = gb.accession
+											seq.source = type.to_s
+											seq.type = "CDS"
+											is << seq
+											fa += 1
+										end
+									end
+									
+									if seq
+										if h['product']
+											seq.description = h['product'][0]
+										elsif h['note']
+											seq.description = h['note'][0]
+										else
+											seq.description = "" if ! seq.description
+										end
+										
+										seq.pseudogene = 1 if h['pseudo']
+										seq.trans_table = h['trans_table'][0] if h['trans_table']
+									else
+										warn "++++++++++ ERROR MAPING <CDS> TO <gene> OR CREATING <gene> IN LOCUS: " + gb.accession
+										next
+									end
 								else
-									warn ">>>>>>>>>> NOT VALID tag for CDS in " + gb.accession
 								end
-							else
+							elsif type == :nucest
+								if feat.feature == "source"
+									id = gb.accession
+									
+									seq = Isolate::Seq.new(id)
+									seq.subid = id
+									seq.accession = id
+									seq.strand = feat.locations[0].strand.to_i
+									seq.from = feat.locations[0].from.to_i
+									seq.to = feat.locations[0].to.to_i
+									seq.locus = gb.accession
+									seq.source = type.to_s
+									seq.type = "EST"
+									seq.description = "EST"
+									is << seq
+								end
 							end
 						end
 					else
@@ -196,10 +221,12 @@ module Parser
 					warn u
 				end
 			end
-			
-			is.each_value do |seq|
-				puts seq.locus
+			fo = File.open(config.dir_source + taxon.name + "accepted.txt", "w")
+				is.each_value do |seq|
+				fo.puts seq.locus + "\t" + seq.accession + "\t" + seq.source
 			end
+			fo.close
+			
 			is
 		end
 		
@@ -215,33 +242,6 @@ module Parser
 			tmp
 		end
 		
-##		def _check_isolate(entry)
-##			iso = false
-##			entry.features.each do |feat|
-##				if feat.feature == "source"
-##					iso = _check_isolate_from_feat(feat)
-##					break
-##				end
-##			end
-##			iso
-##		end
-##		
-##		def _check_isolate_from_feature(f)
-##				h = f.to_hash
-##				iso = false
-##				isolate = ""
-##				if h["isolate"]
-##					iso = true
-##					isolate = h["isolate"][0]
-##				end
-##				[iso, isolate]
-##		end
-#		
-#		def _check_strain_from_feature(f)
-#				h = f.to_hash
-#				h["strain"] if h["strain"]
-#		end
-#		
 		def _filter_entry(entry)
 			ok = true
 			why = []

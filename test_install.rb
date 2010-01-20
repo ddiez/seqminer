@@ -4,7 +4,8 @@ sm = SeqMiner::Install.new
 #sm.install
 
 #sm.taxon.filter_by_name("anaplasma.marginale")
-sm.taxon.filter_by_name("plasmodium.falciparum")
+#sm.taxon.filter_by_name("plasmodium.falciparum")
+#sm.taxon.filter_by_name("plasmodium.yoelii")
 #sm.taxon.filter_by_name("anaplasma.phagocytophilum")
 #sm.taxon.filter_by_source("ncbi")
 sm.taxon.filter_by_type("clade")
