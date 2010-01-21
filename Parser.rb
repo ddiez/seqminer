@@ -123,6 +123,7 @@ module Parser
 									end
 									seq.type = "gene"
 									seq.pseudogene = 1 if h['pseudo']
+									seq.sequence = gb.seq.subseq(seq.from, seq.to)
 									is << seq
 									fa += 1
 								elsif feat.feature == "CDS"
@@ -149,7 +150,7 @@ module Parser
 											seq.to = feat.locations[0].to.to_i
 											seq.locus = gb.accession
 											seq.source = type.to_s
-											seq.type = "CDS"
+											seq.sequence = gb.seq.subseq(seq.from, seq.to)
 											is << seq
 											fa += 1
 										else
@@ -163,7 +164,7 @@ module Parser
 											seq.to = feat.locations[0].to.to_i
 											seq.locus = gb.accession
 											seq.source = type.to_s
-											seq.type = "CDS"
+											seq.sequence = gb.seq.subseq(seq.from, seq.to)
 											is << seq
 											fa += 1
 										end
@@ -178,8 +179,10 @@ module Parser
 											seq.description = "" if ! seq.description
 										end
 										
+										seq.type = "CDS"
 										seq.pseudogene = 1 if h['pseudo']
-										seq.trans_table = h['trans_table'][0] if h['trans_table']
+										seq.trans_table = h['transl_table'][0] if h['transl_table']
+										seq.translation = h['translation'][0] if h['translation']
 									else
 										warn "++++++++++ ERROR MAPING <CDS> TO <gene> OR CREATING <gene> IN LOCUS: " + gb.accession
 										next
@@ -200,6 +203,7 @@ module Parser
 									seq.source = type.to_s
 									seq.type = "EST"
 									seq.description = "EST"
+									seq.sequence = gb.seq.subseq(seq.from, seq.to)
 									is << seq
 								end
 							end

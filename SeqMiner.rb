@@ -202,8 +202,10 @@ module SeqMiner
 			outdir = config.dir_sequence + t.name
 			outdir.mkpath if ! outdir.exist?
 			
-#			i.write_fasta("nuccore", outdir + "nuccore.fa")
-#			i.write_fasta("nucest", outdir + "nucest.fa")
+			i.write_fasta("gene", outdir + "gene.fa")
+			i.write_fasta("cds", outdir + "cds.fa")
+			i.write_fasta("protein", outdir + "protein.fa")
+			i.write_fasta("6frame", outdir + "6frame.fa")
 		end
 	end
 	

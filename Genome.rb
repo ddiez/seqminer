@@ -230,11 +230,18 @@ module Genome
 			to.to_i - from.to_i
 		end
 		
-		def translation(frame = 1, tt = nil)
-			tt = trans_table if ! tt
-			cds.translate(frame, tt)
+		# A synonim of the method translate().
+		def translation(frame = 1, table = nil)
+			translate(frame, table)
 		end
-	
+		
+		def translate(frame = 1, table = nil)
+			table = trans_table if ! table
+			cds.translate(frame, table)
+		end
+		
+		# This methods returns the splicing pattern in gene coordinates. In other words, it is used to extract
+		# the exonic sequence (and potentially the introns) from the gene sequence.
 		def splicing
 			loc =[]
 			
@@ -257,18 +264,29 @@ module Genome
 			loc
 		end
 		
-#		def splicing_original
-#			loc = []
-#			items.sort.each_index do |index|
-#				x0 = items[index+1].from
-#				x1 = items[index+1].to
-#				loc << x0.to_s + ".." + x1.to_s
-#			end
-#			loc = loc.join(",")
-#			loc = "join(" + loc + ")" if length > 1
-#			loc = "complement(" + loc + ")" if strand == -1
-#			loc
-#		end
+		# This methods displays the original splicing pattern based on the genomic coordinates. It can be used to 
+		# extract the exons from the genome sequence. It is intended mainly as a check method.
+		def splicing_original
+			loc =[]
+						
+			case strand
+			when 1
+				exons = oitems
+			when -1
+				exons = oitems.reverse
+			end
+			
+			#f0 = exons[0].from
+			exons.each do |exon|
+				x0 = exon.from #- f0 + 1
+				x1 = exon.to #- f0 + 1
+				loc << x0.to_s + ".." + x1.to_s
+			end
+			loc = loc.join(",")
+			loc = "join(" + loc + ")" if length > 1
+			loc = "complement(" + loc + ")" if strand == -1
+			loc
+		end
 		
 		def << (exon)
 			add(exon)
