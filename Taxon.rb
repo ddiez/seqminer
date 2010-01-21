@@ -1,12 +1,14 @@
 require 'SeqMiner'
 require 'Item'
+require 'bio'
+require 'rexml/document'
 
 module Taxon
 	include Item
 	
 	class Set < Set
 		attr_reader :config
-		def initialize(options = { :empty => false, :config => nil })
+		def initialize(options = { :empty => false, :config => nil, :update_ncbi_info => false })
 			super()
 			
 			if ! options[:config]
@@ -30,6 +32,8 @@ module Taxon
 				end
 				file.close
 			end
+		
+			load_ncbi_info(options[:update_ncbi_info])	
 		end
 		
 		def get_taxon_by_name(name)
@@ -52,6 +56,66 @@ module Taxon
 			items.delete_if {|name, taxon| ! taxon.source.match(/#{filter}/) }
 		end
 		
+		# This function connects to the NCBI taxonomy and gets updated information of all the taxons in the set.
+		# It stores the XML file in the specified location (default: $SM_HOME/etc/ncbi_taxonomy.xml)
+		def update_ncbi_info(file = nil)
+			if length == 0
+				warn "WARNING: no taxons in the set [skipping]"
+				return
+			end
+			warn "* loading NCBI information"
+			
+			Bio::NCBI.default_email = "diez@kuicr.kyoto-u.ac.jp"
+			ncbi = Bio::NCBI::REST::EFetch.new
+			
+			list = []
+			each_value do |taxon|
+				list << taxon.id
+			end
+			list.join(" ")
+			taxfile = ncbi.taxonomy(list, "xml")
+			
+			file = config.dir_config + "ncbi_taxonomy.xml" if ! file
+			# TODO: check the existence of the file and make backup.
+			
+			if file.exist?
+				warn "* file exist! making backup..."
+				dir, fileb = file.split
+				fileb += "_ori"
+				f = File.new(file.to_s, "r")
+				f.copy(dir + fileb)
+				f.close
+			end
+			
+			f = File.open(file, "w")
+			f.puts taxfile
+			f.close
+		end
+		
+		# This function reads a taxonomy file from NCBI (default: $SM_HOME/etc/ncbi_taxonomy.xml) and optionally
+		# forces an update.
+		def load_ncbi_info(update = false)
+			update_ncbi_info if update
+			
+			file = config.dir_config + "ncbi_taxonomy.xml"
+			doc = REXML::Document.new(file.read)
+			
+			id = []
+			code = []
+			
+			doc.elements.each('TaxaSet/Taxon/TaxId') do |item|
+				id << item.text
+			end
+			doc.elements.each('TaxaSet/Taxon/GeneticCode/GCId') do |item|
+				code << item.text
+			end
+			
+			id.each_index do |index|
+				taxon = get_item_by_id(id[index])
+				taxon.trans_table = code[index].to_i
+			end
+		end
+		
 		def debug
 			warn "+ Taxon Set +"
 			warn "* length: " + length.to_s
@@ -63,7 +127,7 @@ module Taxon
 	end
 
 	class Taxon < Item
-		attr_accessor :name, :strain, :binomial, :type, :source, :kegg_name, :short_name
+		attr_accessor :name, :strain, :binomial, :type, :source, :kegg_name, :short_name, :trans_table
 
 		def initialize (id, name1, name2, strain, type, source)
 			super(id)
@@ -76,15 +140,17 @@ module Taxon
 			@binomial = name1 + "." + name2
 			@short_name = name1.match(/^(.)/)[0].upcase + name2
 			@kegg_name = name1.match(/^(.)/)[0] + name2.match(/^(..)/)[0] + (strain == "" ? "" : "_" + strain)
+			@trans_table = 1
 		end
 		
 
 		def debug
 			warn "+ Taxon +"
-			warn "* taxon_id: " + @id
-			warn "* organism: " + @name
-			warn "* type: " + @type
-			warn "* source: " + @source
+			warn "* taxon_id: " + id
+			warn "* organism: " + name
+			warn "* type: " + type
+			warn "* source: " + source
+			warn "* trans_table: " + trans_table.to_s
 		end
 	end
 end
