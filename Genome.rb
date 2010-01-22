@@ -125,34 +125,38 @@ module Genome
 			case type
 			when 'gene'
 				items.each_value do |gene|
+					id = gene.id + " " + gene.description
 					seq = gene.sequence
-					fo.puts seq.to_fasta(gene.id + " " + gene.description, 60)
+					fo.puts seq.to_fasta(id, 60)
 				end
 			when 'cds'
 				items.each_value do |gene|
+					id = gene.id + " " + gene.description
 					seq = gene.cds
-					fo.puts seq.to_fasta(gene.id + " " + gene.description, 60)
+					fo.puts seq.to_fasta(id, 60)
 				end
 			when 'protein'
 				items.each_value do |gene|
+					id = gene.id + " " + gene.description
 					seq = gene.translation
-					fo.puts seq.to_fasta(gene.id + " " + gene.description, 60)
+					fo.puts seq.to_fasta(id, 60)
 				end
 			when '6frame'
 				items.each_value do |gene|
 					next if gene.size < 1
+					id = gene.id + " " + gene.description
 					seq = gene.translation(1)
-					fo.puts seq.to_fasta(gene.id + " " + gene.description + " [strand=#{gene.strand};frame=1]", 60)
+					fo.puts seq.to_fasta(id + " [strand=#{gene.strand};frame=1]", 60)
 					seq = gene.translation(2)
-					fo.puts seq.to_fasta(gene.id + " " + gene.description + " [strand=#{gene.strand};frame=2]", 60)
+					fo.puts seq.to_fasta(id + " [strand=#{gene.strand};frame=2]", 60)
 					seq = gene.translation(3)
-					fo.puts seq.to_fasta(gene.id + " " + gene.description + " [strand=#{gene.strand};frame=3]", 60)
+					fo.puts seq.to_fasta(id + " [strand=#{gene.strand};frame=3]", 60)
 					seq = gene.translation(4)
-					fo.puts seq.to_fasta(gene.id + " " + gene.description + " [strand=#{gene.strand * -1};frame=1]", 60)
+					fo.puts seq.to_fasta(id + " [strand=#{gene.strand * -1};frame=1]", 60)
 					seq = gene.translation(5)
-					fo.puts seq.to_fasta(gene.id + " " + gene.description + " [strand=#{gene.strand * -1};frame=2]", 60)
+					fo.puts seq.to_fasta(id + " [strand=#{gene.strand * -1};frame=2]", 60)
 					seq = gene.translation(6)
-					fo.puts seq.to_fasta(gene.id + " " + gene.description + " [strand=#{gene.strand * -1};frame=3]", 60)
+					fo.puts seq.to_fasta(id + " [strand=#{gene.strand * -1};frame=3]", 60)
 				end
 			when 'genome'
 				chromosome.each_pair do |id, chr|

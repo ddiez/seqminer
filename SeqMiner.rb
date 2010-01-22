@@ -187,11 +187,17 @@ module SeqMiner
 			
 			outdir = config.dir_sequence + t.name
 			outdir.mkpath if ! outdir.exist?
+			warn "* writing gene file"
 			g.write_fasta("gene", outdir + "gene.fa")
+			warn "* writing CDS file"
 			g.write_fasta("cds", outdir + "cds.fa")
+			warn "* writing protein file"
 			g.write_fasta("protein", outdir + "protein.fa")
+			warn "* writing 6frame file"
 			g.write_fasta("6frame", outdir + "6frame.fa")
+			warn "* writing genome file"
 			g.write_fasta("genome", outdir + "genome.fa")
+			warn "* writing GFF file"
 			g.write_gff(outdir + "genome.gff")
 		end
 		

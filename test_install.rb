@@ -9,7 +9,8 @@ sm = SeqMiner::Install.new
 #sm.taxon.filter_by_name("plasmodium.yoelii")
 #sm.taxon.filter_by_name("anaplasma.phagocytophilum")
 #sm.taxon.filter_by_source("ncbi")
-sm.taxon.filter_by_type("clade")
+#sm.taxon.filter_by_type("spp")
+#sm.taxon.filter_by_type("clade")
 #sm.taxon.debug
 
 #sm.update_pfam

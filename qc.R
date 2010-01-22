@@ -3,7 +3,7 @@ foo.p <- read.delim("nuccore_pass.txt")
 foo.s <- read.delim("nuccore_skip.txt")
 foo.a <- read.delim("accepted.txt")
 
-plotSizeDist(foo.p, groups = "Isolate")
+plotSizeDist(foo.p, groups = "Country")
 plotSizeDist(foo.s)
 plotSizeDist(foo.a, groups = "Source")
 

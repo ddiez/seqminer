@@ -53,6 +53,8 @@ module Parser
 				skip.puts "LOCUS\tLength\tWhy\tIsolate\tStrain\tCountry\tClone\tOrganelle"
 				pass.puts "LOCUS\tLength\tIsolate\tStrain\tCountry\tClone\tOrganelle"
 				p.each_entry do |gb|
+					next if gb.accession == ""
+					
 					#warn "* processing: " + gb.accession
 					strain = _check_in_source(gb, "strain")
 					isolate = _check_in_source(gb, "isolate")
@@ -158,7 +160,11 @@ module Parser
 										
 										seq.type = "CDS"
 										seq.pseudogene = 1 if h['pseudo']
-										seq.trans_table = h['transl_table'][0] if h['transl_table']
+										if h['transl_table']
+											seq.trans_table = h['transl_table'][0]
+										else
+											seq.trans_table = taxon.trans_table
+										end
 										seq.translation = h['translation'][0] if h['translation']
 									else
 										warn "++++++++++ ERROR MAPING <CDS> TO <gene> OR CREATING <gene> IN LOCUS: " + gb.accession
@@ -181,6 +187,7 @@ module Parser
 									seq.type = "EST"
 									seq.description = "EST"
 									seq.sequence = gb.seq.subseq(seq.from, seq.to)
+									seq.trans_table = taxon.trans_table
 									is << seq
 								end
 							end
@@ -263,6 +270,8 @@ module Parser
 				#puts gb.accession
 				#puts gb.organism
 				#puts gb.definition
+				puts "* DEBUG: " + taxon.name + "/" + gb.accession
+				next if gb.accession == ""
 
 				chr[gb.accession] = gb.seq
 
@@ -282,6 +291,7 @@ module Parser
 							gene.description = ""
 							gene.source = "refseq"
 							gene.chromosome = gb.accession
+							gene.trans_table = taxon.trans_table
 							genome << gene
 
 							if h['pseudo']
@@ -395,6 +405,8 @@ module Parser
 			chrs = {}
 			map = {}
 			p1.each_entry do |gb|
+				next if gb.accession == ""
+				
 				chrs[gb.accession] = gb.seq
 				id = gb.definition
 				if id.match(/(supercont.+?) /)
@@ -428,6 +440,7 @@ module Parser
 						gene.description = attr[:desc]
 						gene.pseudogene = attr[:pseudo]
 						gene.type = "CDS"
+						gene.trans_table = taxon.trans_table
 						genome << gene
 					end
 					exon = Genome::Exon.new(gene.length + 1)
@@ -454,6 +467,8 @@ module Parser
 				gene.sequence = chrs[gene.chromosome].subseq(gene.from, gene.to)
 			end
 			f.close
+			
+			genome.chromosome = chrs
 			
 			genome
 		end
@@ -527,6 +542,7 @@ module Parser
 					gene.description = attr[:desc]
 					gene.pseudogene = attr[:pseudo]
 					gene.sequence = sequences[record.seqname].subseq(record.start, record.end)
+					gene.trans_table = taxon.trans_table
 					genome << gene
 				elsif record.feature == "exon"
 					attr = _parse_attributes(record.attributes, record.feature)
