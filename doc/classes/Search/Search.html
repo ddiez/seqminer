@@ -79,18 +79,6 @@
 
 
   <div id="contextContent">
-    <div id="diagram">
-      <map id="map" name="map">
-  <area shape="rect" coords="157,5,229,53"      href="../Item.html" alt="Item" />
-  <area shape="rect" coords="373,101,445,149"      href="Search.html" alt="Search" />
-  <area shape="rect" coords="157,101,229,149"      href="Type.html" alt="Type" />
-  <area shape="rect" coords="253,101,325,149"      href="Set.html" alt="Set" />
-  <area shape="rect" coords="253,197,325,245"      href="TypeSet.html" alt="TypeSet" />
-  <area shape="rect" coords="27,101,109,149"      href="Parameter.html" alt="Parameter" />
-  <area shape="rect" coords="16,67,456,256"      href="../Search.html" alt="Search" />
-</map>
-<img src="../../dot/f_6.png" usemap="#map" border="0" alt="dot/f_6.png">
-    </div>
 
 
 
@@ -100,8 +88,8 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000025">debug</a>&nbsp;&nbsp;
-      <a href="#M000024">new</a>&nbsp;&nbsp;
+      <a href="#M000032">debug</a>&nbsp;&nbsp;
+      <a href="#M000031">new</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -146,27 +134,27 @@
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000024" class="method-detail">
-        <a name="M000024"></a>
+      <div id="method-M000031" class="method-detail">
+        <a name="M000031"></a>
 
         <div class="method-heading">
-          <a href="#M000024" class="method-signature">
+          <a href="#M000031" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(taxon, ortholog, type)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000024-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000024-source">
+            onclick="toggleCode('M000031-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000031-source">
 <pre>
-<span class="ruby-comment cmt"># File Search.rb, line 172</span>
-                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span> (<span class="ruby-identifier">taxon</span>, <span class="ruby-identifier">ortholog</span>, <span class="ruby-identifier">type</span>)
-                        <span class="ruby-ivar">@taxon</span> = <span class="ruby-identifier">taxon</span>
-                        <span class="ruby-ivar">@ortholog</span> = <span class="ruby-identifier">ortholog</span>
-                        <span class="ruby-ivar">@type</span> = <span class="ruby-identifier">type</span>
-                        <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">type</span>.<span class="ruby-identifier">name</span>)
-                <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File Search.rb, line 172</span>
+172:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span> (<span class="ruby-identifier">taxon</span>, <span class="ruby-identifier">ortholog</span>, <span class="ruby-identifier">type</span>)
+173:             <span class="ruby-ivar">@taxon</span> = <span class="ruby-identifier">taxon</span>
+174:             <span class="ruby-ivar">@ortholog</span> = <span class="ruby-identifier">ortholog</span>
+175:             <span class="ruby-ivar">@type</span> = <span class="ruby-identifier">type</span>
+176:             <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">type</span>.<span class="ruby-identifier">name</span>)
+177:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -174,29 +162,29 @@
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000025" class="method-detail">
-        <a name="M000025"></a>
+      <div id="method-M000032" class="method-detail">
+        <a name="M000032"></a>
 
         <div class="method-heading">
-          <a href="#M000025" class="method-signature">
+          <a href="#M000032" class="method-signature">
           <span class="method-name">debug</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000025-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000025-source">
+            onclick="toggleCode('M000032-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000032-source">
 <pre>
-<span class="ruby-comment cmt"># File Search.rb, line 179</span>
-                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
-                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Search +&quot;</span>
-                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
-                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* taxon: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>
-                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* ortholog: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span>
-                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* type: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">type</span>.<span class="ruby-identifier">name</span>
-                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* hmm: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">hmm</span>
-                <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File Search.rb, line 179</span>
+179:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+180:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Search +&quot;</span>
+181:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
+182:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* taxon: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>
+183:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* ortholog: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span>
+184:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* type: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">type</span>.<span class="ruby-identifier">name</span>
+185:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* hmm: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">hmm</span>
+186:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

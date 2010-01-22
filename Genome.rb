@@ -105,16 +105,6 @@ module Genome
 			get_item_by_id(acc)
 		end
 		
-#		def _get_strand(s)
-#			if s == "+"
-#				return 1
-#			elsif s == "-"
-#				return -1
-#			else
-#				return nil
-#			end
-#		end
-		
 		def write_fasta(type, file = nil)
 			if file
 				fo = File.new(file, "w")
@@ -234,15 +224,10 @@ module Genome
 			to.to_i - from.to_i
 		end
 		
-		# A synonim to the method translate().
+		# A synonim to the method #translate
 		def translation(frame = 1, table = nil)
 			translate(frame, table)
 		end
-		
-#		def translate(frame = 1, table = nil)
-#			table = trans_table if ! table
-#			cds.translate(frame, table)
-#		end
 		
 		def translate(frame = 1, table = nil)
 			if table

@@ -79,19 +79,6 @@
 
 
   <div id="contextContent">
-    <div id="diagram">
-      <map id="map" name="map">
-  <area shape="rect" coords="560,101,632,149"      href="Set.html" alt="Set" />
-  <area shape="rect" coords="272,5,344,53"      href="../Item.html" alt="Item" />
-  <area shape="rect" coords="464,101,536,149"      href="Domain.html" alt="Domain" />
-  <area shape="rect" coords="368,101,440,149"      href="Result.html" alt="Result" />
-  <area shape="rect" coords="272,101,344,149"      href="Hit.html" alt="Hit" />
-  <area shape="rect" coords="176,101,248,149"      href="SubHit.html" alt="SubHit" />
-  <area shape="rect" coords="27,101,128,149"      href="HmmerParser.html" alt="HmmerParser" />
-  <area shape="rect" coords="16,67,667,160"      href="../Result.html" alt="Result" />
-</map>
-<img src="../../dot/f_5.png" usemap="#map" border="0" alt="dot/f_5.png">
-    </div>
 
 
 
@@ -101,9 +88,9 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000142">complete?</a>&nbsp;&nbsp;
-      <a href="#M000143">completeness</a>&nbsp;&nbsp;
-      <a href="#M000141">new</a>&nbsp;&nbsp;
+      <a href="#M000160">complete?</a>&nbsp;&nbsp;
+      <a href="#M000161">completeness</a>&nbsp;&nbsp;
+      <a href="#M000159">new</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -198,24 +185,24 @@
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000141" class="method-detail">
-        <a name="M000141"></a>
+      <div id="method-M000159" class="method-detail">
+        <a name="M000159"></a>
 
         <div class="method-heading">
-          <a href="#M000141" class="method-signature">
+          <a href="#M000159" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(id)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000141-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000141-source">
+            onclick="toggleCode('M000159-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000159-source">
 <pre>
-<span class="ruby-comment cmt"># File Result.rb, line 10</span>
-                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>)
-                        <span class="ruby-keyword kw">super</span>
-                <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File Result.rb, line 10</span>
+10:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>)
+11:             <span class="ruby-keyword kw">super</span>
+12:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -223,11 +210,11 @@
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000142" class="method-detail">
-        <a name="M000142"></a>
+      <div id="method-M000160" class="method-detail">
+        <a name="M000160"></a>
 
         <div class="method-heading">
-          <a href="#M000142" class="method-signature">
+          <a href="#M000160" class="method-signature">
           <span class="method-name">complete?</span><span class="method-args">(cut = 1)</span>
           </a>
         </div>
@@ -236,47 +223,47 @@
           <p>
 Checks whether the <a href="Domain.html">Domain</a> hit is complete
 compared to the query length. By default checks for full <a
-href="Domain.html#M000143">completeness</a> (cutoff = 1) but this can be
+href="Domain.html#M000161">completeness</a> (cutoff = 1) but this can be
 changed.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000142-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000142-source">
+            onclick="toggleCode('M000160-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000160-source">
 <pre>
-<span class="ruby-comment cmt"># File Result.rb, line 16</span>
-                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">complete?</span>(<span class="ruby-identifier">cut</span> = <span class="ruby-value">1</span>)                        
-                        <span class="ruby-identifier">completeness</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">cut</span>
-                <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File Result.rb, line 16</span>
+16:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">complete?</span>(<span class="ruby-identifier">cut</span> = <span class="ruby-value">1</span>)            
+17:             <span class="ruby-identifier">completeness</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">cut</span>
+18:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000143" class="method-detail">
-        <a name="M000143"></a>
+      <div id="method-M000161" class="method-detail">
+        <a name="M000161"></a>
 
         <div class="method-heading">
-          <a href="#M000143" class="method-signature">
+          <a href="#M000161" class="method-signature">
           <span class="method-name">completeness</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Computes the <a href="Domain.html#M000143">completeness</a>, i.e. the
+Computes the <a href="Domain.html#M000161">completeness</a>, i.e. the
 ration between the number of residues matching the domain and the length of
 the domain.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000143-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000143-source">
+            onclick="toggleCode('M000161-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000161-source">
 <pre>
-<span class="ruby-comment cmt"># File Result.rb, line 22</span>
-                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">completeness</span>
-                        <span class="ruby-comment cmt"># TODO: may be better to do this by referencing the parent class?</span>
-                        <span class="ruby-identifier">l</span> = <span class="ruby-identifier">hmm_to</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">hmm_from</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-                        <span class="ruby-identifier">l</span>.<span class="ruby-identifier">to_f</span><span class="ruby-operator">/</span><span class="ruby-identifier">query_length</span>.<span class="ruby-identifier">to_f</span>
-                <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File Result.rb, line 22</span>
+22:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">completeness</span>
+23:             <span class="ruby-comment cmt"># TODO: may be better to do this by referencing the parent class?</span>
+24:             <span class="ruby-identifier">l</span> = <span class="ruby-identifier">hmm_to</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">hmm_from</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+25:             <span class="ruby-identifier">l</span>.<span class="ruby-identifier">to_f</span><span class="ruby-operator">/</span><span class="ruby-identifier">query_length</span>.<span class="ruby-identifier">to_f</span>
+26:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

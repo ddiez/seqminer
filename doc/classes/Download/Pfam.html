@@ -79,17 +79,6 @@
 
 
   <div id="contextContent">
-    <div id="diagram">
-      <map id="map" name="map">
-  <area shape="rect" coords="161,101,233,149"      href="Set.html" alt="Set" />
-  <area shape="rect" coords="65,101,137,149"      href="Common.html" alt="Common" />
-  <area shape="rect" coords="51,197,131,245"      href="Download.html" alt="Download" />
-  <area shape="rect" coords="155,197,227,245"      href="Pfam.html" alt="Pfam" />
-  <area shape="rect" coords="5,5,77,53"      href="../Item.html" alt="Item" />
-  <area shape="rect" coords="31,67,268,256"      href="../Download.html" alt="Download" />
-</map>
-<img src="../../dot/f_0.png" usemap="#map" border="0" alt="dot/f_0.png">
-    </div>
 
 
 
@@ -99,8 +88,8 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000078">new</a>&nbsp;&nbsp;
-      <a href="#M000079">update</a>&nbsp;&nbsp;
+      <a href="#M000097">new</a>&nbsp;&nbsp;
+      <a href="#M000098">update</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -160,40 +149,40 @@
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000078" class="method-detail">
-        <a name="M000078"></a>
+      <div id="method-M000097" class="method-detail">
+        <a name="M000097"></a>
 
         <div class="method-heading">
-          <a href="#M000078" class="method-signature">
+          <a href="#M000097" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(options = {:config =&gt; nil})</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000078-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000078-source">
+            onclick="toggleCode('M000097-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000097-source">
 <pre>
-<span class="ruby-comment cmt"># File Download.rb, line 324</span>
-                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
-                        <span class="ruby-ivar">@host</span> = <span class="ruby-value str">'ftp.sanger.ac.uk'</span>
-                        <span class="ruby-ivar">@base_dir</span> = <span class="ruby-value str">'/pub/databases/Pfam/releases/'</span>
-                        <span class="ruby-ivar">@release</span> = <span class="ruby-value str">'Pfam24.0'</span>
-                        <span class="ruby-ivar">@files</span> = [
-                                <span class="ruby-value str">'Pfam-A.seed.gz'</span>,
-                                <span class="ruby-value str">'Pfam-A.full.gz'</span>,
-                                <span class="ruby-value str">'Pfam-A.hmm.gz'</span>,
-                                <span class="ruby-value str">'Pfam-B.gz'</span>,
-                                <span class="ruby-value str">'relnotes.txt'</span>,
-                                <span class="ruby-value str">'userman.txt'</span>
-                        ]
-
-                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
-                                <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
-                        <span class="ruby-keyword kw">else</span>
-                                <span class="ruby-ivar">@config</span> = <span class="ruby-constant">SeqMiner</span><span class="ruby-operator">::</span><span class="ruby-constant">Config</span>.<span class="ruby-identifier">new</span>
-                        <span class="ruby-keyword kw">end</span>
-                <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File Download.rb, line 324</span>
+324:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
+325:             <span class="ruby-ivar">@host</span> = <span class="ruby-value str">'ftp.sanger.ac.uk'</span>
+326:             <span class="ruby-ivar">@base_dir</span> = <span class="ruby-value str">'/pub/databases/Pfam/releases/'</span>
+327:             <span class="ruby-ivar">@release</span> = <span class="ruby-value str">'Pfam24.0'</span>
+328:             <span class="ruby-ivar">@files</span> = [
+329:                 <span class="ruby-value str">'Pfam-A.seed.gz'</span>,
+330:                 <span class="ruby-value str">'Pfam-A.full.gz'</span>,
+331:                 <span class="ruby-value str">'Pfam-A.hmm.gz'</span>,
+332:                 <span class="ruby-value str">'Pfam-B.gz'</span>,
+333:                 <span class="ruby-value str">'relnotes.txt'</span>,
+334:                 <span class="ruby-value str">'userman.txt'</span>
+335:             ]
+336: 
+337:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+338:                 <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+339:             <span class="ruby-keyword kw">else</span>
+340:                 <span class="ruby-ivar">@config</span> = <span class="ruby-constant">SeqMiner</span><span class="ruby-operator">::</span><span class="ruby-constant">Config</span>.<span class="ruby-identifier">new</span>
+341:             <span class="ruby-keyword kw">end</span>
+342:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -201,36 +190,36 @@
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000079" class="method-detail">
-        <a name="M000079"></a>
+      <div id="method-M000098" class="method-detail">
+        <a name="M000098"></a>
 
         <div class="method-heading">
-          <a href="#M000079" class="method-signature">
+          <a href="#M000098" class="method-signature">
           <span class="method-name">update</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000079-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000079-source">
+            onclick="toggleCode('M000098-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000098-source">
 <pre>
-<span class="ruby-comment cmt"># File Download.rb, line 344</span>
-                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>
-                        <span class="ruby-comment cmt"># TODO: check there are updates to download?</span>
-                        
-                        <span class="ruby-comment cmt"># Check directory exists.</span>
-                        <span class="ruby-identifier">dir_pfam</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_pfam</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span>
-                        <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">dir_pfam</span>.<span class="ruby-identifier">exist?</span>
-                                <span class="ruby-identifier">dir_pfam</span>.<span class="ruby-identifier">mkpath</span>
-                                <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_pfam_current</span>.<span class="ruby-identifier">make_symlink</span>(<span class="ruby-identifier">dir_pfam</span>)
-                        <span class="ruby-keyword kw">end</span>
-                        
-                        <span class="ruby-comment cmt"># Download files (with progress bar).</span>
-                        <span class="ruby-identifier">files</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
-                                <span class="ruby-identifier">ftp_download</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">base_dir</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">dir_pfam</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">file</span>)
-                        <span class="ruby-keyword kw">end</span>
-                <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File Download.rb, line 344</span>
+344:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>
+345:             <span class="ruby-comment cmt"># TODO: check there are updates to download?</span>
+346:             
+347:             <span class="ruby-comment cmt"># Check directory exists.</span>
+348:             <span class="ruby-identifier">dir_pfam</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_pfam</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span>
+349:             <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">dir_pfam</span>.<span class="ruby-identifier">exist?</span>
+350:                 <span class="ruby-identifier">dir_pfam</span>.<span class="ruby-identifier">mkpath</span>
+351:                 <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_pfam_current</span>.<span class="ruby-identifier">make_symlink</span>(<span class="ruby-identifier">dir_pfam</span>)
+352:             <span class="ruby-keyword kw">end</span>
+353:             
+354:             <span class="ruby-comment cmt"># Download files (with progress bar).</span>
+355:             <span class="ruby-identifier">files</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+356:                 <span class="ruby-identifier">ftp_download</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">base_dir</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">dir_pfam</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">file</span>)
+357:             <span class="ruby-keyword kw">end</span>
+358:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

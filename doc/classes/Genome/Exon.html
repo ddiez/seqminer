@@ -79,16 +79,6 @@
 
 
   <div id="contextContent">
-    <div id="diagram">
-      <map id="map" name="map">
-  <area shape="rect" coords="51,5,123,53"      href="../Item.html" alt="Item" />
-  <area shape="rect" coords="267,101,339,149"      href="Exon.html" alt="Exon" />
-  <area shape="rect" coords="51,101,123,149"      href="Gene.html" alt="Gene" />
-  <area shape="rect" coords="147,101,219,149"      href="Set.html" alt="Set" />
-  <area shape="rect" coords="16,67,349,160"      href="../Genome.html" alt="Genome" />
-</map>
-<img src="../../dot/f_1.png" usemap="#map" border="0" alt="dot/f_1.png">
-    </div>
 
 
 
@@ -98,8 +88,8 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000041">debug</a>&nbsp;&nbsp;
-      <a href="#M000040">new</a>&nbsp;&nbsp;
+      <a href="#M000048">debug</a>&nbsp;&nbsp;
+      <a href="#M000047">new</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -149,11 +139,11 @@
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000040" class="method-detail">
-        <a name="M000040"></a>
+      <div id="method-M000047" class="method-detail">
+        <a name="M000047"></a>
 
         <div class="method-heading">
-          <a href="#M000040" class="method-signature">
+          <a href="#M000047" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(id)</span>
           </a>
         </div>
@@ -163,13 +153,13 @@
 TODO: do i need parent method (like in perl API) ?
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000040-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000040-source">
+            onclick="toggleCode('M000047-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000047-source">
 <pre>
-<span class="ruby-comment cmt"># File Genome.rb, line 307</span>
-                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>)
-                        <span class="ruby-keyword kw">super</span>
-                <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File Genome.rb, line 323</span>
+323:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>)
+324:             <span class="ruby-keyword kw">super</span>
+325:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -177,27 +167,27 @@ TODO: do i need parent method (like in perl API) ?
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000041" class="method-detail">
-        <a name="M000041"></a>
+      <div id="method-M000048" class="method-detail">
+        <a name="M000048"></a>
 
         <div class="method-heading">
-          <a href="#M000041" class="method-signature">
+          <a href="#M000048" class="method-signature">
           <span class="method-name">debug</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000041-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000041-source">
+            onclick="toggleCode('M000048-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000048-source">
 <pre>
-<span class="ruby-comment cmt"># File Genome.rb, line 311</span>
-                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
-                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Exon +&quot;</span>
-                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_s</span>
-                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* strand: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">strand</span>.<span class="ruby-identifier">to_s</span>
-                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* location: (&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">from</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;..&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">to</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;)&quot;</span>
-                <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File Genome.rb, line 327</span>
+327:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+328:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Exon +&quot;</span>
+329:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_s</span>
+330:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* strand: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">strand</span>.<span class="ruby-identifier">to_s</span>
+331:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* location: (&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">from</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;..&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">to</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;)&quot;</span>
+332:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

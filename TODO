@@ -1,0 +1,1 @@
+* Item does not maintain the order of items (because is a hash). There is one hack in Genome::Gene for Exon but it would be great to have a general approach.

@@ -79,18 +79,6 @@
 
 
   <div id="contextContent">
-    <div id="diagram">
-      <map id="map" name="map">
-  <area shape="rect" coords="157,5,229,53"      href="../Item.html" alt="Item" />
-  <area shape="rect" coords="373,101,445,149"      href="Search.html" alt="Search" />
-  <area shape="rect" coords="157,101,229,149"      href="Type.html" alt="Type" />
-  <area shape="rect" coords="253,101,325,149"      href="Set.html" alt="Set" />
-  <area shape="rect" coords="253,197,325,245"      href="TypeSet.html" alt="TypeSet" />
-  <area shape="rect" coords="27,101,109,149"      href="Parameter.html" alt="Parameter" />
-  <area shape="rect" coords="16,67,456,256"      href="../Search.html" alt="Search" />
-</map>
-<img src="../../dot/f_6.png" usemap="#map" border="0" alt="dot/f_6.png">
-    </div>
 
 
 
@@ -100,8 +88,8 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000027">debug</a>&nbsp;&nbsp;
-      <a href="#M000026">new</a>&nbsp;&nbsp;
+      <a href="#M000034">debug</a>&nbsp;&nbsp;
+      <a href="#M000033">new</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -123,30 +111,30 @@
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000026" class="method-detail">
-        <a name="M000026"></a>
+      <div id="method-M000033" class="method-detail">
+        <a name="M000033"></a>
 
         <div class="method-heading">
-          <a href="#M000026" class="method-signature">
+          <a href="#M000033" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(options = {:empty =&gt; false})</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000026-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000026-source">
+            onclick="toggleCode('M000033-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000033-source">
 <pre>
-<span class="ruby-comment cmt"># File Search.rb, line 11</span>
-                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:empty</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>})
-                        <span class="ruby-keyword kw">super</span>()
-                        <span class="ruby-ivar">@types</span> = [<span class="ruby-value str">&quot;nucleotide&quot;</span>, <span class="ruby-value str">&quot;protein&quot;</span>]
-                        <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:empty</span>]
-                                <span class="ruby-ivar">@types</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">type</span><span class="ruby-operator">|</span>
-                                        <span class="ruby-identifier">add</span>(<span class="ruby-constant">Type</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">length</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>, <span class="ruby-identifier">type</span>))
-                                <span class="ruby-keyword kw">end</span>
-                        <span class="ruby-keyword kw">end</span>
-                <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File Search.rb, line 11</span>
+11:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:empty</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>})
+12:             <span class="ruby-keyword kw">super</span>()
+13:             <span class="ruby-ivar">@types</span> = [<span class="ruby-value str">&quot;nucleotide&quot;</span>, <span class="ruby-value str">&quot;protein&quot;</span>]
+14:             <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:empty</span>]
+15:                 <span class="ruby-ivar">@types</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">type</span><span class="ruby-operator">|</span>
+16:                     <span class="ruby-identifier">add</span>(<span class="ruby-constant">Type</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">length</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>, <span class="ruby-identifier">type</span>))
+17:                 <span class="ruby-keyword kw">end</span>
+18:             <span class="ruby-keyword kw">end</span>
+19:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -154,25 +142,25 @@
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000027" class="method-detail">
-        <a name="M000027"></a>
+      <div id="method-M000034" class="method-detail">
+        <a name="M000034"></a>
 
         <div class="method-heading">
-          <a href="#M000027" class="method-signature">
+          <a href="#M000034" class="method-signature">
           <span class="method-name">debug</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000027-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000027-source">
+            onclick="toggleCode('M000034-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000034-source">
 <pre>
-<span class="ruby-comment cmt"># File Search.rb, line 21</span>
-                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
-                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Parameter Set +&quot;</span>
-                        <span class="ruby-keyword kw">super</span>
-                <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File Search.rb, line 21</span>
+21:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+22:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Parameter Set +&quot;</span>
+23:             <span class="ruby-keyword kw">super</span>
+24:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

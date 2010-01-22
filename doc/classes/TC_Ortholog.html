@@ -77,15 +77,6 @@
 
 
   <div id="contextContent">
-    <div id="diagram">
-      <map id="map" name="map">
-  <area shape="rect" coords="5,101,101,149"      href="TC_Ortholog.html" alt="TC_Ortholog" />
-  <area shape="rect" coords="125,101,197,149"      href="TC_Item.html" alt="TC_Item" />
-  <area shape="rect" coords="221,101,304,149"      href="TC_Taxon.html" alt="TC_Taxon" />
-  <area shape="rect" coords="92,5,231,53"      href="Test/Unit/TestCase.html" alt="Test::Unit::TestCase" />
-</map>
-<img src="../dot/f_16.png" usemap="#map" border="0" alt="dot/f_16.png">
-    </div>
 
 
 
@@ -132,15 +123,15 @@
             onclick="toggleCode('M000003-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000003-source">
 <pre>
-<span class="ruby-comment cmt"># File tc_all.rb, line 79</span>
-        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filter</span>
-                <span class="ruby-identifier">os</span> = <span class="ruby-constant">Ortholog</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
-                
-                <span class="ruby-identifier">assert_not_nil</span>(<span class="ruby-identifier">os</span>.<span class="ruby-identifier">filter_by_name</span>(<span class="ruby-value str">&quot;var&quot;</span>))
-                
-<span class="ruby-comment cmt">#               assert_equal(&quot;var&quot;, os.filter_by_name(&quot;var&quot;).name)</span>
-<span class="ruby-comment cmt">#               assert_equal(&quot;PFEMP&quot;, os.filter_by_name(&quot;var&quot;).hmm)</span>
-        <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File tc_all.rb, line 79</span>
+79:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filter</span>
+80:         <span class="ruby-identifier">os</span> = <span class="ruby-constant">Ortholog</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
+81:         
+82:         <span class="ruby-identifier">assert_not_nil</span>(<span class="ruby-identifier">os</span>.<span class="ruby-identifier">filter_by_name</span>(<span class="ruby-value str">&quot;var&quot;</span>))
+83:         
+84: <span class="ruby-comment cmt">#       assert_equal(&quot;var&quot;, os.filter_by_name(&quot;var&quot;).name)</span>
+85: <span class="ruby-comment cmt">#       assert_equal(&quot;PFEMP&quot;, os.filter_by_name(&quot;var&quot;).hmm)</span>
+86:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -160,11 +151,11 @@
             onclick="toggleCode('M000002-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000002-source">
 <pre>
-<span class="ruby-comment cmt"># File tc_all.rb, line 74</span>
-        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_create</span>
-                <span class="ruby-identifier">assert_not_nil</span>(<span class="ruby-constant">Ortholog</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>)
-                <span class="ruby-identifier">assert_not_nil</span>(<span class="ruby-constant">Ortholog</span><span class="ruby-operator">::</span><span class="ruby-constant">Ortholog</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;var&quot;</span>, <span class="ruby-value str">&quot;PFEMP&quot;</span>))
-        <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File tc_all.rb, line 74</span>
+74:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_create</span>
+75:         <span class="ruby-identifier">assert_not_nil</span>(<span class="ruby-constant">Ortholog</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>)
+76:         <span class="ruby-identifier">assert_not_nil</span>(<span class="ruby-constant">Ortholog</span><span class="ruby-operator">::</span><span class="ruby-constant">Ortholog</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;var&quot;</span>, <span class="ruby-value str">&quot;PFEMP&quot;</span>))
+77:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

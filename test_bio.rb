@@ -1,4 +1,3 @@
-#require 'bio'
 require 'bio'
 seq = Bio::Sequence::NA.new("atgcatgcaaaa")
 puts seq
