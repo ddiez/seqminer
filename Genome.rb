@@ -230,14 +230,23 @@ module Genome
 			to.to_i - from.to_i
 		end
 		
-		# A synonim of the method translate().
+		# A synonim to the method translate().
 		def translation(frame = 1, table = nil)
 			translate(frame, table)
 		end
 		
+#		def translate(frame = 1, table = nil)
+#			table = trans_table if ! table
+#			cds.translate(frame, table)
+#		end
+		
 		def translate(frame = 1, table = nil)
-			table = trans_table if ! table
-			cds.translate(frame, table)
+			if table
+				t = Bio::CodonTable[table]
+			else
+				t = Bio::CodonTable[@trans_table.to_i]
+			end
+			cds.translate(frame, t)
 		end
 		
 		# This methods returns the splicing pattern in gene coordinates. In other words, it is used to extract

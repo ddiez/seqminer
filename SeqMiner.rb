@@ -10,8 +10,8 @@ require 'Download'
 module SeqMiner
 	class Config
 		# Directories.
-		attr_accessor :dir_home
-		attr_reader :dir_source, :dir_sequence, :dir_model, :dir_pfam, :dir_pfam_current, :dir_config, :dir_result_base, :dir_result
+		attr_accessor :dir_home, :dir_result
+		attr_reader :dir_source, :dir_sequence, :dir_model, :dir_pfam, :dir_pfam_current, :dir_config
 		# Tools directories.
 		attr_accessor :dir_hmmer, :dir_blast
 		# Files.
@@ -37,8 +37,8 @@ module SeqMiner
 			@dir_pfam_current = @dir_pfam + "current"
 			
 			# Results.
-			@dir_result_base = dir_home + "result"
-			@dir_result = dir_result_base + "last"
+			@dir_result = dir_home + "result"
+			#@dir_result = dir_result_base + "last"
 			
 			# Tools.
 			@dir_hmmer = Pathname.new("/Users/diez/local/hmmer3/bin/")
@@ -53,15 +53,19 @@ module SeqMiner
 		def basedir
 			@dir_home
 		end
-		
-		def dir_result=(dir)
-			@dir_result = dir_result_base + dir
-		end
 
 		def debug
-			puts "+ Config +"
-			puts "* dir_home: " + dir_home
-			puts "* dir_result: " + dir_result
+			warn "+ Config +"
+			warn "* dir_home: " + dir_home
+			warn "* dir_config: " + dir_config
+			warn "* dir_source: " + dir_source
+			warn "* dir_sequence: " + dir_sequence
+			warn "* dir_model: " + dir_model
+			warn "* dir_pfam: " + dir_pfam
+			warn "* dir_result: " + dir_result
+			warn "* dir_hmmer: " + dir_hmmer
+			warn "* dir_blast: " + dir_blast
+			warn ""
 		end
 	end
 	
