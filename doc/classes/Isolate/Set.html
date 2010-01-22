@@ -88,10 +88,11 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000066">get_seq_by_acc</a>&nbsp;&nbsp;
-      <a href="#M000067">get_seq_by_subid</a>&nbsp;&nbsp;
-      <a href="#M000065">new</a>&nbsp;&nbsp;
-      <a href="#M000068">write_fasta</a>&nbsp;&nbsp;
+      <a href="#M000069">auto_clean</a>&nbsp;&nbsp;
+      <a href="#M000067">get_seq_by_acc</a>&nbsp;&nbsp;
+      <a href="#M000068">get_seq_by_subid</a>&nbsp;&nbsp;
+      <a href="#M000066">new</a>&nbsp;&nbsp;
+      <a href="#M000070">write_fasta</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -136,19 +137,19 @@
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000065" class="method-detail">
-        <a name="M000065"></a>
+      <div id="method-M000066" class="method-detail">
+        <a name="M000066"></a>
 
         <div class="method-heading">
-          <a href="#M000065" class="method-signature">
+          <a href="#M000066" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(name, options = {:empty =&gt; false, :config =&gt; nil})</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000065-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000065-source">
+            onclick="toggleCode('M000066-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000066-source">
 <pre>
     <span class="ruby-comment cmt"># File Isolate.rb, line 11</span>
 11:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:empty</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
@@ -172,27 +173,26 @@
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000066" class="method-detail">
-        <a name="M000066"></a>
+      <div id="method-M000069" class="method-detail">
+        <a name="M000069"></a>
 
         <div class="method-heading">
-          <a href="#M000066" class="method-signature">
-          <span class="method-name">get_seq_by_acc</span><span class="method-args">(acc)</span>
+          <a href="#M000069" class="method-signature">
+          <span class="method-name">auto_clean</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
-          <p>
-Returns a sequence based on the accession value.
-</p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000066-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000066-source">
+            onclick="toggleCode('M000069-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000069-source">
 <pre>
-    <span class="ruby-comment cmt"># File Isolate.rb, line 27</span>
-27:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_seq_by_acc</span>(<span class="ruby-identifier">acc</span>)
-28:             <span class="ruby-identifier">get_item_by_id</span>(<span class="ruby-identifier">acc</span>)
-29:         <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File Isolate.rb, line 39</span>
+39:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">auto_clean</span>
+40:             <span class="ruby-identifier">items</span>.<span class="ruby-identifier">delete_if</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">id</span>, <span class="ruby-identifier">seq</span><span class="ruby-operator">|</span>
+41:                 <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">3</span>
+42:             <span class="ruby-keyword kw">end</span>
+43:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -203,6 +203,32 @@ Returns a sequence based on the accession value.
 
         <div class="method-heading">
           <a href="#M000067" class="method-signature">
+          <span class="method-name">get_seq_by_acc</span><span class="method-args">(acc)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns a sequence based on the accession value.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000067-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000067-source">
+<pre>
+    <span class="ruby-comment cmt"># File Isolate.rb, line 27</span>
+27:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_seq_by_acc</span>(<span class="ruby-identifier">acc</span>)
+28:             <span class="ruby-identifier">get_item_by_id</span>(<span class="ruby-identifier">acc</span>)
+29:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000068" class="method-detail">
+        <a name="M000068"></a>
+
+        <div class="method-heading">
+          <a href="#M000068" class="method-signature">
           <span class="method-name">get_seq_by_subid</span><span class="method-args">(subid)</span>
           </a>
         </div>
@@ -213,8 +239,8 @@ Returns a sequence in the <a href="Set.html">Isolate::Set</a> based on the
 subid value.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000067-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000067-source">
+            onclick="toggleCode('M000068-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000068-source">
 <pre>
     <span class="ruby-comment cmt"># File Isolate.rb, line 32</span>
 32:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_seq_by_subid</span>(<span class="ruby-identifier">subid</span>)
@@ -228,11 +254,11 @@ subid value.
         </div>
       </div>
 
-      <div id="method-M000068" class="method-detail">
-        <a name="M000068"></a>
+      <div id="method-M000070" class="method-detail">
+        <a name="M000070"></a>
 
         <div class="method-heading">
-          <a href="#M000068" class="method-signature">
+          <a href="#M000070" class="method-signature">
           <span class="method-name">write_fasta</span><span class="method-args">(type, file = nil)</span>
           </a>
         </div>
@@ -245,51 +271,51 @@ reverse complement if necesary), protein (tranlated from the CDS) or 6frame
 (6 possible translations based upon frame and strand).
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000068-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000068-source">
+            onclick="toggleCode('M000070-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000070-source">
 <pre>
-    <span class="ruby-comment cmt"># File Isolate.rb, line 42</span>
-42:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_fasta</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">file</span> = <span class="ruby-keyword kw">nil</span>)
-43:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file</span>
-44:                 <span class="ruby-identifier">fo</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>, <span class="ruby-value str">&quot;w&quot;</span>)
-45:             <span class="ruby-keyword kw">else</span>
-46:                 <span class="ruby-identifier">fo</span> = <span class="ruby-identifier">$stdout</span>
-47:             <span class="ruby-keyword kw">end</span>
-48:             
-49:             <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">type</span>
-50:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;gene&quot;</span>
-51:                 <span class="ruby-identifier">items</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">seq</span><span class="ruby-operator">|</span>
-52:                     <span class="ruby-identifier">id</span> = <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot; accession=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">accession</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;;source=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">source</span> <span class="ruby-operator">+</span> \
-53:                         <span class="ruby-value str">&quot;;type=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;;description=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">description</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;;&quot;</span>
-54:                     <span class="ruby-identifier">fo</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">to_fasta</span>(<span class="ruby-identifier">id</span>, <span class="ruby-value">60</span>)
-55:                 <span class="ruby-keyword kw">end</span>
-56:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;cds&quot;</span>
-57:                 <span class="ruby-identifier">items</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">seq</span><span class="ruby-operator">|</span>
-58:                     <span class="ruby-identifier">id</span> = <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot; accession=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">accession</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;;source=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">source</span> <span class="ruby-operator">+</span> \
-59:                         <span class="ruby-value str">&quot;;type=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;;description=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">description</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;;&quot;</span>
-60:                     <span class="ruby-identifier">fo</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">cds</span>.<span class="ruby-identifier">to_fasta</span>(<span class="ruby-identifier">id</span>, <span class="ruby-value">60</span>)
-61:                 <span class="ruby-keyword kw">end</span>
-62:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;protein&quot;</span>
-63:                 <span class="ruby-identifier">items</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">seq</span><span class="ruby-operator">|</span>
-64:                     <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">translation</span>
+    <span class="ruby-comment cmt"># File Isolate.rb, line 49</span>
+49:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_fasta</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">file</span> = <span class="ruby-keyword kw">nil</span>)
+50:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file</span>
+51:                 <span class="ruby-identifier">fo</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>, <span class="ruby-value str">&quot;w&quot;</span>)
+52:             <span class="ruby-keyword kw">else</span>
+53:                 <span class="ruby-identifier">fo</span> = <span class="ruby-identifier">$stdout</span>
+54:             <span class="ruby-keyword kw">end</span>
+55:             
+56:             <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">type</span>
+57:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;gene&quot;</span>
+58:                 <span class="ruby-identifier">items</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">seq</span><span class="ruby-operator">|</span>
+59:                     <span class="ruby-identifier">id</span> = <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot; accession=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">accession</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;;source=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">source</span> <span class="ruby-operator">+</span> \
+60:                         <span class="ruby-value str">&quot;;type=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;;description=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">description</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;;&quot;</span>
+61:                     <span class="ruby-identifier">fo</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">to_fasta</span>(<span class="ruby-identifier">id</span>, <span class="ruby-value">60</span>)
+62:                 <span class="ruby-keyword kw">end</span>
+63:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;cds&quot;</span>
+64:                 <span class="ruby-identifier">items</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">seq</span><span class="ruby-operator">|</span>
 65:                     <span class="ruby-identifier">id</span> = <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot; accession=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">accession</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;;source=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">source</span> <span class="ruby-operator">+</span> \
-66:                         <span class="ruby-value str">&quot;;type=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;;trans_table=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">trans_table</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;;description=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">description</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;;&quot;</span>
-67:                     <span class="ruby-identifier">fo</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">translation</span>.<span class="ruby-identifier">to_fasta</span>(<span class="ruby-identifier">id</span>, <span class="ruby-value">60</span>)
+66:                         <span class="ruby-value str">&quot;;type=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;;description=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">description</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;;&quot;</span>
+67:                     <span class="ruby-identifier">fo</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">cds</span>.<span class="ruby-identifier">to_fasta</span>(<span class="ruby-identifier">id</span>, <span class="ruby-value">60</span>)
 68:                 <span class="ruby-keyword kw">end</span>
-69:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'6frame'</span>
+69:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;protein&quot;</span>
 70:                 <span class="ruby-identifier">items</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">seq</span><span class="ruby-operator">|</span>
-71:                     <span class="ruby-identifier">id</span> = <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot; accession=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">accession</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;;source=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">source</span> <span class="ruby-operator">+</span> \
-72:                         <span class="ruby-value str">&quot;;type=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;;trans_table=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">trans_table</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;;description=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">description</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;;&quot;</span>
-73:                     <span class="ruby-identifier">fo</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value">1</span>).<span class="ruby-identifier">to_fasta</span>(<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot; [strand=#{seq.strand};frame=1]&quot;</span>, <span class="ruby-value">60</span>)
-74:                     <span class="ruby-identifier">fo</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value">2</span>).<span class="ruby-identifier">to_fasta</span>(<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot; [strand=#{seq.strand};frame=2]&quot;</span>, <span class="ruby-value">60</span>)
-75:                     <span class="ruby-identifier">fo</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value">3</span>).<span class="ruby-identifier">to_fasta</span>(<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot; [strand=#{seq.strand};frame=3]&quot;</span>, <span class="ruby-value">60</span>)
-76:                     <span class="ruby-identifier">fo</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value">4</span>).<span class="ruby-identifier">to_fasta</span>(<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot; [strand=#{seq.strand * -1};frame=1]&quot;</span>, <span class="ruby-value">60</span>)
-77:                     <span class="ruby-identifier">fo</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value">5</span>).<span class="ruby-identifier">to_fasta</span>(<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot; [strand=#{seq.strand * -1};frame=2]&quot;</span>, <span class="ruby-value">60</span>)
-78:                     <span class="ruby-identifier">fo</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value">6</span>).<span class="ruby-identifier">to_fasta</span>(<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot; [strand=#{seq.strand * -1};frame=3]&quot;</span>, <span class="ruby-value">60</span>)
-79:                 <span class="ruby-keyword kw">end</span>
-80:             <span class="ruby-keyword kw">end</span>
-81:             <span class="ruby-identifier">fo</span>.<span class="ruby-identifier">close</span>
-82:         <span class="ruby-keyword kw">end</span>
+71:                     <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">translation</span>
+72:                     <span class="ruby-identifier">id</span> = <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot; accession=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">accession</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;;source=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">source</span> <span class="ruby-operator">+</span> \
+73:                         <span class="ruby-value str">&quot;;type=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;;trans_table=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">trans_table</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;;description=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">description</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;;&quot;</span>
+74:                     <span class="ruby-identifier">fo</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">translation</span>.<span class="ruby-identifier">to_fasta</span>(<span class="ruby-identifier">id</span>, <span class="ruby-value">60</span>)
+75:                 <span class="ruby-keyword kw">end</span>
+76:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'6frame'</span>
+77:                 <span class="ruby-identifier">items</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">seq</span><span class="ruby-operator">|</span>
+78:                     <span class="ruby-identifier">id</span> = <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot; accession=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">accession</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;;source=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">source</span> <span class="ruby-operator">+</span> \
+79:                         <span class="ruby-value str">&quot;;type=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;;trans_table=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">trans_table</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;;description=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">description</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;;&quot;</span>
+80:                     <span class="ruby-identifier">fo</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value">1</span>).<span class="ruby-identifier">to_fasta</span>(<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot; [strand=#{seq.strand};frame=1]&quot;</span>, <span class="ruby-value">60</span>)
+81:                     <span class="ruby-identifier">fo</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value">2</span>).<span class="ruby-identifier">to_fasta</span>(<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot; [strand=#{seq.strand};frame=2]&quot;</span>, <span class="ruby-value">60</span>)
+82:                     <span class="ruby-identifier">fo</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value">3</span>).<span class="ruby-identifier">to_fasta</span>(<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot; [strand=#{seq.strand};frame=3]&quot;</span>, <span class="ruby-value">60</span>)
+83:                     <span class="ruby-identifier">fo</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value">4</span>).<span class="ruby-identifier">to_fasta</span>(<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot; [strand=#{seq.strand * -1};frame=1]&quot;</span>, <span class="ruby-value">60</span>)
+84:                     <span class="ruby-identifier">fo</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value">5</span>).<span class="ruby-identifier">to_fasta</span>(<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot; [strand=#{seq.strand * -1};frame=2]&quot;</span>, <span class="ruby-value">60</span>)
+85:                     <span class="ruby-identifier">fo</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value">6</span>).<span class="ruby-identifier">to_fasta</span>(<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot; [strand=#{seq.strand * -1};frame=3]&quot;</span>, <span class="ruby-value">60</span>)
+86:                 <span class="ruby-keyword kw">end</span>
+87:             <span class="ruby-keyword kw">end</span>
+88:             <span class="ruby-identifier">fo</span>.<span class="ruby-identifier">close</span>
+89:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

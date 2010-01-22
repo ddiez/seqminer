@@ -88,12 +88,13 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000072">cds</a>&nbsp;&nbsp;
-      <a href="#M000074">debug</a>&nbsp;&nbsp;
-      <a href="#M000069">new</a>&nbsp;&nbsp;
-      <a href="#M000070">splicing</a>&nbsp;&nbsp;
-      <a href="#M000071">splicing_original</a>&nbsp;&nbsp;
-      <a href="#M000073">translate</a>&nbsp;&nbsp;
+      <a href="#M000075">cds</a>&nbsp;&nbsp;
+      <a href="#M000077">debug</a>&nbsp;&nbsp;
+      <a href="#M000071">new</a>&nbsp;&nbsp;
+      <a href="#M000072">size</a>&nbsp;&nbsp;
+      <a href="#M000073">splicing</a>&nbsp;&nbsp;
+      <a href="#M000074">splicing_original</a>&nbsp;&nbsp;
+      <a href="#M000076">translate</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -208,32 +209,32 @@
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000069" class="method-detail">
-        <a name="M000069"></a>
+      <div id="method-M000071" class="method-detail">
+        <a name="M000071"></a>
 
         <div class="method-heading">
-          <a href="#M000069" class="method-signature">
+          <a href="#M000071" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(id)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000069-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000069-source">
+            onclick="toggleCode('M000071-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000071-source">
 <pre>
-    <span class="ruby-comment cmt"># File Isolate.rb, line 89</span>
-89:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>)
-90:             <span class="ruby-keyword kw">super</span>
-91:             
-92:             <span class="ruby-ivar">@pseudogene</span> = <span class="ruby-value">0</span>
-93:             <span class="ruby-comment cmt"># Assume the default and pray we can get the information somewhere.</span>
-94:             <span class="ruby-ivar">@trans_table</span> = <span class="ruby-value">1</span>
-95:             <span class="ruby-comment cmt"># For isolates we usually get the translation from the CDS, and this is stored in the @translation holder.</span>
-96:             <span class="ruby-comment cmt"># There is a method translate() that computes a translation based on the corresponding cds. It accepts</span>
-97:             <span class="ruby-comment cmt"># a different frame and translation table.</span>
-98:             <span class="ruby-ivar">@translation</span> = <span class="ruby-keyword kw">nil</span>
-99:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File Isolate.rb, line 96</span>
+ 96:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>)
+ 97:             <span class="ruby-keyword kw">super</span>
+ 98:             
+ 99:             <span class="ruby-ivar">@pseudogene</span> = <span class="ruby-value">0</span>
+100:             <span class="ruby-comment cmt"># Assume the default and pray we can get the information somewhere.</span>
+101:             <span class="ruby-ivar">@trans_table</span> = <span class="ruby-value">1</span>
+102:             <span class="ruby-comment cmt"># For isolates we usually get the translation from the CDS, and this is stored in the @translation holder.</span>
+103:             <span class="ruby-comment cmt"># There is a method translate() that computes a translation based on the corresponding cds. It accepts</span>
+104:             <span class="ruby-comment cmt"># a different frame and translation table.</span>
+105:             <span class="ruby-ivar">@translation</span> = <span class="ruby-keyword kw">nil</span>
+106:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -241,75 +242,98 @@
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000072" class="method-detail">
-        <a name="M000072"></a>
+      <div id="method-M000075" class="method-detail">
+        <a name="M000075"></a>
 
         <div class="method-heading">
-          <a href="#M000072" class="method-signature">
+          <a href="#M000075" class="method-signature">
           <span class="method-name">cds</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Returns the CDS based on the <a href="Seq.html#M000070">splicing</a>
+Returns the CDS based on the <a href="Seq.html#M000073">splicing</a>
 pattern.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000072-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000072-source">
+            onclick="toggleCode('M000075-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000075-source">
 <pre>
-     <span class="ruby-comment cmt"># File Isolate.rb, line 123</span>
-123:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cds</span>
-124:             <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">splice</span>(<span class="ruby-identifier">splicing</span>)
-125:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File Isolate.rb, line 134</span>
+134:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cds</span>
+135:             <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">splice</span>(<span class="ruby-identifier">splicing</span>)
+136:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000074" class="method-detail">
-        <a name="M000074"></a>
+      <div id="method-M000077" class="method-detail">
+        <a name="M000077"></a>
 
         <div class="method-heading">
-          <a href="#M000074" class="method-signature">
+          <a href="#M000077" class="method-signature">
           <span class="method-name">debug</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000074-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000074-source">
+            onclick="toggleCode('M000077-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000077-source">
 <pre>
-     <span class="ruby-comment cmt"># File Isolate.rb, line 137</span>
-137:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
-138:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Sequence +&quot;</span>
-139:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
-140:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* subid: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">subid</span>
-141:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* locus: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">locus</span>
-142:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* accession: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">accession</span>
-143:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* description: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">description</span>
-144:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* source: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">source</span>
-145:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* strand: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">strand</span>.<span class="ruby-identifier">to_s</span>
-146:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* location: [&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">from</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot; - &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">to</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;]&quot;</span>
-147:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* splicing: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">splicing</span>
-148:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* splicing_ori: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">splicing_original</span>
-149:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* pseudogene: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">pseudogene</span>.<span class="ruby-identifier">to_s</span>
-150:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* type: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">type</span>
-151:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* trans_table: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">trans_table</span>.<span class="ruby-identifier">to_s</span>
-152:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;&quot;</span>
-153:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File Isolate.rb, line 148</span>
+148:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+149:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Sequence +&quot;</span>
+150:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
+151:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* subid: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">subid</span>
+152:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* locus: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">locus</span>
+153:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* accession: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">accession</span>
+154:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* description: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">description</span>
+155:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* source: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">source</span>
+156:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* strand: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">strand</span>.<span class="ruby-identifier">to_s</span>
+157:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* location: [&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">from</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot; - &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">to</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;]&quot;</span>
+158:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* splicing: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">splicing</span>
+159:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* splicing_ori: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">splicing_original</span>
+160:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* pseudogene: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">pseudogene</span>.<span class="ruby-identifier">to_s</span>
+161:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* type: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">type</span>
+162:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* trans_table: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">trans_table</span>.<span class="ruby-identifier">to_s</span>
+163:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;&quot;</span>
+164:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000070" class="method-detail">
-        <a name="M000070"></a>
+      <div id="method-M000072" class="method-detail">
+        <a name="M000072"></a>
 
         <div class="method-heading">
-          <a href="#M000070" class="method-signature">
+          <a href="#M000072" class="method-signature">
+          <span class="method-name">size</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000072-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000072-source">
+<pre>
+     <span class="ruby-comment cmt"># File Isolate.rb, line 108</span>
+108:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">size</span>
+109:             <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">length</span>
+110:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000073" class="method-detail">
+        <a name="M000073"></a>
+
+        <div class="method-heading">
+          <a href="#M000073" class="method-signature">
           <span class="method-name">splicing</span><span class="method-args">()</span>
           </a>
         </div>
@@ -325,58 +349,58 @@ sure if isolate sequences use different strands at all (which makes the
 whole thing even simpler).
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000070-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000070-source">
+            onclick="toggleCode('M000073-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000073-source">
 <pre>
-     <span class="ruby-comment cmt"># File Isolate.rb, line 105</span>
-105:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">splicing</span>
-106:             <span class="ruby-identifier">x0</span> = <span class="ruby-identifier">from</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">from</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-107:             <span class="ruby-identifier">x1</span> = <span class="ruby-identifier">to</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">from</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-108:             <span class="ruby-identifier">loc</span> = <span class="ruby-identifier">x0</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;..&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">x1</span>.<span class="ruby-identifier">to_s</span>
-109:             
-110:             <span class="ruby-identifier">loc</span> = <span class="ruby-value str">&quot;complement(&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loc</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;)&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>
-111:             <span class="ruby-identifier">loc</span>
-112:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File Isolate.rb, line 116</span>
+116:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">splicing</span>
+117:             <span class="ruby-identifier">x0</span> = <span class="ruby-identifier">from</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">from</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+118:             <span class="ruby-identifier">x1</span> = <span class="ruby-identifier">to</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">from</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+119:             <span class="ruby-identifier">loc</span> = <span class="ruby-identifier">x0</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;..&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">x1</span>.<span class="ruby-identifier">to_s</span>
+120:             
+121:             <span class="ruby-identifier">loc</span> = <span class="ruby-value str">&quot;complement(&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loc</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;)&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>
+122:             <span class="ruby-identifier">loc</span>
+123:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000071" class="method-detail">
-        <a name="M000071"></a>
+      <div id="method-M000074" class="method-detail">
+        <a name="M000074"></a>
 
         <div class="method-heading">
-          <a href="#M000071" class="method-signature">
+          <a href="#M000074" class="method-signature">
           <span class="method-name">splicing_original</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Returns the <a href="Seq.html#M000070">splicing</a> pattern based on the
+Returns the <a href="Seq.html#M000073">splicing</a> pattern based on the
 locus coordinates, i.e. this is the original <a
-href="Seq.html#M000070">splicing</a> pattern found in the Genbank entry.
+href="Seq.html#M000073">splicing</a> pattern found in the Genbank entry.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000071-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000071-source">
+            onclick="toggleCode('M000074-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000074-source">
 <pre>
-     <span class="ruby-comment cmt"># File Isolate.rb, line 116</span>
-116:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">splicing_original</span>
-117:             <span class="ruby-identifier">loc</span> = <span class="ruby-identifier">from</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;..&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">to</span>.<span class="ruby-identifier">to_s</span>
-118:             <span class="ruby-identifier">loc</span> = <span class="ruby-value str">&quot;complement(&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loc</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;)&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>
-119:             <span class="ruby-identifier">loc</span>
-120:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File Isolate.rb, line 127</span>
+127:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">splicing_original</span>
+128:             <span class="ruby-identifier">loc</span> = <span class="ruby-identifier">from</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;..&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">to</span>.<span class="ruby-identifier">to_s</span>
+129:             <span class="ruby-identifier">loc</span> = <span class="ruby-value str">&quot;complement(&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loc</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;)&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>
+130:             <span class="ruby-identifier">loc</span>
+131:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000073" class="method-detail">
-        <a name="M000073"></a>
+      <div id="method-M000076" class="method-detail">
+        <a name="M000076"></a>
 
         <div class="method-heading">
-          <a href="#M000073" class="method-signature">
+          <a href="#M000076" class="method-signature">
           <span class="method-name">translate</span><span class="method-args">(frame = 1, table = nil)</span>
           </a>
         </div>
@@ -387,18 +411,18 @@ Translates the CDS sequence. Can be specified the frame and tanslation
 table.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000073-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000073-source">
+            onclick="toggleCode('M000076-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000076-source">
 <pre>
-     <span class="ruby-comment cmt"># File Isolate.rb, line 128</span>
-128:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">translate</span>(<span class="ruby-identifier">frame</span> = <span class="ruby-value">1</span>, <span class="ruby-identifier">table</span> = <span class="ruby-keyword kw">nil</span>)
-129:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">table</span>
-130:                 <span class="ruby-identifier">t</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">CodonTable</span>[<span class="ruby-identifier">table</span>]
-131:             <span class="ruby-keyword kw">else</span>
-132:                 <span class="ruby-identifier">t</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">CodonTable</span>[<span class="ruby-ivar">@trans_table</span>.<span class="ruby-identifier">to_i</span>]
-133:             <span class="ruby-keyword kw">end</span>
-134:             <span class="ruby-identifier">cds</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-identifier">frame</span>, <span class="ruby-identifier">t</span>)
-135:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File Isolate.rb, line 139</span>
+139:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">translate</span>(<span class="ruby-identifier">frame</span> = <span class="ruby-value">1</span>, <span class="ruby-identifier">table</span> = <span class="ruby-keyword kw">nil</span>)
+140:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">table</span>
+141:                 <span class="ruby-identifier">t</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">CodonTable</span>[<span class="ruby-identifier">table</span>]
+142:             <span class="ruby-keyword kw">else</span>
+143:                 <span class="ruby-identifier">t</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">CodonTable</span>[<span class="ruby-ivar">@trans_table</span>.<span class="ruby-identifier">to_i</span>]
+144:             <span class="ruby-keyword kw">end</span>
+145:             <span class="ruby-identifier">cds</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-identifier">frame</span>, <span class="ruby-identifier">t</span>)
+146:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

@@ -7,7 +7,7 @@ sm = SeqMiner::Install.new
 #sm.taxon.filter_by_name("babesia.bovis")
 #sm.taxon.filter_by_name("plasmodium.falciparum")
 #sm.taxon.filter_by_name("plasmodium.yoelii")
-#sm.taxon.filter_by_name("anaplasma.phagocytophilum")
+#sm.taxon.filter_by_name("trypanosoma.brucei")
 #sm.taxon.filter_by_source("ncbi")
 #sm.taxon.filter_by_type("spp")
 #sm.taxon.filter_by_type("clade")

@@ -99,6 +99,12 @@ module Genome
 			end
 			h
 		end
+		
+		def auto_clean
+			items.delete_if do |id, gene|
+				gene.size < 3
+			end
+		end
 
 		# returns a gene item based on the accession value.
 		def get_gene_by_acc(acc)
@@ -133,7 +139,6 @@ module Genome
 				end
 			when '6frame'
 				items.each_value do |gene|
-					next if gene.size < 1
 					id = gene.id + " " + gene.description
 					seq = gene.translation(1)
 					fo.puts seq.to_fasta(id + " [strand=#{gene.strand};frame=1]", 60)
@@ -221,7 +226,8 @@ module Genome
 		end
 
 		def size
-			to.to_i - from.to_i
+			sequence.length
+			#to.to_i - from.to_i
 		end
 		
 		# A synonim to the method #translate

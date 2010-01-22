@@ -213,7 +213,7 @@ module Parser
 					fo.puts seq.accession + "\t" + seq.locus + "\t" + seq.source + "\t" + seq.sequence.length.to_s
 				end
 			end
-			
+			is.auto_clean
 			is
 		end
 		
@@ -377,6 +377,7 @@ module Parser
 				end
 			end
 			genome.chromosome = chr
+			genome.auto_clean
 			genome
 		end
 	end
@@ -469,7 +470,7 @@ module Parser
 			f.close
 			
 			genome.chromosome = chrs
-			
+			genome.auto_clean
 			genome
 		end
 		
@@ -584,6 +585,7 @@ module Parser
 				end
 			end
 			genome.chromosome = chrs
+			genome.auto_clean
 			genome
 		end
 

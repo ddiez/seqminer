@@ -36,6 +36,13 @@ module Isolate
 			return nil
 		end
 		
+		def auto_clean
+			items.delete_if do |id, seq|
+				seq.size < 3
+			end
+		end
+
+		
 		# Writes a FASTA file with sequences based on the different types: gene (3'->5' sequence), CDS (the coding
 		# sequences; i.e. the reverse complement if necesary), protein (tranlated from the CDS) or 6frame (6 possible
 		# translations based upon frame and strand).
@@ -96,6 +103,10 @@ module Isolate
 			# There is a method translate() that computes a translation based on the corresponding cds. It accepts
 			# a different frame and translation table.
 			@translation = nil
+		end
+		
+		def size
+			sequence.length
 		end
 		
 		# This method is very simple since we assume that there is not exon information in isolated sequences. This
