@@ -6,7 +6,7 @@ sm = SeqMiner::Install.new
 #sm.taxon.filter_by_name("anaplasma.marginale")
 #sm.taxon.filter_by_name("babesia.bovis")
 #sm.taxon.filter_by_name("plasmodium.falciparum")
-sm.taxon.filter_by_name("plasmodium.yoelii")
+#sm.taxon.filter_by_name("plasmodium.yoelii")
 #sm.taxon.filter_by_name("anaplasma.phagocytophilum")
 #sm.taxon.filter_by_source("ncbi")
 sm.taxon.filter_by_type("clade")
@@ -16,3 +16,4 @@ sm.taxon.filter_by_type("clade")
 #sm.process_pfam
 #sm.update_sequences
 sm.process_sequences
+#sm.process_directories
