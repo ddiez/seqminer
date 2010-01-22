@@ -1,7 +1,7 @@
 require 'Taxon'
 
-ts = Taxon::Set.new(options = {:update_ncbi_info => true})
-#ts = Taxon::Set.new
+#ts = Taxon::Set.new(options = {:update_ncbi_info => true})
+ts = Taxon::Set.new
 ts.debug
 
 #t = ts.get_taxon_by_name("plasmodium.falciparum")

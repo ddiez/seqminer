@@ -2,6 +2,7 @@ require 'SeqMiner'
 require 'Item'
 require 'bio'
 require 'rexml/document'
+require 'ftools'
 
 module Taxon
 	include Item
@@ -80,11 +81,7 @@ module Taxon
 			
 			if file.exist?
 				warn "* file exist! making backup..."
-				dir, fileb = file.split
-				fileb += "_ori"
-				f = File.new(file.to_s, "r")
-				f.copy(dir + fileb)
-				f.close
+				File.move(file, file.dirname + (file.basename.to_s + "_ori"))
 			end
 			
 			f = File.open(file, "w")

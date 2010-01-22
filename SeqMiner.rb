@@ -197,14 +197,17 @@ module SeqMiner
 			
 			p = Parser::GenbankIsolate.new(t, options = {:config => config})
 			i = p.parse
-			i.debug
 			
 			outdir = config.dir_sequence + t.name
 			outdir.mkpath if ! outdir.exist?
 			
+			warn "* writing gene file"
 			i.write_fasta("gene", outdir + "gene.fa")
+			warn "* writing CDS file"
 			i.write_fasta("cds", outdir + "cds.fa")
+			warn "* writing protein file"
 			i.write_fasta("protein", outdir + "protein.fa")
+			warn "* writing 6frame file"
 			i.write_fasta("6frame", outdir + "6frame.fa")
 		end
 	end

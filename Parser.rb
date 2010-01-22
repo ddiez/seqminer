@@ -41,6 +41,7 @@ module Parser
 		def parse
 			is = Isolate::Set.new(name, options = {:empty => true})
 			
+			feats = []
 			files.each_pair do |type, file|
 				next if ! file.exist?
 				warn "* processing Genbank [" + type.to_s + "] file: " + file
@@ -48,45 +49,20 @@ module Parser
 				
 				skip = File.new(config.dir_source + taxon.name + (type.to_s + "_skip.txt"), "w")
 				pass = File.new(config.dir_source + taxon.name + (type.to_s + "_pass.txt"), "w")
-				size = File.new(config.dir_source + taxon.name + (type.to_s + "_size.txt"), "w")
-				iso = File.new(config.dir_source + taxon.name + (type.to_s + "_isolate.txt"), "w")
-				str = File.new(config.dir_source + taxon.name + (type.to_s + "_strain.txt"), "w")
-				con = File.new(config.dir_source + taxon.name + (type.to_s + "_country.txt"), "w")
-				clo = File.new(config.dir_source + taxon.name + (type.to_s + "_clone.txt"), "w")
-				notype = File.new(config.dir_source + taxon.name + (type.to_s + "_notype.txt"), "w")
-				susp = File.new(config.dir_source + taxon.name + (type.to_s + "_susp.txt"), "w")
 				
-				skip.puts "Accession\tLength\tWhy\tIsolate\tStrain\tCountry\tClone"
-				pass.puts "Accession\tLength\tIsolate\tStrain\tCountry\tClone"
-				iso.puts "Accession\tLength\tIsolate"
-				str.puts "Accession\tLength\tStrain"
-				con.puts "Accession\tLength\tCountry"
-				clo.puts "Accession\tLength\tClone"
-				notype.puts "Accession\tLength"
-				susp.puts "Accession\tLength\tLocus\tIsolate\tStrain\tCountry\tClone"
-				feats = []
+				skip.puts "LOCUS\tLength\tWhy\tIsolate\tStrain\tCountry\tClone\tOrganelle"
+				pass.puts "LOCUS\tLength\tIsolate\tStrain\tCountry\tClone\tOrganelle"
 				p.each_entry do |gb|
 					#warn "* processing: " + gb.accession
-					size.puts gb.accession + "\t" + gb.length.to_s
 					strain = _check_in_source(gb, "strain")
 					isolate = _check_in_source(gb, "isolate")
 					country = _check_in_source(gb, "country")
 					clone = _check_in_source(gb, "clone")
+					organelle = _check_in_source(gb, "organelle")
 
 					ok, why = _filter_entry(gb)
 					if ok
-						pass.puts gb.accession + "\t" + gb.length.to_s + "\t" + isolate.to_s + "\t" + strain.to_s + "\t" + country.to_s + "\t" + clone.to_s
-						if isolate
-							iso.puts gb.accession + "\t" + gb.length.to_s + "\t" + isolate.to_s
-						elsif strain
-							str.puts gb.accession + "\t" + gb.length.to_s + "\t" + strain.to_s
-						elsif country
-							con.puts gb.accession + "\t" + gb.length.to_s + "\t" + country.to_s
-						elsif clone
-							clo.puts gb.accession + "\t" + gb.length.to_s + "\t" + clone.to_s
-						else
-							notype.puts gb.accession + "\t" + gb.length.to_s
-						end
+						pass.puts gb.accession + "\t" + gb.length.to_s + "\t" + isolate.to_s + "\t" + strain.to_s + "\t" + country.to_s + "\t" + clone.to_s + "\t" + organelle.to_s
 						fa = 0
 						gb.features.each do |feat|
 							feats << feat.feature
@@ -97,9 +73,10 @@ module Parser
 									id = nil
 									acc = ""
 									if h['locus_tag']
+										# These are suspicious to be present in genome projects but there are some 
+										# situations where this is not the case so we maintain them.
 										id = gb.accession + "|" + h['locus_tag'][0]
 										acc = h['locus_tag'][0]
-										susp.puts gb.accession + "\t" + gb.length.to_s + "\t" + id + "\t" + isolate.to_s + "\t" + strain.to_s + "\t" + country.to_s + "\t" + clone.to_s
 									elsif h['gene']
 										id = gb.accession + "|" + h['gene'][0]
 										acc = h['gene'][0]
@@ -209,41 +186,37 @@ module Parser
 							end
 						end
 					else
-						skip.puts gb.accession + "\t" + gb.length.to_s + "\t" + why + "\t" + isolate.to_s + "\t" + strain.to_s + "\t" + country.to_s + "\t" + clone.to_s 
+						skip.puts gb.accession + "\t" + gb.length.to_s + "\t" + why + "\t" + isolate.to_s + "\t" + strain.to_s + "\t" + country.to_s + "\t" + clone.to_s + "\t" + organelle.to_s
 					end
 				end
 				skip.close
-				size.close
 				pass.close
-				iso.close
-				str.close
-				con.close
-				clo.close
-				notype.close
-				susp.close
+				
+			end
+			# Write existing features.
+			File.open(config.dir_source + taxon.name + "features.txt", "w") do |fo|
 				feats.uniq.each do |u|
-					warn u
+					fo.puts u
 				end
 			end
-			fo = File.open(config.dir_source + taxon.name + "accepted.txt", "w")
+			# Write accepted sequences.
+			File.open(config.dir_source + taxon.name + "accepted.txt", "w") do |fo|
+				fo.puts "Accession\tLOCUS\tSource\tLength"
 				is.each_value do |seq|
-				fo.puts seq.locus + "\t" + seq.accession + "\t" + seq.source
+					fo.puts seq.accession + "\t" + seq.locus + "\t" + seq.source + "\t" + seq.sequence.length.to_s
+				end
 			end
-			fo.close
 			
 			is
 		end
 		
 		def _check_in_source(entry, what)
-			tmp = nil
 			entry.features.each do |feat|
 				if feat.feature == "source"
 					h = feat.to_hash
-					tmp = h[what]
-					break
+					return h[what]
 				end
 			end
-			tmp
 		end
 		
 		def _filter_entry(entry)
