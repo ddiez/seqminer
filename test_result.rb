@@ -1,10 +1,11 @@
 require 'Result'
 
-#r = Result::HmmerParser.new("test_result.txt", "test", "protein")
-#r = Result::HmmerParser.new("test_result2.txt", "test", "nucleotide")
-r = Result::HmmerParser.new("test_result3.txt", "test", "nucleotide")
+#p = Result::HmmerParser.new("test_result.txt", "test", "protein")
+#p = Result::HmmerParser.new("test_result2.txt", "test", "nucleotide")
+p = Result::HmmerParser.new("test_result3.txt", "test", "nucleotide")
 
-r.result.debug
+r = p.parse
+r.debug
 
 #r.result.filter_by_eval(0.001)
 #r.result.debug
@@ -16,9 +17,9 @@ r.result.debug
 #end
 
 rs = Result::Set.new
-rs << r.result
+rs << r
 
-r.result.items.each_value do |hit|
+r.items.each_value do |hit|
 	warn "+ HIT +"
 	warn "* hit id: " + hit.id
 	warn hit.best_subhit.debug

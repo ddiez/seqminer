@@ -96,8 +96,17 @@ module Result
 	# contain several subhits. For a merge result, subhits may contain a mix of protein and
 	# nucleotide results in the same sequence hit.
 	class Hit < Item
+		
 		def initialize(id)
 			super
+		end
+		
+		def eval
+			best_subhit.eval
+		end
+		
+		def score
+			best_subhit.score
 		end
 		
 		# Finds the best SubHit in a Hit.
@@ -185,6 +194,13 @@ module Result
 			end
 			mc
 		end
+		
+		def debug
+			warn "+ HIT +"
+			warn "* id: " + id
+			warn "* score: " + score.to_s
+			warn "* e-value: " + eval.to_s
+		end
 	end
 
 	class Result < Item
@@ -231,10 +247,16 @@ module Result
 		
 		# Find the best Hit in a Result (maybe to create a PSI-Blast model).
 		def best_hit
-			# TODO: Implement.
-#			items.each_value do |hit|
-#				
-#			end
+			ch = nil
+			cbe = nil
+
+			items.each_value do |hit|
+				if cbe.nil? or hit.eval < cbe
+					ch = hit
+					cbe = hit.eval
+				end
+			end
+			return ch
 		end
 
 		# Export results in a format suitable to load in varDB (Nelson's preferred format)
@@ -347,7 +369,17 @@ module Result
 		def initialize
 			super
 		end
-
+		
+		# Finds the best hit in all the Results.
+		def best_hit
+			bh = nil
+			items.each_value do |result|
+				ch = result.best_hit
+				bh = ch if bh.nil? or ch.eval < bh.eval
+			end
+			return bh
+		end
+		
 		def auto_merge
 			rs = Set.new
 			each_value do |result|
@@ -459,8 +491,14 @@ module Result
 #			valid.include?(type)
 #		end
 		
-		def initialize
-			@config = nil
+		def initialize(*args)
+			if args.length == 3
+				@file = args[0]
+				@result_id = args[1]
+				@type = args[2]
+			else
+				@config = nil
+			end
 		end
 		
 		
