@@ -134,14 +134,19 @@ module Search
 		def search
 			warn "+ Running search +"
 			each_value do |search|
-				warn "* search id: " + search.id
-				hr = Tools::Hmmer.new(options = {config => config})
-				hr.tool = "hmmsearch"
-				hr.infile = config.dir_sequence + search.taxon.name + (search.type.name + ".fa")
-				hr.model = config.dir_model + "hmm" + search.ortholog.hmm
-				hr.outfile = config.dir_result + "genome/search" + search.ortholog.name + (search.id + ".log")
-				hr.debug
-				res = hr.execute
+				case search.taxon.type
+				when 'spp'
+					warn "* search id: " + search.id
+					hr = Tools::Hmmer.new(options = {:config => config})
+					hr.tool = "hmmsearch"
+					hr.infile = config.dir_sequence + search.taxon.name + (search.type.name + ".fa")
+					hr.model = config.dir_model + "hmm" + search.ortholog.hmm
+					hr.outfile = config.dir_result + "genome/search" + search.ortholog.name + (search.id + ".log")
+					hr.debug
+					res = hr.execute
+				when 'clade'
+					tool = Tools::Blast.new(options = {:config => config})
+				end
 			end
 			warn "+ DONE +"
 			warn ""

@@ -38,6 +38,13 @@ module Ortholog
 			end
 		end
 		
+		def get_ortholog_by_name(name)
+			each_ortholog do |o|
+				return o if o.name == name
+			end
+			return nil
+		end
+		
 		def filter_by_name(filter)
 			items.delete_if { |name, ortholog| ! name.match(/#{filter}/) }
 		end

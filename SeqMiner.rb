@@ -95,7 +95,7 @@ module SeqMiner
 			config.dir_model.mkpath
 			config.dir_sequence.mkpath
 			config.dir_pfam.mkpath
-			config.dir_result_base.mkpath
+			config.dir_result.mkpath
 			config.dir_config.mkpath
 		end
 		
@@ -157,11 +157,31 @@ module SeqMiner
 			taxon.each_value do |t|
 				case t.type
 				when 'spp'
-					process_spp(t)
+			#		process_spp(t)
 				when 'clade'
-					process_clade(t)
+			#		process_clade(t)
 				end
+				process_blast(t)
 			end
+		end
+		
+		# This method will generate the approapriate databases for use with BLAST-like programs.
+		def process_blast(t)
+			warn "* formatting: " + t.name
+			dir = config.dir_sequence + t.name
+			Dir.chdir(dir)
+			if t.type == "spp"
+				cmd = "formatdb -p F -i genome.fa -n genome -o T -V"
+				res = system cmd
+			end
+			cmd = "formatdb -p F -i gene.fa -n gene -o T -V"
+			res = system cmd
+			cmd = "formatdb -p F -i cds.fa -n cds -o T -V"
+			res = system cmd
+			cmd = "formatdb -i protein.fa -n protein -o T -V"
+			res = system cmd
+			cmd = "formatdb -i 6frame.fa -n 6frame -o T -V"
+			res = system cmd
 		end
 		
 		def process_spp(t)
@@ -219,6 +239,67 @@ module SeqMiner
 			i.write_fasta("protein", outdir + "protein.fa")
 			warn "* writing 6frame file"
 			i.write_fasta("6frame", outdir + "6frame.fa")
+		end
+		
+		def update_model
+			update_hmm
+			update_psiblast
+		end
+		
+		def update_hmm
+			# TODO: not implemented
+		end
+		
+		# This method computes the best hit for a series of genomic searches belonging to the same species and
+		# then returns the best hit as seed for a PSI-Blast search.
+		# TODO: This works but requires refinement, using a Tool object for PSI-Blast and putting some default
+		# parameters into Config.
+		def update_psiblast
+			typeset = Search::TypeSet.new
+			ortholog.each_ortholog do |o|
+				rs = Result::Set.new
+				warn "* computing best hit"
+				taxon.each_taxon do |t|
+					next if t.type != 'spp'
+					typeset.each_value do |type|
+						sid = t.name + "-" + o.name + "-" + type.name
+						file = config.dir_result + "genome/search" + o.name + (sid + ".txt") 
+						p = Result::HmmerParser.new(options = {:taxon => t, :ortholog => o})
+						p.file = file
+						p.result_id = sid
+						p.type = type
+						r = p.parse
+						rs << r
+					end
+				end
+				#rs.debug
+				rs.filter_by_eval(0.001)
+				rs.clean_up
+				next if rs.length == 0
+				#o.debug
+				#rs.debug
+				bh = rs.best_hit
+				bh.debug
+				
+				# Store the SEED sequence.
+				warn "* updating seed sequences"
+				sdb = Sequence::Set.new(bh.taxon.name, "protein", options = {:config => config})
+				seq = sdb.get_seq_by_acc(bh.id)
+				dir = config.dir_model + "pssm"
+				dir.mkpath if ! dir.exist?
+				file = dir + (bh.ortholog.name + ".seed")
+				fo = File.new(file, "w")
+				fo.puts seq.seq.to_fasta(seq.definition, 60)
+				fo.close
+				
+				# Run the search with the SEED and the genome.
+				warn "* computing PSSM model"
+				pssm_file = dir + (bh.ortholog.name + ".chk")
+				pgp_file = dir + (bh.ortholog.name + ".pgp")
+				cmd = "blastpgp -d " + (config.dir_sequence + bh.taxon.name + "protein") + " -i " + \
+					file + " -s T -j 3 -h 1E-03 -C " + pssm_file + " -F T -b 10000 -a 8 > " + pgp_file
+				system cmd
+			end
 		end
 	end
 	

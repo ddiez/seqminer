@@ -16,5 +16,6 @@ sm = SeqMiner::Install.new
 #sm.update_pfam
 #sm.process_pfam
 #sm.update_sequences
-sm.process_sequences
+#sm.process_sequences
 #sm.process_directories
+sm.update_psiblast

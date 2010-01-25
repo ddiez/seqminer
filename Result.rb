@@ -2,6 +2,8 @@ require 'SeqMiner'
 require 'Item'
 require 'Genome'
 require 'Sequence'
+require 'Taxon'
+require 'Ortholog'
 
 module Result
 	include Item
@@ -96,6 +98,7 @@ module Result
 	# contain several subhits. For a merge result, subhits may contain a mix of protein and
 	# nucleotide results in the same sequence hit.
 	class Hit < Item
+		attr_accessor :taxon, :ortholog
 		
 		def initialize(id)
 			super
@@ -209,6 +212,8 @@ module Result
 			warn "* has_complete?: " + has_complete?.to_s
 			warn "* has_fragment?: " + has_fragment?.to_s
 			warn "* coherent?: " + coherent?.to_s
+			warn "* taxon: " + taxon.name if ! taxon.nil?
+			warn "* ortholog: " + ortholog.name if ! ortholog.nil?
 		end
 	end
 
@@ -219,13 +224,26 @@ module Result
 		def initialize(id, options = {:config => nil})
 			super(id)
 
-			if ! options[:config]
-				@config = SeqMiner::Config.new
-			else
+			if options[:config]
 				@config = options[:config]
+			else
+				@config = SeqMiner::Config.new
 			end
 		end
 		
+		# Is this necessary?
+		def <<(hit)
+			add(hit)
+		end
+		
+		# Overload the method to assign automatically taxon and ortholog to the hits.
+		def add(hit)
+			super
+			hit.taxon = taxon
+			hit.ortholog = ortholog
+		end
+		
+		# Simple access method for each hit.
 		def each_hit
 			items.each_value do |value|
 				yield value
@@ -235,7 +253,7 @@ module Result
 		# Removes subhits on the basis of an E-value cutoff (>). If no subhits remain the it
 		# removes the hit from the result.
 		def filter_by_eval(val)
-			each_value do |hit|
+			each_hit do |hit|
 				hit.items.delete_if do |key, subhit|
 					subhit.eval > val
 				end
@@ -249,7 +267,7 @@ module Result
 		# Removes subhits on the basis of an Score cutoff (<). If no subhits remain the it
 		# removes the hit from the result.
 		def filter_by_score(val)
-			each_value do |hit|
+			each_hit do |hit|
 				hit.items.delete_if do |key, subhit|
 					subhit.score < val
 				end
@@ -265,7 +283,7 @@ module Result
 			ch = nil
 			cbe = nil
 
-			items.each_value do |hit|
+			each_hit do |hit|
 				if cbe.nil? or hit.eval < cbe
 					ch = hit
 					cbe = hit.eval
@@ -381,8 +399,14 @@ module Result
 	end
 
 	class Set < Set
-		def initialize
-			super
+		def initialize(options = {:config => nil})
+			super()
+			
+			if options[:config]
+				@config = options[:config]
+			else
+				@config = SeqMiner::Config.new
+			end
 		end
 		
 		def each_result
@@ -497,27 +521,36 @@ module Result
 		def debug
 			warn "+ RESULT SET +"
 			warn "* results: " + length.to_s
-			items.each_value do |result|
+			each_result do |result|
 				result.debug
 			end
 		end
 	end
 
 	class HmmerParser
+		attr_reader :taxon, :ortholog
 		attr_accessor :file, :result_id, :type, :config
 		
-		def initialize(*args)
-			if args.length == 3
-				@file = args[0]
-				@result_id = args[1]
-				@type = args[2]
+		def initialize(options = {:config => nil, :taxon => nil, :ortholog => nil, :empty => false})
+			if options[:config]
+				@config = options[:config]
 			else
-				@config = nil
+				@config = SeqMiner::Config.new
 			end
+			
+			
+			@taxon = options[:taxon] if options[:taxon]
+			@ortholog = options[:ortholog] if options[:ortholog]
+
+			@file = nil
+			@result_id = nil
+			@type = nil
 		end
 		
 		def parse
 			result = Result.new(result_id, options = {:config => config})
+			result.taxon = taxon if taxon
+			result.ortholog = ortholog if ortholog
 			
 			fi = File.open(file)
 			fi.each do |line|
@@ -577,7 +610,9 @@ module Result
 				sh.add(dom)
 			end
 			fi.close
-
+			
+			result.taxon = taxon if taxon
+			result.ortholog = ortholog if ortholog
 			result
 		end
 		
