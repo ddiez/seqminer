@@ -23,6 +23,12 @@ module Isolate
 			end
 		end
 		
+		def each_isolate
+			items.each_value do |value|
+				yield value
+			end
+		end
+		
 		# Returns a sequence based on the accession value.
 		def get_seq_by_acc(acc)
 			get_item_by_id(acc)

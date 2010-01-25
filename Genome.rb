@@ -100,6 +100,12 @@ module Genome
 			h
 		end
 		
+		def each_gene
+			items.each_value do |value|
+				yield value
+			end
+		end
+		
 		def auto_clean
 			items.delete_if do |id, gene|
 				gene.size < 3

@@ -37,6 +37,12 @@ module Taxon
 			load_ncbi_info(options[:update_ncbi_info])	
 		end
 		
+		def each_taxon
+			items.each_value do |value|
+				yield value
+			end
+		end
+		
 		def get_taxon_by_name(name)
 			each_value do |item|
 				#warn "* searching " + name + " on " + item.name

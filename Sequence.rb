@@ -32,6 +32,12 @@ module Sequence
 				add(seq, seq.accessions[0])
 			end
 		end
+		
+		def each_sequence
+			items.each_value do |value|
+				yield value
+			end
+		end
 
 		def get_seq_by_acc(acc)
 			get_item_by_id(acc)

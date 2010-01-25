@@ -101,6 +101,12 @@ module Result
 			super
 		end
 		
+		def each_subhit
+			items.each_value do |value|
+				yield value
+			end
+		end
+		
 		def eval
 			best_subhit.eval
 		end
@@ -200,6 +206,9 @@ module Result
 			warn "* id: " + id
 			warn "* score: " + score.to_s
 			warn "* e-value: " + eval.to_s
+			warn "* has_complete?: " + has_complete?.to_s
+			warn "* has_fragment?: " + has_fragment?.to_s
+			warn "* coherent?: " + coherent?.to_s
 		end
 	end
 
@@ -214,6 +223,12 @@ module Result
 				@config = SeqMiner::Config.new
 			else
 				@config = options[:config]
+			end
+		end
+		
+		def each_hit
+			items.each_value do |value|
+				yield value
 			end
 		end
 
@@ -368,6 +383,12 @@ module Result
 	class Set < Set
 		def initialize
 			super
+		end
+		
+		def each_result
+			items.each_value do |value|
+				yield value
+			end
 		end
 		
 		# Finds the best hit in all the Results.

@@ -32,6 +32,12 @@ module Ortholog
 			end
 		end
 		
+		def each_ortholog
+			items.each_value do |value|
+				yield value
+			end
+		end
+		
 		def filter_by_name(filter)
 			items.delete_if { |name, ortholog| ! name.match(/#{filter}/) }
 		end

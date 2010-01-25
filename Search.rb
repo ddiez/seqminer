@@ -114,6 +114,12 @@ module Search
 #			end
 		end
 		
+		def each_search
+			items.each_value do |value|
+				yield value
+			end
+		end
+		
 		def populate
 			parameters.taxon.each_value do |taxon|
 				parameters.ortholog.each_value do |ortholog|
