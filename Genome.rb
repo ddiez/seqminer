@@ -21,10 +21,10 @@ module Genome
 		attr_accessor :chromosome
 		attr_reader :config, :name, :file
 
-		def initialize(name, options = {:empty => false, :config => nil})
+		def initialize(taxon, options = {:empty => false, :config => nil})
 			super()
 			
-			@name = name
+			@name = taxon.name
 			@chromosome = {}
 
 			if options[:config]
@@ -109,6 +109,12 @@ module Genome
 		# returns a gene item based on the accession value.
 		def get_gene_by_acc(acc)
 			get_item_by_id(acc)
+		end
+
+		def filter_by_acc(acc)
+			items.delete_if do |id, gene|
+				! acc.include?(id)
+			end
 		end
 		
 		def write_fasta(type, file = nil)

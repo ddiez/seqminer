@@ -252,27 +252,25 @@ module SeqMiner
 			dir_level1 = ['genome']
 			dir_level2 = ['search', 'sequences', 'fasta']
 			
-			if ! config.dir_result.exist?
-				warn "+ CREATE RESULT DIR STRUCTURE +"
-				#warn "* " + dir_result
-				#dir_result.mkpath
-				dir_level1.each do |level1|
-					dir_level2.each do |level2|
-						ortholog.items.each_value do |ortholog|
-							dir = config.dir_result + level1 + level2 + ortholog.name
-							warn "* " + dir
-							dir.mkpath
-						end
+			warn "+ CREATE RESULT DIR STRUCTURE +"
+			#warn "* " + dir_result
+			#dir_result.mkpath
+			dir_level1.each do |level1|
+				dir_level2.each do |level2|
+					ortholog.items.each_value do |ortholog|
+						dir = config.dir_result + level1 + level2 + ortholog.name
+						warn "* " + dir
+						dir.mkpath if ! dir.exist?
 					end
 				end
 			end
 		end
 
 		def run_all
-			run_search
+			#run_search
 			get_results
-			export_nelson
-			export_fasta
+			#export_nelson
+			write_fasta
 		end
 		
 		def build_search
@@ -301,11 +299,11 @@ module SeqMiner
 		end
 
 		# Pipeline-wise export_fasta.
-		def export_fasta
+		def write_fasta
 			if result.nil?
 				get_results
 			end
-			result.export_fasta
+			result.write_fasta
 		end
 		
 		# Pipeline-wise report.

@@ -10,7 +10,8 @@ module Search
 	class TypeSet < Set
 		def initialize(options = {:empty => false})
 			super()
-			@types = ["nucleotide", "protein"]
+			#@types = ["nucleotide", "protein"]
+			@types = ["6frame", "protein"]
 			if ! options[:empty]
 				@types.each do |type|
 					add(Type.new(length + 1, type))
@@ -27,7 +28,8 @@ module Search
 	class Type < Item
 		def initialize(id, type)
 			super(id)
-			@valid_types = ["nucleotide", "protein"]
+			#@valid_types = ["nucleotide", "protein"]
+			@valid_types = ["6frame", "protein"]
 			@type = validate_type(type)
 		end
 		

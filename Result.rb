@@ -120,7 +120,8 @@ module Result
 		# Checks whether a hit contains a SubHit of type "nucleotide"
 		def has_nucleotide?
 			each_value do |subhit|
-				return true if subhit.type == "nucleotide"
+				#return true if subhit.type == "nucleotide"
+				return true if subhit.type == "6frame"
 			end
 			return false
 		end
@@ -272,9 +273,9 @@ module Result
 				g.chromosome + "\t" +
 				pseq + "\t" +
 				nseq + "\t" +
-				g.start.to_s + "\t" +
-				g.end.to_s + "\t" +
-				g.strand + "\t" +
+				g.from.to_s + "\t" +
+				g.to.to_s + "\t" +
+				g.strand.to_s + "\t" +
 				g.length.to_s + "\t" + # this is number of exons- may change
 				g.splicing + "\t" +
 				ortholog.hmm + "\t" +
@@ -285,6 +286,16 @@ module Result
 				g.description
 			end
 			of.close
+		end
+
+		# This method will write the FASTA sequences.
+		def write_fasta
+			genome = Genome::Set.new(taxon, options = {:config => config})
+			genome.filter_by_acc(items.keys)
+			["protein", "cds", "gene"].each do |type|
+				file = config.dir_result + "genome/fasta" + ortholog.name + (id + "_" + type + ".fa")
+				genome.write_fasta(type, file)
+			end
 		end
 
 		# Exports sequence information as FASTA format
@@ -413,10 +424,10 @@ module Result
 		end
 
 		# Exports sequences in FASTA format.
-		def export_fasta
+		def write_fasta
 			each_value do |result|
 				if result.length > 0
-					result.export_fasta
+					result.write_fasta
 				end
 			end
 		end
@@ -470,7 +481,8 @@ module Result
 				end
 			
 				sp = []	
-				if type == "nucleotide"
+				#if type == "nucleotide"
+				if type == "6frame"
 					sp = _parse_line(line)
 					if sp.nil?
 						raise "ERROR: nucleotide result does not contain strand/frame information"

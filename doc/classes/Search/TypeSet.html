@@ -128,13 +128,14 @@
     <span class="ruby-comment cmt"># File Search.rb, line 11</span>
 11:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:empty</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>})
 12:             <span class="ruby-keyword kw">super</span>()
-13:             <span class="ruby-ivar">@types</span> = [<span class="ruby-value str">&quot;nucleotide&quot;</span>, <span class="ruby-value str">&quot;protein&quot;</span>]
-14:             <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:empty</span>]
-15:                 <span class="ruby-ivar">@types</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">type</span><span class="ruby-operator">|</span>
-16:                     <span class="ruby-identifier">add</span>(<span class="ruby-constant">Type</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">length</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>, <span class="ruby-identifier">type</span>))
-17:                 <span class="ruby-keyword kw">end</span>
-18:             <span class="ruby-keyword kw">end</span>
-19:         <span class="ruby-keyword kw">end</span>
+13:             <span class="ruby-comment cmt">#@types = [&quot;nucleotide&quot;, &quot;protein&quot;]</span>
+14:             <span class="ruby-ivar">@types</span> = [<span class="ruby-value str">&quot;6frame&quot;</span>, <span class="ruby-value str">&quot;protein&quot;</span>]
+15:             <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:empty</span>]
+16:                 <span class="ruby-ivar">@types</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">type</span><span class="ruby-operator">|</span>
+17:                     <span class="ruby-identifier">add</span>(<span class="ruby-constant">Type</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">length</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>, <span class="ruby-identifier">type</span>))
+18:                 <span class="ruby-keyword kw">end</span>
+19:             <span class="ruby-keyword kw">end</span>
+20:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -156,11 +157,11 @@
             onclick="toggleCode('M000034-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000034-source">
 <pre>
-    <span class="ruby-comment cmt"># File Search.rb, line 21</span>
-21:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
-22:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Parameter Set +&quot;</span>
-23:             <span class="ruby-keyword kw">super</span>
-24:         <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File Search.rb, line 22</span>
+22:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+23:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Parameter Set +&quot;</span>
+24:             <span class="ruby-keyword kw">super</span>
+25:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
