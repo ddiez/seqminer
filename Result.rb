@@ -485,12 +485,6 @@ module Result
 	class HmmerParser
 		attr_accessor :file, :result_id, :type, :config
 		
-		# Check whether a valid type is assign to the Result object.
-#		def is_valid?(type)
-#			valid = ['nucleotide', 'protein']
-#			valid.include?(type)
-#		end
-		
 		def initialize(*args)
 			if args.length == 3
 				@file = args[0]
@@ -500,7 +494,6 @@ module Result
 				@config = nil
 			end
 		end
-		
 		
 		def parse
 			result = Result.new(result_id, options = {:config => config})
