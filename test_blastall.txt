@@ -1,0 +1,961 @@
+PSITBLASTN 2.2.22 [Sep-27-2009]
+
+
+Reference: Altschul, Stephen F., Thomas L. Madden, Alejandro A. Schaffer, 
+Jinghui Zhang, Zheng Zhang, Webb Miller, and David J. Lipman (1997), 
+"Gapped BLAST and PSI-BLAST: a new generation of protein database search
+programs",  Nucleic Acids Res. 25:3389-3402.
+
+Query= lcl|ECH_1142 major outer membrane protein OMP-1F
+         (280 letters)
+
+Database: cds 
+           1004 sequences; 1,051,166 total letters
+
+Searching..................................................done
+
+
+
+                                                                 Score    E
+Sequences producing significant alignments:                      (bits) Value
+
+AM090 major surface protein 4                                         265   1e-72
+AM1142 msp2 operon associated gene 2                                  221   2e-59
+AM1257 outer membrane protein 12                                      214   2e-57
+AM1141 hypothetical protein                                           204   2e-54
+AM1140 msp2 operon associated gene 3                                  204   2e-54
+AM1139 outer membrane protein 1                                       195   7e-52
+AM1255 outer membrane protein 11                                      192   6e-51
+AM1258 outer membrane protein 13                                      174   1e-45
+AM1063 major surface protein 3                                        159   6e-41
+AM1144 major surface protein 2                                        159   6e-41
+AM062                                                                 159   6e-41
+AM1221 outer membrane protein 8                                       147   2e-37
+AM1222 outer membrane protein 9                                       145   1e-36
+AM1223 outer membrane protein 10                                      139   5e-35
+AM1220 outer membrane protein 7                                       139   5e-35
+AM075 outer membrane protein 14                                       139   8e-35
+AM1164 outer membrane protein 4                                       137   3e-34
+AM1166 outer membrane protein 5                                       131   2e-32
+AM1219 outer membrane protein 6                                       130   3e-32
+AM1148                                                                125   9e-31
+AM091                                                                 116   6e-28
+AM049                                                                  88   2e-19
+AM213                                                                  73   6e-15
+AM047                                                                  64   3e-12
+AM991                                                                  64   3e-12
+AM720                                                                  64   3e-12
+AM033                                                                  64   3e-12
+AM1250                                                                 64   3e-12
+AM987 outer membrane protein 15                                        63   7e-12
+AM1345                                                                 57   3e-10
+AM1159 outer membrane protein 3                                        49   1e-07
+AM780 hypothetical protein                                             30   0.070
+AM638 hypothetical protein                                             24   5.0  
+AM390 glutathione S-transferase                                        23   6.6  
+AM405 2-oxoglutarate dehydrogenase E1 component                        23   8.6  
+
+>AM090 major surface protein 4
+          Length = 849
+
+ Score =  265 bits (676), Expect = 1e-72
+ Identities = 85/271 (31%), Positives = 137/271 (50%)
+ Frame = +1
+
+Query: 10  TTLVSLMSFLPGISFSDAVQNDNVGGNFYISGKYVPSVSHFGVFSAKQERNTTTGVFGLK 69
+           + LVS       +S   A +   +GG+FY+   Y P+      F  ++    T+ V G  
+Sbjct: 58  SLLVSGAVVASPMSHEVASEGGVMGGSFYVGAAYSPAFPSVTSFDMRESSKETSYVRGYD 237
+
+Query: 70  QDWDGSTISKNSPENTFNVPNYSFKYENNPFLGFAGAVGYLMNGPRIELEMSYETFDVKN 129
+           +     TI  + P N F+   Y+F +  N    F GAVGY + G R+ELE SY  F    
+Sbjct: 238 KSLA--TIDVSVPAN-FSKSGYTFAFSKNLITSFDGAVGYSLGGARVELEASYRRFATLA 408
+
+Query: 130 QGNNYKNDAHKYYALTHNSGGKLSNAGDKFVFLKNEGLLDISLMLNACYDVISEGIPFSP 189
+            G   K+ A    A+T ++    +N    +  +K + + + S+MLN CYDV+   +P SP
+Sbjct: 409 DGQYAKSGAESLAAITRDANITETN----YFVVKIDEITNTSVMLNGCYDVLHTDLPVSP 576
+
+Query: 190 YICAGVGTDLISMFEAINPKISYQGKLGLSYSISPEASVFVGGHFHKVIGNEFRDIPAMI 249
+           Y+CAG+G   + + + +  K++Y+GK+G+SY  +PE S+  GG +H +    ++DIPA  
+Sbjct: 577 YVCAGIGASFVDISKQVTTKLAYRGKVGISYQFTPEISLVAGGFYHGLFDESYKDIPAH- 753
+
+Query: 250 PSTSTLTGNHFTIVTLSVCHFGVELGGRFNF 280
+            ++   +G     V   +  +G  LG RF F
+Sbjct: 754 -NSVKFSGEAKASVKAHIADYGFNLGARFLF 843
+
+
+>AM1142 msp2 operon associated gene 2
+          Length = 912
+
+ Score =  221 bits (562), Expect = 2e-59
+ Identities = 67/301 (22%), Positives = 118/301 (39%), Gaps = 24/301 (7%)
+ Frame = +1
+
+Query: 1   MNCKKFFITTTLVSLMS--FLPGISFSDAVQNDNVG--GNFYISGKYVPSVSHFGVFSAK 56
+           M+ K  F+   L+ +       G + +       VG  G  Y++ +Y P++     F+ +
+Sbjct: 19  MSRKSLFVLPCLLFVAVSTAGNGAAPNVGSAAPGVGAEGELYVAAQYKPALPVVREFAVR 198
+
+Query: 57  QERNTTTG----------VFGLKQDWDGSTISKNSPENTFNVPNYSFKYENN---PFLGF 103
+           + R T             V   +Q    + +            N+   Y  +      G 
+Sbjct: 199 ENRLTAPSKLFRLAPSTSVLTAEQATGATLLDSPLLRALRGRNNFEPSYTPSYEVSMCGV 378
+
+Query: 104 AGAVGYLMNGPRIELEMSYETFDVKNQGNNYKNDAHKYYALTHNSGGKLSNAGDKFVFLK 163
+           +G +GY   G R+ELE+S+E F VK  G       H+Y+A           +  + V   
+Sbjct: 379 SGVLGYSRAGTRVELEVSFEDFRVKKSGKPVLKGGHEYFAAGR-------TSDTQRVVFA 537
+
+Query: 164 NEGLLDISLMLNACYDVI--SEGIPFSPYICAGVGTDLISMFEAINPKISYQGKLGLSYS 221
+           N  +   S +++ C D      G   +PY C G G + + +    N + +YQ K+G + +
+Sbjct: 538 NRAISAGSAVVSICRDFPAGPSGGSVTPYTCLGGGVEFLDILGMANTRFAYQAKMGAALN 717
+
+Query: 222 ISPEASVFVGGHFHKVIGNEFRDIPAMIPSTSTLTGN-----HFTIVTLSVCHFGVELGG 276
+           + P AS+F  G++   +    R +PA++   +T                 V + GVE G 
+Sbjct: 718 LHPRASIFAAGYYRGTLERAIRPLPAVVVIPATAGEGENLGLPPFEGNAGVRYLGVEAGI 897
+
+Query: 277 R 277
+           R
+Sbjct: 898 R 900
+
+
+>AM1257 outer membrane protein 12
+          Length = 858
+
+ Score =  214 bits (545), Expect = 2e-57
+ Identities = 67/283 (23%), Positives = 111/283 (39%), Gaps = 6/283 (2%)
+ Frame = +1
+
+Query: 4   KKFFITTTLVSLMSFLPGISFSDAVQNDNVG----GNFYISGKYVPSVSHFGVFSAKQER 59
+           K        + +   L       A           G  Y+ G Y  S   FG     + +
+Sbjct: 28  KGSISVRVWIFIAVLLFPPQAFSASNCPLRKFRSQGRAYLIGAYKSSFPDFGNLKISEGQ 207
+
+Query: 60  NTTTGVFGLKQ-DWDGSTISKNSPENTFNVPNYSFKYENNPFLGFAGAVGYLMNGPRIEL 118
+            +T GV  + Q   +GS I        F    Y   + N+ +L FAG VGY     R+EL
+Sbjct: 208 LSTPGVATVAQMSMNGSVIVDIHNHKAFG--PYRPPFYNSDYLEFAGGVGYSAGPVRLEL 381
+
+Query: 119 EMSYETFDVKNQGNNYKNDAHKYYALTHNSGGKLSNAGDKFVFLKNEGLLDISLMLNACY 178
+           E  +  F+ K    +   D     AL         N    +  ++N  +   S+ LN CY
+Sbjct: 382 ERFHSVFETKGGVGSVNKDDACNIALVRAQTIMPGN----YAVVENRKIDVSSVALNLCY 549
+
+Query: 179 DVISEGIPFSPYICAGVGTDLISMFEAINPKISYQGKLGLSYSISPEASVFVGGHFHKVI 238
+           + I        Y+C GV  + +S+    +    YQGK+G+   ++   ++F+G ++H + 
+Sbjct: 550 EQIQISAALG-YVCVGVSGNRLSLLNTGDVTHGYQGKMGVGIPMTRGVTLFIGTYYHMLH 726
+
+Query: 239 GNEFRDIPAMIPSTSTLTGNH-FTIVTLSVCHFGVELGGRFNF 280
+            + F  +  ++P    +          + + HFG ELG R+ F
+Sbjct: 727 SSRFSSVALVVPERFDVVPKPVAAKANMRIAHFGGELGARYMF 855
+
+
+>AM1141 hypothetical protein
+          Length = 1104
+
+ Score =  204 bits (519), Expect = 2e-54
+ Identities = 63/288 (21%), Positives = 111/288 (38%), Gaps = 8/288 (2%)
+ Frame = -1
+
+Query: 1    MNCKKFFITTTLVSLMSFLPGISFSDAVQNDNVGGNFYISGKYVPSVSHFGVFSAKQERN 60
+            M+ +     + L          +          G    + G+   +   F          
+Sbjct: 1047 MSIRGRACCSILACGALVAASGAVCTGANAGTRGFYATLGGELGVANFGFPSVKTHGVPG 868
+
+Query: 61   TTTGV-FGLKQDWDGSTISKNSPENTFNVPNYSFKYENNPFLGFAGAVGYLMNGPRIELE 119
+               GV  G +Q    + +   +P       +Y  KYEN+  LG +GA+GY  +  R++L 
+Sbjct: 867  AVLGVDKGSEQLVRFAELGLAAPTRDGFGAHYLPKYENS--LGLSGALGYSFDSFRLQLS 694
+
+Query: 120  MSYETFDVKNQGNNYKNDAHKYYALTHNSGGKLSNAGDKFVFL--KNEGLLDISLMLNAC 177
+                +F V   G +Y    +  +     SG   S+ G    +   +  G+   S+ L+AC
+Sbjct: 693  AYSSSFSV--DGGSYAVSGNAAW-FAFPSGKVSSDGGSTAEYHIGEVSGVGLNSVELSAC 523
+
+Query: 178  YDVISE-GIPFSPYICAGVGTDLISMFEAINPK-ISYQGKLGLSYSISPEASVFVGGHFH 235
+            Y  +   G  F  Y C G+G   +  + +     +S+ G+ G+ Y++ P  S+F   ++ 
+Sbjct: 522  YSGVGAFGRHFGLYSCLGLGVSSVDYWGSRGSLVLSWSGRTGVEYNLGPRLSLFAEAYYL 343
+
+Query: 236  KVIGNEFR-DIPAMIPSTSTLTGNHFTIV--TLSVCHFGVELGGRFNF 280
+                 E     P ++ +TS+   +    V   LSV +FG   G R  F
+Sbjct: 342  GTDTEEHAGGGPTLLSTTSSGVPSVDADVLPVLSVGYFGGIAGVRCAF 199
+
+
+>AM1140 msp2 operon associated gene 3
+          Length = 939
+
+ Score =  204 bits (519), Expect = 2e-54
+ Identities = 63/288 (21%), Positives = 111/288 (38%), Gaps = 8/288 (2%)
+ Frame = +1
+
+Query: 1   MNCKKFFITTTLVSLMSFLPGISFSDAVQNDNVGGNFYISGKYVPSVSHFGVFSAKQERN 60
+           M+ +     + L          +          G    + G+   +   F          
+Sbjct: 76  MSIRGRACCSILACGALVAASGAVCTGANAGTRGFYATLGGELGVANFGFPSVKTHGVPG 255
+
+Query: 61  TTTGV-FGLKQDWDGSTISKNSPENTFNVPNYSFKYENNPFLGFAGAVGYLMNGPRIELE 119
+              GV  G +Q    + +   +P       +Y  KYEN+  LG +GA+GY  +  R++L 
+Sbjct: 256 AVLGVDKGSEQLVRFAELGLAAPTRDGFGAHYLPKYENS--LGLSGALGYSFDSFRLQLS 429
+
+Query: 120 MSYETFDVKNQGNNYKNDAHKYYALTHNSGGKLSNAGDKFVFL--KNEGLLDISLMLNAC 177
+               +F V   G +Y    +  +     SG   S+ G    +   +  G+   S+ L+AC
+Sbjct: 430 AYSSSFSV--DGGSYAVSGNAAW-FAFPSGKVSSDGGSTAEYHIGEVSGVGLNSVELSAC 600
+
+Query: 178 YDVISE-GIPFSPYICAGVGTDLISMFEAINPK-ISYQGKLGLSYSISPEASVFVGGHFH 235
+           Y  +   G  F  Y C G+G   +  + +     +S+ G+ G+ Y++ P  S+F   ++ 
+Sbjct: 601 YSGVGAFGRHFGLYSCLGLGVSSVDYWGSRGSLVLSWSGRTGVEYNLGPRLSLFAEAYYL 780
+
+Query: 236 KVIGNEFR-DIPAMIPSTSTLTGNHFTIV--TLSVCHFGVELGGRFNF 280
+                E     P ++ +TS+   +    V   LSV +FG   G R  F
+Sbjct: 781 GTDTEEHAGGGPTLLSTTSSGVPSVDADVLPVLSVGYFGGIAGVRCAF 924
+
+
+>AM1139 outer membrane protein 1
+          Length = 993
+
+ Score =  195 bits (496), Expect = 7e-52
+ Identities = 66/302 (21%), Positives = 111/302 (36%), Gaps = 52/302 (17%)
+ Frame = +1
+
+Query: 29  QNDNVGGNFYISGKYVPSVSHFGVFSAKQERNTTTGVFGLKQDWDGSTISKNSPENTFNV 88
+                   F+ S +Y  +V HF  F   +++      F +K+   G T    +   T   
+Sbjct: 91  SRGEGASGFFASVQYKLAVPHFRDFIV-EDKGKALNTFAMKEKQQGGTAKAAAGAATPPA 267
+
+Query: 89  P----------------------NYSFKYENNPFLGFAGAVGYLMNGPRIELEMSYETFD 126
+                                   YS +Y  +   G + +VGY     R+E E  Y+ F 
+Sbjct: 268 APSGAEAPPAKGPDLASGGSFEGKYSPEYLRSAKAG-SVSVGYSAGNVRLEAEGMYQKFP 444
+
+Query: 127 VKNQGNNYKNDAHKYY-----ALTHNSGGKLSNAGDKF-VFLKNEGLLDISLMLNACYDV 180
+           V      YK++  + Y     A   NS    +   + + +  +N+ +   SLM N CYD+
+Sbjct: 445 VDT--KKYKDNPERAYRFAISAPDENSTTVATRPQEPYHITAENKEVTTASLMANLCYDL 618
+
+Query: 181 ISEGIPFSPYICAGVGTDLISMFEAINPKISYQGKLGLSYSISPEASVFVGGHFHKVIGN 240
+           + E    SP  C G G  L+        + +YQ K+G+ Y  S +A++F   +  +V   
+Sbjct: 619 LPESSQISPSACVGGGGSLVRFLGVTEVRWAYQAKVGVQYFASRKAALFAYAYASRVHPE 798
+
+Query: 241 EFRDIPAMI------------------------PSTSTLTGNHFTIVTLSVCHFGVELGG 276
+           +F +IP +                          +   L G  +   +L + +FG E G 
+Sbjct: 799 KFSNIPVVHHIKTESPKGSQGAAGSGGGESSAQAAGGKLPGLLYPQASLGLDYFGFECGI 978
+
+Query: 277 RF 278
+           R 
+Sbjct: 979 RL 984
+
+
+>AM1255 outer membrane protein 11
+          Length = 990
+
+ Score =  192 bits (488), Expect = 6e-51
+ Identities = 80/330 (24%), Positives = 131/330 (39%), Gaps = 50/330 (15%)
+ Frame = +1
+
+Query: 1   MNCKKFFITTT-LVSLMSFLPGISFSDAVQNDNVGGNFYISGKYVPSVSHFGVFSAKQER 59
+           M+  +F   +   V L      +SFS       VGG  YI G Y P+   FG  + K   
+Sbjct: 1   MSFVRFLAVSLGCVFLAYSSSAVSFSLDGIARGVGG-LYIGGMYKPASPIFGDLAFKGSF 177
+
+Query: 60  NT---TTGVFGLKQDWDGSTISKNSPENTFNVPNYSF---------KYENNPFLGFAGAV 107
+           +T   T  +  L   W       ++  N   V   SF            ++   G A  +
+Sbjct: 178 DTSFRTAPLNVLPMLWFAGQDVWHAHLNVSTVTADSFDPWPVLARGSDYHSSARGVAVVL 357
+
+Query: 108 GYLMNGPRIELEMSYETFDVKNQGNN------------YKNDAHKYYALTHNSGG----- 150
+           GY +   R ELE++ ++FDV   G              Y ++ ++Y A+           
+Sbjct: 358 GYPVGQVRAELELAKQSFDVGRGGGPASGHDEGVVGDLYASEGYRYSAVHMKLSSGKGAP 537
+
+Query: 151 ----KLSNAGDK--FVFLKNEGLLDISLMLNACYDV-ISEGIPFSPYICAGVGTDLISMF 203
+                 ++ GD    V +KNEG+   S++ + C D  IS      PY+CAG G + +SMF
+Sbjct: 538 ATPPATTDGGDANAMVIVKNEGVQLSSVLASLCRDFSISLNENILPYVCAGFGLEKVSMF 717
+
+Query: 204 EAINPKISYQGKLGLSYSISPEASVFVGGHFHKVIGNEF-------RDIPAMIPSTSTLT 256
+           ++   ++SYQ K+G SY        F   ++  + GN          ++     S  T +
+Sbjct: 718 DSDAKRVSYQAKIGASYKFGNNVHGFASLYYRALAGNGEVILTQSGYEVVRTDCSRHTGS 897
+
+Query: 257 GNHFTI------VTLSVCHFGVELGGRFNF 280
+             H  +      + + + +FG+E G R + 
+Sbjct: 898 KTHAKLLPVNLPIGMDIAYFGLEAGLRLSL 987
+
+
+>AM1258 outer membrane protein 13
+          Length = 1059
+
+ Score =  174 bits (442), Expect = 1e-45
+ Identities = 61/289 (21%), Positives = 111/289 (38%), Gaps = 42/289 (14%)
+ Frame = +1
+
+Query: 34  GGNFYISGKYVPSVSHFGVFSAKQERNTTTGVFGLKQD-----WDGSTISKNSPENTFNV 88
+              FY S  Y P++ + G  +   +   T  VF    D      +   +     E   + 
+Sbjct: 196 AAGFYASMGYRPALQNIGRLAMSMD-GRTADVFAPGLDTCCGPLEAREVDSRMIERMRSA 372
+
+Query: 89  PNYSFKYENNPFLGFAGAVGYLMNGPRIELEMSYETF-DVKNQGNNYKNDAH-------- 139
+              S  Y  + + G  G +G    G R+E +++   F  ++ +G+   +           
+Sbjct: 373 RAASVTYS-SDYTGVFGVLGAADRGFRLEFKVARSFFGAIRTRGDALIDHKDVLLIQEIR 549
+
+Query: 140 --------KYYALTHNSGGKLSNAG-----------DKFVFLKNEGLLDISLMLNACYDV 180
+                      A T N+ G  S+AG           D  V ++++G+   + M++ CYD 
+Sbjct: 550 ETNDAAATTNAAATTNAAGAGSSAGQQPSTAPAPVTDGLVAVRHKGIGSTTTMVSVCYDA 729
+
+Query: 181 ISEGI--PFSPYICAGVGTDLISMFEAINPKISYQGKLGLSYSISPEASVFVGGHFHKVI 238
+             + I  PF P+ C G G D + + +      S +G +G    +S    + V    H+V+
+Sbjct: 730 DRQFITAPFVPHFCVGSGIDAVDLLDMTRAAFSVEGSIGFHQQVSQSLQLVVSAFVHRVL 909
+
+Query: 239 GNEFRDIP-AMIPSTSTLTGNHFTI------VTLSVCHFGVELGGRFNF 280
+            + F D+P A     S+ T +            + + + G E+G R+ F
+Sbjct: 910 DSTFNDVPVAYQWGASSRTRDDPRRSLDVRVSDVHISYLGAEIGLRWFF 1056
+
+
+>AM1063 major surface protein 3
+          Length = 2832
+
+ Score =  159 bits (402), Expect = 6e-41
+ Identities = 53/137 (38%), Positives = 83/137 (60%), Gaps = 5/137 (3%)
+ Frame = +1
+
+Query: 149  GGKLSNAGDKFVFLKNEGLLDISLMLNACYDVISEGIPFSPYICAGVGTDLISMFEA-IN 207
+             G  + A +    ++   +   S+MLNACYD++++GI   PY CAG+G + +S+ +  IN
+Sbjct: 2419 AGAFARAVEGAEVIEVRAIGSTSVMLNACYDLLTDGIGVVPYACAGIGGNFVSVVDGHIN 2598
+
+Query: 208  PKISYQGKLGLSYSISPEASVFVGGHFHKVIGN-EFRDIPAMIPS--TSTLTGNHFT-IV 263
+            PK +Y+ K GLSY+++PE S F G  +HKV+G+ ++ ++P    S  T T   N  T I 
+Sbjct: 2599 PKFAYRVKAGLSYALTPEISAFAGAFYHKVLGDGDYDELPLSHISDYTGTAGKNKDTGIA 2778
+
+Query: 264  TLSVCHFGVELGGRFNF 280
+            + +  +FG ELG RF F
+Sbjct: 2779 SFNFAYFGGELGVRFAF 2829
+
+
+
+ Score =  116 bits (290), Expect = 6e-28
+ Identities = 27/144 (18%), Positives = 50/144 (34%), Gaps = 7/144 (4%)
+ Frame = +1
+
+Query: 31  DNVGGNFYISGKYVPSVSHFGVFSA-------KQERNTTTGVFGLKQDWDGSTISKNSPE 83
+               G+FYI   Y P+ +              + +  T             +    NS  
+Sbjct: 151 GKGNGSFYIGLDYNPTFNGIKDLKIIGETDEDEMDVLTGARGLFPMNALASNVTDFNSYH 330
+
+Query: 84  NTFNVPNYSFKYENNPFLGFAGAVGYLMNGPRIELEMSYETFDVKNQGNNYKNDAHKYYA 143
+             ++ P    ++ N+      G++GY + G R+E+ + +E F +K   +       +  A
+Sbjct: 331 FDWSTPLPGLEFGNSTL-ALGGSIGYRIGGARVEVGIGHERFVIKGGDDTAFLLG-RELA 504
+
+Query: 144 LTHNSGGKLSNAGDKFVFLKNEGL 167
+           L    G  LS+A  +        L
+Sbjct: 505 LDTARGQLLSSALGRMSMGDVRRL 576
+
+
+>AM1144 major surface protein 2
+          Length = 1224
+
+ Score =  159 bits (402), Expect = 6e-41
+ Identities = 53/137 (38%), Positives = 83/137 (60%), Gaps = 5/137 (3%)
+ Frame = +1
+
+Query: 149 GGKLSNAGDKFVFLKNEGLLDISLMLNACYDVISEGIPFSPYICAGVGTDLISMFEA-IN 207
+            G  + A +    ++   +   S+MLNACYD++++GI   PY CAG+G + +S+ +  IN
+Sbjct: 811 AGAFARAVEGAEVIEVRAIGSTSVMLNACYDLLTDGIGVVPYACAGIGGNFVSVVDGHIN 990
+
+Query: 208 PKISYQGKLGLSYSISPEASVFVGGHFHKVIGN-EFRDIPAMIPS--TSTLTGNHFT-IV 263
+           PK +Y+ K GLSY+++PE S F G  +HKV+G+ ++ ++P    S  T T   N  T I 
+Sbjct: 991 PKFAYRVKAGLSYALTPEISAFAGAFYHKVLGDGDYDELPLSHISDYTGTAGKNKDTGIA 1170
+
+Query: 264 TLSVCHFGVELGGRFNF 280
+           + +  +FG ELG RF F
+Sbjct: 1171SFNFAYFGGELGVRFAF 1221
+
+
+
+ Score =  142 bits (359), Expect = 6e-36
+ Identities = 30/144 (20%), Positives = 56/144 (38%)
+ Frame = +1
+
+Query: 13  VSLMSFLPGISFSDAVQNDNVGGNFYISGKYVPSVSHFGVFSAKQERNTTTGVFGLKQDW 72
+           +         +  + + +    G+FYI   Y P+      F  ++   TT GVF  K+D 
+Sbjct: 82  LLAAPAAGAGAGGEGLFSGAGAGSFYIGLDYSPAFGSIKDFKVQEAGGTTRGVFPYKRDA 261
+
+Query: 73  DGSTISKNSPENTFNVPNYSFKYENNPFLGFAGAVGYLMNGPRIELEMSYETFDVKNQGN 132
+            G  +        ++ P     ++++      G++GY + G R+E+E+ YE F +K  G 
+Sbjct: 262 AGR-VDFKVHNFDWSAPEPKISFKDSMLTALEGSIGYSIGGARVEVEVGYERFVIK-GGK 435
+
+Query: 133 NYKNDAHKYYALTHNSGGKLSNAG 156
+               D    + L        +   
+Sbjct: 436 KSNEDTASVFLLGKELAYDTARGQ 507
+
+
+>AM062 
+          Length = 2355
+
+ Score =  159 bits (402), Expect = 6e-41
+ Identities = 53/137 (38%), Positives = 83/137 (60%), Gaps = 5/137 (3%)
+ Frame = +1
+
+Query: 149  GGKLSNAGDKFVFLKNEGLLDISLMLNACYDVISEGIPFSPYICAGVGTDLISMFEA-IN 207
+             G  + A +    ++   +   S+MLNACYD++++GI   PY CAG+G + +S+ +  IN
+Sbjct: 1945 AGAFARAVEGAEVIEVRAIGSTSVMLNACYDLLTDGIGVVPYACAGIGGNFVSVVDGHIN 2124
+
+Query: 208  PKISYQGKLGLSYSISPEASVFVGGHFHKVIGN-EFRDIPAMIPS--TSTLTGNHFT-IV 263
+            PK +Y+ K GLSY+++PE S F G  +HKV+G+ ++ ++P    S  T T   N  T I 
+Sbjct: 2125 PKFAYRVKAGLSYALTPEISAFAGAFYHKVLGDGDYDELPLSHISDYTGTAGKNKDTGIA 2304
+
+Query: 264  TLSVCHFGVELGGRFNF 280
+            + +  +FG ELG RF F
+Sbjct: 2305 SFNFAYFGGELGVRFAF 2355
+
+
+
+ Score = 64.0 bits (154), Expect = 3e-12
+ Identities = 14/58 (24%), Positives = 23/58 (39%)
+ Frame = +1
+
+Query: 99  PFLGFAGAVGYLMNGPRIELEMSYETFDVKNQGNNYKNDAHKYYALTHNSGGKLSNAG 156
+                 G++GY + G R+E+E+ YE F +K  G     D    + L        +   
+Sbjct: 1   MLTALEGSIGYSIGGARVEVEVGYERFVIK-GGKKSNEDTASVFLLGKELAYDTARGQ 171
+
+
+>AM1221 outer membrane protein 8
+          Length = 1200
+
+ Score =  147 bits (371), Expect = 2e-37
+ Identities = 27/182 (14%), Positives = 61/182 (33%), Gaps = 7/182 (3%)
+ Frame = +1
+
+Query: 8   ITTTLVSLMSFLPGISFSDAVQNDNVGGN---FYISGKYVPSVSHFGVFSAKQERNTTTG 64
+           +  + +     +  I+F  +      GG+   FY+     P+  +   F   +       
+Sbjct: 1   VVRSFLLSAVVVGAIAFGSSAVAAGFGGDDTDFYLGFGLAPAFGNVADF-YAEVPGAADS 177
+
+Query: 65  VFGLKQDWDGS----TISKNSPENTFNVPNYSFKYENNPFLGFAGAVGYLMNGPRIELEM 120
+               ++D  G         +  E+      Y  K+++N   G  G++G   +  R+E E 
+Sbjct: 178 ALPYRKDAIGGGETSPFDFDWEESGTKGSKYPIKFQHNSLFGVVGSIGVRHSTGRLEFEA 357
+
+Query: 121 SYETFDVKNQGNNYKNDAHKYYALTHNSGGKLSNAGDKFVFLKNEGLLDISLMLNACYDV 180
+             E F +              + L  ++  +++          ++ +  +S  L    D 
+Sbjct: 358 MRERFPIMKVSGRVWAKGDSMFLLVDDAVVRVATGQRGVNDSDSKTVKSLSKALPEHRDF 537
+
+Query: 181 IS 182
+           +S
+Sbjct: 538 LS 543
+
+
+
+ Score =  141 bits (356), Expect = 1e-35
+ Identities = 44/225 (19%), Positives = 82/225 (36%), Gaps = 11/225 (4%)
+ Frame = +1
+
+Query: 65  VFGLKQDWDGSTISKNSPENTFNVPNYSFKY-----ENNPFLGFAGAVGYLMNGPRIELE 119
+                +D+     +  +    F V   +  Y     ++        A+ Y     +++L 
+Sbjct: 514 ALPEHRDFLSLEDALLTARQDFMVQKGTLSYTGASTDDAAAAAKIVAMAYGRQFGKVDLT 693
+
+Query: 120 MSYETFDVKNQGNNYKNDAHKYYALTHNSGGKLSNAGDKFVFLKNEGLLDISLMLNACYD 179
+                  +            +   +      + +        ++   +   +   N CYD
+Sbjct: 694 PERRRKAMLLLAAATAVGEEEREIVKRAHMIRAAFGSIGGHKIEIPAVAANTFGANYCYD 873
+
+Query: 180 VISEGIP-FSPYICAGVGTDLISMFEAINPKISYQGKLGLSYSISPEASVFVGGHFHKVI 238
+           V +  +   SPY C   G   + + +   PK +Y  KLG+SY +SP A VFVGG + +V+
+Sbjct: 874 VSTVNMGGLSPYGCVSAGMSFLKVVKNSVPKFTYGAKLGVSYELSPRARVFVGGAYRRVM 1053
+
+Query: 239 GNEFRDIPAMIPSTS-----TLTGNHFTIVTLSVCHFGVELGGRF 278
+           G   R   + + + S     T   N    V+  + +  +E G RF
+Sbjct: 1054GYGERCRVSTLSAASGYREYTERENIRARVSFGLHYLALEAGLRF 1188
+
+
+>AM1222 outer membrane protein 9
+          Length = 1212
+
+ Score =  145 bits (365), Expect = 1e-36
+ Identities = 24/167 (14%), Positives = 52/167 (31%), Gaps = 7/167 (4%)
+ Frame = +1
+
+Query: 8   ITTTLVSLMSFLPGISFSDAVQNDNVGGN---FYISGKYVPSVSHFGVFSAKQERNTTTG 64
+           +  + +        ++F  +      GG+   FY+     P+      F   +       
+Sbjct: 1   VVRSFLLSAVVAGALAFGSSAVAAGFGGDDTDFYLGFGLAPAFGDVADF-YAEVPGAADS 177
+
+Query: 65  VFGLKQD----WDGSTISKNSPENTFNVPNYSFKYENNPFLGFAGAVGYLMNGPRIELEM 120
+               ++D    W+ S    +   +      Y  K++     G  G+VG   +  R+E E 
+Sbjct: 178 ALPYRKDAVGSWETSPFDFDWEGSGTKGSKYPIKFQRRSLFGMVGSVGVRHSNSRLEFEA 357
+
+Query: 121 SYETFDVKNQGNNYKNDAHKYYALTHNSGGKLSNAGDKFVFLKNEGL 167
+           + E F V              + L  ++  + +          N+ +
+Sbjct: 358 ACERFPVMKVSGRTWAKGDSIFLLVDDAVVRFATGQRSAGDTDNQAV 498
+
+
+
+ Score =  134 bits (336), Expect = 3e-33
+ Identities = 34/130 (26%), Positives = 58/130 (44%), Gaps = 6/130 (4%)
+ Frame = +1
+
+Query: 155 AGDKFVFLKNEGLLDISLMLNACYDVISEGIP-FSPYICAGVGTDLISMFEAINPKISYQ 213
+            G     +K   ++  +   N CYD+ +  +   SPY C  +G   + + E   PK +Y 
+Sbjct: 811 GGIGGYRIKIPAVVANTFGANYCYDISTVNVRGLSPYGCVSIGMSFLKVAENSAPKFTYG 990
+
+Query: 214 GKLGLSYSISPEASVFVGGHFHKVIGNEFRDIPAMIPSTST-----LTGNHFTIVTLSVC 268
+            KLG+SY +SP A VFV G + + +    R   + + + S         +    V+  + 
+Sbjct: 991 AKLGVSYELSPRARVFVDGAYRRAVEYSERCRVSTLSAASDYSEYVEREDVKARVSFGLH 1170
+
+Query: 269 HFGVELGGRF 278
+           +  +E G RF
+Sbjct: 1171YLALEAGLRF 1200
+
+
+>AM1223 outer membrane protein 10
+          Length = 1263
+
+ Score =  139 bits (351), Expect = 5e-35
+ Identities = 36/189 (19%), Positives = 60/189 (31%), Gaps = 21/189 (11%)
+ Frame = +1
+
+Query: 1   MNCKKFF-----ITTTLV--SLMSFLPGISFSDAVQNDNVGGNFYISGKYVPSVSHFGVF 53
+           + C  FF     +  +LV  +L   LP +       +       Y+S  Y P+       
+Sbjct: 31  LRCDGFFKLGGVVLRSLVGATLAVLLPAVFLYGTGSSAAEAFGPYVSFGYTPAWGGVRNL 210
+
+Query: 54  SAKQERNTTTGVFGLKQDWDGSTISKNSPENTFNVPNYSFK-----YENNPFLGFAGAVG 108
+                   T  V   K+D  G  +   S  + +     +       ++     G  GAVG
+Sbjct: 211 YV-GIPGETWYVLPYKKDVSGDEVLSWSSFDWWGKNGGAPGDDPIKFKRISPYGVTGAVG 387
+
+Query: 109 YLMNGPRIELEMSYETFDVKNQGNNYKNDAHKYYALTHNSGG---------KLSNAGDKF 159
+           Y +   RIEL +  + F V      +    +  + L                 +NAGD  
+Sbjct: 388 YALGDTRIELGVIGQEFSVSEISGRHWKQGNSLFLLLGKRSADLVRWLRPYISTNAGDGK 567
+
+Query: 160 VFLKNEGLL 168
+              + + L 
+Sbjct: 568 SVEEGKRLG 594
+
+
+
+ Score =  109 bits (273), Expect = 5e-26
+ Identities = 33/133 (24%), Positives = 52/133 (39%), Gaps = 15/133 (11%)
+ Frame = +1
+
+Query: 161 FLKNEGLLDISLMLNACYDVISEGI-------PFSPYICAGVGTDLISMFEAINPKISYQ 213
+            +    +   ++ +  C D+    +           Y CAG+G   +        +   +
+Sbjct: 853 VVAISAVELTAVTVVGCRDLALSNLFTAAATRNLDAYGCAGMGVSFVRGAGKNVAEFGAE 1032
+
+Query: 214 GKLGLSYSISPEASVFVGGHFHKVIGNEFR--DIPAMIPSTSTLTGNH------FTIVTL 265
+            KLG+SY +S  ASVFVGG  H+    +F    IP    S S   G H         ++ 
+Sbjct: 1033LKLGVSYRLSRAASVFVGGVLHRTANYDFNLPVIPMGADSGSVAAGGHADYARNEARISF 1212
+
+Query: 266 SVCHFGVELGGRF 278
+            V +   E+G RF
+Sbjct: 1213GVLNLAGEVGLRF 1251
+
+
+>AM1220 outer membrane protein 7
+          Length = 1191
+
+ Score =  139 bits (351), Expect = 5e-35
+ Identities = 33/139 (23%), Positives = 64/139 (46%), Gaps = 6/139 (4%)
+ Frame = +1
+
+Query: 146 HNSGGKLSNAGDKFVFLKNEGLLDISLMLNACYDVISEGIP-FSPYICAGVGTDLISMFE 204
+             S    +        ++   +   +   N CYDV +  +   SPY C G+G   + + +
+Sbjct: 763 KRSMILTALGRIGGYKIEIPAVAANTFGANYCYDVSTVNMGGLSPYGCVGIGMSFLKVAK 942
+
+Query: 205 AINPKISYQGKLGLSYSISPEASVFVGGHFHKVIGNEFRDIPAMIPSTS-----TLTGNH 259
+              P+ +Y  KLG+SY +SP+AS+FV G + +V+  + +   + + + S     T   + 
+Sbjct: 943 TGTPRFTYGAKLGVSYELSPQASIFVDGAYRRVMEYKEQCRVSTLSAASGHREYTEEEDV 1122
+
+Query: 260 FTIVTLSVCHFGVELGGRF 278
+              ++  + +  +E G RF
+Sbjct: 1123KARMSFGLHYLALEAGLRF 1179
+
+
+
+ Score =  139 bits (349), Expect = 8e-35
+ Identities = 24/156 (15%), Positives = 49/156 (31%), Gaps = 7/156 (4%)
+ Frame = +1
+
+Query: 8   ITTTLVSLMSFLPGISFSDAVQNDNVGGN---FYISGKYVPSVSHFGVFSAKQERNTTTG 64
+           +  + +        I+F  +      GG+   FY+     P+      F   +       
+Sbjct: 1   VVRSFLLGAVVAGTIAFGSSAVAAGFGGDDTDFYLGFGLAPAFGSVADF-YAEVPGAADS 177
+
+Query: 65  VFGLKQDWDGS----TISKNSPENTFNVPNYSFKYENNPFLGFAGAVGYLMNGPRIELEM 120
+               ++D  G         +   +      Y  K++++   G  G+VG   +  R+ELE 
+Sbjct: 178 ALPYRKDAIGGGETSPFDFDWEGSGTKGSKYPIKFQHSSPFGVVGSVGVRYSTGRLELEA 357
+
+Query: 121 SYETFDVKNQGNNYKNDAHKYYALTHNSGGKLSNAG 156
+             E F +              + L  ++  +L    
+Sbjct: 358 VRERFPIMKVSGRAWTKGDSMFLLVDDAIVRLVTGQ 465
+
+
+>AM075 outer membrane protein 14
+          Length = 1215
+
+ Score =  139 bits (349), Expect = 8e-35
+ Identities = 42/141 (29%), Positives = 71/141 (50%), Gaps = 8/141 (5%)
+ Frame = +1
+
+Query: 148 SGGKLSNAGDKFVFLKNEGLLDISLMLNACYDVISEGI----PFSPYICAGVGTDLISM- 202
+            G  ++ + +    ++  G+  +S +L+ACYD    G+      SPY CAG+G   + + 
+Sbjct: 790 IGRAIATSTEGMEIVEISGVRVVSAILSACYDFPQVGLLVDWRMSPYACAGLGASFVGLT 969
+
+Query: 203 FEAINPKISYQGKLGLSYSISPEASVFVGGHFHKVIGNEFRDIPAM--IPSTSTLTGNHF 260
+            +   P+++ Q K G+SYSI+P  + F+GG   K +G  + + PA   +   S L     
+Sbjct: 970 AQRFQPQLTCQVKAGVSYSITPSLAAFIGGTASKTLGTNYDNTPAHRAVDDASPLGKTKE 1149
+
+Query: 261 T-IVTLSVCHFGVELGGRFNF 280
+               +  + + GVELG RF F
+Sbjct: 1150KVSASFGLRNIGVELGIRFGF 1212
+
+
+
+ Score =  122 bits (306), Expect = 8e-30
+ Identities = 34/152 (22%), Positives = 61/152 (40%)
+ Frame = +1
+
+Query: 8   ITTTLVSLMSFLPGISFSDAVQNDNVGGNFYISGKYVPSVSHFGVFSAKQERNTTTGVFG 67
+           I   L+S + +L   S        N   +FY+S  Y P++     F     + T   +  
+Sbjct: 64  IAAALLSTIGYLVPAS----SHGMNGREDFYVSFGYGPTIGKISGFRLNAAKETVAILPY 231
+
+Query: 68  LKQDWDGSTISKNSPENTFNVPNYSFKYENNPFLGFAGAVGYLMNGPRIELEMSYETFDV 127
+           + +       S N      +  + +  +EN+  LG  G+VG ++ G R+ELE  +E +D 
+Sbjct: 232 IGKLGSAELSSANYDWAGESTESPAMGFENSSLLGLRGSVGCVVRGTRLELEFGHEHYDF 411
+
+Query: 128 KNQGNNYKNDAHKYYALTHNSGGKLSNAGDKF 159
+           K+Q     +     +AL        +   + F
+Sbjct: 412 KSQNYALLSGGSATFALVKRISASATRDVEGF 507
+
+
+>AM1164 outer membrane protein 4
+          Length = 1218
+
+ Score =  137 bits (344), Expect = 3e-34
+ Identities = 36/178 (20%), Positives = 64/178 (35%), Gaps = 16/178 (8%)
+ Frame = +1
+
+Query: 119 EMSYETFDVKNQGNNYKNDAHKYY--ALTHNSGGKLSNAG-----------DKFVFLKNE 165
+           +  +    VK+    Y  + +KY    +     G  +              +     +  
+Sbjct: 682 KAEFPRSAVKHLVAGYGAEKYKYSPKLVAQKIAGLSTQGTASVASSFIRHLEGATVARIS 861
+
+Query: 166 GLLDISLMLNACYDVISE--GIPFSPYICAGVGTDLISMFEAINPKISYQGKLGLSYSIS 223
+           G+   S+ LN C DV +        PY CAGVG   I M       + Y+ K G  Y+++
+Sbjct: 862 GITSTSVTLNVCRDVPTYIPNARLIPYACAGVGWGFIGMSGETATHLMYRVKGGARYALT 1041
+
+Query: 224 PEASVFVGGHFHKVIGN-EFRDIPAMIPSTSTLTGNHFTIVTLSVCHFGVELGGRFNF 280
+           P   +  G     V G+ + +DI   + + +          T  + + G  +G  F+ 
+Sbjct: 1042PRVHLIAGAFLQGVFGSVKHQDIDTDVVAGNISKAASHISSTFRLKNLGFNIGASFSI 1215
+
+
+
+ Score =  121 bits (303), Expect = 2e-29
+ Identities = 37/158 (23%), Positives = 62/158 (39%), Gaps = 4/158 (2%)
+ Frame = +1
+
+Query: 1   MNCKKFFITTTL----VSLMSFLPGISFSDAVQNDNVGGNFYISGKYVPSVSHFGVFSAK 56
+           +N  + F+  T+    V L   LP ++ +DA   +   G FY      PS S    F  K
+Sbjct: 76  VNYARSFLAGTMALSAVCLNFALPSVAQADASDWEQQDG-FYAGFTLNPSYSRVQNFKLK 252
+
+Query: 57  QERNTTTGVFGLKQDWDGSTISKNSPENTFNVPNYSFKYENNPFLGFAGAVGYLMNGPRI 116
+              N   G+         S I        +N  + + ++ N+ F    G +G+ M G R+
+Sbjct: 253 DAGNDPAGILAYH-----SGIGTVPERFDWNTLDANVEFGNSSFPALEGIIGFSMQGFRV 417
+
+Query: 117 ELEMSYETFDVKNQGNNYKNDAHKYYALTHNSGGKLSN 154
+           EL +  E F VK      +  + + + L  N    ++ 
+Sbjct: 418 ELGIGREAFPVKTD----EAGSSRTFLLIRNLARAVAQ 519
+
+
+>AM1166 outer membrane protein 5
+          Length = 1119
+
+ Score =  131 bits (328), Expect = 2e-32
+ Identities = 35/143 (24%), Positives = 68/143 (47%), Gaps = 5/143 (3%)
+ Frame = +1
+
+Query: 143 ALTHNSGGKLSNAGDKFVFLKNEGLLDISLMLNACYDVISEGI--PFSPYICAGVGTDLI 200
+           A         +  G+    ++   +   + M +ACYD  +       +PY+C  VG +L+
+Sbjct: 688 AAAKLLSKVENGGGETAAVVEVNEIETTAAMFSACYDAPARAFSGRLTPYVCGSVGGNLV 867
+
+Query: 201 SMFEAINPKISYQGKLGLSYSISPEASVFVGGHFHKVIGN-EFRD--IPAMIPSTSTLTG 257
+            +   I  K++Y+ +LG++Y ++ + SV +    HKV G   +R   +  ++  T    G
+Sbjct: 868 DVSGNILWKLAYRARLGVNYMLTQKVSVNLEAFVHKVPGEVRYRKFVVEHVLGDTYADQG 1047
+
+Query: 258 NHFTIVTLSVCHFGVELGGRFNF 280
+           ++F  V+L + + G  LG +  F
+Sbjct: 1048SNFADVSLKLSYSGCNLGLKLEF 1116
+
+
+
+ Score =  103 bits (257), Expect = 4e-24
+ Identities = 25/156 (16%), Positives = 43/156 (27%), Gaps = 2/156 (1%)
+ Frame = +1
+
+Query: 10  TTLVSLMSFLPGISFSDAVQNDNVGGNFYISGKYVPSVSHFGVFSAKQERNTTTGVFGLK 69
+           +  V L + +   +              Y++G    + S             T GV  L 
+Sbjct: 82  SVAVCLFACVASGAVHIG-HKGAGTRRVYVAGTAGWARSAVRDLRLGTIDGKTAGVLPLS 258
+
+Query: 70  QD--WDGSTISKNSPENTFNVPNYSFKYENNPFLGFAGAVGYLMNGPRIELEMSYETFDV 127
+                + + +        +  PN    +    F     + GY     R E  M    F V
+Sbjct: 259 HTHGAEHAELVGEITSFDWKSPNPDISFGCGDFPALGWSAGYTTGRVRFEFGMEGRRFPV 438
+
+Query: 128 KNQGNNYKNDAHKYYALTHNSGGKLSNAGDKFVFLK 163
+           K  G +       ++ L  N    L+  G      +
+Sbjct: 439 KIDGES--AGGAGFFLLLKNLTYALAYNGSASSLAE 540
+
+
+>AM1219 outer membrane protein 6
+          Length = 462
+
+ Score =  130 bits (327), Expect = 3e-32
+ Identities = 28/150 (18%), Positives = 48/150 (32%), Gaps = 7/150 (4%)
+ Frame = +1
+
+Query: 8   ITTTLV--SLMSFLPGISFSDAVQNDNVGGNFYISGKYVPSVSHFGVFSAKQERNTTTGV 65
+           +  +LV  +L   LP +       +       Y+S  Y P+               T  V
+Sbjct: 1   VLRSLVGATLAVLLPAVFLYGTGSSAAEAFGPYVSFGYTPAWGGVRNLYV-GIPGETWYV 177
+
+Query: 66  FGLKQDWDGSTISKNSPENTFNVPNYSFK-----YENNPFLGFAGAVGYLMNGPRIELEM 120
+              K+D  G  +   S  + +     +       ++     G  GAVGY +   RIEL +
+Sbjct: 178 LPYKKDVSGDEVLSWSSFDWWGKNGGAPGDDPIKFKRISPYGVTGAVGYALGDTRIELGV 357
+
+Query: 121 SYETFDVKNQGNNYKNDAHKYYALTHNSGG 150
+             + F V      +    +  + L      
+Sbjct: 358 IGQEFSVSEISGRHWKQGNSLFLLLGKRSA 447
+
+
+>AM1148 
+          Length = 705
+
+ Score =  125 bits (314), Expect = 9e-31
+ Identities = 27/149 (18%), Positives = 49/149 (32%), Gaps = 7/149 (4%)
+ Frame = +1
+
+Query: 31  DNVGGNFYISGKYVPSVSHFGVFSA-------KQERNTTTGVFGLKQDWDGSTISKNSPE 83
+               G+FYI   Y P+ +              + +  T             +    NS  
+Sbjct: 151 GKGNGSFYIGLDYNPTFNGIKDLKIIGETDEDEMDVLTGARGLFPMNALASNVTDFNSYH 330
+
+Query: 84  NTFNVPNYSFKYENNPFLGFAGAVGYLMNGPRIELEMSYETFDVKNQGNNYKNDAHKYYA 143
+             ++ P    ++ N+      G++GY + G R+E+ + +E F +K   +       +  A
+Sbjct: 331 FDWSTPLPGLEFGNSTL-ALGGSIGYRIGGARVEVGIGHERFVIKGGDDTAFLLG-RELA 504
+
+Query: 144 LTHNSGGKLSNAGDKFVFLKNEGLLDISL 172
+           L    G  LS+A               S 
+Sbjct: 505 LDTARGQLLSSALGITEVDPIARTSITSA 591
+
+
+>AM091 
+          Length = 2199
+
+ Score =  116 bits (290), Expect = 6e-28
+ Identities = 27/144 (18%), Positives = 50/144 (34%), Gaps = 7/144 (4%)
+ Frame = +1
+
+Query: 31  DNVGGNFYISGKYVPSVSHFGVFSA-------KQERNTTTGVFGLKQDWDGSTISKNSPE 83
+               G+FYI   Y P+ +              + +  T             +    NS  
+Sbjct: 22  GKGNGSFYIGLDYNPTFNGIKDLKIIGETDEDEMDVLTGARGLFPMNALASNVTDFNSYH 201
+
+Query: 84  NTFNVPNYSFKYENNPFLGFAGAVGYLMNGPRIELEMSYETFDVKNQGNNYKNDAHKYYA 143
+             ++ P    ++ N+      G++GY + G R+E+ + +E F +K   +       +  A
+Sbjct: 202 FDWSTPLPGLEFGNSTL-ALGGSIGYRIGGARVEVGIGHERFVIKGGDDTAFLLG-RELA 375
+
+Query: 144 LTHNSGGKLSNAGDKFVFLKNEGL 167
+           L    G  LS+A  +        L
+Sbjct: 376 LDTARGQLLSSALGRMSMGDVRRL 447
+
+
+>AM049 
+          Length = 603
+
+ Score = 87.9 bits (216), Expect = 2e-19
+ Identities = 15/80 (18%), Positives = 31/80 (38%)
+ Frame = +1
+
+Query: 77  ISKNSPENTFNVPNYSFKYENNPFLGFAGAVGYLMNGPRIELEMSYETFDVKNQGNNYKN 136
+           +        ++ P     ++++      G++GY + G R+E+E+ YE F +K  G     
+Sbjct: 1   VDFKVHNFDWSAPEPKISFKDSMLTALEGSIGYSIGGARVEVEVGYERFVIK-GGKKSNE 177
+
+Query: 137 DAHKYYALTHNSGGKLSNAG 156
+           D    + L        +   
+Sbjct: 178 DTASVFLLGKELAYDTARGQ 237
+
+
+>AM213 
+          Length = 777
+
+ Score = 73.3 bits (178), Expect = 6e-15
+ Identities = 14/67 (20%), Positives = 27/67 (40%)
+ Frame = +1
+
+Query: 90  NYSFKYENNPFLGFAGAVGYLMNGPRIELEMSYETFDVKNQGNNYKNDAHKYYALTHNSG 149
+                ++++      G++GY + G R+E+E+ YE F +K  G     D    + L     
+Sbjct: 7   EPKISFKDSMLTALEGSIGYSIGGARVEVEVGYERFVIK-GGKKSNEDTASVFLLGKELA 183
+
+Query: 150 GKLSNAG 156
+              +   
+Sbjct: 184 YDTARGQ 204
+
+
+>AM047 
+          Length = 1542
+
+ Score = 64.0 bits (154), Expect = 3e-12
+ Identities = 14/58 (24%), Positives = 23/58 (39%)
+ Frame = +1
+
+Query: 99  PFLGFAGAVGYLMNGPRIELEMSYETFDVKNQGNNYKNDAHKYYALTHNSGGKLSNAG 156
+                 G++GY + G R+E+E+ YE F +K  G     D    + L        +   
+Sbjct: 1   MLTALEGSIGYSIGGARVEVEVGYERFVIK-GGKKSNEDTASVFLLGKELAYDTARGQ 171
+
+
+>AM991 
+          Length = 210
+
+ Score = 64.0 bits (154), Expect = 3e-12
+ Identities = 14/58 (24%), Positives = 23/58 (39%)
+ Frame = +1
+
+Query: 99  PFLGFAGAVGYLMNGPRIELEMSYETFDVKNQGNNYKNDAHKYYALTHNSGGKLSNAG 156
+                 G++GY + G R+E+E+ YE F +K  G     D    + L        +   
+Sbjct: 1   MLTALEGSIGYSIGGARVEVEVGYERFVIK-GGKKSNEDTASVFLLGKELAYDTARGQ 171
+
+
+>AM720 
+          Length = 537
+
+ Score = 64.0 bits (154), Expect = 3e-12
+ Identities = 14/58 (24%), Positives = 23/58 (39%)
+ Frame = +1
+
+Query: 99  PFLGFAGAVGYLMNGPRIELEMSYETFDVKNQGNNYKNDAHKYYALTHNSGGKLSNAG 156
+                 G++GY + G R+E+E+ YE F +K  G     D    + L        +   
+Sbjct: 1   MLTALEGSIGYSIGGARVEVEVGYERFVIK-GGKKSNEDTASVFLLGKELAYDTARGQ 171
+
+
+>AM033 
+          Length = 585
+
+ Score = 64.0 bits (154), Expect = 3e-12
+ Identities = 14/58 (24%), Positives = 23/58 (39%)
+ Frame = +1
+
+Query: 99  PFLGFAGAVGYLMNGPRIELEMSYETFDVKNQGNNYKNDAHKYYALTHNSGGKLSNAG 156
+                 G++GY + G R+E+E+ YE F +K  G     D    + L        +   
+Sbjct: 1   MLTALEGSIGYSIGGARVEVEVGYERFVIK-GGKKSNEDTASVFLLGKELAYDTARGQ 171
+
+
+>AM1250 
+          Length = 540
+
+ Score = 64.0 bits (154), Expect = 3e-12
+ Identities = 14/58 (24%), Positives = 23/58 (39%)
+ Frame = +1
+
+Query: 99  PFLGFAGAVGYLMNGPRIELEMSYETFDVKNQGNNYKNDAHKYYALTHNSGGKLSNAG 156
+                 G++GY + G R+E+E+ YE F +K  G     D    + L        +   
+Sbjct: 1   MLTALEGSIGYSIGGARVEVEVGYERFVIK-GGKKSNEDTASVFLLGKELAYDTARGQ 171
+
+
+>AM987 outer membrane protein 15
+          Length = 456
+
+ Score = 62.9 bits (151), Expect = 7e-12
+ Identities = 20/65 (30%), Positives = 32/65 (49%), Gaps = 3/65 (4%)
+ Frame = +1
+
+Query: 219 SYSISPEASVFVGGHFHKVIGNEFRDIPAM--IPSTSTLTGNHFT-IVTLSVCHFGVELG 275
+           ++SI+P  + F+GG   K +G  + + PA   +   S L         +  + + GVELG
+Sbjct: 259 AFSITPSLAAFIGGTASKTLGTNYDNTPAHRAVDDASPLGKTKEKVSASFGLRNIGVELG 438
+
+Query: 276 GRFNF 280
+            RF F
+Sbjct: 439 IRFGF 453
+
+
+>AM1345 
+          Length = 1982
+
+ Score = 57.5 bits (137), Expect = 3e-10
+ Identities = 16/54 (29%), Positives = 27/54 (50%)
+ Frame = -1
+
+Query: 102  GFAGAVGYLMNGPRIELEMSYETFDVKNQGNNYKNDAHKYYALTHNSGGKLSNA 155
+             F G++GY + G R+E+ + +E F +K   +       +  AL    G  LS+A
+Sbjct: 1949 AFGGSIGYRIGGARVEVGIGHERFVIKGGDDAAFLLG-RELALDTARGQLLSSA 1791
+
+
+>AM1159 outer membrane protein 3
+          Length = 651
+
+ Score = 49.0 bits (115), Expect = 1e-07
+ Identities = 15/52 (28%), Positives = 23/52 (44%), Gaps = 3/52 (5%)
+ Frame = +1
+
+Query: 232 GHFHKVIGNEFRDIPAM--IPSTSTLTGNHFTI-VTLSVCHFGVELGGRFNF 280
+           G   K +G  + + PA   +   S L      +  +  + + GVELG RF F
+Sbjct: 493 GTASKTLGTNYDNTPAHRAVDDASPLGKTKEKVSASFGLRNIGVELGIRFGF 648
+
+
+>AM780 hypothetical protein
+          Length = 1680
+
+ Score = 29.7 bits (65), Expect = 0.070
+ Identities = 18/100 (18%), Positives = 26/100 (26%)
+ Frame = +1
+
+Query: 19   LPGISFSDAVQNDNVGGNFYISGKYVPSVSHFGVFSAKQERNTTTGVFGLKQDWDGSTIS 78
+              GIS S        G     +     SV   G                 +    GST+ 
+Sbjct: 1171 AAGISRSYGDVAPVGGFCALAAVGMSASV-EVGGVDFGFGYGHLGNSGYPRGPLVGSTVD 1347
+
+Query: 79   KNSPENTFNVPNYSFKYENNPFLGFAGAVGYLMNGPRIEL 118
+                   ++       +  + +L     VGY     R EL
+Sbjct: 1348 -------WSRGKTDPAWRPSSYLVMG--VGYGSGPVRAEL 1440
+
+
+>AM638 hypothetical protein
+          Length = 9585
+
+ Score = 23.6 bits (49), Expect = 5.0
+ Identities = 6/15 (40%), Positives = 8/15 (53%)
+ Frame = -2
+
+Query: 179  DVISEGIPFSPYICA 193
+            D  +  +  SPY CA
+Sbjct: 7214 DFPASSVASSPYACA 7170
+
+
+>AM390 glutathione S-transferase
+          Length = 669
+
+ Score = 23.2 bits (48), Expect = 6.6
+ Identities = 10/30 (33%), Positives = 15/30 (50%)
+ Frame = -2
+
+Query: 187 FSPYICAGVGTDLISMFEAINPKISYQGKL 216
+            SP IC   G D I  + ++   +  QGK+
+Sbjct: 620 LSPKICENDGLDFIREYHSLRVGLKSQGKM 531
+
+
+>AM405 2-oxoglutarate dehydrogenase E1 component
+          Length = 2793
+
+ Score = 22.8 bits (47), Expect = 8.6
+ Identities = 9/63 (14%), Positives = 18/63 (28%)
+ Frame = +1
+
+Query: 47  VSHFGVFSAKQERNTTTGVFGLKQDWDGSTISKNSPENTFNVPNYSFKYENNPFLGFAGA 106
+              +G  +A  +     G   L  D   ++I  +                      + G+
+Sbjct: 313 FRSYGHLAADLDPLGMAGKVALDHDKFIASIIGDGEAAWRGSGASLPSILQALKETYCGS 492
+
+Query: 107 VGY 109
+           +GY
+Sbjct: 493 IGY 501
+
+
+  Database: cds
+    Posted date:  Jan 25, 2010  5:24 PM
+  Number of letters in database: 1,051,166
+  Number of sequences in database:  1004
+  
+Lambda     K      H
+   0.317    0.125    0.308 
+
+Gapped
+Lambda     K      H
+   0.267   0.0383    0.140 
+
+
+Matrix: BLOSUM62
+Gap Penalties: Existence: 11, Extension: 1
+Number of Sequences: 1004
+Number of Hits to DB: 195,288
+Number of extensions: 1797
+Number of successful extensions: 118
+Number of sequences better than 10.0: 35
+Number of HSP's gapped: 59
+Number of HSP's successfully gapped: 45
+Length of query: 280
+Length of database: 350,388
+Length adjustment: 74
+Effective length of query: 206
+Effective length of database: 276,092
+Effective search space: 56874952
+Effective search space used: 56874952
+Neighboring words threshold: 13
+Window for multiple hits: 40
+X1: 16 ( 7.3 bits)
+X2: 38 (14.6 bits)
+X3: 64 (24.7 bits)
+S1: 41 (21.8 bits)
+S2: 36 (18.6 bits)

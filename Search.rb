@@ -3,6 +3,7 @@ require 'Ortholog'
 require 'Taxon'
 require 'Tools'
 require 'Result'
+require 'term/ansicolor'
 
 module Search
 	include Item
@@ -10,8 +11,7 @@ module Search
 	class TypeSet < Set
 		def initialize(options = {:empty => false})
 			super()
-			#@types = ["nucleotide", "protein"]
-			@types = ["6frame", "protein"]
+			@types = ["cds", "6frame", "protein"]
 			if ! options[:empty]
 				@types.each do |type|
 					add(Type.new(length + 1, type))
@@ -28,8 +28,7 @@ module Search
 	class Type < Item
 		def initialize(id, type)
 			super(id)
-			#@valid_types = ["nucleotide", "protein"]
-			@valid_types = ["6frame", "protein"]
+			@valid_types = ["cds", "6frame", "protein"]
 			@type = validate_type(type)
 		end
 		
@@ -86,7 +85,7 @@ module Search
 	class Set < Set
 		attr_accessor :parameters
 		attr_reader :config
-	
+		include Term::ANSIColor
 		def initialize(ps = nil, options = {:empty => false, :config => nil})
 			super()
 			
@@ -124,6 +123,10 @@ module Search
 			parameters.taxon.each_value do |taxon|
 				parameters.ortholog.each_value do |ortholog|
 					parameters.type.each_value do |type|
+						# This two lines are a hack until I find a better solution.
+						next if taxon.type == "spp" and type.name == "cds"
+						next if taxon.type == "clade" and type.name != "cds"
+						# Here we go.
 						search = Search.new(taxon, ortholog, type)
 						add(search)
 					end
@@ -145,29 +148,57 @@ module Search
 					hr.debug
 					res = hr.execute
 				when 'clade'
-					tool = Tools::Blast.new(options = {:config => config})
+					warn "* search id: " + search.id
+					st = Tools::Blast.new(options = {:config => config})
+					st.tool = 'tblastn'
+					st.pssm_file = config.dir_model + "pssm" + (search.ortholog.name + ".chk")
+					st.seed_file = config.dir_model + "pssm" + (search.ortholog.name + ".seed")
+					st.db = config.dir_sequence + search.taxon.name + (search.type.name)
+					st.outfile = config.dir_result + "isolate/search" + search.ortholog.name + (search.id + ".txt")
+					st.debug
+					res = st.execute
 				end
+				if res
+					$stderr.puts green, bold, "+ OK [#{res}] +", reset
+				else
+					$stderr.puts red, bold, "+ FAIL [#{res}] +", reset
+				end
+				warn ""
 			end
-			warn "+ DONE +"
-			warn ""
 		end
 
 		# this method parses results from a search.
 		def parse
 			rs = Result::Set.new
 			each_value do |search|
-				file = config.dir_result + "genome/search" + search.ortholog.name + (search.id + ".txt")
-				
-				rp = Result::HmmerParser.new
-				rp.file = file
-				rp.result_id = search.id
-				rp.type = search.type.name
-				rp.config = config # this makes sense in this case since HmmerParse is not using Config, but passing it to the Result.
-				r = rp.parse
-				r.taxon = search.taxon
-				r.ortholog = search.ortholog
-				r.type = search.type
-				rs << r
+				case search.taxon.type
+				when 'spp'
+					file = config.dir_result + "genome/search" + search.ortholog.name + (search.id + ".txt")
+					
+					rp = Result::HmmerParser.new
+					rp.file = file
+					rp.result_id = search.id
+					rp.type = search.type.name
+					rp.config = config # this makes sense in this case since HmmerParse is not using Config, but passing it to the Result.
+					r = rp.parse
+					r.taxon = search.taxon
+					r.ortholog = search.ortholog
+					r.type = search.type
+					rs << r
+				when 'clade'
+					file = config.dir_result + "isolate/search" + search.ortholog.name + (search.id + ".txt")
+					
+					rp = Result::BlastParser.new
+					rp.file = file
+					rp.result_id = search.id
+					rp.type = search.type.name
+					rp.config = config
+					r = rp.parse
+					r.taxon = search.taxon
+					r.ortholog = search.ortholog
+					r.type = search.type
+					rs << r
+				end
 			end
 			rs
 		end

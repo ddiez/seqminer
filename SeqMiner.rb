@@ -6,6 +6,8 @@ require 'Ortholog'
 require 'Search'
 require 'Result'
 require 'Download'
+require 'Tools'
+require 'term/ansicolor'
 
 module SeqMiner
 	class Config
@@ -19,7 +21,7 @@ module SeqMiner
 
 		def initialize
 			# Basedir.
-			@dir_home = Pathname.new("/Volumes/Biodev/projects/vardb/sm")
+			@dir_home = Pathname.new("/Volumes/Biodev/projects/vardb/dr-3")
 			update
 		end
 		
@@ -42,7 +44,7 @@ module SeqMiner
 			
 			# Tools.
 			@dir_hmmer = Pathname.new("/Users/diez/local/hmmer3/bin/")
-			@dir_blast = Pathname.new("/Users/diez/local/blast/bin/")
+			@dir_blast = Pathname.new("/usr/local/ncbi/blast/bin/")
 		end
 		
 		def basedir=(dir)
@@ -70,6 +72,7 @@ module SeqMiner
 	end
 	
 	class Install
+		include Term::ANSIColor
 		attr_reader :project, :config, :taxon, :ortholog
 
 		def initialize(options = {:config => nil})
@@ -157,10 +160,15 @@ module SeqMiner
 			taxon.each_value do |t|
 				case t.type
 				when 'spp'
-			#		process_spp(t)
+					process_spp(t)
 				when 'clade'
-			#		process_clade(t)
+					process_clade(t)
 				end
+			end
+		end
+		
+		def process_directories
+			taxon.each_taxon do |t|
 				process_blast(t)
 			end
 		end
@@ -170,17 +178,39 @@ module SeqMiner
 			warn "* formatting: " + t.name
 			dir = config.dir_sequence + t.name
 			Dir.chdir(dir)
+			
+			ts = Tools::Blast.new
+			ts.tool = 'makeblastdb'
+			
+			["gene", "cds", "protein", "6frame", "genome"].each do |type|
+				next if type == "genome" and t.type != "spp"
+				ts.type = "nucl"
+				ts.type = "prot" if type == "protein" or type == "6frame"
+				ts.db = type
+				end
+			end
+			
 			if t.type == "spp"
-				cmd = "formatdb -p F -i genome.fa -n genome -o T -V"
+#				cmd = "formatdb -p F -i genome.fa -n genome -o T -V"
+#				res = system cmd
+				cmd = "makeblastdb -in genome.fa -out genome -hash_index -parse_seqids -dbtype nucl"
 				res = system cmd
 			end
-			cmd = "formatdb -p F -i gene.fa -n gene -o T -V"
+#			cmd = "formatdb -p F -i gene.fa -n gene -o T -V"
+#			res = system cmd
+#			cmd = "formatdb -p F -i cds.fa -n cds -o T -V"
+#			res = system cmd
+#			cmd = "formatdb -i protein.fa -n protein -o T -V"
+#			res = system cmd
+#			cmd = "formatdb -i 6frame.fa -n 6frame -o T -V"
+#			res = system cmd
+			cmd = "makeblastdb -in gene.fa -out gene -hash_index -parse_seqids -dbtype nucl"
 			res = system cmd
-			cmd = "formatdb -p F -i cds.fa -n cds -o T -V"
+			cmd = "makeblastdb -in cds.fa -out cds -hash_index -parse_seqids -dbtype nucl"
 			res = system cmd
-			cmd = "formatdb -i protein.fa -n protein -o T -V"
+			cmd = "makeblastdb -in protein.fa -out protein -hash_index -parse_seqids"
 			res = system cmd
-			cmd = "formatdb -i 6frame.fa -n 6frame -o T -V"
+			cmd = "makeblastdb -in 6frame.fa -out 6frame -hash_index -parse_seqids"
 			res = system cmd
 		end
 		
@@ -257,11 +287,13 @@ module SeqMiner
 		def update_psiblast
 			typeset = Search::TypeSet.new
 			ortholog.each_ortholog do |o|
+				o.debug
 				rs = Result::Set.new
 				warn "* computing best hit"
 				taxon.each_taxon do |t|
 					next if t.type != 'spp'
 					typeset.each_value do |type|
+						next if type.name == "cds"
 						sid = t.name + "-" + o.name + "-" + type.name
 						file = config.dir_result + "genome/search" + o.name + (sid + ".txt") 
 						p = Result::HmmerParser.new(options = {:taxon => t, :ortholog => o})
@@ -280,6 +312,7 @@ module SeqMiner
 				#rs.debug
 				bh = rs.best_hit
 				bh.debug
+				bh.taxon.debug
 				
 				# Store the SEED sequence.
 				warn "* updating seed sequences"
@@ -296,9 +329,22 @@ module SeqMiner
 				warn "* computing PSSM model"
 				pssm_file = dir + (bh.ortholog.name + ".chk")
 				pgp_file = dir + (bh.ortholog.name + ".pgp")
-				cmd = "blastpgp -d " + (config.dir_sequence + bh.taxon.name + "protein") + " -i " + \
-					file + " -s T -j 3 -h 1E-03 -C " + pssm_file + " -F T -b 10000 -a 8 > " + pgp_file
-				system cmd
+				ts = Tools::Blast.new
+				ts.tool = 'psiblast'
+				ts.seed_file = file
+				ts.db = config.dir_sequence + bh.taxon.name + "protein"
+				ts.pssm_file = pssm_file
+				ts.outfile = pgp_file
+				res = ts.execute
+				if res
+					$stderr.puts green, bold, "[DONE]", reset
+				else
+					$stderr.puts red, bold, "[FAIL]", reset
+				end
+				
+#				cmd = "blastpgp -d " + (config.dir_sequence + bh.taxon.name + "protein") + " -i " + \
+#					file + " -s T -j 3 -h 1E-03 -C " + pssm_file + " -F T -b 10000 -a 8 > " + pgp_file
+#				system cmd
 			end
 		end
 	end
@@ -330,7 +376,7 @@ module SeqMiner
 		end
 		
 		def dir_initialize
-			dir_level1 = ['genome']
+			dir_level1 = ['genome', 'isolate']
 			dir_level2 = ['search', 'sequences', 'fasta']
 			
 			warn "+ CREATE RESULT DIR STRUCTURE +"
@@ -348,10 +394,10 @@ module SeqMiner
 		end
 
 		def run_all
-			#run_search
+			run_search
 			get_results
-			#export_nelson
-			write_fasta
+			export_nelson
+			#write_fasta
 		end
 		
 		def build_search
@@ -362,12 +408,12 @@ module SeqMiner
 		# Initializes the result directory structure if needed, then performs the searches.
 		def run_search
 			dir_initialize if ! dir_initialized?
-			@search.search
+			search.search
 		end
 		
 		# Parses the HMMER files, performs auto_merge and obtains the results (given an Evalue thereshold).
 		def get_results(eval = 0.001)
-			@result = @search.parse
+			@result = search.parse
 			@result = result.auto_merge
 			result.filter_by_eval(eval)
 		end

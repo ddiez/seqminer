@@ -8,7 +8,9 @@ require 'Ortholog'
 module Result
 	include Item
 	class Domain < Item
-		attr_accessor :ceval, :ieval, :score, :bias, :aln_from, :aln_to, :hmm_from, :hmm_to, :env_from, :env_to, :query_length, :seq_eval, :seq_score
+		attr_accessor :ceval, :ieval, :score, :bias, :aln_from, :aln_to, :hmm_from, :hmm_to
+		attr_accessor :env_from, :env_to, :query_length, :seq_eval, :seq_score, :eval
+		
 		def initialize(id)
 			super
 		end
@@ -291,9 +293,62 @@ module Result
 			end
 			return ch
 		end
+		
+		def export_nelson
+			case taxon.type
+			when 'spp'
+				write_nelson_spp
+			when 'clade'
+				write_nelson_clade
+			end
+		end
+		
+		def write_nelson_clade
+			ndb = Sequence::Set.new(taxon.name, "gene", options = {:config => config})
+			pdb = Sequence::Set.new(taxon.name, "protein", options = {:config => config})
+			
+			ofile = config.dir_result + "isolate/sequences" + ortholog.name + (id + ".txt")
+			warn "* export_nelson: " + ofile
+			#ofile = "foo.txt"
+			of = File.new(ofile, "w")
+			of.puts	"family" + "\t" +
+				"genome" + "\t" +
+				"taxid" + "\t" +
+				"source" + "\t" +
+				"sequence" + "\t" +
+				"method" + "\t" +
+				"score" + "\t" +
+				"evalue" + "\t" +
+				"hmmloc" + "\t" +
+				"description"
+			each_hit do |hit|
+				gseq = ndb.get_seq_by_acc(hit.id)
+				if gseq
+					gseq = gseq.seq
+				else
+					gseq = ""
+				end
+				pseq = pdb.get_seq_by_acc(hit.id)
+				if pseq
+					pseq = pseq.seq
+				else
+					pseq = ""
+				end
+				
+				of.puts hit.id + "\t" +
+					taxon.binomial + "." + ortholog.name + "\t" +
+					taxon.binomial + "." + taxon.id + "\t" +
+					taxon.id + "\t" +
+					gseq + "\t" +
+					pseq + "\t" +
+					hit.score.to_s + "\t" +
+					hit.eval.to_s + "\t"
+			end
+			of.close
+		end
 
 		# Export results in a format suitable to load in varDB (Nelson's preferred format)
-		def export_nelson
+		def write_nelson_spp
 			ndb = Sequence::Set.new(taxon.name, "gene")
 			pdb = Sequence::Set.new(taxon.name, "protein")
 			gdb = Genome::Set.new(taxon)
@@ -427,7 +482,7 @@ module Result
 		
 		def auto_merge
 			rs = Set.new
-			each_value do |result|
+			each_result do |result|
 				id = result.taxon.name + "-" + result.ortholog.name
 				r = rs.get_item_by_id(id)
 				if r.nil?
@@ -492,7 +547,7 @@ module Result
 		# Exports data in format suitable for varDB (a.k.a. Nelson format).
 		def export_nelson
 			warn "+ EXPORT NELSON +" 
-			each_value do |result|
+			each_result do |result|
 				if result.length > 0
 					warn "* " + result.taxon.name + " / " + result.ortholog.name
 					result.export_nelson
@@ -524,6 +579,87 @@ module Result
 			each_result do |result|
 				result.debug
 			end
+		end
+	end
+	
+	class BlastParser
+		attr_reader :taxon, :ortholog
+		attr_accessor :file, :result_id, :type, :config
+
+		def initialize(options = {:config => nil, :taxon => nil, :ortholog => nil, :empty => false})
+			if options[:config]
+				@config = options[:config]
+			else
+				@config = SeqMiner::Config.new
+			end
+			
+			
+			@taxon = options[:taxon] if options[:taxon]
+			@ortholog = options[:ortholog] if options[:ortholog]
+
+			@file = nil
+			@result_id = nil
+			@type = nil
+		end
+		
+		def parse
+			result = Result.new(result_id, options = {:config => config})
+			result.taxon = taxon if taxon
+			result.ortholog = ortholog if ortholog
+			result.type = type if type
+			
+			fi = File.open(file)
+			fi.each do |line|
+				next if line =~ /^#/
+				line.chomp
+				#tid, tacc, tlen, qid, qacc, qlen, seval, sscore,
+				#sbias, dn, dtot, dceval, dieval, dscore, dbias, hf, ht,
+				#af, at, ef, et, acc = line.split(' ')
+				qid, tid, piden, alen, mis, gaps, qs, qe, ts, te, eval, score = line.split("\t")
+				h = result.get_item_by_id(tid)
+				if h.nil?
+					h = Hit.new(tid)
+					result << h
+				end
+			
+				sp = []	
+				sid = tid
+				#warn "* subhit id: " + sid
+				sh = h.get_item_by_id(sid)
+				if sh.nil?
+					sh = SubHit.new(sid)
+					sh.score = score.to_f
+					sh.eval = eval.to_f
+					sh.target_name = tid
+					#sh.target_acc = tacc
+					#sh.target_length = tlen.to_i
+					sh.query_name = qid
+					#sh.query_acc = qacc
+					#sh.query_length = qlen.to_i
+					sh.type = type
+					#sh.strand = sp[0]
+					#sh.frame = sp[1]
+					h << sh
+				end
+				dom = Domain.new(sh.length + 1)
+				dom.hmm_from = qs.to_i
+				dom.hmm_to = qe.to_i
+				dom.aln_from = ts.to_i
+				dom.aln_to = te.to_i
+				#dom.env_from = ef.to_i
+				#dom.env_to = et.to_i
+				#dom.ceval = dceval
+				#dom.ieval = dieval
+				dom.eval = eval
+				dom.score = score
+				#dom.bias = dbias
+				# TODO: may be better to do this by referencing the parent class?
+				#dom.query_length = qlen.to_i
+				sh.add(dom)
+			end
+			fi.close
+			
+			result
 		end
 	end
 
@@ -611,8 +747,6 @@ module Result
 			end
 			fi.close
 			
-			result.taxon = taxon if taxon
-			result.ortholog = ortholog if ortholog
 			result
 		end
 		
