@@ -376,7 +376,8 @@ module SeqMiner
 		end
 
 		def run_all
-			run_search
+			dir_initialize if ! dir_initialized?
+			#run_search
 			get_results
 			export_nelson
 			#write_fasta
@@ -389,7 +390,6 @@ module SeqMiner
 		
 		# Initializes the result directory structure if needed, then performs the searches.
 		def run_search
-			dir_initialize if ! dir_initialized?
 			search.search
 		end
 		
