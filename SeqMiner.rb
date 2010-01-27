@@ -184,34 +184,19 @@ module SeqMiner
 			
 			["gene", "cds", "protein", "6frame", "genome"].each do |type|
 				next if type == "genome" and t.type != "spp"
-				ts.type = "nucl"
-				ts.type = "prot" if type == "protein" or type == "6frame"
-				ts.db = type
+				ts.outfile = type
+				ts.dbtitle = type
+				ts.dbtype = "nucl"
+				ts.dbtype = "prot" if type == "protein" or type == "6frame"
+				ts.infile = type + ".fa"
+				ts.debug
+				res = ts.execute
+				if res
+					$stderr.puts green, bold, "[DONE]", reset
+				else
+					$stderr.puts red, bold, "[FAIL]", reset
 				end
 			end
-			
-			if t.type == "spp"
-#				cmd = "formatdb -p F -i genome.fa -n genome -o T -V"
-#				res = system cmd
-				cmd = "makeblastdb -in genome.fa -out genome -hash_index -parse_seqids -dbtype nucl"
-				res = system cmd
-			end
-#			cmd = "formatdb -p F -i gene.fa -n gene -o T -V"
-#			res = system cmd
-#			cmd = "formatdb -p F -i cds.fa -n cds -o T -V"
-#			res = system cmd
-#			cmd = "formatdb -i protein.fa -n protein -o T -V"
-#			res = system cmd
-#			cmd = "formatdb -i 6frame.fa -n 6frame -o T -V"
-#			res = system cmd
-			cmd = "makeblastdb -in gene.fa -out gene -hash_index -parse_seqids -dbtype nucl"
-			res = system cmd
-			cmd = "makeblastdb -in cds.fa -out cds -hash_index -parse_seqids -dbtype nucl"
-			res = system cmd
-			cmd = "makeblastdb -in protein.fa -out protein -hash_index -parse_seqids"
-			res = system cmd
-			cmd = "makeblastdb -in 6frame.fa -out 6frame -hash_index -parse_seqids"
-			res = system cmd
 		end
 		
 		def process_spp(t)
@@ -335,16 +320,13 @@ module SeqMiner
 				ts.db = config.dir_sequence + bh.taxon.name + "protein"
 				ts.pssm_file = pssm_file
 				ts.outfile = pgp_file
+				ts.debug
 				res = ts.execute
 				if res
 					$stderr.puts green, bold, "[DONE]", reset
 				else
 					$stderr.puts red, bold, "[FAIL]", reset
 				end
-				
-#				cmd = "blastpgp -d " + (config.dir_sequence + bh.taxon.name + "protein") + " -i " + \
-#					file + " -s T -j 3 -h 1E-03 -C " + pssm_file + " -F T -b 10000 -a 8 > " + pgp_file
-#				system cmd
 			end
 		end
 	end

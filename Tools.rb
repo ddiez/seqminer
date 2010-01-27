@@ -3,7 +3,7 @@ require 'SeqMiner'
 module Tools
 	
 	class Tools
-		attr_accessor :outfile, :tool
+		attr_accessor :infile, :outfile, :tool
 		attr_reader :path, :config
 		
 		def initialize(options = {:config => nil})
@@ -12,10 +12,6 @@ module Tools
 			else
 				@config = SeqMiner::Config.new
 			end
-			
-			@tool = "_undef_"
-			@path = "_undef_"
-			@outfile = "_undef_"
 		end
 		
 		def tool=(tool)
@@ -34,7 +30,7 @@ module Tools
 	end
 	
 	class Hmmer < Tools
-		attr_accessor :model, :infile, :table_file
+		attr_accessor :model, :table_file
 		
 		def initialize(options = {:config => nil})
 			super
@@ -66,18 +62,18 @@ module Tools
 		
 		def debug
 			warn "+ Tool +"
-			warn "* tool: " + tool
-			warn "* path: " + path
-			warn "* model: " + model
-			warn "* infile: " + infile
-			warn "* outfile: " + outfile
-			warn "* table_file: " + table_file
+			warn "* tool: " + tool.to_s
+			warn "* path: " + path.to_s
+			warn "* model: " + model.to_s
+			warn "* infile: " + infile.to_s
+			warn "* outfile: " + outfile.to_s
+			warn "* table_file: " + table_file.to_s
 			warn ""
 		end
 	end
 	
 	class Blast < Tools
-		attr_accessor :seed_file, :pssm_file, :db
+		attr_accessor :seed_file, :pssm_file, :db, :dbtype, :dbtitle
 		def initialize(options = {:config => nil})
 			super
 		end
@@ -85,13 +81,15 @@ module Tools
 		def execute
 			case tool
 			when 'tblastn'
-				params = "-outfmt 7"
+				params = "-outfmt 7 -num_threads 8"
 				cmd = [path, params, "-db", db, "-in_pssm", pssm_file, ">", outfile]
 			when 'psiblast'
 				params = "-num_iterations 3 -inclusion_ethresh 0.0001 -num_threads 8"
 				cmd = [path, params, "-db", db, "-out_pssm", pssm_file, "-query", seed_file, ">", outfile] 
 			when 'makeblastdb'
-				cmd = [path]
+				params = "-hash_index -parse_seqids"
+				@dbtitle = outfile if ! dbtitle
+				cmd = [path, params, "-in", infile, "-out", outfile, "-dbtype", dbtype, "-title", dbtitle]
 			end
 			cmd = cmd.join(" ")
 			res = system cmd
@@ -100,12 +98,15 @@ module Tools
 		
 		def debug
 			warn "+ Tool +"
-			warn "* tool: " + tool
-			warn "* path: " + path
-			warn "* model: " + pssm_file
-			warn "* db: " + db
-			warn "* seed_file: " + seed_file
-			warn "* outfile: " + outfile
+			warn "* tool: " + tool.to_s
+			warn "* path: " + path.to_s
+			warn "* db: " + db.to_s
+			warn "* dbtype: " + dbtype.to_s
+			warn "* dbtitle: " + dbtitle.to_s
+			warn "* infile: " + infile.to_s
+			warn "* outfile: " + outfile.to_s
+			warn "* seed_file: " + seed_file.to_s
+			warn "* model: " + pssm_file.to_s
 			warn ""
 		end
 	end

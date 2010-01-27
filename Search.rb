@@ -152,17 +152,18 @@ module Search
 					st = Tools::Blast.new(options = {:config => config})
 					st.tool = 'tblastn'
 					st.pssm_file = config.dir_model + "pssm" + (search.ortholog.name + ".chk")
-					st.seed_file = config.dir_model + "pssm" + (search.ortholog.name + ".seed")
+					#st.seed_file = config.dir_model + "pssm" + (search.ortholog.name + ".seed")
 					st.db = config.dir_sequence + search.taxon.name + (search.type.name)
 					st.outfile = config.dir_result + "isolate/search" + search.ortholog.name + (search.id + ".txt")
 					st.debug
 					res = st.execute
 				end
+				
 				if res
-					$stderr.puts green, bold, "+ OK [#{res}] +", reset
-				else
-					$stderr.puts red, bold, "+ FAIL [#{res}] +", reset
-				end
+                    $stderr.puts green, bold, "[DONE]", reset
+                else
+                    $stderr.puts red, bold, "[FAIL]", reset
+                end
 				warn ""
 			end
 		end
