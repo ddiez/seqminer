@@ -178,8 +178,7 @@ module SeqMiner
 			dir = config.dir_sequence + t.name
 			Dir.chdir(dir)
 			
-			ts = Tools::Blast.new
-			ts.tool = 'makeblastdb'
+			ts = Tools::Blast.new('makeblastdb', options = {:config => config}) 
 			
 			["gene", "cds", "protein", "6frame", "genome"].each do |type|
 				next if type == "genome" and t.type != "spp"
@@ -316,8 +315,7 @@ module SeqMiner
 				warn "* computing PSSM model"
 				pssm_file = dir + (bh.ortholog.name + ".pssm")
 				pgp_file = dir + (bh.ortholog.name + ".pgp")
-				ts = Tools::Blast.new
-				ts.tool = 'psiblast'
+				ts = Tools::Blast.new('psiblast', options = {:config => config})
 				ts.seed_file = file
 				ts.db = config.dir_sequence + bh.taxon.name + "protein"
 				ts.pssm_file = pssm_file
@@ -379,7 +377,7 @@ module SeqMiner
 
 		def run_all
 			dir_initialize if ! dir_initialized?
-			#run_search
+			run_search
 			get_results
 			export_nelson
 			#write_fasta

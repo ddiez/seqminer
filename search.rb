@@ -140,8 +140,7 @@ module Search
 				case search.taxon.type
 				when 'spp'
 					warn "* search id: " + search.id
-					hr = Tools::Hmmer.new(options = {:config => config})
-					hr.tool = "hmmsearch"
+					hr = Tools::Hmmer.new('hmmsearch', options = {:config => config})
 					hr.infile = config.dir_sequence + search.taxon.name + (search.type.name + ".fa")
 					hr.model = config.dir_model + "hmm" + search.ortholog.hmm
 					hr.outfile = config.dir_result + "genome/search" + search.ortholog.name + (search.id + ".log")
@@ -149,8 +148,7 @@ module Search
 					res = hr.execute
 				when 'clade'
 					warn "* search id: " + search.id
-					st = Tools::Blast.new(options = {:config => config})
-					st.tool = 'tblastn'
+					st = Tools::Blast.new('tblastn', options = {:config => config})
 					st.pssm_file = config.dir_model + "pssm" + (search.ortholog.name + ".pssm")
 					#st.seed_file = config.dir_model + "pssm" + (search.ortholog.name + ".seed")
 					st.db = config.dir_sequence + search.taxon.name + (search.type.name)

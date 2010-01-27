@@ -1,7 +1,6 @@
 require 'tools'
 
-ts = Tools::Blast.new
-ts.tool = "makeblastdb"
+ts = Tools::Blast.new("makeblastdb")
 ts.db = "cds"
 ts.dbtype = "nucl"
 ts.dbtitle = "CDS from my species"
