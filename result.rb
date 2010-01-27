@@ -46,7 +46,7 @@ module Result
 			end
 		end
 
-		# Returnsa string with the localization in the sequence of the different domains in the SubHit.
+		# Returns a string with the localization in the sequence of the different domains in the SubHit.
 		def localization
 			loc = []
 			# we have to sort the hash in this case.
@@ -300,6 +300,7 @@ module Result
 			return ch
 		end
 		
+		# TODO: rename to write_nelson
 		def export_nelson
 			case taxon.type
 			when 'spp'
@@ -337,13 +338,15 @@ module Result
 				"description"
 			each_hit do |hit|
 				gseq = ndb.get_seq_by_acc(hit.id)
+				pseq = pdb.get_seq_by_acc(hit.id)
+				bh = hit.best_subhit
+				
 				gs = ""
 				gs = gseq.seq if gseq
-				pseq = pdb.get_seq_by_acc(hit.id)
 				ps = ""
 				ps = pseq.seq if pseq
 				
-				d = _parse_description(gseq.description)
+				d = _parse_description(gseq.definition)
 				desc = d["description"]
 				source = d["source"]
 				acc = d["accession"]
@@ -356,19 +359,20 @@ module Result
 					gs + "\t" +
 					ps + "\t" +
 					"psitblastn" + "\t" +
-					hit.score.to_s + "\t" +
-					hit.eval.to_s + "\t"
-					"" + "\t" +
+					bh.score.to_s + "\t" +
+					bh.eval.to_s + "\t" +
+					bh.localization + "\t" +
 					desc
 			end
 			of.close
 		end
 		
 		def _parse_description(desc)
-			desc = desc.split(";|=")
+			desc.sub!(/.+? /, "")
+			desc = desc.split(/[;=]/, -1)
 			h = {}
 			valid = ["description", "accession", "source"]
-			desc.index do |index|
+			desc.each_index do |index|
 				if valid.include?(desc[index])
 					h[desc[index]] = desc[index+1]
 				end
@@ -384,7 +388,29 @@ module Result
 
 			ofile = config.dir_result + "genome/sequences" + ortholog.name + (id + ".txt")
 			of = File.new(ofile, "w")
-			each_value do |hit|
+			of.puts	"SEQUENCE\t" +
+				"family\t" +
+				"genome\t" +
+				"strain\t" +
+				"taxid\t" +
+				"source\t" + 
+				"chromosome\t" +
+				"translation\t" +
+				"sequence\t" +
+				"start\t" +
+				"end\t" +
+				"strand\t" +
+				"numexons\t" +
+				"splicing\t" +
+				"pseudogene\t" +
+				"truncated\t" +
+				"method\t" +
+				"model\t" +
+				"score\t" +
+				"evalue\t" +
+				"hmmloc\t" +
+				"description"
+			each_hit do |hit|
 				ns = ndb.get_seq_by_acc(hit.id)
 				ps = pdb.get_seq_by_acc(hit.id)
 				g = gdb.get_gene_by_acc(hit.id)
@@ -403,6 +429,8 @@ module Result
 					pseq = ps.seq
 				end
 
+				# FIX?: I am not including where the best hit is located (protein, gene, etc)
+				# bh.type + "\t" +  # TODO: update to take care of new class SubHit
 				of.puts hit.id + "\t" +
 				taxon.binomial + "." + ortholog.name + "\t" +
 				taxon.binomial + "." + taxon.id + "\t" +
@@ -417,8 +445,10 @@ module Result
 				g.strand.to_s + "\t" +
 				g.length.to_s + "\t" + # this is number of exons- may change
 				g.splicing + "\t" +
+				"FALSE" + "\t" + # pseudogene?
+				"FALSE" + "\t" + # truncated?
+				"hmmsearch" + "\t" +
 				ortholog.hmm + "\t" +
-				bh.type + "\t" +  # TODO: update to take care of new class SubHit
 				bh.score.to_s + "\t" +
 				bh.eval.to_s + "\t" +
 				bh.localization + "\t" +
@@ -429,6 +459,15 @@ module Result
 
 		# This method will write the FASTA sequences.
 		def write_fasta
+			case taxon.type
+			when 'spp'
+				write_fasta_spp
+			when 'clade'
+				write_fasta_clade
+			end
+		end
+		
+		def write_fasta_spp
 			genome = Genome::Set.new(taxon, options = {:config => config})
 			genome.filter_by_acc(items.keys)
 			["protein", "cds", "gene"].each do |type|
@@ -436,7 +475,16 @@ module Result
 				genome.write_fasta(type, file)
 			end
 		end
-
+		
+		def write_fasta_clade
+			isolate = Isolate::Set.new(taxon, options = {:config => config})
+			isolate.filter_by_acc(items.keys)
+			["protein", "cds", "gene"].each do |type|
+				file = config.dir_result + "isolate/fasta" + ortholog.name + (id + "_" + type + ".fa")
+				isolate.write_fasta(type, file)
+			end
+		end
+		
 		# Exports sequence information as FASTA format
 		def export_fasta
 			ndb = Sequence::Set.new(taxon.name, "gene")
@@ -641,17 +689,14 @@ module Result
 			fi.each do |line|
 				next if line =~ /^#/
 				line.chomp
-				#tid, tacc, tlen, qid, qacc, qlen, seval, sscore,
-				#sbias, dn, dtot, dceval, dieval, dscore, dbias, hf, ht,
-				#af, at, ef, et, acc = line.split(' ')
-				qid, tid, piden, alen, mis, gaps, qs, qe, ts, te, eval, score = line.split("\t")
+				qid, tid, piden, alen, mis, gaps, qs, qe, ts, te, eval, score, sframe = line.split("\t")
 				h = result.get_item_by_id(tid)
 				if h.nil?
 					h = Hit.new(tid)
 					result << h
 				end
 			
-				sp = []	
+				sp = sframe.split(/./)
 				sid = tid
 				#warn "* subhit id: " + sid
 				sh = h.get_item_by_id(sid)
@@ -664,10 +709,10 @@ module Result
 					#sh.target_length = tlen.to_i
 					sh.query_name = qid
 					#sh.query_acc = qacc
-					#sh.query_length = qlen.to_i
+					sh.query_length = (qe.to_i - qs.to_i + 1).to_s
 					sh.type = type
-					#sh.strand = sp[0]
-					#sh.frame = sp[1]
+					sh.strand = sp[0]
+					sh.frame = sp[1]
 					h << sh
 				end
 				dom = Domain.new(sh.length + 1)

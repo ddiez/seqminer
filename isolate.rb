@@ -32,6 +32,12 @@ module Isolate
 			end
 		end
 		
+		def filter_by_acc(acc)
+			items.delete_if do |id, iso|
+				! acc.include?(id)
+			end
+		end
+		
 		# Returns a sequence based on the accession value.
 		def get_seq_by_acc(acc)
 			get_item_by_id(acc)

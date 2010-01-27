@@ -377,10 +377,10 @@ module SeqMiner
 
 		def run_all
 			dir_initialize if ! dir_initialized?
-			run_search
+			#run_search
 			get_results
-			export_nelson
-			#write_fasta
+			#export_nelson
+			write_fasta
 		end
 		
 		def build_search
