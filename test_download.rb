@@ -1,4 +1,4 @@
-require 'Download'
+require 'download'
 
 
 ts = Taxon::Set.new

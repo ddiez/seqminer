@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-require 'SeqMiner'
+require 'seqminer'
 
 sm = SeqMiner::Pipeline.new
 sm.config.dir_result = "vardb-3"

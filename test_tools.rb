@@ -1,4 +1,4 @@
-require 'Tools'
+require 'tools'
 
 ts = Tools::Blast.new
 ts.tool = "makeblastdb"

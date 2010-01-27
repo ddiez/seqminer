@@ -1,4 +1,4 @@
-require 'Taxon'
+require 'taxon'
 
 #ts = Taxon::Set.new(options = {:update_ncbi_info => true})
 ts = Taxon::Set.new

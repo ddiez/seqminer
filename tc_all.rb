@@ -1,7 +1,7 @@
 require 'test/unit'
-require 'Item'
-require 'Taxon'
-require 'Ortholog'
+require 'item'
+require 'taxon'
+require 'ortholog'
 
 class TC_Item < Test::Unit::TestCase
 	def test_create

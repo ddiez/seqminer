@@ -1,6 +1,6 @@
-require 'Item'
-require 'SeqMiner'
-require 'Parser'
+require 'item'
+require 'seqminer'
+require 'parser'
 
 require 'progressbar'
 require 'net/ftp'

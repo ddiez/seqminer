@@ -55,8 +55,8 @@
         <tr class="top-aligned-row">
             <td><strong>In:</strong></td>
             <td>
-                <a href="../../files/Parser_rb.html">
-                Parser.rb
+                <a href="../../files/parser_rb.html">
+                parser.rb
                 </a>
         <br />
             </td>
@@ -129,7 +129,7 @@
             onclick="toggleCode('M000025-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000025-source">
 <pre>
-     <span class="ruby-comment cmt"># File Parser.rb, line 507</span>
+     <span class="ruby-comment cmt"># File parser.rb, line 507</span>
 507:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">taxon</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
 508:             <span class="ruby-keyword kw">super</span>
 509:             
@@ -160,7 +160,7 @@
             onclick="toggleCode('M000030-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000030-source">
 <pre>
-     <span class="ruby-comment cmt"># File Parser.rb, line 648</span>
+     <span class="ruby-comment cmt"># File parser.rb, line 648</span>
 648:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_array2hash</span>(<span class="ruby-identifier">a</span>)
 649:             <span class="ruby-identifier">h</span> = {}
 650:             <span class="ruby-identifier">a</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
@@ -187,7 +187,7 @@
             onclick="toggleCode('M000028-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000028-source">
 <pre>
-     <span class="ruby-comment cmt"># File Parser.rb, line 598</span>
+     <span class="ruby-comment cmt"># File parser.rb, line 598</span>
 598:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_get_strand</span>(<span class="ruby-identifier">s</span>)
 599:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">s</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;+&quot;</span>
 600:                 <span class="ruby-keyword kw">return</span> <span class="ruby-value">1</span>
@@ -216,7 +216,7 @@
             onclick="toggleCode('M000029-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000029-source">
 <pre>
-     <span class="ruby-comment cmt"># File Parser.rb, line 608</span>
+     <span class="ruby-comment cmt"># File parser.rb, line 608</span>
 608:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_parse_attributes</span>(<span class="ruby-identifier">c</span>, <span class="ruby-identifier">type</span>)
 609:             <span class="ruby-identifier">f</span> = <span class="ruby-identifier">_array2hash</span>(<span class="ruby-identifier">c</span>)
 610:             <span class="ruby-identifier">h</span> = {
@@ -275,7 +275,7 @@
             onclick="toggleCode('M000027-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000027-source">
 <pre>
-     <span class="ruby-comment cmt"># File Parser.rb, line 592</span>
+     <span class="ruby-comment cmt"># File parser.rb, line 592</span>
 592:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_unescape</span>(<span class="ruby-identifier">str</span>)
 593:             <span class="ruby-identifier">str</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">unescape</span>(<span class="ruby-identifier">str</span>)
 594:             <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/\+/</span>, <span class="ruby-value str">' '</span>)
@@ -300,7 +300,7 @@
             onclick="toggleCode('M000026-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000026-source">
 <pre>
-     <span class="ruby-comment cmt"># File Parser.rb, line 517</span>
+     <span class="ruby-comment cmt"># File parser.rb, line 517</span>
 517:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parse</span>
 518:             <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* file: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">file</span>
 519:             

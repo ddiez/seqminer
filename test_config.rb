@@ -1,8 +1,8 @@
-require 'SeqMiner'
+require 'seqminer'
 
 sm = SeqMiner::Config.new
-sm.debug
-sm.basedir = "~/tmp/vardb"
-sm.debug
-sm.dir_result = "./foo"
-sm.debug
+#sm.debug
+#sm.basedir = "~/tmp/vardb"
+#sm.debug
+#sm.dir_result = "./foo"
+#sm.debug

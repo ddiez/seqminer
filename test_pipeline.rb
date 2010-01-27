@@ -1,4 +1,4 @@
-require 'SeqMiner'
+require 'seqminer'
 
 sm = SeqMiner::Pipeline.new
 #sm.taxon.filter_by_name("anaplasma.marginale")

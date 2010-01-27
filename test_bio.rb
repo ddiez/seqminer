@@ -1,4 +1,5 @@
 require 'bio'
+
 seq = Bio::Sequence::NA.new("atgcatgcaaaa")
 puts seq
 puts seq.length

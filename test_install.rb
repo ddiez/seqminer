@@ -1,4 +1,4 @@
-require 'SeqMiner'
+require 'seqminer'
 
 sm = SeqMiner::Install.new
 #sm.install

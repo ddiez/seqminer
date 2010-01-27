@@ -1,5 +1,5 @@
-require 'SeqMiner'
-require 'Item'
+require 'seqminer'
+require 'item'
 
 module Ortholog
 	include Item

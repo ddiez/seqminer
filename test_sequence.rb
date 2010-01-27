@@ -1,4 +1,4 @@
-require 'Sequence'
+require 'sequence'
 
 sdb = Sequence::Set.new("anaplasma.marginale_st_maries", "protein")
 sdb.debug

@@ -55,8 +55,8 @@
         <tr class="top-aligned-row">
             <td><strong>In:</strong></td>
             <td>
-                <a href="../../files/Ortholog_rb.html">
-                Ortholog.rb
+                <a href="../../files/ortholog_rb.html">
+                ortholog.rb
                 </a>
         <br />
             </td>
@@ -88,8 +88,8 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000087">debug</a>&nbsp;&nbsp;
-      <a href="#M000086">new</a>&nbsp;&nbsp;
+      <a href="#M000088">debug</a>&nbsp;&nbsp;
+      <a href="#M000087">new</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -129,39 +129,12 @@
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000086" class="method-detail">
-        <a name="M000086"></a>
-
-        <div class="method-heading">
-          <a href="#M000086" class="method-signature">
-          <span class="method-name">new</span><span class="method-args">(name, hmm)</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000086-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000086-source">
-<pre>
-    <span class="ruby-comment cmt"># File Ortholog.rb, line 58</span>
-58:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span> (<span class="ruby-identifier">name</span>, <span class="ruby-identifier">hmm</span>)
-59:             <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">hmm</span>.<span class="ruby-identifier">to_s</span>)
-60:             <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">name</span>
-61:             <span class="ruby-ivar">@hmm</span> = <span class="ruby-identifier">hmm</span>
-62:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <h3 class="section-bar">Public Instance methods</h3>
-
       <div id="method-M000087" class="method-detail">
         <a name="M000087"></a>
 
         <div class="method-heading">
           <a href="#M000087" class="method-signature">
-          <span class="method-name">debug</span><span class="method-args">()</span>
+          <span class="method-name">new</span><span class="method-args">(name, hmm)</span>
           </a>
         </div>
       
@@ -170,13 +143,40 @@
             onclick="toggleCode('M000087-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000087-source">
 <pre>
-    <span class="ruby-comment cmt"># File Ortholog.rb, line 64</span>
-64:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
-65:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Ortholog +&quot;</span>
-66:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
-67:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* name: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name</span>
-68:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* hmm: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">hmm</span>
+    <span class="ruby-comment cmt"># File ortholog.rb, line 65</span>
+65:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span> (<span class="ruby-identifier">name</span>, <span class="ruby-identifier">hmm</span>)
+66:             <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">hmm</span>.<span class="ruby-identifier">to_s</span>)
+67:             <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">name</span>
+68:             <span class="ruby-ivar">@hmm</span> = <span class="ruby-identifier">hmm</span>
 69:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000088" class="method-detail">
+        <a name="M000088"></a>
+
+        <div class="method-heading">
+          <a href="#M000088" class="method-signature">
+          <span class="method-name">debug</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000088-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000088-source">
+<pre>
+    <span class="ruby-comment cmt"># File ortholog.rb, line 71</span>
+71:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+72:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Ortholog +&quot;</span>
+73:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
+74:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* name: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name</span>
+75:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* hmm: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">hmm</span>
+76:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

@@ -1,4 +1,4 @@
-require 'Parser'
+require 'parser'
 
 config = SeqMiner::Config.new
 

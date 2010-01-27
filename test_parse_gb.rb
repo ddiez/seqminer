@@ -1,4 +1,4 @@
-require 'Parser'
+require 'parser'
 
 p = Parser::Refseq.new("foo.gb", "foo")
 g = p.parse

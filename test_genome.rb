@@ -1,4 +1,4 @@
-require 'Genome'
+require 'genome'
 
 config = SeqMiner::Config.new
 #config.basedir = "/Volumes/Biodev/projects/vardb/"

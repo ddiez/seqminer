@@ -1,7 +1,7 @@
 require 'bio'
 require 'uri'
-require 'Genome'
-require 'Isolate'
+require 'genome'
+require 'isolate'
 
 module Parser
 	class Common

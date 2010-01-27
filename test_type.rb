@@ -1,4 +1,4 @@
-require 'Search'
+require 'search'
 
 t1 = Search::Type.new(0, "nucleotide")
 t1.debug

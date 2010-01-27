@@ -1,4 +1,4 @@
-require 'Search'
+require 'search'
 
 p = Search::Parameter.new
 p.taxon.filter_by_name("anaplasma.marginale")

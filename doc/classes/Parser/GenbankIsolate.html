@@ -55,8 +55,8 @@
         <tr class="top-aligned-row">
             <td><strong>In:</strong></td>
             <td>
-                <a href="../../files/Parser_rb.html">
-                Parser.rb
+                <a href="../../files/parser_rb.html">
+                parser.rb
                 </a>
         <br />
             </td>
@@ -140,7 +140,7 @@
             onclick="toggleCode('M000013-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000013-source">
 <pre>
-    <span class="ruby-comment cmt"># File Parser.rb, line 32</span>
+    <span class="ruby-comment cmt"># File parser.rb, line 32</span>
 32:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">taxon</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
 33:             <span class="ruby-keyword kw">super</span>
 34:             
@@ -170,7 +170,7 @@
             onclick="toggleCode('M000015-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000015-source">
 <pre>
-     <span class="ruby-comment cmt"># File Parser.rb, line 220</span>
+     <span class="ruby-comment cmt"># File parser.rb, line 220</span>
 220:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_check_in_source</span>(<span class="ruby-identifier">entry</span>, <span class="ruby-identifier">what</span>)
 221:             <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">features</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">feat</span><span class="ruby-operator">|</span>
 222:                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">feat</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;source&quot;</span>
@@ -198,7 +198,7 @@
             onclick="toggleCode('M000016-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000016-source">
 <pre>
-     <span class="ruby-comment cmt"># File Parser.rb, line 229</span>
+     <span class="ruby-comment cmt"># File parser.rb, line 229</span>
 229:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_filter_entry</span>(<span class="ruby-identifier">entry</span>)
 230:             <span class="ruby-identifier">ok</span> = <span class="ruby-keyword kw">true</span>
 231:             <span class="ruby-identifier">why</span> = []
@@ -240,7 +240,7 @@
             onclick="toggleCode('M000014-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000014-source">
 <pre>
-     <span class="ruby-comment cmt"># File Parser.rb, line 41</span>
+     <span class="ruby-comment cmt"># File parser.rb, line 41</span>
  41:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parse</span>
  42:             <span class="ruby-identifier">is</span> = <span class="ruby-constant">Isolate</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:empty</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>})
  43:             

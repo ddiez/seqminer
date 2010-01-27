@@ -1,5 +1,5 @@
-require 'Item'
-require 'SeqMiner'
+require 'item'
+require 'seqminer'
 
 module Family
 	include Item

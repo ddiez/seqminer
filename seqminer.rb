@@ -1,13 +1,12 @@
-require 'Pathname'
-
-#require 'FileUtils'
-require 'Taxon'
-require 'Ortholog'
-require 'Search'
-require 'Result'
-require 'Download'
-require 'Tools'
+require 'pathname'
 require 'term/ansicolor'
+
+require 'taxon'
+require 'ortholog'
+require 'search'
+require 'result'
+require 'download'
+require 'tools'
 
 module SeqMiner
 	class Config

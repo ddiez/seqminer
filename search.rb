@@ -1,8 +1,8 @@
-require 'SeqMiner'
-require 'Ortholog'
-require 'Taxon'
-require 'Tools'
-require 'Result'
+require 'seqminer'
+require 'ortholog'
+require 'taxon'
+require 'tools'
+require 'result'
 require 'term/ansicolor'
 
 module Search

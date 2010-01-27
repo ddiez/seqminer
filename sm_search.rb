@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'SeqMiner'
+require 'seqminer'
 
 sm = SeqMiner::Pipeline.new
 sm.taxon.filter_by_name("plasmodium.falciparum_3d7")

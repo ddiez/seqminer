@@ -1,4 +1,4 @@
-require 'Result'
+require 'result'
 
 rs = Result::Set.new
 

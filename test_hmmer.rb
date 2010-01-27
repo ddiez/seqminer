@@ -1,4 +1,4 @@
-require 'Tools'
+require 'tools'
 
 t = Tools::Hmmer.new
 t.tool = "hmmsearch"

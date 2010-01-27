@@ -1,4 +1,4 @@
-require 'Ortholog'
+require 'ortholog'
 
 os = Ortholog::Set.new
 #o = Ortholog::Ortholog.new("var", "PFEMP")

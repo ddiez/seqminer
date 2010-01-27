@@ -1,4 +1,4 @@
-require 'Tools'
+require 'tools'
 
 #t = Tools::Blast.new
 #t.tool = "blastall"
@@ -9,7 +9,7 @@ require 'Tools'
 #t.debug
 #t.execute
 
-require 'Result'
+require 'result'
 
 ts = Taxon::Set.new
 t = ts.get_taxon_by_name("anaplasma.marginale_st_maries")

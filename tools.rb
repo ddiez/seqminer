@@ -1,4 +1,4 @@
-require 'SeqMiner'
+require 'seqminer'
 
 module Tools
 	

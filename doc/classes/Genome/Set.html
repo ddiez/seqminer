@@ -55,8 +55,8 @@
         <tr class="top-aligned-row">
             <td><strong>In:</strong></td>
             <td>
-                <a href="../../files/Genome_rb.html">
-                Genome.rb
+                <a href="../../files/genome_rb.html">
+                genome.rb
                 </a>
         <br />
             </td>
@@ -175,7 +175,7 @@ href="../Item.html">Item</a>
             onclick="toggleCode('M000050-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000050-source">
 <pre>
-    <span class="ruby-comment cmt"># File Genome.rb, line 24</span>
+    <span class="ruby-comment cmt"># File genome.rb, line 24</span>
 24:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">taxon</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:empty</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
 25:             <span class="ruby-keyword kw">super</span>()
 26:             
@@ -262,7 +262,7 @@ href="../Item.html">Item</a>
             onclick="toggleCode('M000051-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000051-source">
 <pre>
-     <span class="ruby-comment cmt"># File Genome.rb, line 90</span>
+     <span class="ruby-comment cmt"># File genome.rb, line 90</span>
  90:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_parse_desc</span>(<span class="ruby-identifier">line</span>)
  91:             <span class="ruby-identifier">valid_fields</span> = [<span class="ruby-value str">&quot;description&quot;</span>, <span class="ruby-value str">&quot;pseudogene&quot;</span>]
  92:             <span class="ruby-identifier">a</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp re">/=|;/</span>)
@@ -294,7 +294,7 @@ href="../Item.html">Item</a>
             onclick="toggleCode('M000053-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000053-source">
 <pre>
-     <span class="ruby-comment cmt"># File Genome.rb, line 109</span>
+     <span class="ruby-comment cmt"># File genome.rb, line 109</span>
 109:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">auto_clean</span>
 110:             <span class="ruby-identifier">items</span>.<span class="ruby-identifier">delete_if</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">id</span>, <span class="ruby-identifier">gene</span><span class="ruby-operator">|</span>
 111:                 <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">3</span>
@@ -319,7 +319,7 @@ href="../Item.html">Item</a>
             onclick="toggleCode('M000058-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000058-source">
 <pre>
-     <span class="ruby-comment cmt"># File Genome.rb, line 216</span>
+     <span class="ruby-comment cmt"># File genome.rb, line 216</span>
 216:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
 217:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Genome +&quot;</span>
 218:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* file: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">file</span>
@@ -345,7 +345,7 @@ href="../Item.html">Item</a>
             onclick="toggleCode('M000052-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000052-source">
 <pre>
-     <span class="ruby-comment cmt"># File Genome.rb, line 103</span>
+     <span class="ruby-comment cmt"># File genome.rb, line 103</span>
 103:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each_gene</span>
 104:             <span class="ruby-identifier">items</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
 105:                 <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">value</span>
@@ -370,7 +370,7 @@ href="../Item.html">Item</a>
             onclick="toggleCode('M000055-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000055-source">
 <pre>
-     <span class="ruby-comment cmt"># File Genome.rb, line 120</span>
+     <span class="ruby-comment cmt"># File genome.rb, line 120</span>
 120:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filter_by_acc</span>(<span class="ruby-identifier">acc</span>)
 121:             <span class="ruby-identifier">items</span>.<span class="ruby-identifier">delete_if</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">id</span>, <span class="ruby-identifier">gene</span><span class="ruby-operator">|</span>
 122:                 <span class="ruby-operator">!</span> <span class="ruby-identifier">acc</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">id</span>)
@@ -398,7 +398,7 @@ returns a gene item based on the accession value.
             onclick="toggleCode('M000054-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000054-source">
 <pre>
-     <span class="ruby-comment cmt"># File Genome.rb, line 116</span>
+     <span class="ruby-comment cmt"># File genome.rb, line 116</span>
 116:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_gene_by_acc</span>(<span class="ruby-identifier">acc</span>)
 117:             <span class="ruby-identifier">get_item_by_id</span>(<span class="ruby-identifier">acc</span>)
 118:         <span class="ruby-keyword kw">end</span>
@@ -421,7 +421,7 @@ returns a gene item based on the accession value.
             onclick="toggleCode('M000056-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000056-source">
 <pre>
-     <span class="ruby-comment cmt"># File Genome.rb, line 126</span>
+     <span class="ruby-comment cmt"># File genome.rb, line 126</span>
 126:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_fasta</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">file</span> = <span class="ruby-keyword kw">nil</span>)
 127:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file</span>
 128:                 <span class="ruby-identifier">fo</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>, <span class="ruby-value str">&quot;w&quot;</span>)
@@ -490,7 +490,7 @@ returns a gene item based on the accession value.
             onclick="toggleCode('M000057-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000057-source">
 <pre>
-     <span class="ruby-comment cmt"># File Genome.rb, line 176</span>
+     <span class="ruby-comment cmt"># File genome.rb, line 176</span>
 176:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_gff</span>(<span class="ruby-identifier">file</span> = <span class="ruby-keyword kw">nil</span>)
 177:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file</span>
 178:                 <span class="ruby-identifier">fo</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>, <span class="ruby-value str">&quot;w&quot;</span>)

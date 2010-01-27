@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Result::BlastParser</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Result::BlastParser</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/result_rb.html">
+                result.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000168">new</a>&nbsp;&nbsp;
+      <a href="#M000169">parse</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">config</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">file</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">ortholog</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">result_id</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">taxon</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">type</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000168" class="method-detail">
+        <a name="M000168"></a>
+
+        <div class="method-heading">
+          <a href="#M000168" class="method-signature">
+          <span class="method-name">new</span><span class="method-args">(options = {:config =&gt; nil, :taxon =&gt; nil, :ortholog =&gt; nil, :empty =&gt; false})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000168-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000168-source">
+<pre>
+     <span class="ruby-comment cmt"># File result.rb, line 590</span>
+590:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">:taxon</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">:ortholog</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">:empty</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>})
+591:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+592:                 <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+593:             <span class="ruby-keyword kw">else</span>
+594:                 <span class="ruby-ivar">@config</span> = <span class="ruby-constant">SeqMiner</span><span class="ruby-operator">::</span><span class="ruby-constant">Config</span>.<span class="ruby-identifier">new</span>
+595:             <span class="ruby-keyword kw">end</span>
+596:             
+597:             
+598:             <span class="ruby-ivar">@taxon</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:taxon</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:taxon</span>]
+599:             <span class="ruby-ivar">@ortholog</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ortholog</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ortholog</span>]
+600: 
+601:             <span class="ruby-ivar">@file</span> = <span class="ruby-keyword kw">nil</span>
+602:             <span class="ruby-ivar">@result_id</span> = <span class="ruby-keyword kw">nil</span>
+603:             <span class="ruby-ivar">@type</span> = <span class="ruby-keyword kw">nil</span>
+604:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000169" class="method-detail">
+        <a name="M000169"></a>
+
+        <div class="method-heading">
+          <a href="#M000169" class="method-signature">
+          <span class="method-name">parse</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000169-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000169-source">
+<pre>
+     <span class="ruby-comment cmt"># File result.rb, line 606</span>
+606:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parse</span>
+607:             <span class="ruby-identifier">result</span> = <span class="ruby-constant">Result</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">result_id</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+608:             <span class="ruby-identifier">result</span>.<span class="ruby-identifier">taxon</span> = <span class="ruby-identifier">taxon</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">taxon</span>
+609:             <span class="ruby-identifier">result</span>.<span class="ruby-identifier">ortholog</span> = <span class="ruby-identifier">ortholog</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ortholog</span>
+610:             <span class="ruby-identifier">result</span>.<span class="ruby-identifier">type</span> = <span class="ruby-identifier">type</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">type</span>
+611:             
+612:             <span class="ruby-identifier">fi</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">file</span>)
+613:             <span class="ruby-identifier">fi</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+614:                 <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^#/</span>
+615:                 <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp</span>
+616:                 <span class="ruby-comment cmt">#tid, tacc, tlen, qid, qacc, qlen, seval, sscore,</span>
+617:                 <span class="ruby-comment cmt">#sbias, dn, dtot, dceval, dieval, dscore, dbias, hf, ht,</span>
+618:                 <span class="ruby-comment cmt">#af, at, ef, et, acc = line.split(' ')</span>
+619:                 <span class="ruby-identifier">qid</span>, <span class="ruby-identifier">tid</span>, <span class="ruby-identifier">piden</span>, <span class="ruby-identifier">alen</span>, <span class="ruby-identifier">mis</span>, <span class="ruby-identifier">gaps</span>, <span class="ruby-identifier">qs</span>, <span class="ruby-identifier">qe</span>, <span class="ruby-identifier">ts</span>, <span class="ruby-identifier">te</span>, <span class="ruby-identifier">eval</span>, <span class="ruby-identifier">score</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">&quot;\t&quot;</span>)
+620:                 <span class="ruby-identifier">h</span> = <span class="ruby-identifier">result</span>.<span class="ruby-identifier">get_item_by_id</span>(<span class="ruby-identifier">tid</span>)
+621:                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">h</span>.<span class="ruby-identifier">nil?</span>
+622:                     <span class="ruby-identifier">h</span> = <span class="ruby-constant">Hit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">tid</span>)
+623:                     <span class="ruby-identifier">result</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">h</span>
+624:                 <span class="ruby-keyword kw">end</span>
+625:             
+626:                 <span class="ruby-identifier">sp</span> = [] 
+627:                 <span class="ruby-identifier">sid</span> = <span class="ruby-identifier">tid</span>
+628:                 <span class="ruby-comment cmt">#warn &quot;* subhit id: &quot; + sid</span>
+629:                 <span class="ruby-identifier">sh</span> = <span class="ruby-identifier">h</span>.<span class="ruby-identifier">get_item_by_id</span>(<span class="ruby-identifier">sid</span>)
+630:                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">nil?</span>
+631:                     <span class="ruby-identifier">sh</span> = <span class="ruby-constant">SubHit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">sid</span>)
+632:                     <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">score</span> = <span class="ruby-identifier">score</span>.<span class="ruby-identifier">to_f</span>
+633:                     <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">eval</span> = <span class="ruby-identifier">eval</span>.<span class="ruby-identifier">to_f</span>
+634:                     <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">target_name</span> = <span class="ruby-identifier">tid</span>
+635:                     <span class="ruby-comment cmt">#sh.target_acc = tacc</span>
+636:                     <span class="ruby-comment cmt">#sh.target_length = tlen.to_i</span>
+637:                     <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">query_name</span> = <span class="ruby-identifier">qid</span>
+638:                     <span class="ruby-comment cmt">#sh.query_acc = qacc</span>
+639:                     <span class="ruby-comment cmt">#sh.query_length = qlen.to_i</span>
+640:                     <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">type</span> = <span class="ruby-identifier">type</span>
+641:                     <span class="ruby-comment cmt">#sh.strand = sp[0]</span>
+642:                     <span class="ruby-comment cmt">#sh.frame = sp[1]</span>
+643:                     <span class="ruby-identifier">h</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">sh</span>
+644:                 <span class="ruby-keyword kw">end</span>
+645:                 <span class="ruby-identifier">dom</span> = <span class="ruby-constant">Domain</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">sh</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
+646:                 <span class="ruby-identifier">dom</span>.<span class="ruby-identifier">hmm_from</span> = <span class="ruby-identifier">qs</span>.<span class="ruby-identifier">to_i</span>
+647:                 <span class="ruby-identifier">dom</span>.<span class="ruby-identifier">hmm_to</span> = <span class="ruby-identifier">qe</span>.<span class="ruby-identifier">to_i</span>
+648:                 <span class="ruby-identifier">dom</span>.<span class="ruby-identifier">aln_from</span> = <span class="ruby-identifier">ts</span>.<span class="ruby-identifier">to_i</span>
+649:                 <span class="ruby-identifier">dom</span>.<span class="ruby-identifier">aln_to</span> = <span class="ruby-identifier">te</span>.<span class="ruby-identifier">to_i</span>
+650:                 <span class="ruby-comment cmt">#dom.env_from = ef.to_i</span>
+651:                 <span class="ruby-comment cmt">#dom.env_to = et.to_i</span>
+652:                 <span class="ruby-comment cmt">#dom.ceval = dceval</span>
+653:                 <span class="ruby-comment cmt">#dom.ieval = dieval</span>
+654:                 <span class="ruby-identifier">dom</span>.<span class="ruby-identifier">eval</span> = <span class="ruby-identifier">eval</span>
+655:                 <span class="ruby-identifier">dom</span>.<span class="ruby-identifier">score</span> = <span class="ruby-identifier">score</span>
+656:                 <span class="ruby-comment cmt">#dom.bias = dbias</span>
+657:                 <span class="ruby-comment cmt"># TODO: may be better to do this by referencing the parent class?</span>
+658:                 <span class="ruby-comment cmt">#dom.query_length = qlen.to_i</span>
+659:                 <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">dom</span>)
+660:             <span class="ruby-keyword kw">end</span>
+661:             <span class="ruby-identifier">fi</span>.<span class="ruby-identifier">close</span>
+662:             
+663:             <span class="ruby-identifier">result</span>
+664:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

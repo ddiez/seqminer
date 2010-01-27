@@ -55,8 +55,8 @@
         <tr class="top-aligned-row">
             <td><strong>In:</strong></td>
             <td>
-                <a href="../../files/Isolate_rb.html">
-                Isolate.rb
+                <a href="../../files/isolate_rb.html">
+                isolate.rb
                 </a>
         <br />
             </td>
@@ -152,7 +152,7 @@
             onclick="toggleCode('M000069-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000069-source">
 <pre>
-    <span class="ruby-comment cmt"># File Isolate.rb, line 11</span>
+    <span class="ruby-comment cmt"># File isolate.rb, line 11</span>
 11:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:empty</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
 12:             <span class="ruby-keyword kw">super</span>()
 13:             
@@ -188,7 +188,7 @@
             onclick="toggleCode('M000073-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000073-source">
 <pre>
-    <span class="ruby-comment cmt"># File Isolate.rb, line 45</span>
+    <span class="ruby-comment cmt"># File isolate.rb, line 45</span>
 45:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">auto_clean</span>
 46:             <span class="ruby-identifier">items</span>.<span class="ruby-identifier">delete_if</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">id</span>, <span class="ruby-identifier">seq</span><span class="ruby-operator">|</span>
 47:                 <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">3</span>
@@ -213,7 +213,7 @@
             onclick="toggleCode('M000070-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000070-source">
 <pre>
-    <span class="ruby-comment cmt"># File Isolate.rb, line 26</span>
+    <span class="ruby-comment cmt"># File isolate.rb, line 26</span>
 26:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each_isolate</span>
 27:             <span class="ruby-identifier">items</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
 28:                 <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">value</span>
@@ -241,7 +241,7 @@ Returns a sequence based on the accession value.
             onclick="toggleCode('M000071-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000071-source">
 <pre>
-    <span class="ruby-comment cmt"># File Isolate.rb, line 33</span>
+    <span class="ruby-comment cmt"># File isolate.rb, line 33</span>
 33:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_seq_by_acc</span>(<span class="ruby-identifier">acc</span>)
 34:             <span class="ruby-identifier">get_item_by_id</span>(<span class="ruby-identifier">acc</span>)
 35:         <span class="ruby-keyword kw">end</span>
@@ -268,7 +268,7 @@ subid value.
             onclick="toggleCode('M000072-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000072-source">
 <pre>
-    <span class="ruby-comment cmt"># File Isolate.rb, line 38</span>
+    <span class="ruby-comment cmt"># File isolate.rb, line 38</span>
 38:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_seq_by_subid</span>(<span class="ruby-identifier">subid</span>)
 39:             <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">seq</span><span class="ruby-operator">|</span>
 40:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">seq</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">subid</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">subid</span>
@@ -300,7 +300,7 @@ reverse complement if necesary), protein (tranlated from the CDS) or 6frame
             onclick="toggleCode('M000074-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000074-source">
 <pre>
-    <span class="ruby-comment cmt"># File Isolate.rb, line 55</span>
+    <span class="ruby-comment cmt"># File isolate.rb, line 55</span>
 55:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_fasta</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">file</span> = <span class="ruby-keyword kw">nil</span>)
 56:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file</span>
 57:                 <span class="ruby-identifier">fo</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>, <span class="ruby-value str">&quot;w&quot;</span>)

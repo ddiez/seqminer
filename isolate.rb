@@ -1,6 +1,6 @@
-require 'SeqMiner'
-require 'Item'
-require 'Sequence'
+require 'seqminer'
+require 'item'
+require 'sequence'
 
 module Isolate
 	include Item

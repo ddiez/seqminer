@@ -1,4 +1,4 @@
-require 'Search'
+require 'search'
 
 p = Search::Parameter.new
 p.debug

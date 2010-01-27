@@ -1,4 +1,4 @@
-require 'Result'
+require 'result'
 
 #p = Result::HmmerParser.new("test_result.txt", "test", "protein")
 #p = Result::HmmerParser.new("test_result2.txt", "test", "nucleotide")

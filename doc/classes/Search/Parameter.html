@@ -55,8 +55,8 @@
         <tr class="top-aligned-row">
             <td><strong>In:</strong></td>
             <td>
-                <a href="../../files/Search_rb.html">
-                Search.rb
+                <a href="../../files/search_rb.html">
+                search.rb
                 </a>
         <br />
             </td>
@@ -146,18 +146,18 @@
             onclick="toggleCode('M000041-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000041-source">
 <pre>
-    <span class="ruby-comment cmt"># File Search.rb, line 65</span>
-65:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
-66:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
-67:                 <span class="ruby-ivar">@taxon</span> = <span class="ruby-constant">Taxon</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
-68:                 <span class="ruby-ivar">@ortholog</span> = <span class="ruby-constant">Ortholog</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
-69:                 <span class="ruby-ivar">@type</span> = <span class="ruby-constant">TypeSet</span>.<span class="ruby-identifier">new</span>
-70:             <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">3</span>
-71:                 <span class="ruby-ivar">@taxon</span> = <span class="ruby-identifier">args</span>[<span class="ruby-value">0</span>]
-72:                 <span class="ruby-ivar">@ortholog</span> = <span class="ruby-identifier">args</span>[<span class="ruby-value">1</span>]
-73:                 <span class="ruby-ivar">@type</span> = <span class="ruby-identifier">args</span>[<span class="ruby-value">2</span>]
-74:             <span class="ruby-keyword kw">end</span>
-75:         <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File search.rb, line 64</span>
+64:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+65:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+66:                 <span class="ruby-ivar">@taxon</span> = <span class="ruby-constant">Taxon</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
+67:                 <span class="ruby-ivar">@ortholog</span> = <span class="ruby-constant">Ortholog</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
+68:                 <span class="ruby-ivar">@type</span> = <span class="ruby-constant">TypeSet</span>.<span class="ruby-identifier">new</span>
+69:             <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">3</span>
+70:                 <span class="ruby-ivar">@taxon</span> = <span class="ruby-identifier">args</span>[<span class="ruby-value">0</span>]
+71:                 <span class="ruby-ivar">@ortholog</span> = <span class="ruby-identifier">args</span>[<span class="ruby-value">1</span>]
+72:                 <span class="ruby-ivar">@type</span> = <span class="ruby-identifier">args</span>[<span class="ruby-value">2</span>]
+73:             <span class="ruby-keyword kw">end</span>
+74:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -179,14 +179,14 @@
             onclick="toggleCode('M000042-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000042-source">
 <pre>
-    <span class="ruby-comment cmt"># File Search.rb, line 77</span>
-77:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
-78:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Parameter +&quot;</span>
-79:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* taxon: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
-80:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* ortholog: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
-81:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* type: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">type</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
-82:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;&quot;</span>
-83:         <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File search.rb, line 76</span>
+76:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+77:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Parameter +&quot;</span>
+78:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* taxon: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
+79:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* ortholog: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
+80:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* type: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">type</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
+81:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;&quot;</span>
+82:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
