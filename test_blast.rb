@@ -2,7 +2,7 @@ require 'tools'
 
 #t = Tools::Blast.new
 #t.tool = "blastall"
-#t.pssm_file = "foo.chk"
+#t.pssm_file = "foo.pssm"
 #t.seed_file = "foo.seed"
 #t.db = "cds"
 #t.outfile = "test_blastall.txt"

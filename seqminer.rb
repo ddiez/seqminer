@@ -260,7 +260,7 @@ module SeqMiner
 		
 		def update_model
 			update_hmm
-			update_psiblast
+			update_pssm
 		end
 		
 		def update_hmm
@@ -271,7 +271,7 @@ module SeqMiner
 		# then returns the best hit as seed for a PSI-Blast search.
 		# TODO: This works but requires refinement, using a Tool object for PSI-Blast and putting some default
 		# parameters into Config.
-		def update_psiblast
+		def update_pssm
 			typeset = Search::TypeSet.new
 			ortholog.each_ortholog do |o|
 				o.debug
@@ -283,7 +283,7 @@ module SeqMiner
 						next if type.name == "cds"
 						sid = t.name + "-" + o.name + "-" + type.name
 						file = config.dir_result + "genome/search" + o.name + (sid + ".txt") 
-						p = Result::HmmerParser.new(options = {:taxon => t, :ortholog => o})
+						p = Result::HmmerParser.new(options = {:config => config, :taxon => t, :ortholog => o})
 						p.file = file
 						p.result_id = sid
 						p.type = type
@@ -314,7 +314,7 @@ module SeqMiner
 				
 				# Run the search with the SEED and the genome.
 				warn "* computing PSSM model"
-				pssm_file = dir + (bh.ortholog.name + ".chk")
+				pssm_file = dir + (bh.ortholog.name + ".pssm")
 				pgp_file = dir + (bh.ortholog.name + ".pgp")
 				ts = Tools::Blast.new
 				ts.tool = 'psiblast'

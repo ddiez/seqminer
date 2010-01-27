@@ -151,7 +151,7 @@ module Search
 					warn "* search id: " + search.id
 					st = Tools::Blast.new(options = {:config => config})
 					st.tool = 'tblastn'
-					st.pssm_file = config.dir_model + "pssm" + (search.ortholog.name + ".chk")
+					st.pssm_file = config.dir_model + "pssm" + (search.ortholog.name + ".pssm")
 					#st.seed_file = config.dir_model + "pssm" + (search.ortholog.name + ".seed")
 					st.db = config.dir_sequence + search.taxon.name + (search.type.name)
 					st.outfile = config.dir_result + "isolate/search" + search.ortholog.name + (search.id + ".txt")

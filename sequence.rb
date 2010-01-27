@@ -12,10 +12,10 @@ module Sequence
 		def initialize(name, type, options = {:config => nil})
 			super()
 
-			if ! options[:config]
-				@config = SeqMiner::Config.new
-			else
+			if options[:config]
 				@config = options[:config]
+			else
+				@config = SeqMiner::Config.new
 			end
 			@dir = config.dir_sequence + name
 			@type = type
