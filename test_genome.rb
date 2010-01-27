@@ -5,10 +5,9 @@ config = SeqMiner::Config.new
 #config.debug
 
 ts = Taxon::Set.new
-t = ts.get_taxon_by_name("plasmodium.knowlesi_h")
+taxon = ts.get_taxon_by_name("plasmodium.knowlesi_h")
 
-#gdb = Genome::Set.new("babesia.bovis_T2Bo", options = {:config => config})
-gdb = Genome::Set.new(t)
+gdb = Genome::Set.new(taxon)
 gdb.debug
 gdb.auto_clean
 gdb.debug

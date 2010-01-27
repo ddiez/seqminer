@@ -1,7 +1,10 @@
 require 'taxon'
 require 'genome'
 
-genome = Genome::Set.new("plasmodium.yoelii_17xnl", "gene")
+ts = Taxon::Set.new
+taxon = ts.get_taxon_by_name("plasmodium.yoelii_17xnl")
+
+genome = Genome::Set.new(taxon, "gene")
 #gene = genome.get_item_by_id("PY01186")
 gene = genome.get_item_by_id("PY00122")
 gene.debug
