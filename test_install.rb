@@ -9,13 +9,14 @@ sm = SeqMiner::Install.new
 #sm.taxon.filter_by_name("plasmodium.yoelii")
 #sm.taxon.filter_by_name("trypanosoma.brucei")
 #sm.taxon.filter_by_source("ncbi")
-#sm.taxon.filter_by_type("spp")
+sm.taxon.filter_by_type("spp")
 #sm.taxon.filter_by_type("clade")
 #sm.taxon.debug
 
 #sm.update_pfam
 #sm.process_pfam
 #sm.update_sequences
-#sm.process_sequences
+
+sm.process_sequences
 #sm.process_directories
-sm.update_psiblast
+#sm.update_psiblast

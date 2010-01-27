@@ -1,7 +1,20 @@
+###############
+# Author::    Diego Diez (mailto:diez.10.ruiz@gmail.com)
+# Copyright:: Copyright (c) 2010
+# License::   Distributes under the same terms as Ruby
+#
+# = Parsers for genome and sequence file formats
+
 require 'bio'
 require 'uri'
 require 'genome'
 require 'isolate'
+
+# === This module contains parsers for the genome and sequence formats
+# 1. GenbankIsolate
+# 2. Refseq
+# 3. Eupathdb
+# 4. Broad Institute
 
 module Parser
 	class Common
@@ -39,7 +52,7 @@ module Parser
 		end
 
 		def parse
-			is = Isolate::Set.new(name, options = {:empty => true})
+			is = Isolate::Set.new(taxon, options = {:empty => true})
 			
 			feats = []
 			files.each_pair do |type, file|
@@ -136,8 +149,8 @@ module Parser
 											id = gb.accession + "-" + (fa + 1).to_s
 											
 											seq = Isolate::Seq.new(id)
-											seq.subid = ""
-											seq.accession = ""
+											seq.subid = id
+											seq.accession = id
 											seq.strand = feat.locations[0].strand.to_i
 											seq.from = feat.locations[0].from.to_i
 											seq.to = feat.locations[0].to.to_i
@@ -150,12 +163,24 @@ module Parser
 									end
 									
 									if seq
+										# select better description if exists.
 										if h['product']
 											seq.description = h['product'][0]
 										elsif h['note']
 											seq.description = h['note'][0]
 										else
 											seq.description = "" if ! seq.description
+										end
+										
+										# select better id if exists.
+										if h['protein_id']
+											id = gb.accession + "|" + h['protein_id'][0]
+											seq.subid = id
+											seq.accession = h['protein_id'][0]
+										elsif h['locus_tag']
+											id = gb.accession + "|" + h['locus_tag'][0]
+											seq.subid = id
+											seq.accession = h['locus_tag'][0]
 										end
 										
 										seq.type = "CDS"
@@ -259,7 +284,7 @@ module Parser
 		end
 
 		def parse
-			genome = Genome::Set.new(name, options = {:empty => true})
+			genome = Genome::Set.new(taxon, options = {:empty => true})
 
 			warn "* processing Genbank file: " + file
 			p = Bio::GenBank.open(file)
@@ -267,10 +292,6 @@ module Parser
 			chr = {}
 			genome.chromosome = chr
 			p.each_entry do |gb|
-				#puts gb.accession
-				#puts gb.organism
-				#puts gb.definition
-				puts "* DEBUG: " + taxon.name + "/" + gb.accession
 				next if gb.accession == ""
 
 				chr[gb.accession] = gb.seq
@@ -398,7 +419,7 @@ module Parser
 			puts "* gff_file: " + gff_file
 			puts "* annotation_file: " + annot_file
 			
-			genome = Genome::Set.new(name, options = {:empty => true})
+			genome = Genome::Set.new(taxon, options = {:empty => true})
 			
 			puts "* reading genbank file"
 			p1 = Bio::GenBank.open(file)
@@ -517,7 +538,7 @@ module Parser
 		def parse
 			puts "* file: " + file
 			
-			genome = Genome::Set.new(name, options = {:empty => true})
+			genome = Genome::Set.new(taxon, options = {:empty => true})
 
 			warn "* processing GFF file: " + file
 			p = Bio::GFF::GFF3.new(File.open(file, "r"))

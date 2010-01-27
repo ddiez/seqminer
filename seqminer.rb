@@ -253,6 +253,9 @@ module SeqMiner
 			i.write_fasta("protein", outdir + "protein.fa")
 			warn "* writing 6frame file"
 			i.write_fasta("6frame", outdir + "6frame.fa")
+			# TODO: be able to retrieve isolate information.
+#			warn "* writing isolate file"
+#			i.write_fasta("isolate", outdir + "isolate.txt")
 		end
 		
 		def update_model

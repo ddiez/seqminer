@@ -4,6 +4,7 @@ require 'genome'
 require 'sequence'
 require 'taxon'
 require 'ortholog'
+require 'family'
 
 module Result
 	include Item
@@ -38,20 +39,26 @@ module Result
 		def initialize(id)
 			super
 		end
+		
+		def each_domain
+			items.each_value do |value|
+				yield value
+			end
+		end
 
 		# Returnsa string with the localization in the sequence of the different domains in the SubHit.
 		def localization
 			loc = []
 			# we have to sort the hash in this case.
-			@items.sort.each_index do |index|
-				loc << @items[index+1].aln_from.to_s + ".." + @items[index+1].aln_to.to_s
+			items.sort.each_index do |index|
+				loc << items[index+1].aln_from.to_s + ".." + items[index+1].aln_to.to_s
 			end
 			loc.join(",")
 		end
 
 		# Checks whether there is any Domain <b>not complete</b> (fragment) in the Hit.
 		def has_fragment?(cut = 1)
-			each_value do |domain|
+			each_domain do |domain|
 				return true if ! domain.complete?(cut)
 			end
 			return false
@@ -59,7 +66,7 @@ module Result
 
 		# Checks whether there is any Domain <b>complete</b> in the Hit. See #complete?.
 		def has_complete?(cut = 1)
-			each_value do |domain|
+			each_domain do |domain|
 				return true if domain.complete?(cut)
 			end
 			return false
@@ -68,7 +75,7 @@ module Result
 		# Obtains the maximum completeness found in any of the Domains within the SubHit.
 		def max_completeness
 			mc = 0
-			each_value do |domain|
+			each_domain do |domain|
 				smc = domain.completeness
 				mc = smc if smc > mc
 			end
@@ -78,7 +85,7 @@ module Result
 		# Obtains the minimum completeness found in any of the Domains within the SubHit.
 		def min_completeness
 			mc = 1
-			each_value do |domain|
+			each_domain do |domain|
 				smc = domain.completeness
 				mc = smc if smc < mc
 			end
@@ -127,7 +134,7 @@ module Result
 			hp = has_protein?
 			csh = nil
 			cbe = nil
-			each_value do |subhit|
+			each_subhit do |subhit|
 				return subhit if hp and subhit.type == "protein"
 				if cbe.nil? or subhit.eval < cbe
 					csh = subhit
@@ -139,7 +146,7 @@ module Result
 		
 		# Checks whether a hit contains a SubHit of type "nucleotide"
 		def has_nucleotide?
-			each_value do |subhit|
+			each_subhit do |subhit|
 				#return true if subhit.type == "nucleotide"
 				return true if subhit.type == "6frame"
 			end
@@ -147,7 +154,7 @@ module Result
 		end
 		
 		def has_protein?
-			each_value do |subhit|
+			each_subhit do |subhit|
 				return true if subhit.type == "protein"
 			end
 			return false
@@ -160,19 +167,18 @@ module Result
 			s = []
 			p = []
 			
-			each_value do |subhit|
+			each_subhit do |subhit|
 				if subhit.type == "nucleotide"
 					s << subhit.strand
 					p << subhit.frame
 				end
 			end
-
 			p.uniq.length == 1 and s.uniq.length == 1
 		end
 		
 		# A Hit has_fragment if any of the SubHit has_fragment.
 		def has_fragment?(cut = 1)
-			each_value do |subhit|
+			each_subhit do |subhit|
 				return true if subhit.has_fragment?(cut)
 			end
 			return false
@@ -180,7 +186,7 @@ module Result
 		
 		# A Hit has_complete if any of the SubHit has_complete.
 		def has_complete?(cut = 1)
-			each_value do |subhit|
+			each_subhit do |subhit|
 				return true if subhit.has_complete?(cut)
 			end
 			return false
@@ -189,7 +195,7 @@ module Result
 		# Obtains the maximum completeness found in any of the SubHits within the Hit.
 		def max_completeness
 			mc = 0
-			each_value do |subhit|
+			each_subhit do |subhit|
 				smc = subhit.max_completeness
 				mc = smc if smc > mc
 			end
@@ -199,7 +205,7 @@ module Result
 		# Obtains the minimum completeness found in any of the SubHits within the Hit.
 		def min_completeness
 			mc = 1
-			each_value do |subhit|
+			each_subhit do |subhit|
 				smc = subhit.min_completeness
 				mc = smc if smc < mc
 			end
@@ -307,6 +313,12 @@ module Result
 			ndb = Sequence::Set.new(taxon.name, "gene", options = {:config => config})
 			pdb = Sequence::Set.new(taxon.name, "protein", options = {:config => config})
 			
+			# sets the family name (default == to the ortholog family name)
+			fn = ortholog.name
+			fs = Family::Set.new
+			family = fs.get_item_by_id(taxon.name + "." + ortholog.name)
+			fn = family.name if family
+			
 			ofile = config.dir_result + "isolate/sequences" + ortholog.name + (id + ".txt")
 			warn "* export_nelson: " + ofile
 			#ofile = "foo.txt"
@@ -317,6 +329,7 @@ module Result
 				"taxid\t" +
 				"source\t" +
 				"sequence\t" +
+				"translation\t" +
 				"method\t" +
 				"score\t" +
 				"evalue\t" +
@@ -324,28 +337,43 @@ module Result
 				"description"
 			each_hit do |hit|
 				gseq = ndb.get_seq_by_acc(hit.id)
-				if gseq
-					gseq = gseq.seq
-				else
-					gseq = ""
-				end
+				gs = ""
+				gs = gseq.seq if gseq
 				pseq = pdb.get_seq_by_acc(hit.id)
-				if pseq
-					pseq = pseq.seq
-				else
-					pseq = ""
-				end
+				ps = ""
+				ps = pseq.seq if pseq
 				
-				of.puts hit.id + "\t" +
-					taxon.binomial + "." + ortholog.name + "\t" +
+				d = _parse_description(gseq.description)
+				desc = d["description"]
+				source = d["source"]
+				acc = d["accession"]
+				
+				of.puts acc + "\t" +
+					taxon.binomial + "." + fn + "\t" +
 					taxon.binomial + "." + taxon.id + "\t" +
 					taxon.id + "\t" +
-					gseq + "\t" +
-					pseq + "\t" +
+					source + "\t" +
+					gs + "\t" +
+					ps + "\t" +
+					"psitblastn" + "\t" +
 					hit.score.to_s + "\t" +
 					hit.eval.to_s + "\t"
+					"" + "\t" +
+					desc
 			end
 			of.close
+		end
+		
+		def _parse_description(desc)
+			desc = desc.split(";|=")
+			h = {}
+			valid = ["description", "accession", "source"]
+			desc.index do |index|
+				if valid.include?(desc[index])
+					h[desc[index]] = desc[index+1]
+				end
+			end
+			h
 		end
 
 		# Export results in a format suitable to load in varDB (Nelson's preferred format)

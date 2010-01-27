@@ -6,9 +6,9 @@ module Isolate
 	include Item
 
 	class Set < Set
-		attr_reader :config, :name, :file
+		attr_reader :config, :name, :file, :taxon
 		
-		def initialize(name, options = {:empty => false, :config => nil})
+		def initialize(taxon, options = {:empty => false, :config => nil})
 			super()
 			
 			if options[:config]
@@ -21,9 +21,12 @@ module Isolate
 				@file = "_undef_"
 			else
 			end
+			
+			@taxon = taxon
+			@name = taxon.name
 		end
 		
-		def each_isolate
+		def each_sequence
 			items.each_value do |value|
 				yield value
 			end
@@ -61,28 +64,28 @@ module Isolate
 			
 			case type
 			when "gene"
-				items.each_value do |seq|
-					id = seq.id + " accession=" + seq.accession + ";source=" + seq.source + \
-						";type=" + seq.type + ";description=" + seq.description + ";"
+				each_sequence do |seq|
+					id = seq.id + " accession=" + seq.accession + ";source=" + seq.source + ";type=" + \
+						seq.type + ";description=" + seq.description + ";"
 					fo.puts seq.sequence.to_fasta(id, 60)
 				end
 			when "cds"
-				items.each_value do |seq|
-					id = seq.id + " accession=" + seq.accession + ";source=" + seq.source + \
-						";type=" + seq.type + ";description=" + seq.description + ";"
+				each_sequence do |seq|
+					id = seq.id + " accession=" + seq.accession + ";source=" + seq.source + ";type=" + \
+						seq.type + ";description=" + seq.description + ";"
 					fo.puts seq.cds.to_fasta(id, 60)
 				end
 			when "protein"
-				items.each_value do |seq|
+				each_sequence do |seq|
 					next if ! seq.translation
-					id = seq.id + " accession=" + seq.accession + ";source=" + seq.source + \
-						";type=" + seq.type + ";trans_table=" + seq.trans_table.to_s + ";description=" + seq.description + ";"
+					id = seq.id + " accession=" + seq.accession + ";source=" + seq.source + ";type=" + \
+						seq.type + ";trans_table=" + seq.trans_table.to_s + ";description=" + seq.description + ";"
 					fo.puts seq.translation.to_fasta(id, 60)
 				end
 			when '6frame'
-				items.each_value do |seq|
-					id = seq.id + " accession=" + seq.accession + ";source=" + seq.source + \
-						";type=" + seq.type + ";trans_table=" + seq.trans_table.to_s + ";description=" + seq.description + ";"
+				each_sequence do |seq|
+					id = seq.id + " accession=" + seq.accession + ";source=" + seq.source + ";type=" + \
+						seq.type + ";trans_table=" + seq.trans_table.to_s + ";description=" + seq.description + ";"
 					fo.puts seq.translate(1).to_fasta(id + " [strand=#{seq.strand};frame=1]", 60)
 					fo.puts seq.translate(2).to_fasta(id + " [strand=#{seq.strand};frame=2]", 60)
 					fo.puts seq.translate(3).to_fasta(id + " [strand=#{seq.strand};frame=3]", 60)

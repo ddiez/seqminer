@@ -19,11 +19,12 @@ module Genome
 	# * is is derived from class Set in module Item
 	class Set < Set
 		attr_accessor :chromosome
-		attr_reader :config, :name, :file
+		attr_reader :config, :name, :file, :taxon
 
 		def initialize(taxon, options = {:empty => false, :config => nil})
 			super()
 			
+			@taxon = taxon
 			@name = taxon.name
 			@chromosome = {}
 

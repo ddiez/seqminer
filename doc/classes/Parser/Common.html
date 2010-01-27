@@ -155,23 +155,23 @@
             onclick="toggleCode('M000017-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000017-source">
 <pre>
-    <span class="ruby-comment cmt"># File parser.rb, line 11</span>
-11:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">taxon</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
-12:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:subtype</span>]
-13:                 <span class="ruby-ivar">@subtype</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:subtype</span>]
-14:             <span class="ruby-keyword kw">else</span>
-15:                 <span class="ruby-ivar">@subtype</span> = <span class="ruby-keyword kw">nil</span>
-16:             <span class="ruby-keyword kw">end</span>
-17:             
-18:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
-19:                 <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
-20:             <span class="ruby-keyword kw">else</span>
-21:                 <span class="ruby-ivar">@config</span> = <span class="ruby-constant">SeqMiner</span><span class="ruby-operator">::</span><span class="ruby-constant">Config</span>.<span class="ruby-identifier">new</span>
-22:             <span class="ruby-keyword kw">end</span>
-23:         
-24:             <span class="ruby-ivar">@taxon</span> = <span class="ruby-identifier">taxon</span>   
-25:             <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>
-26:         <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File parser.rb, line 24</span>
+24:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">taxon</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
+25:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:subtype</span>]
+26:                 <span class="ruby-ivar">@subtype</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:subtype</span>]
+27:             <span class="ruby-keyword kw">else</span>
+28:                 <span class="ruby-ivar">@subtype</span> = <span class="ruby-keyword kw">nil</span>
+29:             <span class="ruby-keyword kw">end</span>
+30:             
+31:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+32:                 <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+33:             <span class="ruby-keyword kw">else</span>
+34:                 <span class="ruby-ivar">@config</span> = <span class="ruby-constant">SeqMiner</span><span class="ruby-operator">::</span><span class="ruby-constant">Config</span>.<span class="ruby-identifier">new</span>
+35:             <span class="ruby-keyword kw">end</span>
+36:         
+37:             <span class="ruby-ivar">@taxon</span> = <span class="ruby-identifier">taxon</span>   
+38:             <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>
+39:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
