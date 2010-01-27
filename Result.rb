@@ -1,9 +1,9 @@
-require 'SeqMiner'
-require 'Item'
-require 'Genome'
-require 'Sequence'
-require 'Taxon'
-require 'Ortholog'
+require 'seqminer'
+require 'item'
+require 'genome'
+require 'sequence'
+require 'taxon'
+require 'ortholog'
 
 module Result
 	include Item
@@ -311,15 +311,16 @@ module Result
 			warn "* export_nelson: " + ofile
 			#ofile = "foo.txt"
 			of = File.new(ofile, "w")
-			of.puts	"family" + "\t" +
-				"genome" + "\t" +
-				"taxid" + "\t" +
-				"source" + "\t" +
-				"sequence" + "\t" +
-				"method" + "\t" +
-				"score" + "\t" +
-				"evalue" + "\t" +
-				"hmmloc" + "\t" +
+			of.puts	"SEQUENCE\t" +
+				"family\t" +
+				"genome\t" +
+				"taxid\t" +
+				"source\t" +
+				"sequence\t" +
+				"method\t" +
+				"score\t" +
+				"evalue\t" +
+				"hmmloc\t" +
 				"description"
 			each_hit do |hit|
 				gseq = ndb.get_seq_by_acc(hit.id)
