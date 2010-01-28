@@ -75,7 +75,7 @@ module Tools
 			
 			case tool
 			when 'tblastn'
-				@parameters = "-outfmt \"7 std sframe\" -num_threads 8"
+				@parameters = "-outfmt \"7 std sframe\" -num_descriptions 100000 -num_threads 8"
 			when 'psiblast'
 				@parameters = "-num_iterations 3 -inclusion_ethresh 0.0001 -num_threads 8" 
 			when 'makeblastdb'

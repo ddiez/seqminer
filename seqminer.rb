@@ -377,9 +377,9 @@ module SeqMiner
 
 		def run_all
 			dir_initialize if ! dir_initialized?
-			#run_search
+			run_search
 			get_results
-			#export_nelson
+			export_nelson
 			write_fasta
 		end
 		
