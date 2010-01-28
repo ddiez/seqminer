@@ -6,10 +6,15 @@ module Isolate
 	include Item
 
 	class Set < Set
+		attr_accessor :locus
 		attr_reader :config, :name, :file, :taxon
 		
 		def initialize(taxon, options = {:empty => false, :config => nil})
 			super()
+			
+			@taxon = taxon
+			@name = taxon.name
+			@locus = {}
 			
 			if options[:config]
 				@config = options[:config]
@@ -20,10 +25,38 @@ module Isolate
 			if options[:empty]
 				@file = "_undef_"
 			else
+				gdb = Sequence::Set.new(name, "gene", options = {:config => config})
+	
+				file = config.dir_sequence + name + "isolate.txt"
+				@file = file
+				
+				fi = File.open(file, "r")
+				fi.each do |line|
+					next if line.match(/^id\t/)
+					id, accession, subid, locus, source, isolate, strain, clone, country, type, pseudogene, \
+						strand, from, to, trans_table, references, description = line.split("\t")
+					seq = Isolate::Seq.new(id)
+					seq.accession = accession
+					seq.subid = subid
+					seq.locus = locus
+					seq.source = source
+					seq.isolate = isolate
+					seq.strand = strain
+					seq.clone = clone
+					seq.country = country
+					seq.type = type
+					seq.pseudogene = pseudogene.to_i
+					seq.strand = strand.to_i
+					seq.from = from.to_i
+					seq.to = to.to_i
+					seq.trans_table = trans_table
+					seq.references = references
+					seq.description = description
+					gseq = gdb.get_seq_by_acc(id)
+					seq.sequence = gseq
+					add(seq)
+				end
 			end
-			
-			@taxon = taxon
-			@name = taxon.name
 		end
 		
 		def each_sequence
@@ -53,7 +86,7 @@ module Isolate
 		
 		def auto_clean
 			items.delete_if do |id, seq|
-				seq.size < 3
+				seq.size < 5 # This is because this give us at least one residue in the different translations.
 			end
 		end
 
@@ -99,21 +132,72 @@ module Isolate
 					fo.puts seq.translate(5).to_fasta(id + " [strand=#{seq.strand * -1};frame=2]", 60)
 					fo.puts seq.translate(6).to_fasta(id + " [strand=#{seq.strand * -1};frame=3]", 60)
 				end
+			when 'isolate'
+				locus.each_pair do |id, loc|
+					fo.puts loc.to_fasta(id, 60)
+				end
+			end
+			fo.close
+		end
+		
+		def write_table(file = nil)
+			if file
+				fo = File.new(file, "w")
+			else
+				fo = $stdout
+			end
+			
+			fo.puts "id\t" +
+				"accession\t" +
+				"subid\t" +
+				"locus\t" +
+				"source\t" +
+				"isolate\t" +
+				"strain\t" +
+				"clone\t" +
+				"country\t" +
+				"type\t" +
+				"pseudogene\t" +
+				"strand\t" +
+				"from\t" +
+				"to\t" +
+				"trans_table\t" +
+				"references\t" +
+				"description"
+			each_sequence do |seq|
+				fo.puts seq.id + "\t" +
+					seq.accession + "\t" +
+					seq.subid + "\t" +
+					seq.locus + "\t" +
+					seq.source + "\t" +
+					seq.isolate.to_s + "\t" +
+					seq.strain.to_s + "\t" +
+					seq.clone.to_s + "\t" +
+					seq.country.to_s + "\t" +
+					seq.type + "\t" +
+					seq.pseudogene.to_s + "\t" +
+					seq.strand.to_s + "\t" +
+					seq.from.to_s + "\t" +
+					seq.to.to_s + "\t" +
+					seq.trans_table.to_s + "\t" +
+					seq.references + "\t" +
+					seq.description
 			end
 			fo.close
 		end
 	end
 	
 	class Seq < Item
-		attr_accessor :isolate, :strain, :clone, :country, :subid, :accession, :translation
-		attr_accessor :source, :locus, :strand, :from, :to, :description, :pseudogene, :sequence, :trans_table, :type
+		attr_accessor :accession, :subid, :locus, :source, :isolate, :strain, :clone, :country
+		attr_accessor :type, :pseudogene, :strand, :from, :to, :trans_table, :references, :description
+		attr_accessor :sequence, :translation
 
 		def initialize(id)
 			super
 			
 			@pseudogene = 0
 			# Assume the default and pray we can get the information somewhere.
-			@trans_table = 1
+			@trans_table = nil
 			# For isolates we usually get the translation from the CDS, and this is stored in the @translation holder.
 			# There is a method translate() that computes a translation based on the corresponding cds. It accepts
 			# a different frame and translation table.

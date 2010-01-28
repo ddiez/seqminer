@@ -39,45 +39,34 @@ module Genome
 			else
 				gdb = Sequence::Set.new(name, "gene", options = {:config => config})
 	
-				file = config.dir_sequence + name + "genome.gff"
+				file = config.dir_sequence + name + "genome.txt"
 				@file = file
-	
+				
 				fi = File.open(file, "r")
 				fi.each do |line|
-					line.chomp
-					(acc, source, type, chr, strand, s0, s1, foo, desc) = line.split("\t")
-					if type == 'gene'
-						gene = Gene.new(acc)
+					next if line.match(/^id\t/)
+					id, chromosome, source, type, exon, strand, from, to, pseudogene, references, mol_type, description = line.split("\t")
+					if type == "gene"
+						gene = Gene.new(id)
+						gene.chromosome = chromosome
 						gene.source = source
-						gene.chromosome= chr
-						#gene.strand = _get_strand(strand)
 						gene.strand = strand.to_i
-						gene.from = s0.to_i
-						gene.to = s1.to_i
-						
-						if desc.nil?
-							desc = ""
-						else
-							desc = _parse_desc(desc)
-						end
-						gene.description = desc["description"]
-	
-						if desc["pseudogene"]
-							gene.pseudogene = desc["pseudogene"]
-						end
-	
-						seq = gdb.get_item_by_id(acc)
+						gene.from = from.to_i
+						gene.to = to.to_i
+						gene.pseudogene = pseudogene
+						gene.references = references
+						gene.type = mol_type
+						gene.description = description
+						seq = gdb.get_item_by_id(id)
 						gene.sequence = seq
-	
 						add(gene)
 					elsif type == "exon"
-						gene = get_gene_by_acc(acc)
+						gene = get_gene_by_acc(id)
 						if ! gene.nil?
-							exon = Exon.new(gene.length + 1)
-							#exon.strand = _get_strand(strand)
+							exon = Exon.new(exon)
 							exon.strand = strand.to_i
-							exon.from = s0.to_i
-							exon.to = s1.to_i
+							exon.from = from.to_i
+							exon.to = to.to_i
 							gene << exon
 						else
 							raise "ERROR: gene #{acc} not found for exon #{acc}"
@@ -87,7 +76,7 @@ module Genome
 				fi.close
 			end
 		end
-
+		
 		def _parse_desc(line)
 			valid_fields = ["description", "pseudogene"]
 			a = line.split(/=|;/)
@@ -109,7 +98,7 @@ module Genome
 		
 		def auto_clean
 			items.delete_if do |id, gene|
-				gene.size < 3
+				gene.size < 5 # This is because it give us at least one residue in the 6frame translations.
 			end
 		end
 
@@ -212,8 +201,57 @@ module Genome
 
 			fo.close
 		end
-
-
+		
+		def write_table(file = nil)
+			if file
+				fo = File.new(file, "w")
+			else
+				fo = $stdout
+			end
+			
+			fo.puts "id\t" +
+				"chromosome\t" +
+				"source\t" +
+				"type\t" +
+				"exon\t" +
+				"strand\t" +
+				"from\t" +
+				"to\t" +
+				"pseudogene\t" +
+				"references\t" +
+				"mol_type\t" +
+				"description"
+			each_gene do |gene|
+				fo.puts gene.id + "\t" +
+					gene.chromosome + "\t" +
+					gene.source + "\t" +
+					"gene" + "\t" +
+					"\t" +
+					gene.strand.to_s + "\t" +
+					gene.from.to_s + "\t" +
+					gene.to.to_s + "\t" +
+					gene.pseudogene.to_s + "\t" +
+					gene.references.to_s + "\t" +
+					gene.type + "\t" +
+					gene.description
+				gene.oitems.each do |exon|
+					fo.puts gene.id + "\t" +
+						"\t" +
+						"\t" +
+						"exon" + "\t" +
+						exon.id.to_s + "\t" +
+						exon.strand.to_s + "\t" +
+						exon.from.to_s + "\t" +
+						exon.to.to_s + "\t" +
+						"\t" +
+						"\t" +
+						"\t" +
+						""
+				end
+			end
+			fo.close
+		end
+		
 		def debug
 			warn "+ Genome +"
 			warn "* file: " + file
@@ -223,7 +261,8 @@ module Genome
 	end
 	
 	class Gene < Item
-		attr_accessor :source, :chromosome, :strand, :from, :to, :description, :pseudogene, :sequence, :trans_table, :type
+		attr_accessor :source, :chromosome, :strand, :from, :to, :description, :pseudogene, :sequence
+		attr_accessor :trans_table, :type, :references
 		attr_reader :oitems, :size
 
 		def initialize(id)

@@ -55,6 +55,7 @@ module Parser
 			is = Isolate::Set.new(taxon, options = {:empty => true})
 			
 			feats = []
+			chrs = {}
 			files.each_pair do |type, file|
 				next if ! file.exist?
 				warn "* processing Genbank [" + type.to_s + "] file: " + file
@@ -67,6 +68,15 @@ module Parser
 				pass.puts "LOCUS\tLength\tIsolate\tStrain\tCountry\tClone\tOrganelle"
 				p.each_entry do |gb|
 					next if gb.accession == ""
+					
+					chrs[gb.accession] = gb.seq
+
+					refs = gb.references
+					ref = []
+					refs.each do |r|
+						ref << r.pubmed if r.pubmed != ""
+					end
+					ref = ref.join(";")
 					
 					#warn "* processing: " + gb.accession
 					strain = _check_in_source(gb, "strain")
@@ -108,6 +118,8 @@ module Parser
 									seq.to = feat.locations[0].to.to_i
 									seq.locus = gb.accession
 									seq.source = type.to_s
+									seq.trans_table = taxon.trans_table
+									seq.references = ref
 									if h['note']
 										seq.description = h['note'][0]
 									else
@@ -143,6 +155,8 @@ module Parser
 											seq.locus = gb.accession
 											seq.source = type.to_s
 											seq.sequence = gb.seq.subseq(seq.from, seq.to)
+											seq.trans_table = taxon.trans_table
+											seq.references = ref
 											is << seq
 											fa += 1
 										else
@@ -157,6 +171,8 @@ module Parser
 											seq.locus = gb.accession
 											seq.source = type.to_s
 											seq.sequence = gb.seq.subseq(seq.from, seq.to)
+											seq.trans_table = taxon.trans_table
+											seq.references = ref
 											is << seq
 											fa += 1
 										end
@@ -187,8 +203,6 @@ module Parser
 										seq.pseudogene = 1 if h['pseudo']
 										if h['transl_table']
 											seq.trans_table = h['transl_table'][0]
-										else
-											seq.trans_table = taxon.trans_table
 										end
 										seq.translation = h['translation'][0] if h['translation']
 									else
@@ -213,6 +227,7 @@ module Parser
 									seq.description = "EST"
 									seq.sequence = gb.seq.subseq(seq.from, seq.to)
 									seq.trans_table = taxon.trans_table
+									seq.references = ref
 									is << seq
 								end
 							end
@@ -238,6 +253,7 @@ module Parser
 					fo.puts seq.accession + "\t" + seq.locus + "\t" + seq.source + "\t" + seq.sequence.length.to_s
 				end
 			end
+			is.locus = chrs
 			is.auto_clean
 			is
 		end
@@ -293,9 +309,15 @@ module Parser
 			genome.chromosome = chr
 			p.each_entry do |gb|
 				next if gb.accession == ""
-
+				
+				refs = gb.references
+				ref = []
+				refs.each do |r|
+					ref << r.pubmed if r.pubmed != ""
+				end
+				ref = ref.join(";")
+				
 				chr[gb.accession] = gb.seq
-
 				
 				u = {}
 				gb.features.each do |feat|
@@ -313,6 +335,7 @@ module Parser
 							gene.source = "refseq"
 							gene.chromosome = gb.accession
 							gene.trans_table = taxon.trans_table
+							gene.references = ref
 							genome << gene
 
 							if h['pseudo']
@@ -426,9 +449,17 @@ module Parser
 			
 			chrs = {}
 			map = {}
+#			refs = {}
 			p1.each_entry do |gb|
 				next if gb.accession == ""
 				
+				# Currently no references in these files.
+#				ref = []
+#				gb.references.each do |r|
+#					puts r.pubmed if r.pubmed != ""
+#				end
+				
+#				refs[gb.accession] = ref.join(";")
 				chrs[gb.accession] = gb.seq
 				id = gb.definition
 				if id.match(/(supercont.+?) /)
@@ -463,6 +494,7 @@ module Parser
 						gene.pseudogene = attr[:pseudo]
 						gene.type = "CDS"
 						gene.trans_table = taxon.trans_table
+#						gene.references = refs[map[chr]]
 						genome << gene
 					end
 					exon = Genome::Exon.new(gene.length + 1)

@@ -13,9 +13,8 @@ gdb.auto_clean
 gdb.debug
 gdb.filter_by_acc(["PKH_141170", "PKH_126770"])
 gdb.debug
-#g = gdb.get_gene_by_acc("PFD1155w")
-#g = gdb.get_gene_by_acc("BBOV_I001870")
-#g.debug
+g = gdb.get_gene_by_acc("PKH_126770")
+g.debug
 #
 #
 #

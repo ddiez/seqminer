@@ -14,7 +14,7 @@ module SeqMiner
 		attr_accessor :dir_home, :dir_result
 		attr_reader :dir_source, :dir_sequence, :dir_model, :dir_pfam, :dir_pfam_current, :dir_config
 		# Tools directories.
-		attr_accessor :dir_hmmer, :dir_blast
+		attr_accessor :dir_hmmer, :dir_blast, :dir_blastplus
 		# Files.
 		attr_reader :file_taxon, :file_ortholog
 
@@ -43,7 +43,8 @@ module SeqMiner
 			
 			# Tools.
 			@dir_hmmer = Pathname.new("/Users/diez/local/hmmer3/bin/")
-			@dir_blast = Pathname.new("/usr/local/ncbi/blast/bin/")
+			@dir_blastplus = Pathname.new("/usr/local/ncbi/blast/bin/")
+			@dir_blast = Pathname.new("/Users/diez/local/blast/bin/")
 		end
 		
 		def basedir=(dir)
@@ -169,23 +170,48 @@ module SeqMiner
 		def process_directories
 			taxon.each_taxon do |t|
 				process_blast(t)
+				process_blast_plus(t)
 			end
 		end
 		
 		# This method will generate the approapriate databases for use with BLAST-like programs.
+		def process_blast_plus(t)
+			warn "* formatting: " + t.name
+			dir = config.dir_sequence + t.name
+			Dir.chdir(dir)
+			
+			ts = Tools::BlastPlus.new('makeblastdb', options = {:config => config}) 
+			
+			["gene", "cds", "protein", "6frame", "genome"].each do |type|
+				next if type == "genome" and t.type != "spp"
+				ts.outfile = type + "_plus"
+				ts.dbtitle = type
+				ts.dbtype = "nucl"
+				ts.dbtype = "prot" if type == "protein" or type == "6frame"
+				ts.infile = type + ".fa"
+				ts.debug
+				res = ts.execute
+				if res
+					$stderr.puts green, bold, "[DONE]", reset
+				else
+					$stderr.puts red, bold, "[FAIL]", reset
+				end
+			end
+		end
+		
 		def process_blast(t)
 			warn "* formatting: " + t.name
 			dir = config.dir_sequence + t.name
 			Dir.chdir(dir)
 			
-			ts = Tools::Blast.new('makeblastdb', options = {:config => config}) 
+			ts = Tools::Blast.new('formatdb', options = {:config => config}) 
 			
 			["gene", "cds", "protein", "6frame", "genome"].each do |type|
 				next if type == "genome" and t.type != "spp"
 				ts.outfile = type
 				ts.dbtitle = type
-				ts.dbtype = "nucl"
-				ts.dbtype = "prot" if type == "protein" or type == "6frame"
+				ts.dbtype = "F"
+				ts.dbtype = "T" if type == "protein" or type == "6frame"
 				ts.infile = type + ".fa"
 				ts.debug
 				res = ts.execute
@@ -220,18 +246,18 @@ module SeqMiner
 			
 			outdir = config.dir_sequence + t.name
 			outdir.mkpath if ! outdir.exist?
-			warn "* writing gene file"
+			warn "* writing gene FASTA file"
 			g.write_fasta("gene", outdir + "gene.fa")
-			warn "* writing CDS file"
+			warn "* writing CDS FASTA file"
 			g.write_fasta("cds", outdir + "cds.fa")
-			warn "* writing protein file"
+			warn "* writing protein FASTA file"
 			g.write_fasta("protein", outdir + "protein.fa")
-			warn "* writing 6frame file"
+			warn "* writing 6frame FASTA file"
 			g.write_fasta("6frame", outdir + "6frame.fa")
-			warn "* writing genome file"
+			warn "* writing genome FASTA file"
 			g.write_fasta("genome", outdir + "genome.fa")
-			warn "* writing GFF file"
-			g.write_gff(outdir + "genome.gff")
+			warn "* writing genome TABLE file"
+			g.write_table(outdir + "genome.txt")
 		end
 		
 		def process_clade(t)
@@ -244,17 +270,18 @@ module SeqMiner
 			outdir = config.dir_sequence + t.name
 			outdir.mkpath if ! outdir.exist?
 			
-			warn "* writing gene file"
+			warn "* writing gene FASTA file"
 			i.write_fasta("gene", outdir + "gene.fa")
 			warn "* writing CDS file"
 			i.write_fasta("cds", outdir + "cds.fa")
-			warn "* writing protein file"
+			warn "* writing protein FASTA file"
 			i.write_fasta("protein", outdir + "protein.fa")
-			warn "* writing 6frame file"
+			warn "* writing 6frame FASTA file"
 			i.write_fasta("6frame", outdir + "6frame.fa")
-			# TODO: be able to retrieve isolate information.
-#			warn "* writing isolate file"
-#			i.write_fasta("isolate", outdir + "isolate.txt")
+			warn "* writing isolate FASTA file"
+			i.write_fasta("isolate", outdir + "isolate.fa")
+			warn "* writing isolate TABLE file"
+			i.write_table(outdir + "isolate.txt")
 		end
 		
 		def update_model
@@ -312,10 +339,26 @@ module SeqMiner
 				fo.close
 				
 				# Run the search with the SEED and the genome.
-				warn "* computing PSSM model"
-				pssm_file = dir + (bh.ortholog.name + ".pssm")
+				warn "* computing PSSM model for Blast+"
+				pssm_file = dir + (bh.ortholog.name + "_plus.pssm")
+				pgp_file = dir + (bh.ortholog.name + "_plus.pgp")
+				ts = Tools::BlastPlus.new('psiblast', options = {:config => config})
+				ts.seed_file = file
+				ts.db = config.dir_sequence + bh.taxon.name + "protein_plus"
+				ts.pssm_file = pssm_file
+				ts.outfile = pgp_file
+				ts.debug
+				res = ts.execute
+				if res
+					$stderr.puts green, bold, "[DONE]", reset
+				else
+					$stderr.puts red, bold, "[FAIL]", reset
+				end
+				
+				warn "* computing PSSM model for Blast"
+				pssm_file = dir + (bh.ortholog.name + ".chk")
 				pgp_file = dir + (bh.ortholog.name + ".pgp")
-				ts = Tools::Blast.new('psiblast', options = {:config => config})
+				ts = Tools::BlastPlus.new('blastpgp', options = {:config => config})
 				ts.seed_file = file
 				ts.db = config.dir_sequence + bh.taxon.name + "protein"
 				ts.pssm_file = pssm_file

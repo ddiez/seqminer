@@ -3,7 +3,7 @@ require 'seqminer'
 module Tools
 	
 	class Tools
-		attr_accessor :infile, :outfile, :tool
+		attr_accessor :infile, :outfile, :tool, :cmd
 		attr_reader :path, :config, :parameters
 		
 		def initialize(tool, options = {:config => nil})
@@ -23,7 +23,7 @@ module Tools
 		def initialize(tool, options = {:config => nil})
 			super
 			
-			@path = config.dir_blast + tool
+			@path = config.dir_hmmer + tool
 			
 			case tool
 			when 'hmmsearch'
@@ -41,6 +41,12 @@ module Tools
 		end
 		
 		def execute
+			build_cmd
+			res = system cmd
+			res
+		end
+		
+		def build_cmd
 			case tool
 			when 'hmmsearch'
 				cmd = [path, parameters, "--domtblout", table_file, model, infile, ">", outfile]
@@ -49,11 +55,11 @@ module Tools
 			when 'hmmalign'
 				cmd = [path, parameters, model, infile, ">", outfile]
 			end
-			cmd = cmd.join(" ")
-			res = system cmd
+			@cmd = cmd.join(" ")
 		end
 		
 		def debug
+			build_cmd
 			warn "+ Tool +"
 			warn "* tool: " + tool.to_s
 			warn "* path: " + path.to_s
@@ -62,16 +68,17 @@ module Tools
 			warn "* outfile: " + outfile.to_s
 			warn "* table_file: " + table_file.to_s
 			warn "* parameters: " + parameters.to_s
+			warn "* cmd: " + cmd.to_s
 			warn ""
 		end
 	end
 	
-	class Blast < Tools
+	class BlastPlus < Tools
 		attr_accessor :seed_file, :pssm_file, :db, :dbtype, :dbtitle
 		def initialize(tool, options = {:config => nil})
 			super
 			
-			@path = config.dir_blast + tool
+			@path = config.dir_blastplus + tool
 			
 			case tool
 			when 'tblastn'
@@ -84,6 +91,12 @@ module Tools
 		end
 		
 		def execute
+			build_cmd
+			res = system cmd
+			res
+		end
+		
+		def build_cmd
 			case tool
 			when 'tblastn'
 				cmd = [path, parameters, "-db", db, "-in_pssm", pssm_file, ">", outfile]
@@ -91,14 +104,13 @@ module Tools
 				cmd = [path, parameters, "-db", db, "-out_pssm", pssm_file, "-query", seed_file, ">", outfile] 
 			when 'makeblastdb'
 				@dbtitle = outfile if ! dbtitle
-				cmd = [path, parameters, "-in", infile, "-out", outfile, "-dbtype", dbtype, "-title", dbtitle]
+				cmd = [path, parameters, "-in", infile, "-out", outfile, "-dbtype", dbtype, "-title", "\"" + dbtitle + "\""]
 			end
-			cmd = cmd.join(" ")
-			res = system cmd
-			res
+			@cmd = cmd.join(" ")
 		end
 		
 		def debug
+			build_cmd
 			warn "+ Tool +"
 			warn "* tool: " + tool.to_s
 			warn "* path: " + path.to_s
@@ -110,7 +122,63 @@ module Tools
 			warn "* seed_file: " + seed_file.to_s
 			warn "* model: " + pssm_file.to_s
 			warn "* parameters: " + parameters.to_s
+			warn "* cmd: " + cmd.to_s
 			warn ""
+		end
+	end
+	
+	class Blast < Tools
+		attr_accessor :seed_file, :pssm_file, :db, :dbtype, :dbtitle, :program, :dbtype
+		
+		def initialize(tool, options = {:config => nil})
+			super
+			
+			@path = config.dir_blast + tool
+			@dbtype = "F"
+			
+			case tool
+			when 'blastall'
+				@parameters = "-m 9 -p psitblastn -b 100000 -a 8"
+			when 'blastpgp'
+				@parameters = "-s T -j 3 -h 0.001 -F T -b 10000 -a 8" 
+			when 'formatdb'
+				@parameters = "-o T -V"
+			end
+		end
+		
+		def execute
+			build_cmd
+			res = system cmd
+			res
+		end
+		
+		def build_cmd
+			case tool
+			when 'blastall'
+				cmd = [path, parameters, "-d", db, "-i", seed_file, "-R", pssm_file, ">", outfile]
+			when 'blastpgp'
+				cmd = [path, parameters, "-d", db, "-C", pssm_file, "-i", seed_file, ">", outfile] 
+			when 'formatdb'
+				@dbtitle = outfile if ! dbtitle
+				cmd = [path, parameters, "-i", infile, "-n", outfile, "-p", dbtype, "-t", "\"" + dbtitle + "\""]
+			end
+			@cmd = cmd.join(" ")
+		end
+		
+		def debug
+			build_cmd
+			warn "+ Tool +"
+			warn "* tool: " + tool.to_s
+			warn "* path: " + path.to_s
+			warn "* db: " + db.to_s
+			warn "* dbtype: " + dbtype.to_s
+			warn "* dbtitle: " + dbtitle.to_s
+			warn "* infile: " + infile.to_s
+			warn "* outfile: " + outfile.to_s
+			warn "* seed_file: " + seed_file.to_s
+			warn "* model: " + pssm_file.to_s
+			warn "* parameters: " + parameters.to_s
+			warn "* cmd: " + cmd.to_s
 		end
 	end
 end

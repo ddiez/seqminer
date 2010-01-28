@@ -56,9 +56,9 @@ module Item
 
 		def debug
 			warn "* length: " + self.length.to_s
-			each_value do |item|
-				item.debug
-			end
+#			each_value do |item|
+#				item.debug
+#			end
 			warn ""
 		end
 	end
