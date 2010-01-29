@@ -1,9 +1,9 @@
-###############
-# Author::    Diego Diez (mailto:diez.10.ruiz@gmail.com)
+# SeqMiner is a tool for mining sequence information. It aims to
+# help detect sequences belonging to specific protein families.
+#
+# Author::    Diego Diez  (mailto:diez@kuicr.kyoto-u.ac.jp)
 # Copyright:: Copyright (c) 2010
 # License::   Distributes under the same terms as Ruby
-#
-# = Parsers for genome and sequence file formats
 
 require 'bio'
 require 'uri'

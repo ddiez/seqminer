@@ -88,18 +88,18 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000106">debug</a>&nbsp;&nbsp;
-      <a href="#M000101">download_broad</a>&nbsp;&nbsp;
-      <a href="#M000098">download_clade</a>&nbsp;&nbsp;
-      <a href="#M000102">download_eupathdb</a>&nbsp;&nbsp;
-      <a href="#M000103">download_ncbi</a>&nbsp;&nbsp;
-      <a href="#M000099">download_nuccore</a>&nbsp;&nbsp;
-      <a href="#M000100">download_nucest</a>&nbsp;&nbsp;
-      <a href="#M000097">download_spp</a>&nbsp;&nbsp;
-      <a href="#M000104">eupathdb_process_source</a>&nbsp;&nbsp;
-      <a href="#M000096">execute</a>&nbsp;&nbsp;
-      <a href="#M000095">new</a>&nbsp;&nbsp;
-      <a href="#M000105">refseq_process_source</a>&nbsp;&nbsp;
+      <a href="#M000109">debug</a>&nbsp;&nbsp;
+      <a href="#M000104">download_broad</a>&nbsp;&nbsp;
+      <a href="#M000101">download_clade</a>&nbsp;&nbsp;
+      <a href="#M000105">download_eupathdb</a>&nbsp;&nbsp;
+      <a href="#M000106">download_ncbi</a>&nbsp;&nbsp;
+      <a href="#M000102">download_nuccore</a>&nbsp;&nbsp;
+      <a href="#M000103">download_nucest</a>&nbsp;&nbsp;
+      <a href="#M000100">download_spp</a>&nbsp;&nbsp;
+      <a href="#M000107">eupathdb_process_source</a>&nbsp;&nbsp;
+      <a href="#M000099">execute</a>&nbsp;&nbsp;
+      <a href="#M000098">new</a>&nbsp;&nbsp;
+      <a href="#M000108">refseq_process_source</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -144,11 +144,11 @@
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000095" class="method-detail">
-        <a name="M000095"></a>
+      <div id="method-M000098" class="method-detail">
+        <a name="M000098"></a>
 
         <div class="method-heading">
-          <a href="#M000095" class="method-signature">
+          <a href="#M000098" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(id, config)</span>
           </a>
         </div>
@@ -158,15 +158,15 @@
 Config here is required and inherited from the <a href="Set.html">Set</a>.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000095-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000095-source">
+            onclick="toggleCode('M000098-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000098-source">
 <pre>
-     <span class="ruby-comment cmt"># File download.rb, line 132</span>
-132:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">config</span>)
-133:             <span class="ruby-ivar">@id</span> = <span class="ruby-identifier">id</span>
-134:             <span class="ruby-comment cmt">#super(id)</span>
-135:             <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">config</span>
-136:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File download.rb, line 139</span>
+139:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">config</span>)
+140:             <span class="ruby-ivar">@id</span> = <span class="ruby-identifier">id</span>
+141:             <span class="ruby-comment cmt">#super(id)</span>
+142:             <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">config</span>
+143:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -174,298 +174,24 @@ Config here is required and inherited from the <a href="Set.html">Set</a>.
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000106" class="method-detail">
-        <a name="M000106"></a>
+      <div id="method-M000109" class="method-detail">
+        <a name="M000109"></a>
 
         <div class="method-heading">
-          <a href="#M000106" class="method-signature">
+          <a href="#M000109" class="method-signature">
           <span class="method-name">debug</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000106-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000106-source">
+            onclick="toggleCode('M000109-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000109-source">
 <pre>
-     <span class="ruby-comment cmt"># File download.rb, line 315</span>
-315:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
-316:             <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* download id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
-317:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000101" class="method-detail">
-        <a name="M000101"></a>
-
-        <div class="method-heading">
-          <a href="#M000101" class="method-signature">
-          <span class="method-name">download_broad</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000101-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000101-source">
-<pre>
-     <span class="ruby-comment cmt"># File download.rb, line 192</span>
-192:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">download_broad</span>
-193:             <span class="ruby-identifier">download_ncbi</span>
-194:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000098" class="method-detail">
-        <a name="M000098"></a>
-
-        <div class="method-heading">
-          <a href="#M000098" class="method-signature">
-          <span class="method-name">download_clade</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000098-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000098-source">
-<pre>
-     <span class="ruby-comment cmt"># File download.rb, line 163</span>
-163:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">download_clade</span>
-164:             <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* downloading clade (nuccore) &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
-165:             <span class="ruby-identifier">download_nuccore</span>
-166:             <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* downloading clade (nucest) &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
-167:             <span class="ruby-identifier">download_nucest</span>
-168:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000102" class="method-detail">
-        <a name="M000102"></a>
-
-        <div class="method-heading">
-          <a href="#M000102" class="method-signature">
-          <span class="method-name">download_eupathdb</span><span class="method-args">(db)</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000102-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000102-source">
-<pre>
-     <span class="ruby-comment cmt"># File download.rb, line 196</span>
-196:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">download_eupathdb</span>(<span class="ruby-identifier">db</span>)
-197:             <span class="ruby-identifier">host</span> = {
-198:                 <span class="ruby-value str">'plasmodb'</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-value str">'plasmodb.org'</span>,
-199:                 <span class="ruby-value str">'giardiadb'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'giardiadb.org'</span>,
-200:                 <span class="ruby-value str">'tritrypdb'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'tritrypdb.org'</span>
-201:             }
-202:             
-203:             <span class="ruby-identifier">current_release</span> = {
-204:                 <span class="ruby-value str">'plasmodb'</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-value str">'6.3'</span>,
-205:                 <span class="ruby-value str">'giardiadb'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'2.1'</span>,
-206:                 <span class="ruby-value str">'tritrypdb'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'2.0'</span>
-207:             }
-208:             
-209:             <span class="ruby-identifier">release</span> = <span class="ruby-identifier">current_release</span>[<span class="ruby-identifier">db</span>]
-210:             
-211:             <span class="ruby-comment cmt"># Build dir/file/outdir/outfile, includes hacks to deal with file/directory structure inconsistencies.</span>
-212:             <span class="ruby-identifier">dir</span> = <span class="ruby-constant">Pathname</span>(<span class="ruby-value str">&quot;common/downloads&quot;</span>)
-213:             
-214:             <span class="ruby-identifier">outdir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>
-215:             <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">mkpath</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">exist?</span>
-216:             <span class="ruby-identifier">outfile</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gff&quot;</span>)
-217:             
-218:             <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">db</span>
-219:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'plasmodb'</span>
-220:                 <span class="ruby-identifier">dir</span> =  <span class="ruby-identifier">dir</span> <span class="ruby-operator">+</span> (<span class="ruby-value str">&quot;release-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span>
-221:                 <span class="ruby-identifier">file</span> = <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_PlasmoDB-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gff&quot;</span>
-222:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'giardiadb'</span>
-223:                 <span class="ruby-identifier">dir</span> =  <span class="ruby-identifier">dir</span> <span class="ruby-operator">+</span> (<span class="ruby-value str">&quot;release-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span>
-224:                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;giardia.lamblia_ATCC_50803&quot;</span>
-225:                     <span class="ruby-identifier">dir</span> = <span class="ruby-value str">&quot;common/downloads/release-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;/&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;GintestinalisAssemblageA&quot;</span>
-226:                 <span class="ruby-keyword kw">end</span>
-227:                 <span class="ruby-identifier">file</span> = <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_GiardiaDB-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gff&quot;</span>
-228:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'tritrypdb'</span>
-229:                 <span class="ruby-identifier">dir</span> =  <span class="ruby-identifier">dir</span> <span class="ruby-operator">+</span> (<span class="ruby-value str">&quot;release-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span>
-230:                 <span class="ruby-identifier">file</span> = <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_TriTrypDB-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gff&quot;</span>
-231:                     
-232:                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/trypanosoma.brucei/</span>)
-233:                     <span class="ruby-identifier">file</span> = <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">strain</span>.<span class="ruby-identifier">capitalize</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_TriTrypDB-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gff&quot;</span>
-234:                 <span class="ruby-keyword kw">end</span>
-235:                 
-236:                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/leishmania.major_Friedlin/</span>)
-237:                     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">release</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;1.3&quot;</span>
-238:                         <span class="ruby-identifier">file</span> = <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_TriTryDB-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gff&quot;</span>
-239:                     <span class="ruby-keyword kw">end</span>                
-240:                 <span class="ruby-keyword kw">end</span>
-241:                 
-242:                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;trypanosoma.cruzi_CL_Brener&quot;</span>
-243:                     <span class="ruby-identifier">file</span> = <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;Esmeraldo&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_TriTrypDB-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gff&quot;</span>
-244:                     <span class="ruby-identifier">outfile</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-Esmeraldo&quot;</span> <span class="ruby-operator">+</span>  <span class="ruby-value str">&quot;.gff&quot;</span>)
-245:                 <span class="ruby-keyword kw">end</span>
-246:             <span class="ruby-keyword kw">end</span>  
-247: 
-248:             <span class="ruby-identifier">http_download</span>(<span class="ruby-identifier">host</span>[<span class="ruby-identifier">db</span>], <span class="ruby-identifier">dir</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">outfile</span>)
-249:             
-250:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;trypanosoma.cruzi_CL_Brener&quot;</span>
-251:                 <span class="ruby-identifier">file</span> = <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;NonEsmeraldo&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_TriTrypDB-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gff&quot;</span>
-252:                 <span class="ruby-identifier">outfile</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-NonEsmeraldo&quot;</span> <span class="ruby-operator">+</span>  <span class="ruby-value str">&quot;.gff&quot;</span>)
-253:                 <span class="ruby-identifier">http_download</span>(<span class="ruby-identifier">host</span>[<span class="ruby-identifier">db</span>], <span class="ruby-identifier">dir</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">outfile</span>)
-254:             <span class="ruby-keyword kw">end</span>
-255:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000103" class="method-detail">
-        <a name="M000103"></a>
-
-        <div class="method-heading">
-          <a href="#M000103" class="method-signature">
-          <span class="method-name">download_ncbi</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-Methods to download <a href="../Genome.html">Genome</a> sequences from NCBI
-(usually RefSeq).
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000103-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000103-source">
-<pre>
-     <span class="ruby-comment cmt"># File download.rb, line 258</span>
-258:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">download_ncbi</span>
-259:             <span class="ruby-identifier">db</span> = <span class="ruby-value str">&quot;genome&quot;</span>
-260:             <span class="ruby-identifier">term</span> = <span class="ruby-value str">&quot;txid&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">id</span>
-261:             
-262:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;babesia.bovis_T2Bo&quot;</span>
-263:                 <span class="ruby-identifier">term</span> <span class="ruby-operator">+=</span> <span class="ruby-value str">&quot;[Organism:exp]+biomol genomic[properties]&quot;</span>
-264:                 <span class="ruby-identifier">db</span> = <span class="ruby-value str">&quot;nuccore&quot;</span>
-265:             <span class="ruby-keyword kw">end</span>
-266:             
-267:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;plasmodium.falciparum_dd2&quot;</span>
-268:                 <span class="ruby-identifier">term</span> <span class="ruby-operator">+=</span> <span class="ruby-value str">&quot;[Organism:exp]+biomol genomic[properties]&quot;</span>
-269:                 <span class="ruby-identifier">db</span> = <span class="ruby-value str">&quot;nuccore&quot;</span>
-270:             <span class="ruby-keyword kw">end</span>
-271:             
-272:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;plasmodium.falciparum_hb3&quot;</span>
-273:                 <span class="ruby-identifier">term</span> <span class="ruby-operator">+=</span> <span class="ruby-value str">&quot;[Organism:exp]+biomol genomic[properties]&quot;</span>
-274:                 <span class="ruby-identifier">db</span> = <span class="ruby-value str">&quot;nuccore&quot;</span>
-275:             <span class="ruby-keyword kw">end</span>
-276:             
-277:             <span class="ruby-identifier">outdir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>
-278:             <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">mkpath</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">exist?</span>
-279:             <span class="ruby-identifier">outfile</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gb&quot;</span>)
-280:             <span class="ruby-identifier">outfile</span>.<span class="ruby-identifier">unlink</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">outfile</span>.<span class="ruby-identifier">exist?</span>
-281:             
-282:             <span class="ruby-identifier">ncbi_download</span>(<span class="ruby-identifier">term</span>, <span class="ruby-identifier">db</span>, <span class="ruby-identifier">outfile</span>)
-283:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000099" class="method-detail">
-        <a name="M000099"></a>
-
-        <div class="method-heading">
-          <a href="#M000099" class="method-signature">
-          <span class="method-name">download_nuccore</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000099-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000099-source">
-<pre>
-     <span class="ruby-comment cmt"># File download.rb, line 170</span>
-170:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">download_nuccore</span>
-171:             <span class="ruby-identifier">outdir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>
-172:             <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">mkpath</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">exist?</span>
-173:             <span class="ruby-identifier">outfile</span> = <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_nuccore.gb&quot;</span>)
-174:             <span class="ruby-identifier">outfile</span>.<span class="ruby-identifier">unlink</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">outfile</span>.<span class="ruby-identifier">exist?</span>
-175:             
-176:             <span class="ruby-identifier">term</span> = <span class="ruby-value str">&quot;txid&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;[Organism:exp]&quot;</span>
-177:             
-178:             <span class="ruby-identifier">ncbi_download</span>(<span class="ruby-identifier">term</span>, <span class="ruby-value str">&quot;nuccore&quot;</span>, <span class="ruby-identifier">outfile</span>)
-179:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000100" class="method-detail">
-        <a name="M000100"></a>
-
-        <div class="method-heading">
-          <a href="#M000100" class="method-signature">
-          <span class="method-name">download_nucest</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000100-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000100-source">
-<pre>
-     <span class="ruby-comment cmt"># File download.rb, line 181</span>
-181:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">download_nucest</span>
-182:             <span class="ruby-identifier">outdir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>
-183:             <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">mkpath</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">exist?</span>
-184:             <span class="ruby-identifier">outfile</span> = <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_nucest.gb&quot;</span>)
-185:             <span class="ruby-identifier">outfile</span>.<span class="ruby-identifier">unlink</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">outfile</span>.<span class="ruby-identifier">exist?</span>
-186:             
-187:             <span class="ruby-identifier">term</span> = <span class="ruby-value str">&quot;txid&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;[Organism:exp]&quot;</span>
-188:             
-189:             <span class="ruby-identifier">ncbi_download</span>(<span class="ruby-identifier">term</span>, <span class="ruby-value str">&quot;nucest&quot;</span>, <span class="ruby-identifier">outfile</span>)
-190:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000097" class="method-detail">
-        <a name="M000097"></a>
-
-        <div class="method-heading">
-          <a href="#M000097" class="method-signature">
-          <span class="method-name">download_spp</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000097-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000097-source">
-<pre>
-     <span class="ruby-comment cmt"># File download.rb, line 147</span>
-147:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">download_spp</span>
-148:             <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* downloading spp &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
-149:             <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">source</span>
-150:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;plasmodb&quot;</span>
-151:                 <span class="ruby-identifier">download_eupathdb</span>(<span class="ruby-value str">'plasmodb'</span>)
-152:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;tritrypdb&quot;</span>
-153:                 <span class="ruby-identifier">download_eupathdb</span>(<span class="ruby-value str">'tritrypdb'</span>)
-154:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;giardiadb&quot;</span>
-155:                 <span class="ruby-identifier">download_eupathdb</span>(<span class="ruby-value str">'giardiadb'</span>)
-156:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;broad&quot;</span>
-157:                 <span class="ruby-identifier">download_broad</span>
-158:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;ncbi&quot;</span>
-159:                 <span class="ruby-identifier">download_ncbi</span>
-160:             <span class="ruby-keyword kw">end</span>
-161:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File download.rb, line 322</span>
+322:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+323:             <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* download id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
+324:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -476,7 +202,7 @@ Methods to download <a href="../Genome.html">Genome</a> sequences from NCBI
 
         <div class="method-heading">
           <a href="#M000104" class="method-signature">
-          <span class="method-name">eupathdb_process_source</span><span class="method-args">(infile)</span>
+          <span class="method-name">download_broad</span><span class="method-args">()</span>
           </a>
         </div>
       
@@ -485,49 +211,36 @@ Methods to download <a href="../Genome.html">Genome</a> sequences from NCBI
             onclick="toggleCode('M000104-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000104-source">
 <pre>
-     <span class="ruby-comment cmt"># File download.rb, line 285</span>
-285:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">eupathdb_process_source</span>(<span class="ruby-identifier">infile</span>)
-286:             <span class="ruby-identifier">p</span> = <span class="ruby-constant">Parser</span><span class="ruby-operator">::</span><span class="ruby-constant">Eupathdb</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">infile</span>, <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
-287:             <span class="ruby-identifier">g</span> = <span class="ruby-identifier">p</span>.<span class="ruby-identifier">parse</span>
-288: 
-289:             <span class="ruby-identifier">outdir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_sequence</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>
-290:             <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">mkpath</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">exist?</span>
-291: 
-292:             <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">'gene'</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;gene.fa&quot;</span>)
-293:             <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">'cds'</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;cds.fa&quot;</span>)
-294:             <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">'protein'</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;protein.fa&quot;</span>)
-295:             <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">'6frame'</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;6frame.fa&quot;</span>)
-296:             <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">'genome'</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;genome.fa&quot;</span>)
-297:             <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_gff</span>(<span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;genome.gff&quot;</span>)
-298:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File download.rb, line 199</span>
+199:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">download_broad</span>
+200:             <span class="ruby-identifier">download_ncbi</span>
+201:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000096" class="method-detail">
-        <a name="M000096"></a>
+      <div id="method-M000101" class="method-detail">
+        <a name="M000101"></a>
 
         <div class="method-heading">
-          <a href="#M000096" class="method-signature">
-          <span class="method-name">execute</span><span class="method-args">()</span>
+          <a href="#M000101" class="method-signature">
+          <span class="method-name">download_clade</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000096-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000096-source">
+            onclick="toggleCode('M000101-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000101-source">
 <pre>
-     <span class="ruby-comment cmt"># File download.rb, line 138</span>
-138:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">execute</span>
-139:             <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">type</span>
-140:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;spp&quot;</span>
-141:                 <span class="ruby-identifier">download_spp</span>
-142:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;clade&quot;</span>
-143:                 <span class="ruby-identifier">download_clade</span>
-144:             <span class="ruby-keyword kw">end</span>
-145:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File download.rb, line 170</span>
+170:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">download_clade</span>
+171:             <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* downloading clade (nuccore) &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
+172:             <span class="ruby-identifier">download_nuccore</span>
+173:             <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* downloading clade (nucest) &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
+174:             <span class="ruby-identifier">download_nucest</span>
+175:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -538,7 +251,7 @@ Methods to download <a href="../Genome.html">Genome</a> sequences from NCBI
 
         <div class="method-heading">
           <a href="#M000105" class="method-signature">
-          <span class="method-name">refseq_process_source</span><span class="method-args">(infile)</span>
+          <span class="method-name">download_eupathdb</span><span class="method-args">(db)</span>
           </a>
         </div>
       
@@ -547,21 +260,308 @@ Methods to download <a href="../Genome.html">Genome</a> sequences from NCBI
             onclick="toggleCode('M000105-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000105-source">
 <pre>
-     <span class="ruby-comment cmt"># File download.rb, line 300</span>
-300:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">refseq_process_source</span>(<span class="ruby-identifier">infile</span>)
-301:             <span class="ruby-identifier">p</span> = <span class="ruby-constant">Parser</span><span class="ruby-operator">::</span><span class="ruby-constant">Refseq</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">infile</span>, <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">option</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
-302:             <span class="ruby-identifier">g</span> = <span class="ruby-identifier">p</span>.<span class="ruby-identifier">parse</span>
-303:             
-304:             <span class="ruby-identifier">outdir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_sequence</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>
-305:             <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">mkpath</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">exist?</span>
-306: 
-307:             <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">'gene'</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;gene.fa&quot;</span>)
-308:             <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">'cds'</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;cds.fa&quot;</span>)
-309:             <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">'protein'</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;protein.fa&quot;</span>)
-310:             <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">'6frame'</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;6frame.fa&quot;</span>)
-311:             <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">'genome'</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;genome.fa&quot;</span>)
-312:             <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_gff</span>(<span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;genome.gff&quot;</span>)
-313:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File download.rb, line 203</span>
+203:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">download_eupathdb</span>(<span class="ruby-identifier">db</span>)
+204:             <span class="ruby-identifier">host</span> = {
+205:                 <span class="ruby-value str">'plasmodb'</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-value str">'plasmodb.org'</span>,
+206:                 <span class="ruby-value str">'giardiadb'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'giardiadb.org'</span>,
+207:                 <span class="ruby-value str">'tritrypdb'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'tritrypdb.org'</span>
+208:             }
+209:             
+210:             <span class="ruby-identifier">current_release</span> = {
+211:                 <span class="ruby-value str">'plasmodb'</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-value str">'6.3'</span>,
+212:                 <span class="ruby-value str">'giardiadb'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'2.1'</span>,
+213:                 <span class="ruby-value str">'tritrypdb'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'2.0'</span>
+214:             }
+215:             
+216:             <span class="ruby-identifier">release</span> = <span class="ruby-identifier">current_release</span>[<span class="ruby-identifier">db</span>]
+217:             
+218:             <span class="ruby-comment cmt"># Build dir/file/outdir/outfile, includes hacks to deal with file/directory structure inconsistencies.</span>
+219:             <span class="ruby-identifier">dir</span> = <span class="ruby-constant">Pathname</span>(<span class="ruby-value str">&quot;common/downloads&quot;</span>)
+220:             
+221:             <span class="ruby-identifier">outdir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>
+222:             <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">mkpath</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">exist?</span>
+223:             <span class="ruby-identifier">outfile</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gff&quot;</span>)
+224:             
+225:             <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">db</span>
+226:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'plasmodb'</span>
+227:                 <span class="ruby-identifier">dir</span> =  <span class="ruby-identifier">dir</span> <span class="ruby-operator">+</span> (<span class="ruby-value str">&quot;release-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span>
+228:                 <span class="ruby-identifier">file</span> = <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_PlasmoDB-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gff&quot;</span>
+229:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'giardiadb'</span>
+230:                 <span class="ruby-identifier">dir</span> =  <span class="ruby-identifier">dir</span> <span class="ruby-operator">+</span> (<span class="ruby-value str">&quot;release-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span>
+231:                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;giardia.lamblia_ATCC_50803&quot;</span>
+232:                     <span class="ruby-identifier">dir</span> = <span class="ruby-value str">&quot;common/downloads/release-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;/&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;GintestinalisAssemblageA&quot;</span>
+233:                 <span class="ruby-keyword kw">end</span>
+234:                 <span class="ruby-identifier">file</span> = <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_GiardiaDB-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gff&quot;</span>
+235:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'tritrypdb'</span>
+236:                 <span class="ruby-identifier">dir</span> =  <span class="ruby-identifier">dir</span> <span class="ruby-operator">+</span> (<span class="ruby-value str">&quot;release-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span>
+237:                 <span class="ruby-identifier">file</span> = <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_TriTrypDB-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gff&quot;</span>
+238:                     
+239:                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/trypanosoma.brucei/</span>)
+240:                     <span class="ruby-identifier">file</span> = <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">strain</span>.<span class="ruby-identifier">capitalize</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_TriTrypDB-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gff&quot;</span>
+241:                 <span class="ruby-keyword kw">end</span>
+242:                 
+243:                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/leishmania.major_Friedlin/</span>)
+244:                     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">release</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;1.3&quot;</span>
+245:                         <span class="ruby-identifier">file</span> = <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_TriTryDB-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gff&quot;</span>
+246:                     <span class="ruby-keyword kw">end</span>                
+247:                 <span class="ruby-keyword kw">end</span>
+248:                 
+249:                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;trypanosoma.cruzi_CL_Brener&quot;</span>
+250:                     <span class="ruby-identifier">file</span> = <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;Esmeraldo&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_TriTrypDB-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gff&quot;</span>
+251:                     <span class="ruby-identifier">outfile</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-Esmeraldo&quot;</span> <span class="ruby-operator">+</span>  <span class="ruby-value str">&quot;.gff&quot;</span>)
+252:                 <span class="ruby-keyword kw">end</span>
+253:             <span class="ruby-keyword kw">end</span>  
+254: 
+255:             <span class="ruby-identifier">http_download</span>(<span class="ruby-identifier">host</span>[<span class="ruby-identifier">db</span>], <span class="ruby-identifier">dir</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">outfile</span>)
+256:             
+257:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;trypanosoma.cruzi_CL_Brener&quot;</span>
+258:                 <span class="ruby-identifier">file</span> = <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;NonEsmeraldo&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_TriTrypDB-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gff&quot;</span>
+259:                 <span class="ruby-identifier">outfile</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-NonEsmeraldo&quot;</span> <span class="ruby-operator">+</span>  <span class="ruby-value str">&quot;.gff&quot;</span>)
+260:                 <span class="ruby-identifier">http_download</span>(<span class="ruby-identifier">host</span>[<span class="ruby-identifier">db</span>], <span class="ruby-identifier">dir</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">outfile</span>)
+261:             <span class="ruby-keyword kw">end</span>
+262:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000106" class="method-detail">
+        <a name="M000106"></a>
+
+        <div class="method-heading">
+          <a href="#M000106" class="method-signature">
+          <span class="method-name">download_ncbi</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Methods to download <a href="../Genome.html">Genome</a> sequences from NCBI
+(usually RefSeq).
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000106-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000106-source">
+<pre>
+     <span class="ruby-comment cmt"># File download.rb, line 265</span>
+265:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">download_ncbi</span>
+266:             <span class="ruby-identifier">db</span> = <span class="ruby-value str">&quot;genome&quot;</span>
+267:             <span class="ruby-identifier">term</span> = <span class="ruby-value str">&quot;txid&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">id</span>
+268:             
+269:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;babesia.bovis_T2Bo&quot;</span>
+270:                 <span class="ruby-identifier">term</span> <span class="ruby-operator">+=</span> <span class="ruby-value str">&quot;[Organism:exp]+biomol genomic[properties]&quot;</span>
+271:                 <span class="ruby-identifier">db</span> = <span class="ruby-value str">&quot;nuccore&quot;</span>
+272:             <span class="ruby-keyword kw">end</span>
+273:             
+274:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;plasmodium.falciparum_dd2&quot;</span>
+275:                 <span class="ruby-identifier">term</span> <span class="ruby-operator">+=</span> <span class="ruby-value str">&quot;[Organism:exp]+biomol genomic[properties]&quot;</span>
+276:                 <span class="ruby-identifier">db</span> = <span class="ruby-value str">&quot;nuccore&quot;</span>
+277:             <span class="ruby-keyword kw">end</span>
+278:             
+279:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;plasmodium.falciparum_hb3&quot;</span>
+280:                 <span class="ruby-identifier">term</span> <span class="ruby-operator">+=</span> <span class="ruby-value str">&quot;[Organism:exp]+biomol genomic[properties]&quot;</span>
+281:                 <span class="ruby-identifier">db</span> = <span class="ruby-value str">&quot;nuccore&quot;</span>
+282:             <span class="ruby-keyword kw">end</span>
+283:             
+284:             <span class="ruby-identifier">outdir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>
+285:             <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">mkpath</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">exist?</span>
+286:             <span class="ruby-identifier">outfile</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gb&quot;</span>)
+287:             <span class="ruby-identifier">outfile</span>.<span class="ruby-identifier">unlink</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">outfile</span>.<span class="ruby-identifier">exist?</span>
+288:             
+289:             <span class="ruby-identifier">ncbi_download</span>(<span class="ruby-identifier">term</span>, <span class="ruby-identifier">db</span>, <span class="ruby-identifier">outfile</span>)
+290:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000102" class="method-detail">
+        <a name="M000102"></a>
+
+        <div class="method-heading">
+          <a href="#M000102" class="method-signature">
+          <span class="method-name">download_nuccore</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000102-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000102-source">
+<pre>
+     <span class="ruby-comment cmt"># File download.rb, line 177</span>
+177:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">download_nuccore</span>
+178:             <span class="ruby-identifier">outdir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>
+179:             <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">mkpath</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">exist?</span>
+180:             <span class="ruby-identifier">outfile</span> = <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_nuccore.gb&quot;</span>)
+181:             <span class="ruby-identifier">outfile</span>.<span class="ruby-identifier">unlink</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">outfile</span>.<span class="ruby-identifier">exist?</span>
+182:             
+183:             <span class="ruby-identifier">term</span> = <span class="ruby-value str">&quot;txid&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;[Organism:exp]&quot;</span>
+184:             
+185:             <span class="ruby-identifier">ncbi_download</span>(<span class="ruby-identifier">term</span>, <span class="ruby-value str">&quot;nuccore&quot;</span>, <span class="ruby-identifier">outfile</span>)
+186:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000103" class="method-detail">
+        <a name="M000103"></a>
+
+        <div class="method-heading">
+          <a href="#M000103" class="method-signature">
+          <span class="method-name">download_nucest</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000103-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000103-source">
+<pre>
+     <span class="ruby-comment cmt"># File download.rb, line 188</span>
+188:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">download_nucest</span>
+189:             <span class="ruby-identifier">outdir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>
+190:             <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">mkpath</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">exist?</span>
+191:             <span class="ruby-identifier">outfile</span> = <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_nucest.gb&quot;</span>)
+192:             <span class="ruby-identifier">outfile</span>.<span class="ruby-identifier">unlink</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">outfile</span>.<span class="ruby-identifier">exist?</span>
+193:             
+194:             <span class="ruby-identifier">term</span> = <span class="ruby-value str">&quot;txid&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;[Organism:exp]&quot;</span>
+195:             
+196:             <span class="ruby-identifier">ncbi_download</span>(<span class="ruby-identifier">term</span>, <span class="ruby-value str">&quot;nucest&quot;</span>, <span class="ruby-identifier">outfile</span>)
+197:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000100" class="method-detail">
+        <a name="M000100"></a>
+
+        <div class="method-heading">
+          <a href="#M000100" class="method-signature">
+          <span class="method-name">download_spp</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000100-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000100-source">
+<pre>
+     <span class="ruby-comment cmt"># File download.rb, line 154</span>
+154:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">download_spp</span>
+155:             <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* downloading spp &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
+156:             <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">source</span>
+157:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;plasmodb&quot;</span>
+158:                 <span class="ruby-identifier">download_eupathdb</span>(<span class="ruby-value str">'plasmodb'</span>)
+159:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;tritrypdb&quot;</span>
+160:                 <span class="ruby-identifier">download_eupathdb</span>(<span class="ruby-value str">'tritrypdb'</span>)
+161:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;giardiadb&quot;</span>
+162:                 <span class="ruby-identifier">download_eupathdb</span>(<span class="ruby-value str">'giardiadb'</span>)
+163:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;broad&quot;</span>
+164:                 <span class="ruby-identifier">download_broad</span>
+165:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;ncbi&quot;</span>
+166:                 <span class="ruby-identifier">download_ncbi</span>
+167:             <span class="ruby-keyword kw">end</span>
+168:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000107" class="method-detail">
+        <a name="M000107"></a>
+
+        <div class="method-heading">
+          <a href="#M000107" class="method-signature">
+          <span class="method-name">eupathdb_process_source</span><span class="method-args">(infile)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000107-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000107-source">
+<pre>
+     <span class="ruby-comment cmt"># File download.rb, line 292</span>
+292:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">eupathdb_process_source</span>(<span class="ruby-identifier">infile</span>)
+293:             <span class="ruby-identifier">p</span> = <span class="ruby-constant">Parser</span><span class="ruby-operator">::</span><span class="ruby-constant">Eupathdb</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">infile</span>, <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+294:             <span class="ruby-identifier">g</span> = <span class="ruby-identifier">p</span>.<span class="ruby-identifier">parse</span>
+295: 
+296:             <span class="ruby-identifier">outdir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_sequence</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>
+297:             <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">mkpath</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">exist?</span>
+298: 
+299:             <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">'gene'</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;gene.fa&quot;</span>)
+300:             <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">'cds'</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;cds.fa&quot;</span>)
+301:             <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">'protein'</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;protein.fa&quot;</span>)
+302:             <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">'6frame'</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;6frame.fa&quot;</span>)
+303:             <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">'genome'</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;genome.fa&quot;</span>)
+304:             <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_gff</span>(<span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;genome.gff&quot;</span>)
+305:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000099" class="method-detail">
+        <a name="M000099"></a>
+
+        <div class="method-heading">
+          <a href="#M000099" class="method-signature">
+          <span class="method-name">execute</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000099-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000099-source">
+<pre>
+     <span class="ruby-comment cmt"># File download.rb, line 145</span>
+145:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">execute</span>
+146:             <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">type</span>
+147:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;spp&quot;</span>
+148:                 <span class="ruby-identifier">download_spp</span>
+149:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;clade&quot;</span>
+150:                 <span class="ruby-identifier">download_clade</span>
+151:             <span class="ruby-keyword kw">end</span>
+152:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000108" class="method-detail">
+        <a name="M000108"></a>
+
+        <div class="method-heading">
+          <a href="#M000108" class="method-signature">
+          <span class="method-name">refseq_process_source</span><span class="method-args">(infile)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000108-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000108-source">
+<pre>
+     <span class="ruby-comment cmt"># File download.rb, line 307</span>
+307:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">refseq_process_source</span>(<span class="ruby-identifier">infile</span>)
+308:             <span class="ruby-identifier">p</span> = <span class="ruby-constant">Parser</span><span class="ruby-operator">::</span><span class="ruby-constant">Refseq</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">infile</span>, <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">option</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+309:             <span class="ruby-identifier">g</span> = <span class="ruby-identifier">p</span>.<span class="ruby-identifier">parse</span>
+310:             
+311:             <span class="ruby-identifier">outdir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_sequence</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>
+312:             <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">mkpath</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">exist?</span>
+313: 
+314:             <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">'gene'</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;gene.fa&quot;</span>)
+315:             <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">'cds'</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;cds.fa&quot;</span>)
+316:             <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">'protein'</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;protein.fa&quot;</span>)
+317:             <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">'6frame'</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;6frame.fa&quot;</span>)
+318:             <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">'genome'</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;genome.fa&quot;</span>)
+319:             <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_gff</span>(<span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;genome.gff&quot;</span>)
+320:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

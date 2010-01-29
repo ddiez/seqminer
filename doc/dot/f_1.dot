@@ -10,68 +10,78 @@ digraph TopLevel {
         fontsize = 8
     ]
 
-    Item [
-        URL = "classes/Item.html",
-        label = "Item"
-    ]
-
-    Item -> Genome__Exon [
+    Download__Set -> Download__Set [
 
     ]
 
-    Genome__Set -> Genome__Set [
+    Download__Common -> Download__Download [
 
     ]
 
-    Item -> Genome__Gene [
+    Download__Common -> Download__Pfam [
 
     ]
 
-    subgraph cluster_Genome {
-        label = "Genome"
+    subgraph cluster_Download {
+        label = "Download"
         fillcolor = palegreen1
-        URL = "classes/Genome.html"
+        URL = "classes/Download.html"
         color = blue
         fontname = Arial
         style = filled
-        Genome [
+        Download [
             shape = plaintext,
             height = 0.01,
             width = 0.01,
             label = ""
         ]
 
-        Genome__Exon [
+        Download__Set [
             fontcolor = black,
             shape = ellipse,
-            URL = "classes/Genome/Exon.html",
-            color = palegoldenrod,
-            style = filled,
-            label = "Exon"
-        ]
-
-        Genome__Set [
-            fontcolor = black,
-            shape = ellipse,
-            URL = "classes/Genome/Set.html",
+            URL = "classes/Download/Set.html",
             color = palegoldenrod,
             style = filled,
             label = "Set"
         ]
 
-        Genome__Gene [
+        Download__Common [
             fontcolor = black,
             shape = ellipse,
-            URL = "classes/Genome/Gene.html",
+            URL = "classes/Download/Common.html",
             color = palegoldenrod,
             style = filled,
-            label = "Gene"
+            label = "Common"
+        ]
+
+        Download__Download [
+            fontcolor = black,
+            shape = ellipse,
+            URL = "classes/Download/Download.html",
+            color = palegoldenrod,
+            style = filled,
+            label = "Download"
+        ]
+
+        Download__Pfam [
+            fontcolor = black,
+            shape = ellipse,
+            URL = "classes/Download/Pfam.html",
+            color = palegoldenrod,
+            style = filled,
+            label = "Pfam"
         ]
 
     }
 
-    Item -> Genome [
-        lhead = cluster_Genome
+    Item [
+        shape = box,
+        URL = "classes/Item.html",
+        label = "Item"
+    ]
+
+    Item -> Download [
+        lhead = cluster_Download
     ]
 
 }

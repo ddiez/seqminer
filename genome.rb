@@ -1,14 +1,13 @@
-require 'seqminer'
-require 'item'
-require 'sequence'
-
-# SeqMiner is a tool for mining sequence information. It aims
-# to help detect sequences belonging to specific protein fa-
-# milies.
+# SeqMiner is a tool for mining sequence information. It aims to
+# help detect sequences belonging to specific protein families.
 #
 # Author::    Diego Diez  (mailto:diez@kuicr.kyoto-u.ac.jp)
 # Copyright:: Copyright (c) 2010
 # License::   Distributes under the same terms as Ruby
+
+require 'seqminer'
+require 'item'
+require 'sequence'
 
 module Genome
 	include Item

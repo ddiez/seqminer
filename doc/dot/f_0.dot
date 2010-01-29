@@ -10,78 +10,39 @@ digraph TopLevel {
         fontsize = 8
     ]
 
-    Download__Set -> Download__Set [
-
-    ]
-
-    Download__Common -> Download__Download [
-
-    ]
-
-    Download__Common -> Download__Pfam [
-
-    ]
-
-    subgraph cluster_Download {
-        label = "Download"
+    subgraph cluster_Common {
+        label = "Common"
         fillcolor = palegreen1
-        URL = "classes/Download.html"
+        URL = "classes/Common.html"
         color = blue
         fontname = Arial
         style = filled
-        Download [
+        Common [
             shape = plaintext,
             height = 0.01,
-            width = 0.01,
+            width = 0.75,
             label = ""
-        ]
-
-        Download__Set [
-            fontcolor = black,
-            shape = ellipse,
-            URL = "classes/Download/Set.html",
-            color = palegoldenrod,
-            style = filled,
-            label = "Set"
-        ]
-
-        Download__Common [
-            fontcolor = black,
-            shape = ellipse,
-            URL = "classes/Download/Common.html",
-            color = palegoldenrod,
-            style = filled,
-            label = "Common"
-        ]
-
-        Download__Download [
-            fontcolor = black,
-            shape = ellipse,
-            URL = "classes/Download/Download.html",
-            color = palegoldenrod,
-            style = filled,
-            label = "Download"
-        ]
-
-        Download__Pfam [
-            fontcolor = black,
-            shape = ellipse,
-            URL = "classes/Download/Pfam.html",
-            color = palegoldenrod,
-            style = filled,
-            label = "Pfam"
         ]
 
     }
 
-    Item [
-        shape = box,
-        URL = "classes/Item.html",
-        label = "Item"
+    String [
+        fontcolor = black,
+        shape = ellipse,
+        URL = "classes/String.html",
+        color = palegoldenrod,
+        style = filled,
+        label = "String"
     ]
 
-    Item -> Download [
-        lhead = cluster_Download
+    Term__ANSIColor [
+        shape = box,
+        URL = "classes/Term/ANSIColor.html",
+        label = "Term::ANSIColor"
+    ]
+
+    Term__ANSIColor -> String [
+
     ]
 
 }

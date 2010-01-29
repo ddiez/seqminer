@@ -1,3 +1,10 @@
+# SeqMiner is a tool for mining sequence information. It aims to
+# help detect sequences belonging to specific protein families.
+#
+# Author::    Diego Diez  (mailto:diez@kuicr.kyoto-u.ac.jp)
+# Copyright:: Copyright (c) 2010
+# License::   Distributes under the same terms as Ruby
+
 require 'seqminer'
 require 'ortholog'
 require 'taxon'
@@ -7,7 +14,6 @@ require 'common'
 
 module Search
 	include Item
-	include Common
 	
 	class TypeSet < Set
 		def initialize(options = {:empty => false})
@@ -86,7 +92,8 @@ module Search
 	class Set < Set
 		attr_accessor :parameters
 		attr_reader :config
-		include Term::ANSIColor
+		include Common
+
 		def initialize(ps = nil, options = {:empty => false, :config => nil})
 			super()
 			

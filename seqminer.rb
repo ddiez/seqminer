@@ -1,3 +1,10 @@
+# SeqMiner is a tool for mining sequence information. It aims to
+# help detect sequences belonging to specific protein families.
+#
+# Author::    Diego Diez  (mailto:diez@kuicr.kyoto-u.ac.jp)
+# Copyright:: Copyright (c) 2010
+# License::   Distributes under the same terms as Ruby
+
 require 'pathname'
 
 require 'common'
@@ -9,8 +16,6 @@ require 'download'
 require 'tools'
 
 module SeqMiner
-	include Common
-	
 	class Config
 		# Directories.
 		attr_accessor :dir_home, :dir_result
@@ -73,7 +78,8 @@ module SeqMiner
 	end
 	
 	class Install
-		include Term::ANSIColor
+		include Common
+
 		attr_reader :project, :config, :taxon, :ortholog
 
 		def initialize(options = {:config => nil})
@@ -148,10 +154,15 @@ module SeqMiner
 				if file.file?
 					if file.extname == ".hmm"
 						puts "* hmmpress: " + file
-						ok = system("hmmpress #{file} 1 > /dev/null")
-						if ! ok
-							puts "WARNING: trying to overwrite previous pressing [SKIPPED]."
-						end
+						ts = Tools::Hmmer("hmmpress")
+						ts.infile = file
+						ts.debug
+						res = ts.execute
+						_check_result(res, true, "trying to overwrite previous pressing [SKIPPED]")
+#						ok = system("hmmpress #{file} 1 > /dev/null")
+#						if ! ok
+#							puts "WARNING: trying to overwrite previous pressing [SKIPPED]."
+#						end
 					end
 				end
 			end
@@ -354,7 +365,7 @@ module SeqMiner
 		
 		def dir_initialize
 			dir_level1 = ['genome', 'isolate']
-			dir_level2 = ['search', 'sequences', 'fasta']
+			dir_level2 = ['search', 'sequence', 'fasta']
 			
 			warn "+ CREATE RESULT DIR STRUCTURE +"
 			#warn "* " + dir_result

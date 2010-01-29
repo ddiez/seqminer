@@ -10,69 +10,56 @@ digraph TopLevel {
         fontsize = 8
     ]
 
-    Parser__Common -> Parser__Refseq [
+    Isolate__Set -> Isolate__Set [
 
     ]
 
-    Parser__Common -> Parser__Broad [
+    Item [
+        URL = "classes/Item.html",
+        label = "Item"
+    ]
+
+    Item -> Isolate__Seq [
 
     ]
 
-    Parser__Common -> Parser__Eupathdb [
-
-    ]
-
-    subgraph cluster_Parser {
-        label = "Parser"
+    subgraph cluster_Isolate {
+        label = "Isolate"
         fillcolor = palegreen1
-        URL = "classes/Parser.html"
+        URL = "classes/Isolate.html"
         color = blue
         fontname = Arial
         style = filled
-        Parser [
+        Isolate [
             shape = plaintext,
             height = 0.01,
             width = 0.01,
             label = ""
         ]
 
-        Parser__Common [
+        Isolate__Set [
             fontcolor = black,
             shape = ellipse,
-            URL = "classes/Parser/Common.html",
+            URL = "classes/Isolate/Set.html",
             color = palegoldenrod,
             style = filled,
-            label = "Common"
+            label = "Set"
         ]
 
-        Parser__Refseq [
+        Isolate__Seq [
             fontcolor = black,
             shape = ellipse,
-            URL = "classes/Parser/Refseq.html",
+            URL = "classes/Isolate/Seq.html",
             color = palegoldenrod,
             style = filled,
-            label = "Refseq"
-        ]
-
-        Parser__Broad [
-            fontcolor = black,
-            shape = ellipse,
-            URL = "classes/Parser/Broad.html",
-            color = palegoldenrod,
-            style = filled,
-            label = "Broad"
-        ]
-
-        Parser__Eupathdb [
-            fontcolor = black,
-            shape = ellipse,
-            URL = "classes/Parser/Eupathdb.html",
-            color = palegoldenrod,
-            style = filled,
-            label = "Eupathdb"
+            label = "Seq"
         ]
 
     }
+
+    Item -> Isolate [
+        lhead = cluster_Isolate
+    ]
 
 }
 

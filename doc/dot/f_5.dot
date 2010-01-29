@@ -10,104 +10,43 @@ digraph TopLevel {
         fontsize = 8
     ]
 
-    Result__Set -> Result__Set [
+    Item__Set -> Item__Item [
 
     ]
 
-    Item [
-        URL = "classes/Item.html",
+    subgraph cluster_Item {
         label = "Item"
-    ]
-
-    Item -> Result__Domain [
-
-    ]
-
-    Item -> Result__Result [
-
-    ]
-
-    Item -> Result__Hit [
-
-    ]
-
-    Item -> Result__SubHit [
-
-    ]
-
-    subgraph cluster_Result {
-        label = "Result"
         fillcolor = palegreen1
-        URL = "classes/Result.html"
+        URL = "classes/Item.html"
         color = blue
         fontname = Arial
         style = filled
-        Result [
+        Item [
             shape = plaintext,
             height = 0.01,
             width = 0.01,
             label = ""
         ]
 
-        Result__HmmerParser [
+        Item__Set [
             fontcolor = black,
             shape = ellipse,
-            URL = "classes/Result/HmmerParser.html",
-            color = palegoldenrod,
-            style = filled,
-            label = "HmmerParser"
-        ]
-
-        Result__Set [
-            fontcolor = black,
-            shape = ellipse,
-            URL = "classes/Result/Set.html",
+            URL = "classes/Item/Set.html",
             color = palegoldenrod,
             style = filled,
             label = "Set"
         ]
 
-        Result__Domain [
+        Item__Item [
             fontcolor = black,
             shape = ellipse,
-            URL = "classes/Result/Domain.html",
+            URL = "classes/Item/Item.html",
             color = palegoldenrod,
             style = filled,
-            label = "Domain"
-        ]
-
-        Result__Result [
-            fontcolor = black,
-            shape = ellipse,
-            URL = "classes/Result/Result.html",
-            color = palegoldenrod,
-            style = filled,
-            label = "Result"
-        ]
-
-        Result__Hit [
-            fontcolor = black,
-            shape = ellipse,
-            URL = "classes/Result/Hit.html",
-            color = palegoldenrod,
-            style = filled,
-            label = "Hit"
-        ]
-
-        Result__SubHit [
-            fontcolor = black,
-            shape = ellipse,
-            URL = "classes/Result/SubHit.html",
-            color = palegoldenrod,
-            style = filled,
-            label = "SubHit"
+            label = "Item"
         ]
 
     }
-
-    Item -> Result [
-        lhead = cluster_Result
-    ]
 
 }
 

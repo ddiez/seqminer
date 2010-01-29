@@ -88,15 +88,15 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000234">debug</a>&nbsp;&nbsp;
-      <a href="#M000227">each_taxon</a>&nbsp;&nbsp;
-      <a href="#M000229">filter_by_name</a>&nbsp;&nbsp;
-      <a href="#M000231">filter_by_source</a>&nbsp;&nbsp;
-      <a href="#M000230">filter_by_type</a>&nbsp;&nbsp;
-      <a href="#M000228">get_taxon_by_name</a>&nbsp;&nbsp;
-      <a href="#M000233">load_ncbi_info</a>&nbsp;&nbsp;
-      <a href="#M000226">new</a>&nbsp;&nbsp;
-      <a href="#M000232">update_ncbi_info</a>&nbsp;&nbsp;
+      <a href="#M000239">debug</a>&nbsp;&nbsp;
+      <a href="#M000232">each_taxon</a>&nbsp;&nbsp;
+      <a href="#M000234">filter_by_name</a>&nbsp;&nbsp;
+      <a href="#M000236">filter_by_source</a>&nbsp;&nbsp;
+      <a href="#M000235">filter_by_type</a>&nbsp;&nbsp;
+      <a href="#M000233">get_taxon_by_name</a>&nbsp;&nbsp;
+      <a href="#M000238">load_ncbi_info</a>&nbsp;&nbsp;
+      <a href="#M000231">new</a>&nbsp;&nbsp;
+      <a href="#M000237">update_ncbi_info</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -131,137 +131,12 @@
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000226" class="method-detail">
-        <a name="M000226"></a>
-
-        <div class="method-heading">
-          <a href="#M000226" class="method-signature">
-          <span class="method-name">new</span><span class="method-args">(options = { :empty =&gt; false, :config =&gt; nil, :update_ncbi_info =&gt; false })</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000226-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000226-source">
-<pre>
-    <span class="ruby-comment cmt"># File taxon.rb, line 12</span>
-12:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = { <span class="ruby-identifier">:empty</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">:update_ncbi_info</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span> })
-13:             <span class="ruby-keyword kw">super</span>()
-14:             
-15:             <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
-16:                 <span class="ruby-ivar">@config</span> = <span class="ruby-constant">SeqMiner</span><span class="ruby-operator">::</span><span class="ruby-constant">Config</span>.<span class="ruby-identifier">new</span>
-17:             <span class="ruby-keyword kw">else</span>
-18:                 <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
-19:             <span class="ruby-keyword kw">end</span>
-20: 
-21:             <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:empty</span>]
-22:                 <span class="ruby-identifier">tf</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">file_taxon</span>
-23:                 <span class="ruby-identifier">file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">tf</span>)
-24:                 <span class="ruby-identifier">file</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-25:                     <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/^#/</span>)
-26:                     <span class="ruby-identifier">line</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp</span>
-27:                     <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;&quot;</span>
-28:                     <span class="ruby-identifier">id</span>, <span class="ruby-identifier">name1</span>, <span class="ruby-identifier">name2</span>, <span class="ruby-identifier">strain</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">source</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">&quot;\t&quot;</span>)
-29:                     <span class="ruby-comment cmt">#warn &quot;* Taxon: &quot; + id.to_s</span>
-30:     
-31:                     <span class="ruby-identifier">taxon</span> = <span class="ruby-constant">Taxon</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">name1</span>, <span class="ruby-identifier">name2</span>, <span class="ruby-identifier">strain</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">source</span>)
-32:                     <span class="ruby-identifier">add</span>(<span class="ruby-identifier">taxon</span>)
-33:                 <span class="ruby-keyword kw">end</span>
-34:                 <span class="ruby-identifier">file</span>.<span class="ruby-identifier">close</span>
-35:             <span class="ruby-keyword kw">end</span>
-36:         
-37:             <span class="ruby-identifier">load_ncbi_info</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:update_ncbi_info</span>])   
-38:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <h3 class="section-bar">Public Instance methods</h3>
-
-      <div id="method-M000234" class="method-detail">
-        <a name="M000234"></a>
-
-        <div class="method-heading">
-          <a href="#M000234" class="method-signature">
-          <span class="method-name">debug</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000234-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000234-source">
-<pre>
-     <span class="ruby-comment cmt"># File taxon.rb, line 122</span>
-122:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
-123:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Taxon Set +&quot;</span>
-124:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* length: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
-125:             <span class="ruby-identifier">items</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">taxon</span><span class="ruby-operator">|</span>
-126:                 <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">debug</span>
-127:             <span class="ruby-keyword kw">end</span>
-128:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;&quot;</span>
-129:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000227" class="method-detail">
-        <a name="M000227"></a>
-
-        <div class="method-heading">
-          <a href="#M000227" class="method-signature">
-          <span class="method-name">each_taxon</span><span class="method-args">() {|value| ...}</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000227-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000227-source">
-<pre>
-    <span class="ruby-comment cmt"># File taxon.rb, line 40</span>
-40:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each_taxon</span>
-41:             <span class="ruby-identifier">items</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
-42:                 <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">value</span>
-43:             <span class="ruby-keyword kw">end</span>
-44:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000229" class="method-detail">
-        <a name="M000229"></a>
-
-        <div class="method-heading">
-          <a href="#M000229" class="method-signature">
-          <span class="method-name">filter_by_name</span><span class="method-args">(filter)</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000229-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000229-source">
-<pre>
-    <span class="ruby-comment cmt"># File taxon.rb, line 54</span>
-54:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filter_by_name</span>(<span class="ruby-identifier">filter</span>)
-55:             <span class="ruby-identifier">items</span>.<span class="ruby-identifier">delete_if</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">taxon</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">match</span>(<span class="ruby-node">/#{filter}/</span>) }
-56:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
       <div id="method-M000231" class="method-detail">
         <a name="M000231"></a>
 
         <div class="method-heading">
           <a href="#M000231" class="method-signature">
-          <span class="method-name">filter_by_source</span><span class="method-args">(filter)</span>
+          <span class="method-name">new</span><span class="method-args">(options = { :empty =&gt; false, :config =&gt; nil, :update_ncbi_info =&gt; false })</span>
           </a>
         </div>
       
@@ -270,105 +145,64 @@
             onclick="toggleCode('M000231-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000231-source">
 <pre>
-    <span class="ruby-comment cmt"># File taxon.rb, line 62</span>
-62:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filter_by_source</span>(<span class="ruby-identifier">filter</span>)
-63:             <span class="ruby-identifier">items</span>.<span class="ruby-identifier">delete_if</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">taxon</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">source</span>.<span class="ruby-identifier">match</span>(<span class="ruby-node">/#{filter}/</span>) }
-64:         <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File taxon.rb, line 19</span>
+19:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = { <span class="ruby-identifier">:empty</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">:update_ncbi_info</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span> })
+20:             <span class="ruby-keyword kw">super</span>()
+21:             
+22:             <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+23:                 <span class="ruby-ivar">@config</span> = <span class="ruby-constant">SeqMiner</span><span class="ruby-operator">::</span><span class="ruby-constant">Config</span>.<span class="ruby-identifier">new</span>
+24:             <span class="ruby-keyword kw">else</span>
+25:                 <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+26:             <span class="ruby-keyword kw">end</span>
+27: 
+28:             <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:empty</span>]
+29:                 <span class="ruby-identifier">tf</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">file_taxon</span>
+30:                 <span class="ruby-identifier">file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">tf</span>)
+31:                 <span class="ruby-identifier">file</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+32:                     <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/^#/</span>)
+33:                     <span class="ruby-identifier">line</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp</span>
+34:                     <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;&quot;</span>
+35:                     <span class="ruby-identifier">id</span>, <span class="ruby-identifier">name1</span>, <span class="ruby-identifier">name2</span>, <span class="ruby-identifier">strain</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">source</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">&quot;\t&quot;</span>)
+36:                     <span class="ruby-comment cmt">#warn &quot;* Taxon: &quot; + id.to_s</span>
+37:     
+38:                     <span class="ruby-identifier">taxon</span> = <span class="ruby-constant">Taxon</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">name1</span>, <span class="ruby-identifier">name2</span>, <span class="ruby-identifier">strain</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">source</span>)
+39:                     <span class="ruby-identifier">add</span>(<span class="ruby-identifier">taxon</span>)
+40:                 <span class="ruby-keyword kw">end</span>
+41:                 <span class="ruby-identifier">file</span>.<span class="ruby-identifier">close</span>
+42:             <span class="ruby-keyword kw">end</span>
+43:         
+44:             <span class="ruby-identifier">load_ncbi_info</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:update_ncbi_info</span>])   
+45:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000230" class="method-detail">
-        <a name="M000230"></a>
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000239" class="method-detail">
+        <a name="M000239"></a>
 
         <div class="method-heading">
-          <a href="#M000230" class="method-signature">
-          <span class="method-name">filter_by_type</span><span class="method-args">(filter)</span>
+          <a href="#M000239" class="method-signature">
+          <span class="method-name">debug</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000230-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000230-source">
+            onclick="toggleCode('M000239-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000239-source">
 <pre>
-    <span class="ruby-comment cmt"># File taxon.rb, line 58</span>
-58:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filter_by_type</span>(<span class="ruby-identifier">filter</span>)
-59:             <span class="ruby-identifier">items</span>.<span class="ruby-identifier">delete_if</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">taxon</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">type</span>.<span class="ruby-identifier">match</span>(<span class="ruby-node">/#{filter}/</span>) }
-60:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000228" class="method-detail">
-        <a name="M000228"></a>
-
-        <div class="method-heading">
-          <a href="#M000228" class="method-signature">
-          <span class="method-name">get_taxon_by_name</span><span class="method-args">(name)</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000228-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000228-source">
-<pre>
-    <span class="ruby-comment cmt"># File taxon.rb, line 46</span>
-46:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_taxon_by_name</span>(<span class="ruby-identifier">name</span>)
-47:             <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
-48:                 <span class="ruby-comment cmt">#warn &quot;* searching &quot; + name + &quot; on &quot; + item.name</span>
-49:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">item</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">name</span>
-50:             <span class="ruby-keyword kw">end</span>
-51:             <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span>
-52:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000233" class="method-detail">
-        <a name="M000233"></a>
-
-        <div class="method-heading">
-          <a href="#M000233" class="method-signature">
-          <span class="method-name">load_ncbi_info</span><span class="method-args">(update = false)</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-This function reads a taxonomy file from NCBI (default:
-$SM_HOME/etc/ncbi_taxonomy.xml) and optionally forces an update.
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000233-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000233-source">
-<pre>
-     <span class="ruby-comment cmt"># File taxon.rb, line 100</span>
-100:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">load_ncbi_info</span>(<span class="ruby-identifier">update</span> = <span class="ruby-keyword kw">false</span>)
-101:             <span class="ruby-identifier">update_ncbi_info</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">update</span>
-102:             
-103:             <span class="ruby-identifier">file</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_config</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;ncbi_taxonomy.xml&quot;</span>
-104:             <span class="ruby-identifier">doc</span> = <span class="ruby-constant">REXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>.<span class="ruby-identifier">read</span>)
-105:             
-106:             <span class="ruby-identifier">id</span> = []
-107:             <span class="ruby-identifier">code</span> = []
-108:             
-109:             <span class="ruby-identifier">doc</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span>(<span class="ruby-value str">'TaxaSet/Taxon/TaxId'</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
-110:                 <span class="ruby-identifier">id</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">text</span>
-111:             <span class="ruby-keyword kw">end</span>
-112:             <span class="ruby-identifier">doc</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span>(<span class="ruby-value str">'TaxaSet/Taxon/GeneticCode/GCId'</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
-113:                 <span class="ruby-identifier">code</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">text</span>
-114:             <span class="ruby-keyword kw">end</span>
-115:             
-116:             <span class="ruby-identifier">id</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
-117:                 <span class="ruby-identifier">taxon</span> = <span class="ruby-identifier">get_item_by_id</span>(<span class="ruby-identifier">id</span>[<span class="ruby-identifier">index</span>])
-118:                 <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">trans_table</span> = <span class="ruby-identifier">code</span>[<span class="ruby-identifier">index</span>].<span class="ruby-identifier">to_i</span>
-119:             <span class="ruby-keyword kw">end</span>
-120:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File taxon.rb, line 129</span>
+129:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+130:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Taxon Set +&quot;</span>
+131:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* length: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
+132:             <span class="ruby-identifier">items</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">taxon</span><span class="ruby-operator">|</span>
+133:                 <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">debug</span>
+134:             <span class="ruby-keyword kw">end</span>
+135:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;&quot;</span>
+136:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -379,6 +213,172 @@ $SM_HOME/etc/ncbi_taxonomy.xml) and optionally forces an update.
 
         <div class="method-heading">
           <a href="#M000232" class="method-signature">
+          <span class="method-name">each_taxon</span><span class="method-args">() {|value| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000232-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000232-source">
+<pre>
+    <span class="ruby-comment cmt"># File taxon.rb, line 47</span>
+47:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each_taxon</span>
+48:             <span class="ruby-identifier">items</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+49:                 <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">value</span>
+50:             <span class="ruby-keyword kw">end</span>
+51:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000234" class="method-detail">
+        <a name="M000234"></a>
+
+        <div class="method-heading">
+          <a href="#M000234" class="method-signature">
+          <span class="method-name">filter_by_name</span><span class="method-args">(filter)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000234-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000234-source">
+<pre>
+    <span class="ruby-comment cmt"># File taxon.rb, line 61</span>
+61:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filter_by_name</span>(<span class="ruby-identifier">filter</span>)
+62:             <span class="ruby-identifier">items</span>.<span class="ruby-identifier">delete_if</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">taxon</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">match</span>(<span class="ruby-node">/#{filter}/</span>) }
+63:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000236" class="method-detail">
+        <a name="M000236"></a>
+
+        <div class="method-heading">
+          <a href="#M000236" class="method-signature">
+          <span class="method-name">filter_by_source</span><span class="method-args">(filter)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000236-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000236-source">
+<pre>
+    <span class="ruby-comment cmt"># File taxon.rb, line 69</span>
+69:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filter_by_source</span>(<span class="ruby-identifier">filter</span>)
+70:             <span class="ruby-identifier">items</span>.<span class="ruby-identifier">delete_if</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">taxon</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">source</span>.<span class="ruby-identifier">match</span>(<span class="ruby-node">/#{filter}/</span>) }
+71:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000235" class="method-detail">
+        <a name="M000235"></a>
+
+        <div class="method-heading">
+          <a href="#M000235" class="method-signature">
+          <span class="method-name">filter_by_type</span><span class="method-args">(filter)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000235-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000235-source">
+<pre>
+    <span class="ruby-comment cmt"># File taxon.rb, line 65</span>
+65:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filter_by_type</span>(<span class="ruby-identifier">filter</span>)
+66:             <span class="ruby-identifier">items</span>.<span class="ruby-identifier">delete_if</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">taxon</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">type</span>.<span class="ruby-identifier">match</span>(<span class="ruby-node">/#{filter}/</span>) }
+67:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000233" class="method-detail">
+        <a name="M000233"></a>
+
+        <div class="method-heading">
+          <a href="#M000233" class="method-signature">
+          <span class="method-name">get_taxon_by_name</span><span class="method-args">(name)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000233-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000233-source">
+<pre>
+    <span class="ruby-comment cmt"># File taxon.rb, line 53</span>
+53:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_taxon_by_name</span>(<span class="ruby-identifier">name</span>)
+54:             <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
+55:                 <span class="ruby-comment cmt">#warn &quot;* searching &quot; + name + &quot; on &quot; + item.name</span>
+56:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">item</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">name</span>
+57:             <span class="ruby-keyword kw">end</span>
+58:             <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span>
+59:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000238" class="method-detail">
+        <a name="M000238"></a>
+
+        <div class="method-heading">
+          <a href="#M000238" class="method-signature">
+          <span class="method-name">load_ncbi_info</span><span class="method-args">(update = false)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This function reads a taxonomy file from NCBI (default:
+$SM_HOME/etc/ncbi_taxonomy.xml) and optionally forces an update.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000238-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000238-source">
+<pre>
+     <span class="ruby-comment cmt"># File taxon.rb, line 107</span>
+107:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">load_ncbi_info</span>(<span class="ruby-identifier">update</span> = <span class="ruby-keyword kw">false</span>)
+108:             <span class="ruby-identifier">update_ncbi_info</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">update</span>
+109:             
+110:             <span class="ruby-identifier">file</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_config</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;ncbi_taxonomy.xml&quot;</span>
+111:             <span class="ruby-identifier">doc</span> = <span class="ruby-constant">REXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>.<span class="ruby-identifier">read</span>)
+112:             
+113:             <span class="ruby-identifier">id</span> = []
+114:             <span class="ruby-identifier">code</span> = []
+115:             
+116:             <span class="ruby-identifier">doc</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span>(<span class="ruby-value str">'TaxaSet/Taxon/TaxId'</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
+117:                 <span class="ruby-identifier">id</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">text</span>
+118:             <span class="ruby-keyword kw">end</span>
+119:             <span class="ruby-identifier">doc</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span>(<span class="ruby-value str">'TaxaSet/Taxon/GeneticCode/GCId'</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
+120:                 <span class="ruby-identifier">code</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">text</span>
+121:             <span class="ruby-keyword kw">end</span>
+122:             
+123:             <span class="ruby-identifier">id</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
+124:                 <span class="ruby-identifier">taxon</span> = <span class="ruby-identifier">get_item_by_id</span>(<span class="ruby-identifier">id</span>[<span class="ruby-identifier">index</span>])
+125:                 <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">trans_table</span> = <span class="ruby-identifier">code</span>[<span class="ruby-identifier">index</span>].<span class="ruby-identifier">to_i</span>
+126:             <span class="ruby-keyword kw">end</span>
+127:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000237" class="method-detail">
+        <a name="M000237"></a>
+
+        <div class="method-heading">
+          <a href="#M000237" class="method-signature">
           <span class="method-name">update_ncbi_info</span><span class="method-args">(file = nil)</span>
           </a>
         </div>
@@ -390,39 +390,39 @@ all the taxons in the set. It stores the XML file in the specified location
 (default: $SM_HOME/etc/ncbi_taxonomy.xml)
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000232-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000232-source">
+            onclick="toggleCode('M000237-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000237-source">
 <pre>
-    <span class="ruby-comment cmt"># File taxon.rb, line 68</span>
-68:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update_ncbi_info</span>(<span class="ruby-identifier">file</span> = <span class="ruby-keyword kw">nil</span>)
-69:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
-70:                 <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;WARNING: no taxons in the set [skipping]&quot;</span>
-71:                 <span class="ruby-keyword kw">return</span>
-72:             <span class="ruby-keyword kw">end</span>
-73:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* loading NCBI information&quot;</span>
-74:             
-75:             <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NCBI</span>.<span class="ruby-identifier">default_email</span> = <span class="ruby-value str">&quot;diez@kuicr.kyoto-u.ac.jp&quot;</span>
-76:             <span class="ruby-identifier">ncbi</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NCBI</span><span class="ruby-operator">::</span><span class="ruby-constant">REST</span><span class="ruby-operator">::</span><span class="ruby-constant">EFetch</span>.<span class="ruby-identifier">new</span>
-77:             
-78:             <span class="ruby-identifier">list</span> = []
-79:             <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">taxon</span><span class="ruby-operator">|</span>
-80:                 <span class="ruby-identifier">list</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">id</span>
-81:             <span class="ruby-keyword kw">end</span>
-82:             <span class="ruby-identifier">list</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot; &quot;</span>)
-83:             <span class="ruby-identifier">taxfile</span> = <span class="ruby-identifier">ncbi</span>.<span class="ruby-identifier">taxonomy</span>(<span class="ruby-identifier">list</span>, <span class="ruby-value str">&quot;xml&quot;</span>)
-84:             
-85:             <span class="ruby-identifier">file</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_config</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;ncbi_taxonomy.xml&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">file</span>
-86:             <span class="ruby-comment cmt"># TODO: check the existence of the file and make backup.</span>
-87:             
-88:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">exist?</span>
-89:                 <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* file exist! making backup...&quot;</span>
-90:                 <span class="ruby-constant">File</span>.<span class="ruby-identifier">move</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">file</span>.<span class="ruby-identifier">dirname</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">file</span>.<span class="ruby-identifier">basename</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_ori&quot;</span>))
-91:             <span class="ruby-keyword kw">end</span>
-92:             
-93:             <span class="ruby-identifier">f</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">file</span>, <span class="ruby-value str">&quot;w&quot;</span>)
-94:             <span class="ruby-identifier">f</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">taxfile</span>
-95:             <span class="ruby-identifier">f</span>.<span class="ruby-identifier">close</span>
-96:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File taxon.rb, line 75</span>
+ 75:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update_ncbi_info</span>(<span class="ruby-identifier">file</span> = <span class="ruby-keyword kw">nil</span>)
+ 76:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+ 77:                 <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;WARNING: no taxons in the set [skipping]&quot;</span>
+ 78:                 <span class="ruby-keyword kw">return</span>
+ 79:             <span class="ruby-keyword kw">end</span>
+ 80:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* loading NCBI information&quot;</span>
+ 81:             
+ 82:             <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NCBI</span>.<span class="ruby-identifier">default_email</span> = <span class="ruby-value str">&quot;diez@kuicr.kyoto-u.ac.jp&quot;</span>
+ 83:             <span class="ruby-identifier">ncbi</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NCBI</span><span class="ruby-operator">::</span><span class="ruby-constant">REST</span><span class="ruby-operator">::</span><span class="ruby-constant">EFetch</span>.<span class="ruby-identifier">new</span>
+ 84:             
+ 85:             <span class="ruby-identifier">list</span> = []
+ 86:             <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">taxon</span><span class="ruby-operator">|</span>
+ 87:                 <span class="ruby-identifier">list</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">id</span>
+ 88:             <span class="ruby-keyword kw">end</span>
+ 89:             <span class="ruby-identifier">list</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot; &quot;</span>)
+ 90:             <span class="ruby-identifier">taxfile</span> = <span class="ruby-identifier">ncbi</span>.<span class="ruby-identifier">taxonomy</span>(<span class="ruby-identifier">list</span>, <span class="ruby-value str">&quot;xml&quot;</span>)
+ 91:             
+ 92:             <span class="ruby-identifier">file</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_config</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;ncbi_taxonomy.xml&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">file</span>
+ 93:             <span class="ruby-comment cmt"># TODO: check the existence of the file and make backup.</span>
+ 94:             
+ 95:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">exist?</span>
+ 96:                 <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* file exist! making backup...&quot;</span>
+ 97:                 <span class="ruby-constant">File</span>.<span class="ruby-identifier">move</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">file</span>.<span class="ruby-identifier">dirname</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">file</span>.<span class="ruby-identifier">basename</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_ori&quot;</span>))
+ 98:             <span class="ruby-keyword kw">end</span>
+ 99:             
+100:             <span class="ruby-identifier">f</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">file</span>, <span class="ruby-value str">&quot;w&quot;</span>)
+101:             <span class="ruby-identifier">f</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">taxfile</span>
+102:             <span class="ruby-identifier">f</span>.<span class="ruby-identifier">close</span>
+103:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

@@ -1,3 +1,10 @@
+# SeqMiner is a tool for mining sequence information. It aims to
+# help detect sequences belonging to specific protein families.
+#
+# Author::    Diego Diez  (mailto:diez@kuicr.kyoto-u.ac.jp)
+# Copyright:: Copyright (c) 2010
+# License::   Distributes under the same terms as Ruby
+
 require 'seqminer'
 
 module Tools
@@ -32,6 +39,8 @@ module Tools
 				@parameters = ""
 			when 'hmmalign'
 				@parameters = ""
+			when 'hmmpress'
+				@parameters = ""
 			end
 		end
 		
@@ -53,6 +62,8 @@ module Tools
 			when 'hmmscan'
 				cmd = [path, parameters, model, infile, ">", outfile]
 			when 'hmmalign'
+				cmd = [path, parameters, model, infile, ">", outfile]
+			when 'hmmpress'
 				cmd = [path, parameters, model, infile, ">", outfile]
 			end
 			@cmd = cmd.join(" ")
@@ -78,7 +89,7 @@ module Tools
 		def initialize(tool, options = {:config => nil})
 			super
 			
-			@path = config.dir_blastplus + tool
+			@path = config.dir_blast + tool
 			
 			case tool
 			when 'tblastn'

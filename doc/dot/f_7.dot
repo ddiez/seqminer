@@ -10,45 +10,79 @@ digraph TopLevel {
         fontsize = 8
     ]
 
-    subgraph cluster_SeqMiner {
-        label = "SeqMiner"
+    Parser__Common -> Parser__GenbankIsolate [
+
+    ]
+
+    Parser__Common -> Parser__Refseq [
+
+    ]
+
+    Parser__Common -> Parser__Broad [
+
+    ]
+
+    Parser__Common -> Parser__Eupathdb [
+
+    ]
+
+    subgraph cluster_Parser {
+        label = "Parser"
         fillcolor = palegreen1
-        URL = "classes/SeqMiner.html"
+        URL = "classes/Parser.html"
         color = blue
         fontname = Arial
         style = filled
-        SeqMiner [
+        Parser [
             shape = plaintext,
             height = 0.01,
             width = 0.01,
             label = ""
         ]
 
-        SeqMiner__Pipeline [
+        Parser__GenbankIsolate [
             fontcolor = black,
             shape = ellipse,
-            URL = "classes/SeqMiner/Pipeline.html",
+            URL = "classes/Parser/GenbankIsolate.html",
             color = palegoldenrod,
             style = filled,
-            label = "Pipeline"
+            label = "GenbankIsolate"
         ]
 
-        SeqMiner__Config [
+        Parser__Common [
             fontcolor = black,
             shape = ellipse,
-            URL = "classes/SeqMiner/Config.html",
+            URL = "classes/Parser/Common.html",
             color = palegoldenrod,
             style = filled,
-            label = "Config"
+            label = "Common"
         ]
 
-        SeqMiner__Install [
+        Parser__Refseq [
             fontcolor = black,
             shape = ellipse,
-            URL = "classes/SeqMiner/Install.html",
+            URL = "classes/Parser/Refseq.html",
             color = palegoldenrod,
             style = filled,
-            label = "Install"
+            label = "Refseq"
+        ]
+
+        Parser__Broad [
+            fontcolor = black,
+            shape = ellipse,
+            URL = "classes/Parser/Broad.html",
+            color = palegoldenrod,
+            style = filled,
+            label = "Broad"
+        ]
+
+        Parser__Eupathdb [
+            fontcolor = black,
+            shape = ellipse,
+            URL = "classes/Parser/Eupathdb.html",
+            color = palegoldenrod,
+            style = filled,
+            label = "Eupathdb"
         ]
 
     }

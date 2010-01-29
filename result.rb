@@ -1,3 +1,10 @@
+# SeqMiner is a tool for mining sequence information. It aims to
+# help detect sequences belonging to specific protein families.
+#
+# Author::    Diego Diez  (mailto:diez@kuicr.kyoto-u.ac.jp)
+# Copyright:: Copyright (c) 2010
+# License::   Distributes under the same terms as Ruby
+
 require 'seqminer'
 require 'item'
 require 'genome'
@@ -322,7 +329,7 @@ module Result
 				fn = family.name
 			end
 			
-			ofile = config.dir_result + "isolate/sequences" + ortholog.name + (id + ".txt")
+			ofile = config.dir_result + "isolate/sequence" + ortholog.name + (id + ".txt")
 			warn "* export_nelson: " + ofile
 			#ofile = "foo.txt"
 			of = File.new(ofile, "w")
@@ -396,7 +403,7 @@ module Result
 				fn = family.name
 			end
 
-			ofile = config.dir_result + "genome/sequences" + ortholog.name + (id + ".txt")
+			ofile = config.dir_result + "genome/sequence" + ortholog.name + (id + ".txt")
 			of = File.new(ofile, "w")
 			of.puts	"SEQUENCE\t" +
 				"family\t" +

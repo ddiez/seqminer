@@ -12,3 +12,7 @@ ts.infile = "foo.fa"
 ts.model = "var"
 ts.outfile = "foo.log"
 ts.debug
+
+ts = Tools::Hmmer.new("hmmpress")
+ts.infile = "foo.hmm"
+ts.debug

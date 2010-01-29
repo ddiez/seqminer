@@ -10,55 +10,100 @@ digraph TopLevel {
         fontsize = 8
     ]
 
-    Taxon__Set -> Taxon__Set [
-
-    ]
-
     Item [
         URL = "classes/Item.html",
         label = "Item"
     ]
 
-    Item -> Taxon__Taxon [
+    Item -> Search__Search [
 
     ]
 
-    subgraph cluster_Taxon {
-        label = "Taxon"
+    Search__Set -> Search__TypeSet [
+
+    ]
+
+    Common [
+        shape = box,
+        URL = "classes/Common.html",
+        label = "Common"
+    ]
+
+    Common -> Search__Set [
+
+    ]
+
+    Search__Set -> Search__Set [
+
+    ]
+
+    Item -> Search__Type [
+
+    ]
+
+    subgraph cluster_Search {
+        label = "Search"
         fillcolor = palegreen1
-        URL = "classes/Taxon.html"
+        URL = "classes/Search.html"
         color = blue
         fontname = Arial
         style = filled
-        Taxon [
+        Search [
             shape = plaintext,
             height = 0.01,
             width = 0.01,
             label = ""
         ]
 
-        Taxon__Set [
+        Search__Search [
             fontcolor = black,
             shape = ellipse,
-            URL = "classes/Taxon/Set.html",
+            URL = "classes/Search/Search.html",
+            color = palegoldenrod,
+            style = filled,
+            label = "Search"
+        ]
+
+        Search__TypeSet [
+            fontcolor = black,
+            shape = ellipse,
+            URL = "classes/Search/TypeSet.html",
+            color = palegoldenrod,
+            style = filled,
+            label = "TypeSet"
+        ]
+
+        Search__Set [
+            fontcolor = black,
+            shape = ellipse,
+            URL = "classes/Search/Set.html",
             color = palegoldenrod,
             style = filled,
             label = "Set"
         ]
 
-        Taxon__Taxon [
+        Search__Parameter [
             fontcolor = black,
             shape = ellipse,
-            URL = "classes/Taxon/Taxon.html",
+            URL = "classes/Search/Parameter.html",
             color = palegoldenrod,
             style = filled,
-            label = "Taxon"
+            label = "Parameter"
+        ]
+
+        Search__Type [
+            fontcolor = black,
+            shape = ellipse,
+            URL = "classes/Search/Type.html",
+            color = palegoldenrod,
+            style = filled,
+            label = "Type"
         ]
 
     }
 
-    Item -> Taxon [
-        lhead = cluster_Taxon
+    Item -> Search [
+        lhead = cluster_Search
     ]
 
 }

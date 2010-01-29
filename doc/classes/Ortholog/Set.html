@@ -88,11 +88,11 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000087">debug</a>&nbsp;&nbsp;
-      <a href="#M000084">each_ortholog</a>&nbsp;&nbsp;
-      <a href="#M000086">filter_by_name</a>&nbsp;&nbsp;
-      <a href="#M000085">get_ortholog_by_name</a>&nbsp;&nbsp;
-      <a href="#M000083">new</a>&nbsp;&nbsp;
+      <a href="#M000090">debug</a>&nbsp;&nbsp;
+      <a href="#M000087">each_ortholog</a>&nbsp;&nbsp;
+      <a href="#M000089">filter_by_name</a>&nbsp;&nbsp;
+      <a href="#M000088">get_ortholog_by_name</a>&nbsp;&nbsp;
+      <a href="#M000086">new</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -127,112 +127,12 @@
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000083" class="method-detail">
-        <a name="M000083"></a>
-
-        <div class="method-heading">
-          <a href="#M000083" class="method-signature">
-          <span class="method-name">new</span><span class="method-args">(options = {:empty =&gt; false, :config =&gt; nil})</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000083-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000083-source">
-<pre>
-    <span class="ruby-comment cmt"># File ortholog.rb, line 9</span>
- 9:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:empty</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
-10:             <span class="ruby-keyword kw">super</span>()
-11: 
-12:             <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
-13:                 <span class="ruby-ivar">@config</span> = <span class="ruby-constant">SeqMiner</span><span class="ruby-operator">::</span><span class="ruby-constant">Config</span>.<span class="ruby-identifier">new</span>
-14:             <span class="ruby-keyword kw">else</span>
-15:                 <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
-16:             <span class="ruby-keyword kw">end</span>
-17:             
-18:             <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:empty</span>]
-19:                 <span class="ruby-identifier">of</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">file_ortholog</span>
-20:                 <span class="ruby-identifier">file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">of</span>)
-21:                 <span class="ruby-identifier">file</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-22:                     <span class="ruby-identifier">line</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp</span>
-23:                     <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;&quot;</span>
-24:                     <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^#/</span>
-25:                     <span class="ruby-identifier">name</span>, <span class="ruby-identifier">hmm</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">&quot;\t&quot;</span>)
-26:                     <span class="ruby-comment cmt">#warn &quot;* Ortholog: &quot; + name</span>
-27:     
-28:                     <span class="ruby-identifier">ortholog</span> = <span class="ruby-constant">Ortholog</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">hmm</span>)
-29:                     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">ortholog</span>)
-30:                 <span class="ruby-keyword kw">end</span>
-31:                 <span class="ruby-identifier">file</span>.<span class="ruby-identifier">close</span>
-32:             <span class="ruby-keyword kw">end</span>
-33:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <h3 class="section-bar">Public Instance methods</h3>
-
-      <div id="method-M000087" class="method-detail">
-        <a name="M000087"></a>
-
-        <div class="method-heading">
-          <a href="#M000087" class="method-signature">
-          <span class="method-name">debug</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000087-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000087-source">
-<pre>
-    <span class="ruby-comment cmt"># File ortholog.rb, line 52</span>
-52:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
-53:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Ortholog Set+&quot;</span>
-54:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* length: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
-55:             <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ortholog</span><span class="ruby-operator">|</span>
-56:                 <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">debug</span>
-57:             <span class="ruby-keyword kw">end</span>
-58:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;&quot;</span>
-59:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000084" class="method-detail">
-        <a name="M000084"></a>
-
-        <div class="method-heading">
-          <a href="#M000084" class="method-signature">
-          <span class="method-name">each_ortholog</span><span class="method-args">() {|value| ...}</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000084-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000084-source">
-<pre>
-    <span class="ruby-comment cmt"># File ortholog.rb, line 35</span>
-35:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each_ortholog</span>
-36:             <span class="ruby-identifier">items</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
-37:                 <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">value</span>
-38:             <span class="ruby-keyword kw">end</span>
-39:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
       <div id="method-M000086" class="method-detail">
         <a name="M000086"></a>
 
         <div class="method-heading">
           <a href="#M000086" class="method-signature">
-          <span class="method-name">filter_by_name</span><span class="method-args">(filter)</span>
+          <span class="method-name">new</span><span class="method-args">(options = {:empty =&gt; false, :config =&gt; nil})</span>
           </a>
         </div>
       
@@ -241,36 +141,136 @@
             onclick="toggleCode('M000086-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000086-source">
 <pre>
-    <span class="ruby-comment cmt"># File ortholog.rb, line 48</span>
-48:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filter_by_name</span>(<span class="ruby-identifier">filter</span>)
-49:             <span class="ruby-identifier">items</span>.<span class="ruby-identifier">delete_if</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">ortholog</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">match</span>(<span class="ruby-node">/#{filter}/</span>) }
-50:         <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File ortholog.rb, line 16</span>
+16:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:empty</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
+17:             <span class="ruby-keyword kw">super</span>()
+18: 
+19:             <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+20:                 <span class="ruby-ivar">@config</span> = <span class="ruby-constant">SeqMiner</span><span class="ruby-operator">::</span><span class="ruby-constant">Config</span>.<span class="ruby-identifier">new</span>
+21:             <span class="ruby-keyword kw">else</span>
+22:                 <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+23:             <span class="ruby-keyword kw">end</span>
+24:             
+25:             <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:empty</span>]
+26:                 <span class="ruby-identifier">of</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">file_ortholog</span>
+27:                 <span class="ruby-identifier">file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">of</span>)
+28:                 <span class="ruby-identifier">file</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+29:                     <span class="ruby-identifier">line</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp</span>
+30:                     <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;&quot;</span>
+31:                     <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^#/</span>
+32:                     <span class="ruby-identifier">name</span>, <span class="ruby-identifier">hmm</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">&quot;\t&quot;</span>)
+33:                     <span class="ruby-comment cmt">#warn &quot;* Ortholog: &quot; + name</span>
+34:     
+35:                     <span class="ruby-identifier">ortholog</span> = <span class="ruby-constant">Ortholog</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">hmm</span>)
+36:                     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">ortholog</span>)
+37:                 <span class="ruby-keyword kw">end</span>
+38:                 <span class="ruby-identifier">file</span>.<span class="ruby-identifier">close</span>
+39:             <span class="ruby-keyword kw">end</span>
+40:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000085" class="method-detail">
-        <a name="M000085"></a>
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000090" class="method-detail">
+        <a name="M000090"></a>
 
         <div class="method-heading">
-          <a href="#M000085" class="method-signature">
+          <a href="#M000090" class="method-signature">
+          <span class="method-name">debug</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000090-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000090-source">
+<pre>
+    <span class="ruby-comment cmt"># File ortholog.rb, line 59</span>
+59:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+60:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Ortholog Set+&quot;</span>
+61:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* length: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
+62:             <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ortholog</span><span class="ruby-operator">|</span>
+63:                 <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">debug</span>
+64:             <span class="ruby-keyword kw">end</span>
+65:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;&quot;</span>
+66:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000087" class="method-detail">
+        <a name="M000087"></a>
+
+        <div class="method-heading">
+          <a href="#M000087" class="method-signature">
+          <span class="method-name">each_ortholog</span><span class="method-args">() {|value| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000087-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000087-source">
+<pre>
+    <span class="ruby-comment cmt"># File ortholog.rb, line 42</span>
+42:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each_ortholog</span>
+43:             <span class="ruby-identifier">items</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+44:                 <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">value</span>
+45:             <span class="ruby-keyword kw">end</span>
+46:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000089" class="method-detail">
+        <a name="M000089"></a>
+
+        <div class="method-heading">
+          <a href="#M000089" class="method-signature">
+          <span class="method-name">filter_by_name</span><span class="method-args">(filter)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000089-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000089-source">
+<pre>
+    <span class="ruby-comment cmt"># File ortholog.rb, line 55</span>
+55:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filter_by_name</span>(<span class="ruby-identifier">filter</span>)
+56:             <span class="ruby-identifier">items</span>.<span class="ruby-identifier">delete_if</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">ortholog</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">match</span>(<span class="ruby-node">/#{filter}/</span>) }
+57:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000088" class="method-detail">
+        <a name="M000088"></a>
+
+        <div class="method-heading">
+          <a href="#M000088" class="method-signature">
           <span class="method-name">get_ortholog_by_name</span><span class="method-args">(name)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000085-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000085-source">
+            onclick="toggleCode('M000088-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000088-source">
 <pre>
-    <span class="ruby-comment cmt"># File ortholog.rb, line 41</span>
-41:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_ortholog_by_name</span>(<span class="ruby-identifier">name</span>)
-42:             <span class="ruby-identifier">each_ortholog</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>
-43:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">o</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">name</span>
-44:             <span class="ruby-keyword kw">end</span>
-45:             <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span>
-46:         <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File ortholog.rb, line 48</span>
+48:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_ortholog_by_name</span>(<span class="ruby-identifier">name</span>)
+49:             <span class="ruby-identifier">each_ortholog</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>
+50:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">o</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">name</span>
+51:             <span class="ruby-keyword kw">end</span>
+52:             <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span>
+53:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

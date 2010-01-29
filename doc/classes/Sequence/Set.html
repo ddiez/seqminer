@@ -88,10 +88,10 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000145">debug</a>&nbsp;&nbsp;
-      <a href="#M000143">each_sequence</a>&nbsp;&nbsp;
-      <a href="#M000144">get_seq_by_acc</a>&nbsp;&nbsp;
-      <a href="#M000142">new</a>&nbsp;&nbsp;
+      <a href="#M000148">debug</a>&nbsp;&nbsp;
+      <a href="#M000146">each_sequence</a>&nbsp;&nbsp;
+      <a href="#M000147">get_seq_by_acc</a>&nbsp;&nbsp;
+      <a href="#M000145">new</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -141,57 +141,12 @@
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000142" class="method-detail">
-        <a name="M000142"></a>
-
-        <div class="method-heading">
-          <a href="#M000142" class="method-signature">
-          <span class="method-name">new</span><span class="method-args">(name, type, options = {:config =&gt; nil})</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000142-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000142-source">
-<pre>
-    <span class="ruby-comment cmt"># File sequence.rb, line 12</span>
-12:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
-13:             <span class="ruby-keyword kw">super</span>()
-14: 
-15:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
-16:                 <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
-17:             <span class="ruby-keyword kw">else</span>
-18:                 <span class="ruby-ivar">@config</span> = <span class="ruby-constant">SeqMiner</span><span class="ruby-operator">::</span><span class="ruby-constant">Config</span>.<span class="ruby-identifier">new</span>
-19:             <span class="ruby-keyword kw">end</span>
-20:             <span class="ruby-ivar">@dir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_sequence</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name</span>
-21:             <span class="ruby-ivar">@type</span> = <span class="ruby-identifier">type</span>
-22:             <span class="ruby-ivar">@file</span> = <span class="ruby-ivar">@dir</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">type</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.fa&quot;</span>)
-23:             <span class="ruby-identifier">fi</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FastaFormat</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@file</span>)
-24:             <span class="ruby-identifier">fi</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span>
-25:                 <span class="ruby-identifier">seq</span> = <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">to_biosequence</span>
-26:                 <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">type</span>
-27:                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;gene&quot;</span>
-28:                     <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">na</span>
-29:                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;protein&quot;</span>
-30:                     <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">aa</span>
-31:                 <span class="ruby-keyword kw">end</span>
-32:                 <span class="ruby-identifier">add</span>(<span class="ruby-identifier">seq</span>, <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">accessions</span>[<span class="ruby-value">0</span>])
-33:             <span class="ruby-keyword kw">end</span>
-34:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <h3 class="section-bar">Public Instance methods</h3>
-
       <div id="method-M000145" class="method-detail">
         <a name="M000145"></a>
 
         <div class="method-heading">
           <a href="#M000145" class="method-signature">
-          <span class="method-name">debug</span><span class="method-args">()</span>
+          <span class="method-name">new</span><span class="method-args">(name, type, options = {:config =&gt; nil})</span>
           </a>
         </div>
       
@@ -200,62 +155,107 @@
             onclick="toggleCode('M000145-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000145-source">
 <pre>
-    <span class="ruby-comment cmt"># File sequence.rb, line 46</span>
-46:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
-47:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Sequence +&quot;</span>
-48:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* dir: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir</span>
-49:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* type: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">type</span>
-50:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* file: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">file</span>
-51:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* sequences: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
-52:         <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File sequence.rb, line 19</span>
+19:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
+20:             <span class="ruby-keyword kw">super</span>()
+21: 
+22:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+23:                 <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+24:             <span class="ruby-keyword kw">else</span>
+25:                 <span class="ruby-ivar">@config</span> = <span class="ruby-constant">SeqMiner</span><span class="ruby-operator">::</span><span class="ruby-constant">Config</span>.<span class="ruby-identifier">new</span>
+26:             <span class="ruby-keyword kw">end</span>
+27:             <span class="ruby-ivar">@dir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_sequence</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name</span>
+28:             <span class="ruby-ivar">@type</span> = <span class="ruby-identifier">type</span>
+29:             <span class="ruby-ivar">@file</span> = <span class="ruby-ivar">@dir</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">type</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.fa&quot;</span>)
+30:             <span class="ruby-identifier">fi</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FastaFormat</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@file</span>)
+31:             <span class="ruby-identifier">fi</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span>
+32:                 <span class="ruby-identifier">seq</span> = <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">to_biosequence</span>
+33:                 <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">type</span>
+34:                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;gene&quot;</span>
+35:                     <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">na</span>
+36:                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;protein&quot;</span>
+37:                     <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">aa</span>
+38:                 <span class="ruby-keyword kw">end</span>
+39:                 <span class="ruby-identifier">add</span>(<span class="ruby-identifier">seq</span>, <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">accessions</span>[<span class="ruby-value">0</span>])
+40:             <span class="ruby-keyword kw">end</span>
+41:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000143" class="method-detail">
-        <a name="M000143"></a>
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000148" class="method-detail">
+        <a name="M000148"></a>
 
         <div class="method-heading">
-          <a href="#M000143" class="method-signature">
+          <a href="#M000148" class="method-signature">
+          <span class="method-name">debug</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000148-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000148-source">
+<pre>
+    <span class="ruby-comment cmt"># File sequence.rb, line 53</span>
+53:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+54:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Sequence +&quot;</span>
+55:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* dir: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir</span>
+56:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* type: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">type</span>
+57:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* file: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">file</span>
+58:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* sequences: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
+59:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000146" class="method-detail">
+        <a name="M000146"></a>
+
+        <div class="method-heading">
+          <a href="#M000146" class="method-signature">
           <span class="method-name">each_sequence</span><span class="method-args">() {|value| ...}</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000143-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000143-source">
+            onclick="toggleCode('M000146-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000146-source">
 <pre>
-    <span class="ruby-comment cmt"># File sequence.rb, line 36</span>
-36:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each_sequence</span>
-37:             <span class="ruby-identifier">items</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
-38:                 <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">value</span>
-39:             <span class="ruby-keyword kw">end</span>
-40:         <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File sequence.rb, line 43</span>
+43:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each_sequence</span>
+44:             <span class="ruby-identifier">items</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+45:                 <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">value</span>
+46:             <span class="ruby-keyword kw">end</span>
+47:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000144" class="method-detail">
-        <a name="M000144"></a>
+      <div id="method-M000147" class="method-detail">
+        <a name="M000147"></a>
 
         <div class="method-heading">
-          <a href="#M000144" class="method-signature">
+          <a href="#M000147" class="method-signature">
           <span class="method-name">get_seq_by_acc</span><span class="method-args">(acc)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000144-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000144-source">
+            onclick="toggleCode('M000147-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000147-source">
 <pre>
-    <span class="ruby-comment cmt"># File sequence.rb, line 42</span>
-42:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_seq_by_acc</span>(<span class="ruby-identifier">acc</span>)
-43:             <span class="ruby-identifier">get_item_by_id</span>(<span class="ruby-identifier">acc</span>)
-44:         <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File sequence.rb, line 49</span>
+49:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_seq_by_acc</span>(<span class="ruby-identifier">acc</span>)
+50:             <span class="ruby-identifier">get_item_by_id</span>(<span class="ruby-identifier">acc</span>)
+51:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

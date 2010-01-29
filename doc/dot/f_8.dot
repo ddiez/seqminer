@@ -10,43 +10,112 @@ digraph TopLevel {
         fontsize = 8
     ]
 
-    Sequence__Set -> Sequence__Set [
+    Result__Set -> Result__Set [
 
     ]
 
-    subgraph cluster_Sequence {
-        label = "Sequence"
+    Item [
+        URL = "classes/Item.html",
+        label = "Item"
+    ]
+
+    Item -> Result__Domain [
+
+    ]
+
+    Item -> Result__Result [
+
+    ]
+
+    Item -> Result__Hit [
+
+    ]
+
+    Item -> Result__SubHit [
+
+    ]
+
+    subgraph cluster_Result {
+        label = "Result"
         fillcolor = palegreen1
-        URL = "classes/Sequence.html"
+        URL = "classes/Result.html"
         color = blue
         fontname = Arial
         style = filled
-        Sequence [
+        Result [
             shape = plaintext,
             height = 0.01,
             width = 0.01,
             label = ""
         ]
 
-        Sequence__Set [
+        Result__HmmerParser [
             fontcolor = black,
             shape = ellipse,
-            URL = "classes/Sequence/Set.html",
+            URL = "classes/Result/HmmerParser.html",
+            color = palegoldenrod,
+            style = filled,
+            label = "HmmerParser"
+        ]
+
+        Result__BlastParser [
+            fontcolor = black,
+            shape = ellipse,
+            URL = "classes/Result/BlastParser.html",
+            color = palegoldenrod,
+            style = filled,
+            label = "BlastParser"
+        ]
+
+        Result__Set [
+            fontcolor = black,
+            shape = ellipse,
+            URL = "classes/Result/Set.html",
             color = palegoldenrod,
             style = filled,
             label = "Set"
         ]
 
+        Result__Domain [
+            fontcolor = black,
+            shape = ellipse,
+            URL = "classes/Result/Domain.html",
+            color = palegoldenrod,
+            style = filled,
+            label = "Domain"
+        ]
+
+        Result__Result [
+            fontcolor = black,
+            shape = ellipse,
+            URL = "classes/Result/Result.html",
+            color = palegoldenrod,
+            style = filled,
+            label = "Result"
+        ]
+
+        Result__Hit [
+            fontcolor = black,
+            shape = ellipse,
+            URL = "classes/Result/Hit.html",
+            color = palegoldenrod,
+            style = filled,
+            label = "Hit"
+        ]
+
+        Result__SubHit [
+            fontcolor = black,
+            shape = ellipse,
+            URL = "classes/Result/SubHit.html",
+            color = palegoldenrod,
+            style = filled,
+            label = "SubHit"
+        ]
+
     }
 
-    Item [
-        shape = box,
-        URL = "classes/Item.html",
-        label = "Item"
-    ]
-
-    Item -> Sequence [
-        lhead = cluster_Sequence
+    Item -> Result [
+        lhead = cluster_Result
     ]
 
 }

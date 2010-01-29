@@ -10,53 +10,58 @@ digraph TopLevel {
         fontsize = 8
     ]
 
-    Tools -> Tools__Hmmer [
+    Common [
+        shape = box,
+        URL = "classes/Common.html",
+        label = "Common"
+    ]
+
+    Common -> SeqMiner__Install [
 
     ]
 
-    subgraph cluster_Tools {
-        label = "Tools"
+    subgraph cluster_SeqMiner {
+        label = "SeqMiner"
         fillcolor = palegreen1
-        URL = "classes/Tools.html"
+        URL = "classes/SeqMiner.html"
         color = blue
         fontname = Arial
         style = filled
-        Tools [
+        SeqMiner [
             shape = plaintext,
             height = 0.01,
             width = 0.01,
             label = ""
         ]
 
-        Tools__Tools [
+        SeqMiner__Pipeline [
             fontcolor = black,
             shape = ellipse,
-            URL = "classes/Tools/Tools.html",
+            URL = "classes/SeqMiner/Pipeline.html",
             color = palegoldenrod,
             style = filled,
-            label = "Tools"
+            label = "Pipeline"
         ]
 
-        Tools__Hmmer [
+        SeqMiner__Config [
             fontcolor = black,
             shape = ellipse,
-            URL = "classes/Tools/Hmmer.html",
+            URL = "classes/SeqMiner/Config.html",
             color = palegoldenrod,
             style = filled,
-            label = "Hmmer"
+            label = "Config"
+        ]
+
+        SeqMiner__Install [
+            fontcolor = black,
+            shape = ellipse,
+            URL = "classes/SeqMiner/Install.html",
+            color = palegoldenrod,
+            style = filled,
+            label = "Install"
         ]
 
     }
-
-    Item [
-        shape = box,
-        URL = "classes/Item.html",
-        label = "Item"
-    ]
-
-    Item -> Tools [
-        lhead = cluster_Tools
-    ]
 
 }
 
