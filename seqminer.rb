@@ -1,6 +1,6 @@
 require 'pathname'
-require 'term/ansicolor'
 
+require 'common'
 require 'taxon'
 require 'ortholog'
 require 'search'
@@ -9,12 +9,14 @@ require 'download'
 require 'tools'
 
 module SeqMiner
+	include Common
+	
 	class Config
 		# Directories.
 		attr_accessor :dir_home, :dir_result
 		attr_reader :dir_source, :dir_sequence, :dir_model, :dir_pfam, :dir_pfam_current, :dir_config
 		# Tools directories.
-		attr_accessor :dir_hmmer, :dir_blast, :dir_blastplus
+		attr_accessor :dir_hmmer, :dir_blast
 		# Files.
 		attr_reader :file_taxon, :file_ortholog
 
@@ -43,8 +45,7 @@ module SeqMiner
 			
 			# Tools.
 			@dir_hmmer = Pathname.new("/Users/diez/local/hmmer3/bin/")
-			@dir_blastplus = Pathname.new("/usr/local/ncbi/blast/bin/")
-			@dir_blast = Pathname.new("/Users/diez/local/blast/bin/")
+			@dir_blast = Pathname.new("/usr/local/ncbi/blast/bin/")
 		end
 		
 		def basedir=(dir)
@@ -170,59 +171,27 @@ module SeqMiner
 		def process_directories
 			taxon.each_taxon do |t|
 				process_blast(t)
-				process_blast_plus(t)
 			end
 		end
 		
 		# This method will generate the approapriate databases for use with BLAST-like programs.
-		def process_blast_plus(t)
+		def process_blast(t)
 			warn "* formatting: " + t.name
 			dir = config.dir_sequence + t.name
 			Dir.chdir(dir)
 			
-			ts = Tools::BlastPlus.new('makeblastdb', options = {:config => config}) 
+			ts = Tools::Blast.new('makeblastdb', options = {:config => config}) 
 			
 			["gene", "cds", "protein", "6frame", "genome"].each do |type|
 				next if type == "genome" and t.type != "spp"
-				ts.outfile = type + "_plus"
+				ts.outfile = type
 				ts.dbtitle = type
 				ts.dbtype = "nucl"
 				ts.dbtype = "prot" if type == "protein" or type == "6frame"
 				ts.infile = type + ".fa"
 				ts.debug
 				res = ts.execute
-				if res
-					$stderr.puts green, bold, "[DONE]", reset
-				else
-					$stderr.puts red, bold, "[FAIL]", reset
-					exit
-				end
-			end
-		end
-		
-		def process_blast(t)
-			warn "* formatting: " + t.name
-			dir = config.dir_sequence + t.name
-			Dir.chdir(dir)
-			
-			ts = Tools::Blast.new('formatdb', options = {:config => config}) 
-			
-			#["gene", "cds", "protein", "6frame", "genome"].each do |type|
-			["gene", "cds", "protein", "genome"].each do |type|
-				next if type == "genome" and t.type != "spp"
-				ts.outfile = type
-				ts.dbtitle = type
-				ts.dbtype = "F"
-				ts.dbtype = "T" if type == "protein" or type == "6frame"
-				ts.infile = type + ".fa"
-				ts.debug
-				res = ts.execute
-				if res
-					$stderr.puts green, bold, "[DONE]", reset
-				else
-					$stderr.puts red, bold, "[FAIL]", reset
-					exit
-				end
+				_check_result(res)
 			end
 		end
 		
@@ -343,38 +312,16 @@ module SeqMiner
 				
 				# Run the search with the SEED and the genome.
 				warn "* computing PSSM model for Blast+"
-				pssm_file = dir + (bh.ortholog.name + "_plus.pssm")
-				pgp_file = dir + (bh.ortholog.name + "_plus.pgp")
-				ts = Tools::BlastPlus.new('psiblast', options = {:config => config})
-				ts.db = config.dir_sequence + bh.taxon.name + "protein_plus"
-				ts.seed_file = file
-				ts.pssm_file = pssm_file
-				ts.outfile = pgp_file
-				ts.debug
-				res = ts.execute
-				if res
-					$stderr.puts green, bold, "[DONE]", reset
-				else
-					$stderr.puts red, bold, "[FAIL]", reset
-					exit
-				end
-				
-				warn "* computing PSSM model for Blast"
-				pssm_file = dir + (bh.ortholog.name + ".chk")
+				pssm_file = dir + (bh.ortholog.name + ".pssm")
 				pgp_file = dir + (bh.ortholog.name + ".pgp")
-				ts = Tools::Blast.new('blastpgp', options = {:config => config})
+				ts = Tools::Blast.new('psiblast', options = {:config => config})
 				ts.db = config.dir_sequence + bh.taxon.name + "protein"
 				ts.seed_file = file
 				ts.pssm_file = pssm_file
 				ts.outfile = pgp_file
 				ts.debug
 				res = ts.execute
-				if res
-					$stderr.puts green, bold, "[DONE]", reset
-				else
-					$stderr.puts red, bold, "[FAIL]", reset
-					exit
-				end
+				_check_result(res)
 			end
 		end
 	end

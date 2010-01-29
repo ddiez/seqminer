@@ -120,6 +120,7 @@ module Parser
 									seq.source = type.to_s
 									seq.trans_table = taxon.trans_table
 									seq.references = ref
+									seq.division = gb.division
 									if h['note']
 										seq.description = h['note'][0]
 									else
@@ -157,6 +158,7 @@ module Parser
 											seq.sequence = gb.seq.subseq(seq.from, seq.to)
 											seq.trans_table = taxon.trans_table
 											seq.references = ref
+											seq.division = gb.division
 											is << seq
 											fa += 1
 										else
@@ -173,6 +175,7 @@ module Parser
 											seq.sequence = gb.seq.subseq(seq.from, seq.to)
 											seq.trans_table = taxon.trans_table
 											seq.references = ref
+											seq.division = gb.division
 											is << seq
 											fa += 1
 										end
@@ -228,6 +231,7 @@ module Parser
 									seq.sequence = gb.seq.subseq(seq.from, seq.to)
 									seq.trans_table = taxon.trans_table
 									seq.references = ref
+									seq.division = gb.division
 									is << seq
 								end
 							end
@@ -248,9 +252,9 @@ module Parser
 			end
 			# Write accepted sequences.
 			File.open(config.dir_source + taxon.name + "accepted.txt", "w") do |fo|
-				fo.puts "Accession\tLOCUS\tSource\tLength"
+				fo.puts "Accession\tLOCUS\tDivision\tSource\tLength"
 				is.each_value do |seq|
-					fo.puts seq.accession + "\t" + seq.locus + "\t" + seq.source + "\t" + seq.sequence.length.to_s
+					fo.puts seq.accession + "\t" + seq.locus + "\t" + seq.division + "\t" + seq.source + "\t" + seq.sequence.length.to_s
 				end
 			end
 			is.locus = chrs

@@ -33,12 +33,13 @@ module Isolate
 				fi = File.open(file, "r")
 				fi.each do |line|
 					next if line.match(/^id\t/)
-					id, accession, subid, locus, source, isolate, strain, clone, country, type, pseudogene, \
-						strand, from, to, trans_table, references, description = line.split("\t")
+					id, accession, subid, locus, division, source, isolate, strain, clone, country, type, \
+						pseudogene, strand, from, to, trans_table, references, description = line.split("\t")
 					seq = Isolate::Seq.new(id)
 					seq.accession = accession
 					seq.subid = subid
 					seq.locus = locus
+					seq.division = division
 					seq.source = source
 					seq.isolate = isolate
 					seq.strand = strain
@@ -151,6 +152,7 @@ module Isolate
 				"accession\t" +
 				"subid\t" +
 				"locus\t" +
+				"division\t" +
 				"source\t" +
 				"isolate\t" +
 				"strain\t" +
@@ -169,6 +171,7 @@ module Isolate
 					seq.accession + "\t" +
 					seq.subid + "\t" +
 					seq.locus + "\t" +
+					seq.division + "\t" +
 					seq.source + "\t" +
 					seq.isolate.to_s + "\t" +
 					seq.strain.to_s + "\t" +
@@ -188,7 +191,7 @@ module Isolate
 	end
 	
 	class Seq < Item
-		attr_accessor :accession, :subid, :locus, :source, :isolate, :strain, :clone, :country
+		attr_accessor :accession, :subid, :locus, :division, :source, :isolate, :strain, :clone, :country
 		attr_accessor :type, :pseudogene, :strand, :from, :to, :trans_table, :references, :description
 		attr_accessor :sequence, :translation
 
