@@ -64,8 +64,8 @@ module Parser
 				skip = File.new(config.dir_source + taxon.name + (type.to_s + "_skip.txt"), "w")
 				pass = File.new(config.dir_source + taxon.name + (type.to_s + "_pass.txt"), "w")
 				
-				skip.puts "LOCUS\tLength\tWhy\tIsolate\tStrain\tCountry\tClone\tOrganelle"
-				pass.puts "LOCUS\tLength\tIsolate\tStrain\tCountry\tClone\tOrganelle"
+				skip.puts "LOCUS\tDivision\tLength\tWhy\tIsolate\tStrain\tCountry\tClone\tOrganelle"
+				pass.puts "LOCUS\tDivision\tLength\tIsolate\tStrain\tCountry\tClone\tOrganelle"
 				p.each_entry do |gb|
 					next if gb.accession == ""
 					
@@ -77,7 +77,7 @@ module Parser
 						ref << r.pubmed if r.pubmed != ""
 					end
 					ref = ref.join(";")
-					
+
 					#warn "* processing: " + gb.accession
 					strain = _check_in_source(gb, "strain")
 					isolate = _check_in_source(gb, "isolate")
@@ -87,7 +87,7 @@ module Parser
 
 					ok, why = _filter_entry(gb)
 					if ok
-						pass.puts gb.accession + "\t" + gb.length.to_s + "\t" + isolate.to_s + "\t" + strain.to_s + "\t" + country.to_s + "\t" + clone.to_s + "\t" + organelle.to_s
+						pass.puts gb.accession + "\t" + gb.division + "\t" + gb.length.to_s + "\t" + isolate.to_s + "\t" + strain.to_s + "\t" + country.to_s + "\t" + clone.to_s + "\t" + organelle.to_s
 						fa = 0
 						gb.features.each do |feat|
 							feats << feat.feature
@@ -233,7 +233,7 @@ module Parser
 							end
 						end
 					else
-						skip.puts gb.accession + "\t" + gb.length.to_s + "\t" + why + "\t" + isolate.to_s + "\t" + strain.to_s + "\t" + country.to_s + "\t" + clone.to_s + "\t" + organelle.to_s
+						skip.puts gb.accession + "\t" + gb.division + "\t" + gb.length.to_s + "\t" + why + "\t" + isolate.to_s + "\t" + strain.to_s + "\t" + country.to_s + "\t" + clone.to_s + "\t" + organelle.to_s
 					end
 				end
 				skip.close

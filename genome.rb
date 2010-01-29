@@ -157,6 +157,7 @@ module Genome
 				end
 			when 'genome'
 				chromosome.each_pair do |id, chr|
+					next if chr.length == 0 # to filter non-contig segments.
 					fo.puts chr.to_fasta(id, 60)
 				end
 			end

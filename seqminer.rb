@@ -195,6 +195,7 @@ module SeqMiner
 					$stderr.puts green, bold, "[DONE]", reset
 				else
 					$stderr.puts red, bold, "[FAIL]", reset
+					exit
 				end
 			end
 		end
@@ -206,7 +207,8 @@ module SeqMiner
 			
 			ts = Tools::Blast.new('formatdb', options = {:config => config}) 
 			
-			["gene", "cds", "protein", "6frame", "genome"].each do |type|
+			#["gene", "cds", "protein", "6frame", "genome"].each do |type|
+			["gene", "cds", "protein", "genome"].each do |type|
 				next if type == "genome" and t.type != "spp"
 				ts.outfile = type
 				ts.dbtitle = type
@@ -219,6 +221,7 @@ module SeqMiner
 					$stderr.puts green, bold, "[DONE]", reset
 				else
 					$stderr.puts red, bold, "[FAIL]", reset
+					exit
 				end
 			end
 		end
@@ -343,8 +346,8 @@ module SeqMiner
 				pssm_file = dir + (bh.ortholog.name + "_plus.pssm")
 				pgp_file = dir + (bh.ortholog.name + "_plus.pgp")
 				ts = Tools::BlastPlus.new('psiblast', options = {:config => config})
-				ts.seed_file = file
 				ts.db = config.dir_sequence + bh.taxon.name + "protein_plus"
+				ts.seed_file = file
 				ts.pssm_file = pssm_file
 				ts.outfile = pgp_file
 				ts.debug
@@ -353,14 +356,15 @@ module SeqMiner
 					$stderr.puts green, bold, "[DONE]", reset
 				else
 					$stderr.puts red, bold, "[FAIL]", reset
+					exit
 				end
 				
 				warn "* computing PSSM model for Blast"
 				pssm_file = dir + (bh.ortholog.name + ".chk")
 				pgp_file = dir + (bh.ortholog.name + ".pgp")
-				ts = Tools::BlastPlus.new('blastpgp', options = {:config => config})
-				ts.seed_file = file
+				ts = Tools::Blast.new('blastpgp', options = {:config => config})
 				ts.db = config.dir_sequence + bh.taxon.name + "protein"
+				ts.seed_file = file
 				ts.pssm_file = pssm_file
 				ts.outfile = pgp_file
 				ts.debug
@@ -369,6 +373,7 @@ module SeqMiner
 					$stderr.puts green, bold, "[DONE]", reset
 				else
 					$stderr.puts red, bold, "[FAIL]", reset
+					exit
 				end
 			end
 		end

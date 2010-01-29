@@ -21,7 +21,7 @@ module Family
 			fo.each_line do |line|
 				line.chomp!
 				t, o, fn = line.split("\t")
-				family = Family.new(t + "." + o)
+				family = Family.new(t + "-" + o)
 				family.name = fn
 				self << family
 			end

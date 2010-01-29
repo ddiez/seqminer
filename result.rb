@@ -316,9 +316,11 @@ module Result
 			
 			# sets the family name (default == to the ortholog family name)
 			fn = ortholog.name
-			fs = Family::Set.new
-			family = fs.get_item_by_id(taxon.name + "." + ortholog.name)
-			fn = family.name if family
+			fs = Family::Set.new(options = {:config => config})
+			family = fs.get_item_by_id(taxon.binomial + "-" + ortholog.name)
+			if family
+				fn = family.name
+			end
 			
 			ofile = config.dir_result + "isolate/sequences" + ortholog.name + (id + ".txt")
 			warn "* export_nelson: " + ofile
@@ -385,6 +387,14 @@ module Result
 			ndb = Sequence::Set.new(taxon.name, "gene")
 			pdb = Sequence::Set.new(taxon.name, "protein")
 			gdb = Genome::Set.new(taxon)
+			
+			# sets the family name (default == to the ortholog family name)
+			fn = ortholog.name
+			fs = Family::Set.new(options = {:config => config})
+			family = fs.get_item_by_id(taxon.binomial + "-" + ortholog.name)
+			if family
+				fn = family.name
+			end
 
 			ofile = config.dir_result + "genome/sequences" + ortholog.name + (id + ".txt")
 			of = File.new(ofile, "w")
@@ -432,7 +442,7 @@ module Result
 				# FIX?: I am not including where the best hit is located (protein, gene, etc)
 				# bh.type + "\t" +  # TODO: update to take care of new class SubHit
 				of.puts hit.id + "\t" +
-				taxon.binomial + "." + ortholog.name + "\t" +
+				taxon.binomial + "." + fn + "\t" +
 				taxon.binomial + "." + taxon.id + "\t" +
 				taxon.strain + "\t" +
 				taxon.id + "\t" +

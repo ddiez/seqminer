@@ -148,9 +148,11 @@ module Search
 					res = hr.execute
 				when 'clade'
 					warn "* search id: " + search.id
-					st = Tools::Blast.new('tblastn', options = {:config => config})
-					st.pssm_file = config.dir_model + "pssm" + (search.ortholog.name + ".pssm")
-					#st.seed_file = config.dir_model + "pssm" + (search.ortholog.name + ".seed")
+					#st = Tools::BlastPlus.new('tblastn', options = {:config => config})
+					st = Tools::Blast.new('blastall', options = {:config => config})
+					#st.pssm_file = config.dir_model + "pssm" + (search.ortholog.name + ".pssm")
+					st.pssm_file = config.dir_model + "pssm" + (search.ortholog.name + ".chk")
+					st.seed_file = config.dir_model + "pssm" + (search.ortholog.name + ".seed")
 					st.db = config.dir_sequence + search.taxon.name + (search.type.name)
 					st.outfile = config.dir_result + "isolate/search" + search.ortholog.name + (search.id + ".txt")
 					st.debug
@@ -161,6 +163,7 @@ module Search
                     $stderr.puts green, bold, "[DONE]", reset
                 else
                     $stderr.puts red, bold, "[FAIL]", reset
+					exit
                 end
 				warn ""
 			end

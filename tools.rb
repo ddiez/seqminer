@@ -37,7 +37,7 @@ module Tools
 		
 		def outfile=(file)
 			@outfile = file
-			@table_file = outfile.sub(/\.log$/, "txt")
+			@table_file = outfile.sub(/\.log$/, ".txt")
 		end
 		
 		def execute
@@ -138,7 +138,7 @@ module Tools
 			
 			case tool
 			when 'blastall'
-				@parameters = "-m 9 -p psitblastn -b 100000 -a 8"
+				@parameters = "-m \"9 std sframe\" -p psitblastn -b 100000 -a 8"
 			when 'blastpgp'
 				@parameters = "-s T -j 3 -h 0.001 -F T -b 10000 -a 8" 
 			when 'formatdb'
