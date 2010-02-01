@@ -19,10 +19,10 @@ module Download
 	class Common
 		# This method downloads a file using the FTP protocol.
 		# Parametes:
-		# * host: Host name.
-		# * dir: Directory in the server.
-		# * file: File to download
-		# * ofile: File to save the download.
+		# host: Host name.
+		# dir:: Directory in the server.
+		# file:: File to download
+		# ofile:: File to save the download.
 		def ftp_download(host, dir, file, ofile)
 			ftp = Net::FTP.new(host)
 			ftp.login
@@ -44,10 +44,10 @@ module Download
 		
 		# This method downloads a file using the HTTP protocol.
 		# Parametes:
-		# * host: Host name.
-		# * dir: Directory in the server.
-		# * file: File to download
-		# * ofile: File to save the download.
+		# host:: Host name.
+		# dir:: Directory in the server.
+		# file:: File to download
+		# ofile:: File to save the download.
 		def http_download(host, dir, file, ofile)
 			puts "* host: " + host
 			puts "* dir: " + dir
@@ -78,9 +78,9 @@ module Download
 		# Currently leverages the job to the Bioperl NCBI API since I couldn't find a way to mimic the output with
 		# Bioruby.
 		# Parametes:
-		# * term: Term to search.
-		# * db: Database to search.
-		# * ofile: File to save the download.
+		# term:: Term to search.
+		# db:: Database to search.
+		# ofile:: File to save the download.
 		def ncbi_download(term, db, ofile)
 			Bio::NCBI.default_email = "diez@kuicr.kyoto-u.ac.jp"
 			ncbi = Bio::NCBI::REST.new
