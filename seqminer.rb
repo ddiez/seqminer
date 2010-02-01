@@ -343,10 +343,10 @@ module SeqMiner
 		
 		def initialize(options = {:config => nil})
 
-			if ! options[:config]
-				@config = Config.new
-			else
+			if options[:config]
 				@config = options[:config]
+			else
+				@config = Config.new
 			end
 
 			config.debug
@@ -441,6 +441,65 @@ module SeqMiner
 		# for sequences in the same gene family. Then runs Clustalw-mpi on the concatenated FASTA file.
 		# TODO: not implemented.
 		def generate_alignments
+		end
+	end
+
+	class Stat
+		attr_accessor :taxon, :ortholog
+		attr_reader :config
+		
+		def initialize(options = {:config => nil})
+
+			if options[:config]
+				@config = options[:config]
+			else
+				@config = Config.new
+			end
+
+			config.debug
+
+			@taxon = Taxon::Set.new(options = {:config => config})
+			@ortholog = Ortholog::Set.new(options = {:config => config})
+		end
+
+		def result_stat
+			puts "Ortholog\tTaxon\tType\tCount"
+			ortholog.each_ortholog do |o|
+				taxon.each_taxon do |t|
+					case t.type
+					when 'spp'
+						file = config.dir_result + "genome/sequence" + o.name + (t.name + "-" + o.name + ".txt")
+					when 'clade'
+						file = config.dir_result + "isolate/sequence" + o.name + (t.name + "-" + o.name + ".txt")
+					end
+					if file.exist?
+						n = 0
+						File.open(file, "r").each_line do |line|
+							n += 1
+						end
+						puts o.name + "\t" + t.name + "\t" + t.type + "\t" + n.to_s
+					end
+				end
+			end
+		end
+
+		def source_stat
+			puts "Taxon\tnuccore_pass\tnuccore_skip\tnucest_pass\tnucest_skip\taccepted"
+			taxon.each_taxon do |t|
+				next if t.type == "spp"
+				n = {}
+				["accepted", "nuccore_pass", "nuccore_skip", "nucest_pass", "nucest_skip"].each do |f|
+					n[f] = 0 if ! n[f]
+					file = config.dir_source + t.name + (f + ".txt")
+					if file.exist?
+						File.open(file, "r").each_line do |line|
+							n[f] += 1
+						end
+					end
+				end
+				puts t.name + "\t" + n["nuccore_pass"].to_s + "\t" + n["nuccore_skip"].to_s + "\t" + \
+					n["nucest_pass"].to_s + "\t" + n["nucest_skip"].to_s + "\t" + n["accepted"].to_s
+			end
 		end
 	end
 end
