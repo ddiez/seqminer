@@ -18,7 +18,7 @@ module Download
 	
 	class Common
 		# This method downloads a file using the FTP protocol.
-		# Parametes:
+		# Parameters:
 		# host: Host name.
 		# dir:: Directory in the server.
 		# file:: File to download
@@ -43,7 +43,7 @@ module Download
 		end
 		
 		# This method downloads a file using the HTTP protocol.
-		# Parametes:
+		# Parameters:
 		# host:: Host name.
 		# dir:: Directory in the server.
 		# file:: File to download
@@ -77,7 +77,7 @@ module Download
 		# This method downloads a file using NCBI Eutils.
 		# Currently leverages the job to the Bioperl NCBI API since I couldn't find a way to mimic the output with
 		# Bioruby.
-		# Parametes:
+		# Parameters:
 		# term:: Term to search.
 		# db:: Database to search.
 		# ofile:: File to save the download.
