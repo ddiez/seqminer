@@ -356,7 +356,7 @@ module Result
 					taxon.binomial + "." + taxon.id + "\t" +
 					taxon.id + "\t" +
 					iseq.source + "\t" +
-					iseq.locus + "\t"
+					iseq.locus + "\t" +
 					iseq.gene + "\t" +
 					iseq.translation + "\t" +
 					pseudo + "\t" +
@@ -398,7 +398,6 @@ module Result
 				"numexons\t" +
 				"splicing\t" +
 				"pseudogene\t" +
-				"truncated\t" +
 				"method\t" +
 				"model\t" +
 				"score\t" +
@@ -426,10 +425,9 @@ module Result
 				g.from.to_s + "\t" +
 				g.to.to_s + "\t" +
 				g.strand.to_s + "\t" +
-				g.length.to_s + "\t" + # this is number of exons- may change
+				g.length.to_s + "\t" +
 				g.splicing + "\t" +
-				pseudo + "\t" + # pseudogene?
-				"FALSE" + "\t" + # truncated?
+				pseudo + "\t" +
 				"hmmsearch" + "\t" +
 				ortholog.hmm + "\t" +
 				bh.score.to_s + "\t" +
