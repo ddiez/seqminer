@@ -15,6 +15,7 @@ gdb.filter_by_acc(["PKH_141170", "PKH_126770"])
 gdb.debug
 g = gdb.get_gene_by_acc("PKH_126770")
 g.debug
+g.gene
 #
 #
 #

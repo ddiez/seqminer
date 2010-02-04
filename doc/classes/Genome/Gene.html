@@ -88,16 +88,19 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000067">&lt;&lt;</a>&nbsp;&nbsp;
-      <a href="#M000068">add</a>&nbsp;&nbsp;
-      <a href="#M000061">cds</a>&nbsp;&nbsp;
-      <a href="#M000069">debug</a>&nbsp;&nbsp;
+      <a href="#M000070">&lt;&lt;</a>&nbsp;&nbsp;
+      <a href="#M000071">add</a>&nbsp;&nbsp;
+      <a href="#M000065">cds</a>&nbsp;&nbsp;
+      <a href="#M000072">debug</a>&nbsp;&nbsp;
+      <a href="#M000064">gene</a>&nbsp;&nbsp;
+      <a href="#M000063">location</a>&nbsp;&nbsp;
+      <a href="#M000062">location_original</a>&nbsp;&nbsp;
       <a href="#M000060">new</a>&nbsp;&nbsp;
-      <a href="#M000062">size</a>&nbsp;&nbsp;
-      <a href="#M000065">splicing</a>&nbsp;&nbsp;
-      <a href="#M000066">splicing_original</a>&nbsp;&nbsp;
-      <a href="#M000064">translate</a>&nbsp;&nbsp;
-      <a href="#M000063">translation</a>&nbsp;&nbsp;
+      <a href="#M000061">size</a>&nbsp;&nbsp;
+      <a href="#M000068">splicing</a>&nbsp;&nbsp;
+      <a href="#M000069">splicing_original</a>&nbsp;&nbsp;
+      <a href="#M000067">translate</a>&nbsp;&nbsp;
+      <a href="#M000066">translation</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -220,135 +223,48 @@
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000067" class="method-detail">
-        <a name="M000067"></a>
+      <div id="method-M000070" class="method-detail">
+        <a name="M000070"></a>
 
         <div class="method-heading">
-          <a href="#M000067" class="method-signature">
+          <a href="#M000070" class="method-signature">
           <span class="method-name">&lt;&lt;</span><span class="method-args">(exon)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000067-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000067-source">
+            onclick="toggleCode('M000070-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000070-source">
 <pre>
-     <span class="ruby-comment cmt"># File genome.rb, line 347</span>
-347:         <span class="ruby-keyword kw">def</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-identifier">exon</span>)
-348:             <span class="ruby-identifier">add</span>(<span class="ruby-identifier">exon</span>)
-349:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File genome.rb, line 365</span>
+365:         <span class="ruby-keyword kw">def</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-identifier">exon</span>)
+366:             <span class="ruby-identifier">add</span>(<span class="ruby-identifier">exon</span>)
+367:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000068" class="method-detail">
-        <a name="M000068"></a>
+      <div id="method-M000071" class="method-detail">
+        <a name="M000071"></a>
 
         <div class="method-heading">
-          <a href="#M000068" class="method-signature">
+          <a href="#M000071" class="method-signature">
           <span class="method-name">add</span><span class="method-args">(exon)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000068-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000068-source">
+            onclick="toggleCode('M000071-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000071-source">
 <pre>
-     <span class="ruby-comment cmt"># File genome.rb, line 351</span>
-351:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add</span>(<span class="ruby-identifier">exon</span>)
-352:             <span class="ruby-ivar">@oitems</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">exon</span>
-353:             <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">exon</span>)
-354:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000061" class="method-detail">
-        <a name="M000061"></a>
-
-        <div class="method-heading">
-          <a href="#M000061" class="method-signature">
-          <span class="method-name">cds</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000061-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000061-source">
-<pre>
-     <span class="ruby-comment cmt"># File genome.rb, line 275</span>
-275:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cds</span>
-276:             <span class="ruby-comment cmt">#debug(verbose = TRUE)</span>
-277:             <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">splice</span>(<span class="ruby-identifier">splicing</span>)
-278:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000069" class="method-detail">
-        <a name="M000069"></a>
-
-        <div class="method-heading">
-          <a href="#M000069" class="method-signature">
-          <span class="method-name">debug</span><span class="method-args">(verbose = false)</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000069-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000069-source">
-<pre>
-     <span class="ruby-comment cmt"># File genome.rb, line 356</span>
-356:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>(<span class="ruby-identifier">verbose</span> = <span class="ruby-keyword kw">false</span>)
-357:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Gene +&quot;</span>
-358:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
-359:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* description: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">description</span>
-360:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* source: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">source</span>
-361:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* chromosome: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">chromosome</span>
-362:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* strand: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">strand</span>.<span class="ruby-identifier">to_s</span>
-363:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* location: [&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">from</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot; - &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">to</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;]&quot;</span>
-364:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* exons: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
-365:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* splicing: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">splicing</span>
-366:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* size: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">size</span>.<span class="ruby-identifier">to_s</span>
-367:             <span class="ruby-comment cmt">#warn &quot;* splicing_ori: &quot; + splicing_original</span>
-368:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* pseudogene: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">pseudogene</span>.<span class="ruby-identifier">to_s</span>
-369:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">verbose</span>
-370:                 <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">exon</span><span class="ruby-operator">|</span>
-371:                     <span class="ruby-identifier">exon</span>.<span class="ruby-identifier">debug</span>
-372:                 <span class="ruby-keyword kw">end</span>
-373:             <span class="ruby-keyword kw">end</span>
-374:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000062" class="method-detail">
-        <a name="M000062"></a>
-
-        <div class="method-heading">
-          <a href="#M000062" class="method-signature">
-          <span class="method-name">size</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000062-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000062-source">
-<pre>
-     <span class="ruby-comment cmt"># File genome.rb, line 280</span>
-280:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">size</span>
-281:             <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">length</span>
-282:             <span class="ruby-comment cmt">#to.to_i - from.to_i</span>
-283:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File genome.rb, line 369</span>
+369:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add</span>(<span class="ruby-identifier">exon</span>)
+370:             <span class="ruby-ivar">@oitems</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">exon</span>
+371:             <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">exon</span>)
+372:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -359,88 +275,60 @@
 
         <div class="method-heading">
           <a href="#M000065" class="method-signature">
-          <span class="method-name">splicing</span><span class="method-args">()</span>
+          <span class="method-name">cds</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
-          <p>
-This methods returns the <a href="Gene.html#M000065">splicing</a> pattern
-in gene coordinates. In other words, it is used to extract the exonic
-sequence (and potentially the introns) from the gene sequence.
-</p>
           <p><a class="source-toggle" href="#"
             onclick="toggleCode('M000065-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000065-source">
 <pre>
-     <span class="ruby-comment cmt"># File genome.rb, line 301</span>
-301:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">splicing</span>
-302:             <span class="ruby-identifier">loc</span> =[]
-303:             
-304:             <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">strand</span>
-305:             <span class="ruby-keyword kw">when</span> <span class="ruby-value">1</span>
-306:                 <span class="ruby-identifier">exons</span> = <span class="ruby-identifier">oitems</span>
-307:             <span class="ruby-keyword kw">when</span> <span class="ruby-value">-1</span>
-308:                 <span class="ruby-identifier">exons</span> = <span class="ruby-identifier">oitems</span>.<span class="ruby-identifier">reverse</span>
-309:             <span class="ruby-keyword kw">end</span>
-310:             
-311:             <span class="ruby-identifier">f0</span> = <span class="ruby-identifier">exons</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">from</span>
-312:             <span class="ruby-identifier">exons</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">exon</span><span class="ruby-operator">|</span>
-313:                 <span class="ruby-identifier">x0</span> = <span class="ruby-identifier">exon</span>.<span class="ruby-identifier">from</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">f0</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-314:                 <span class="ruby-identifier">x1</span> = <span class="ruby-identifier">exon</span>.<span class="ruby-identifier">to</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">f0</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-315:                 <span class="ruby-identifier">loc</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">x0</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;..&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">x1</span>.<span class="ruby-identifier">to_s</span>
-316:             <span class="ruby-keyword kw">end</span>
-317:             <span class="ruby-identifier">loc</span> = <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;,&quot;</span>)
-318:             <span class="ruby-identifier">loc</span> = <span class="ruby-value str">&quot;join(&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loc</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;)&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
-319:             <span class="ruby-identifier">loc</span> = <span class="ruby-value str">&quot;complement(&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loc</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;)&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>
-320:             <span class="ruby-identifier">loc</span>
-321:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File genome.rb, line 298</span>
+298:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cds</span>
+299:             <span class="ruby-comment cmt">#debug(verbose = TRUE)</span>
+300:             <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">splice</span>(<span class="ruby-identifier">splicing</span>)
+301:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000066" class="method-detail">
-        <a name="M000066"></a>
+      <div id="method-M000072" class="method-detail">
+        <a name="M000072"></a>
 
         <div class="method-heading">
-          <a href="#M000066" class="method-signature">
-          <span class="method-name">splicing_original</span><span class="method-args">()</span>
+          <a href="#M000072" class="method-signature">
+          <span class="method-name">debug</span><span class="method-args">(verbose = false)</span>
           </a>
         </div>
       
         <div class="method-description">
-          <p>
-This methods displays the original <a href="Gene.html#M000065">splicing</a>
-pattern based on the genomic coordinates. It can be used to extract the
-exons from the genome sequence. It is intended mainly as a check method.
-</p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000066-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000066-source">
+            onclick="toggleCode('M000072-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000072-source">
 <pre>
-     <span class="ruby-comment cmt"># File genome.rb, line 325</span>
-325:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">splicing_original</span>
-326:             <span class="ruby-identifier">loc</span> =[]
-327:                         
-328:             <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">strand</span>
-329:             <span class="ruby-keyword kw">when</span> <span class="ruby-value">1</span>
-330:                 <span class="ruby-identifier">exons</span> = <span class="ruby-identifier">oitems</span>
-331:             <span class="ruby-keyword kw">when</span> <span class="ruby-value">-1</span>
-332:                 <span class="ruby-identifier">exons</span> = <span class="ruby-identifier">oitems</span>.<span class="ruby-identifier">reverse</span>
-333:             <span class="ruby-keyword kw">end</span>
-334:             
-335:             <span class="ruby-comment cmt">#f0 = exons[0].from</span>
-336:             <span class="ruby-identifier">exons</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">exon</span><span class="ruby-operator">|</span>
-337:                 <span class="ruby-identifier">x0</span> = <span class="ruby-identifier">exon</span>.<span class="ruby-identifier">from</span> <span class="ruby-comment cmt">#- f0 + 1</span>
-338:                 <span class="ruby-identifier">x1</span> = <span class="ruby-identifier">exon</span>.<span class="ruby-identifier">to</span> <span class="ruby-comment cmt">#- f0 + 1</span>
-339:                 <span class="ruby-identifier">loc</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">x0</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;..&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">x1</span>.<span class="ruby-identifier">to_s</span>
-340:             <span class="ruby-keyword kw">end</span>
-341:             <span class="ruby-identifier">loc</span> = <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;,&quot;</span>)
-342:             <span class="ruby-identifier">loc</span> = <span class="ruby-value str">&quot;join(&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loc</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;)&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
-343:             <span class="ruby-identifier">loc</span> = <span class="ruby-value str">&quot;complement(&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loc</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;)&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>
-344:             <span class="ruby-identifier">loc</span>
-345:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File genome.rb, line 374</span>
+374:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>(<span class="ruby-identifier">verbose</span> = <span class="ruby-keyword kw">false</span>)
+375:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Gene +&quot;</span>
+376:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
+377:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* description: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">description</span>
+378:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* source: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">source</span>
+379:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* chromosome: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">chromosome</span>
+380:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* strand: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">strand</span>.<span class="ruby-identifier">to_s</span>
+381:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* location: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">location</span>
+382:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* location (original): &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">location_original</span>
+383:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* size: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">size</span>.<span class="ruby-identifier">to_s</span>
+384:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* exons: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
+385:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* splicing: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">splicing</span>
+386:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* splicing (original): &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">splicing_original</span>
+387:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* pseudogene: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">pseudogene</span>.<span class="ruby-identifier">to_s</span>
+388:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">verbose</span>
+389:                 <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">exon</span><span class="ruby-operator">|</span>
+390:                     <span class="ruby-identifier">exon</span>.<span class="ruby-identifier">debug</span>
+391:                 <span class="ruby-keyword kw">end</span>
+392:             <span class="ruby-keyword kw">end</span>
+393:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -451,7 +339,7 @@ exons from the genome sequence. It is intended mainly as a check method.
 
         <div class="method-heading">
           <a href="#M000064" class="method-signature">
-          <span class="method-name">translate</span><span class="method-args">(frame = 1, table = nil)</span>
+          <span class="method-name">gene</span><span class="method-args">()</span>
           </a>
         </div>
       
@@ -460,15 +348,10 @@ exons from the genome sequence. It is intended mainly as a check method.
             onclick="toggleCode('M000064-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000064-source">
 <pre>
-     <span class="ruby-comment cmt"># File genome.rb, line 290</span>
-290:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">translate</span>(<span class="ruby-identifier">frame</span> = <span class="ruby-value">1</span>, <span class="ruby-identifier">table</span> = <span class="ruby-keyword kw">nil</span>)
-291:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">table</span>
-292:                 <span class="ruby-identifier">t</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">CodonTable</span>[<span class="ruby-identifier">table</span>]
-293:             <span class="ruby-keyword kw">else</span>
-294:                 <span class="ruby-identifier">t</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">CodonTable</span>[<span class="ruby-ivar">@trans_table</span>.<span class="ruby-identifier">to_i</span>]
-295:             <span class="ruby-keyword kw">end</span>
-296:             <span class="ruby-identifier">cds</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-identifier">frame</span>, <span class="ruby-identifier">t</span>)
-297:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File genome.rb, line 294</span>
+294:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">gene</span>
+295:             <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">splice</span>(<span class="ruby-identifier">location</span>)
+296:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -479,22 +362,219 @@ exons from the genome sequence. It is intended mainly as a check method.
 
         <div class="method-heading">
           <a href="#M000063" class="method-signature">
+          <span class="method-name">location</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000063-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000063-source">
+<pre>
+     <span class="ruby-comment cmt"># File genome.rb, line 286</span>
+286:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">location</span>
+287:             <span class="ruby-identifier">x0</span> = <span class="ruby-value">1</span>
+288:             <span class="ruby-identifier">x1</span> = <span class="ruby-identifier">to</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">from</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+289:             <span class="ruby-identifier">loc</span> = <span class="ruby-identifier">x0</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;..&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">x1</span>.<span class="ruby-identifier">to_s</span>
+290:             <span class="ruby-identifier">loc</span> = <span class="ruby-value str">&quot;complement(&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loc</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;)&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>
+291:             <span class="ruby-identifier">loc</span>
+292:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000062" class="method-detail">
+        <a name="M000062"></a>
+
+        <div class="method-heading">
+          <a href="#M000062" class="method-signature">
+          <span class="method-name">location_original</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000062-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000062-source">
+<pre>
+     <span class="ruby-comment cmt"># File genome.rb, line 280</span>
+280:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">location_original</span>
+281:             <span class="ruby-identifier">loc</span> = <span class="ruby-identifier">from</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;..&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">to</span>.<span class="ruby-identifier">to_s</span>
+282:             <span class="ruby-identifier">loc</span> = <span class="ruby-value str">&quot;complement(&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loc</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;)&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>
+283:             <span class="ruby-identifier">loc</span>
+284:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000061" class="method-detail">
+        <a name="M000061"></a>
+
+        <div class="method-heading">
+          <a href="#M000061" class="method-signature">
+          <span class="method-name">size</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000061-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000061-source">
+<pre>
+     <span class="ruby-comment cmt"># File genome.rb, line 275</span>
+275:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">size</span>
+276:             <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">length</span>
+277:             <span class="ruby-comment cmt">#to.to_i - from.to_i</span>
+278:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000068" class="method-detail">
+        <a name="M000068"></a>
+
+        <div class="method-heading">
+          <a href="#M000068" class="method-signature">
+          <span class="method-name">splicing</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This methods returns the <a href="Gene.html#M000068">splicing</a> pattern
+in <a href="Gene.html#M000064">gene</a> coordinates. In other words, it is
+used to extract the exonic sequence (and potentially the introns) from the
+<a href="Gene.html#M000064">gene</a> sequence.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000068-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000068-source">
+<pre>
+     <span class="ruby-comment cmt"># File genome.rb, line 319</span>
+319:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">splicing</span>
+320:             <span class="ruby-identifier">loc</span> =[]
+321:             
+322:             <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">strand</span>
+323:             <span class="ruby-keyword kw">when</span> <span class="ruby-value">1</span>
+324:                 <span class="ruby-identifier">exons</span> = <span class="ruby-identifier">oitems</span>
+325:             <span class="ruby-keyword kw">when</span> <span class="ruby-value">-1</span>
+326:                 <span class="ruby-identifier">exons</span> = <span class="ruby-identifier">oitems</span>.<span class="ruby-identifier">reverse</span>
+327:             <span class="ruby-keyword kw">end</span>
+328:             
+329:             <span class="ruby-identifier">f0</span> = <span class="ruby-identifier">exons</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">from</span>
+330:             <span class="ruby-identifier">exons</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">exon</span><span class="ruby-operator">|</span>
+331:                 <span class="ruby-identifier">x0</span> = <span class="ruby-identifier">exon</span>.<span class="ruby-identifier">from</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">f0</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+332:                 <span class="ruby-identifier">x1</span> = <span class="ruby-identifier">exon</span>.<span class="ruby-identifier">to</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">f0</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+333:                 <span class="ruby-identifier">loc</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">x0</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;..&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">x1</span>.<span class="ruby-identifier">to_s</span>
+334:             <span class="ruby-keyword kw">end</span>
+335:             <span class="ruby-identifier">loc</span> = <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;,&quot;</span>)
+336:             <span class="ruby-identifier">loc</span> = <span class="ruby-value str">&quot;join(&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loc</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;)&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
+337:             <span class="ruby-identifier">loc</span> = <span class="ruby-value str">&quot;complement(&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loc</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;)&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>
+338:             <span class="ruby-identifier">loc</span>
+339:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000069" class="method-detail">
+        <a name="M000069"></a>
+
+        <div class="method-heading">
+          <a href="#M000069" class="method-signature">
+          <span class="method-name">splicing_original</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This methods displays the original <a href="Gene.html#M000068">splicing</a>
+pattern based on the genomic coordinates. It can be used to extract the
+exons from the genome sequence. It is intended mainly as a check method.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000069-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000069-source">
+<pre>
+     <span class="ruby-comment cmt"># File genome.rb, line 343</span>
+343:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">splicing_original</span>
+344:             <span class="ruby-identifier">loc</span> =[]
+345:                         
+346:             <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">strand</span>
+347:             <span class="ruby-keyword kw">when</span> <span class="ruby-value">1</span>
+348:                 <span class="ruby-identifier">exons</span> = <span class="ruby-identifier">oitems</span>
+349:             <span class="ruby-keyword kw">when</span> <span class="ruby-value">-1</span>
+350:                 <span class="ruby-identifier">exons</span> = <span class="ruby-identifier">oitems</span>.<span class="ruby-identifier">reverse</span>
+351:             <span class="ruby-keyword kw">end</span>
+352:             
+353:             <span class="ruby-comment cmt">#f0 = exons[0].from</span>
+354:             <span class="ruby-identifier">exons</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">exon</span><span class="ruby-operator">|</span>
+355:                 <span class="ruby-identifier">x0</span> = <span class="ruby-identifier">exon</span>.<span class="ruby-identifier">from</span> <span class="ruby-comment cmt">#- f0 + 1</span>
+356:                 <span class="ruby-identifier">x1</span> = <span class="ruby-identifier">exon</span>.<span class="ruby-identifier">to</span> <span class="ruby-comment cmt">#- f0 + 1</span>
+357:                 <span class="ruby-identifier">loc</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">x0</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;..&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">x1</span>.<span class="ruby-identifier">to_s</span>
+358:             <span class="ruby-keyword kw">end</span>
+359:             <span class="ruby-identifier">loc</span> = <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;,&quot;</span>)
+360:             <span class="ruby-identifier">loc</span> = <span class="ruby-value str">&quot;join(&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loc</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;)&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
+361:             <span class="ruby-identifier">loc</span> = <span class="ruby-value str">&quot;complement(&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loc</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;)&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>
+362:             <span class="ruby-identifier">loc</span>
+363:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000067" class="method-detail">
+        <a name="M000067"></a>
+
+        <div class="method-heading">
+          <a href="#M000067" class="method-signature">
+          <span class="method-name">translate</span><span class="method-args">(frame = 1, table = nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000067-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000067-source">
+<pre>
+     <span class="ruby-comment cmt"># File genome.rb, line 308</span>
+308:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">translate</span>(<span class="ruby-identifier">frame</span> = <span class="ruby-value">1</span>, <span class="ruby-identifier">table</span> = <span class="ruby-keyword kw">nil</span>)
+309:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">table</span>
+310:                 <span class="ruby-identifier">t</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">CodonTable</span>[<span class="ruby-identifier">table</span>]
+311:             <span class="ruby-keyword kw">else</span>
+312:                 <span class="ruby-identifier">t</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">CodonTable</span>[<span class="ruby-ivar">@trans_table</span>.<span class="ruby-identifier">to_i</span>]
+313:             <span class="ruby-keyword kw">end</span>
+314:             <span class="ruby-identifier">cds</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-identifier">frame</span>, <span class="ruby-identifier">t</span>)
+315:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000066" class="method-detail">
+        <a name="M000066"></a>
+
+        <div class="method-heading">
+          <a href="#M000066" class="method-signature">
           <span class="method-name">translation</span><span class="method-args">(frame = 1, table = nil)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-A synonim to the method <a href="Gene.html#M000064">translate</a>
+A synonim to the method <a href="Gene.html#M000067">translate</a>
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000063-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000063-source">
+            onclick="toggleCode('M000066-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000066-source">
 <pre>
-     <span class="ruby-comment cmt"># File genome.rb, line 286</span>
-286:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">translation</span>(<span class="ruby-identifier">frame</span> = <span class="ruby-value">1</span>, <span class="ruby-identifier">table</span> = <span class="ruby-keyword kw">nil</span>)
-287:             <span class="ruby-identifier">translate</span>(<span class="ruby-identifier">frame</span>, <span class="ruby-identifier">table</span>)
-288:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File genome.rb, line 304</span>
+304:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">translation</span>(<span class="ruby-identifier">frame</span> = <span class="ruby-value">1</span>, <span class="ruby-identifier">table</span> = <span class="ruby-keyword kw">nil</span>)
+305:             <span class="ruby-identifier">translate</span>(<span class="ruby-identifier">frame</span>, <span class="ruby-identifier">table</span>)
+306:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

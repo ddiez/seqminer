@@ -52,7 +52,7 @@ module Genome
 						gene.strand = strand.to_i
 						gene.from = from.to_i
 						gene.to = to.to_i
-						gene.pseudogene = pseudogene
+						gene.pseudogene = pseudogene.to_i
 						gene.references = references
 						gene.type = mol_type
 						gene.description = description
@@ -272,14 +272,32 @@ module Genome
 			@oitems = []
 		end
 
-		def cds
-			#debug(verbose = TRUE)
-			sequence.splice(splicing)
-		end
-
 		def size
 			sequence.length
 			#to.to_i - from.to_i
+		end
+		
+		def location_original
+			loc = from.to_s + ".." + to.to_s
+			loc = "complement(" + loc + ")" if strand == -1
+			loc
+		end
+		
+		def location
+			x0 = 1
+			x1 = to - from + 1
+			loc = x0.to_s + ".." + x1.to_s
+			loc = "complement(" + loc + ")" if strand == -1
+			loc
+		end
+
+		def gene
+			sequence.splice(location)
+		end
+
+		def cds
+			#debug(verbose = TRUE)
+			sequence.splice(splicing)
 		end
 		
 		# A synonim to the method #translate
@@ -360,11 +378,12 @@ module Genome
 			warn "* source: " + source
 			warn "* chromosome: " + chromosome
 			warn "* strand: " + strand.to_s
-			warn "* location: [" + from.to_s + " - " + to.to_s + "]"
+			warn "* location: " + location
+			warn "* location (original): " + location_original
+			warn "* size: " + size.to_s
 			warn "* exons: " + length.to_s
 			warn "* splicing: " + splicing
-			warn "* size: " + size.to_s
-			#warn "* splicing_ori: " + splicing_original
+			warn "* splicing (original): " + splicing_original
 			warn "* pseudogene: " + pseudogene.to_s
 			if verbose
 				each_value do |exon|

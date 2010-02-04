@@ -49,8 +49,8 @@ module SeqMiner
 			#@dir_result = dir_result_base + "last"
 			
 			# Tools.
-			@dir_hmmer = Pathname.new("/Users/diez/local/hmmer3/bin/")
-			@dir_blast = Pathname.new("/usr/local/ncbi/blast/bin/")
+			@dir_hmmer = Pathname.new("/Users/diez/local/hmmer3/bin")
+			@dir_blast = Pathname.new("/usr/local/ncbi/blast/bin")
 		end
 		
 		def basedir=(dir)

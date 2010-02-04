@@ -33,6 +33,7 @@ module Isolate
 				@file = "_undef_"
 			else
 				gdb = Sequence::Set.new(name, "gene", options = {:config => config})
+				pdb = Sequence::Set.new(name, "protein", options = {:config => config})
 	
 				file = config.dir_sequence + name + "isolate.txt"
 				@file = file
@@ -62,6 +63,9 @@ module Isolate
 					seq.description = description
 					gseq = gdb.get_seq_by_acc(id)
 					seq.sequence = gseq
+					seq.translation = ""
+					pseq = pdb.get_seq_by_acc(id)
+					seq.translation = pseq if ! pseq.nil?
 					add(seq)
 				end
 			end
@@ -218,12 +222,30 @@ module Isolate
 			sequence.length
 		end
 		
+		def location_original
+			loc = from.to_s + ".." + to.to_s
+			loc = "complement(" + loc + ")" if strand == -1
+			loc
+		end
+		
+		def location
+			x0 = 1
+			x1 = to - from + 1
+			loc = x0.to_s + ".." + x1.to_s
+			loc = "complement(" + loc + ")" if strand == -1
+			loc
+		end
+		
+		def gene
+			sequence.splice(location)
+		end
+		
 		# This method is very simple since we assume that there is not exon information in isolated sequences. This
 		# might be revisited in the future and then the method will mimic the one in Genome::Gene. But right now, it
 		# just takes into account the from and to values, plus the strandness. In fact, I am not sure if isolate
 		# sequences use different strands at all (which makes the whole thing even simpler).
 		def splicing
-			x0 = from - from + 1
+			x0 = 1
 			x1 = to - from + 1
 			loc = x0.to_s + ".." + x1.to_s
 			
@@ -263,9 +285,10 @@ module Isolate
 			warn "* description: " + description
 			warn "* source: " + source
 			warn "* strand: " + strand.to_s
-			warn "* location: [" + from.to_s + " - " + to.to_s + "]"
+			warn "* location: " + location
+			warn "* location (original): " + location_original
 			warn "* splicing: " + splicing
-			warn "* splicing_ori: " + splicing_original
+			warn "* splicing (original): " + splicing_original
 			warn "* pseudogene: " + pseudogene.to_s
 			warn "* type: " + type
 			warn "* trans_table: " + trans_table.to_s

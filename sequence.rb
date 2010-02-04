@@ -8,6 +8,7 @@
 require 'seqminer'
 require 'item'
 require 'bio'
+require 'progressbar'
 
 module Sequence
 	include Item
@@ -27,7 +28,14 @@ module Sequence
 			@dir = config.dir_sequence + name
 			@type = type
 			@file = @dir + (type + ".fa")
-			fi = Bio::FastaFormat.open(@file)
+			
+#			warn "* file: " + file
+#			total = `grep ">" #{file} | wc -l`
+#			total.strip!
+#			puts "* number sequences: " + total
+#			number_read = 0
+#			pb = ProgressBar.new(file.to_s, 100)
+			fi = Bio::FastaFormat.open(file)
 			fi.each do |entry|
 				seq = entry.to_biosequence
 				case type
@@ -37,7 +45,11 @@ module Sequence
 					seq.aa
 				end
 				add(seq, seq.accessions[0])
+#				number_read += 1
+#				percent_finished = 100 * (number_read.to_f / total.to_f)
+#				pb.set(percent_finished)
 			end
+#			pb.finish
 		end
 		
 		def each_sequence

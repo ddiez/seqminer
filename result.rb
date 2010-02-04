@@ -318,8 +318,7 @@ module Result
 		end
 		
 		def write_nelson_clade
-			ndb = Sequence::Set.new(taxon.name, "gene", options = {:config => config})
-			pdb = Sequence::Set.new(taxon.name, "protein", options = {:config => config})
+			idb = Isolate::Set.new(taxon, options = {:config => config})
 			
 			# sets the family name (default == to the ortholog family name)
 			fn = ortholog.name
@@ -330,70 +329,49 @@ module Result
 			end
 			
 			ofile = config.dir_result + "isolate/sequence" + ortholog.name + (id + ".txt")
-			warn "* export_nelson: " + ofile
-			#ofile = "foo.txt"
 			of = File.new(ofile, "w")
 			of.puts	"SEQUENCE\t" +
 				"family\t" +
 				"genome\t" +
 				"taxid\t" +
 				"source\t" +
+				"locus\t" +
 				"sequence\t" +
 				"translation\t" +
+				"pseudogene\t" +
 				"method\t" +
 				"score\t" +
 				"evalue\t" +
 				"hmmloc\t" +
 				"description"
 			each_hit do |hit|
-				gseq = ndb.get_seq_by_acc(hit.id)
-				pseq = pdb.get_seq_by_acc(hit.id)
+				iseq = idb.get_seq_by_acc(hit.id)
 				bh = hit.best_subhit
 				
-				gs = ""
-				gs = gseq.seq if gseq
-				ps = ""
-				ps = pseq.seq if pseq
+				pseudo = "FALSE"
+				pseudo = "TRUE" if iseq.pseudogene == 1
 				
-				d = _parse_description(gseq.definition)
-				desc = d["description"]
-				source = d["source"]
-				acc = d["accession"]
-				
-				of.puts acc + "\t" +
+				of.puts iseq.accession + "\t" +
 					taxon.binomial + "." + fn + "\t" +
 					taxon.binomial + "." + taxon.id + "\t" +
 					taxon.id + "\t" +
-					source + "\t" +
-					gs + "\t" +
-					ps + "\t" +
+					iseq.source + "\t" +
+					iseq.locus + "\t"
+					iseq.gene + "\t" +
+					iseq.translation + "\t" +
+					pseudo + "\t" +
 					"psitblastn" + "\t" +
 					bh.score.to_s + "\t" +
 					bh.eval.to_s + "\t" +
 					bh.localization + "\t" +
-					desc
+					iseq.description
 			end
 			of.close
 		end
 		
-		def _parse_description(desc)
-			desc.sub!(/.+? /, "")
-			desc = desc.split(/[;=]/, -1)
-			h = {}
-			valid = ["description", "accession", "source"]
-			desc.each_index do |index|
-				if valid.include?(desc[index])
-					h[desc[index]] = desc[index+1]
-				end
-			end
-			h
-		end
-
 		# Export results in a format suitable to load in varDB (Nelson's preferred format)
 		def write_nelson_spp
-			ndb = Sequence::Set.new(taxon.name, "gene")
-			pdb = Sequence::Set.new(taxon.name, "protein")
-			gdb = Genome::Set.new(taxon)
+			gdb = Genome::Set.new(taxon, options = {:config => config})
 			
 			# sets the family name (default == to the ortholog family name)
 			fn = ortholog.name
@@ -412,8 +390,8 @@ module Result
 				"taxid\t" +
 				"source\t" + 
 				"chromosome\t" +
-				"translation\t" +
 				"sequence\t" +
+				"translation\t" +
 				"start\t" +
 				"end\t" +
 				"strand\t" +
@@ -428,23 +406,11 @@ module Result
 				"hmmloc\t" +
 				"description"
 			each_hit do |hit|
-				ns = ndb.get_seq_by_acc(hit.id)
-				ps = pdb.get_seq_by_acc(hit.id)
 				g = gdb.get_gene_by_acc(hit.id)
 				
 				bh = hit.best_subhit
-
-				if ns.nil?
-					nseq = ""
-				else
-					nseq = ns.seq
-				end
-
-				if ps.nil?
-					pseq = ""
-				else
-					pseq = ps.seq
-				end
+				pseudo = "FALSE"
+				pseudo = "TRUE" if g.pseudogene == 1
 
 				# FIX?: I am not including where the best hit is located (protein, gene, etc)
 				# bh.type + "\t" +  # TODO: update to take care of new class SubHit
@@ -455,14 +421,14 @@ module Result
 				taxon.id + "\t" +
 				taxon.source + "\t" +
 				g.chromosome + "\t" +
-				pseq + "\t" +
-				nseq + "\t" +
+				g.gene + "\t" +
+				g.translation + "\t" +
 				g.from.to_s + "\t" +
 				g.to.to_s + "\t" +
 				g.strand.to_s + "\t" +
 				g.length.to_s + "\t" + # this is number of exons- may change
 				g.splicing + "\t" +
-				"FALSE" + "\t" + # pseudogene?
+				pseudo + "\t" + # pseudogene?
 				"FALSE" + "\t" + # truncated?
 				"hmmsearch" + "\t" +
 				ortholog.hmm + "\t" +
@@ -503,30 +469,30 @@ module Result
 		end
 		
 		# Exports sequence information as FASTA format
-		def export_fasta
-			ndb = Sequence::Set.new(taxon.name, "gene")
-			pdb = Sequence::Set.new(taxon.name, "protein")
-
-			# TODO: have something like this:
-			onfile = config.dir_result + "genome/fasta/" + ortholog.name + (id + "_nucleotide.fa")
-			opfile = config.dir_result + "genome/fasta/" + ortholog.name + (id + "_protein.fa")
-			onf = File.new(onfile, "w")
-			opf = File.new(opfile, "w")
-			each_value do |hit|
-				ns = ndb.get_seq_by_acc(hit.id)
-				ps = pdb.get_seq_by_acc(hit.id)
-
-				if ! ns.nil?
-					onf.puts ns.to_fasta(ns.definition)
-				end
-
-				if ! ps.nil?
-					opf.puts ps.to_fasta(ps.definition)
-				end
-			end
-			onf.close
-			opf.close
-		end
+#		def export_fasta
+#			ndb = Sequence::Set.new(taxon.name, "gene")
+#			pdb = Sequence::Set.new(taxon.name, "protein")
+#
+#			# TODO: have something like this:
+#			onfile = config.dir_result + "genome/fasta/" + ortholog.name + (id + "_nucleotide.fa")
+#			opfile = config.dir_result + "genome/fasta/" + ortholog.name + (id + "_protein.fa")
+#			onf = File.new(onfile, "w")
+#			opf = File.new(opfile, "w")
+#			each_value do |hit|
+#				ns = ndb.get_seq_by_acc(hit.id)
+#				ps = pdb.get_seq_by_acc(hit.id)
+#
+#				if ! ns.nil?
+#					onf.puts ns.to_fasta(ns.definition)
+#				end
+#
+#				if ! ps.nil?
+#					opf.puts ps.to_fasta(ps.definition)
+#				end
+#			end
+#			onf.close
+#			opf.close
+#		end
 
 		def debug
 			warn "+ RESULT +"

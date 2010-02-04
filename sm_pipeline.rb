@@ -10,7 +10,15 @@
 require 'seqminer'
 
 sm = SeqMiner::Pipeline.new
-sm.config.dir_result = "vardb-3"
-sm.taxon.filter_by_type("spp")
+
+# filter taxons.
+#sm.taxon.filter_by_name("anaplasma.marginale")
+#sm.taxon.filter_by_type("spp")
+sm.taxon.filter_by_type("clade")
+
+# filter orthologs.
+#sm.ortholog.filter_by_name("msp2")
 sm.build_search
-sm.run_all
+sm.search.debug
+#sm.run_all
+sm.export_nelson
