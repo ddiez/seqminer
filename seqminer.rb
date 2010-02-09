@@ -456,8 +456,6 @@ module SeqMiner
 				@config = Config.new
 			end
 
-			config.debug
-
 			@taxon = Taxon::Set.new(options = {:config => config})
 			@ortholog = Ortholog::Set.new(options = {:config => config})
 		end
@@ -482,7 +480,7 @@ module SeqMiner
 				end
 			end
 		end
-
+		
 		def source_stat
 			puts "Taxon\tnuccore_pass\tnuccore_skip\tnucest_pass\tnucest_skip\taccepted"
 			taxon.each_taxon do |t|
@@ -500,6 +498,10 @@ module SeqMiner
 				puts t.name + "\t" + n["nuccore_pass"].to_s + "\t" + n["nuccore_skip"].to_s + "\t" + \
 					n["nucest_pass"].to_s + "\t" + n["nucest_skip"].to_s + "\t" + n["accepted"].to_s
 			end
+		end
+
+		def debug
+			config.debug
 		end
 	end
 end
