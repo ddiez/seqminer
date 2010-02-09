@@ -385,7 +385,7 @@ module SeqMiner
 			dir_initialize if ! dir_initialized?
 			run_search
 			get_results
-			export_nelson
+			write_nelson
 			write_fasta
 		end
 		
@@ -406,14 +406,14 @@ module SeqMiner
 			result.filter_by_eval(eval)
 		end
 
-		def export_nelson
+		def write_nelson
 			if result.nil?
 				get_results
 			end
-			result.export_nelson
+			result.write_nelson
 		end
 
-		# Pipeline-wise export_fasta.
+		# Pipeline-wise write_fasta.
 		def write_fasta
 			if result.nil?
 				get_results

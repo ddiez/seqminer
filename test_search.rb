@@ -12,8 +12,8 @@ ss.debug
 
 rs = ss.parse
 rs.debug
-#rs.export_fasta
-#rs.export_nelson
+#rs.write_fasta
+#rs.write_nelson
 rsm = rs.auto_merge
 rsm.debug
 rsm.report

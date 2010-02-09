@@ -8,7 +8,6 @@ heatMap <- function(mat) {
 	apply(mat, 1, function(x) foo[x[1], x[2]] <<- as.numeric(x[4]))
 	col <- colorRampPalette(c("grey90", "steelblue", "darkblue", "orange"))(100)
 	levelplot(foo, col.regions = col, scales = list(rot = 45), colorkey = list(tick.number = 10, at = seq(-1000, signif(max(mat[, "Count"]), 2), 1000)), cuts = 9, xlab = "Orthologs", ylab = "Species", main = "Distribution of sequences in varDB DR-3")
-	foo
 }
 heatMap(res)
 

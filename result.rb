@@ -307,8 +307,7 @@ module Result
 			return ch
 		end
 		
-		# TODO: rename to write_nelson
-		def export_nelson
+		def write_nelson
 			case taxon.type
 			when 'spp'
 				write_nelson_spp
@@ -466,32 +465,6 @@ module Result
 			end
 		end
 		
-		# Exports sequence information as FASTA format
-#		def export_fasta
-#			ndb = Sequence::Set.new(taxon.name, "gene")
-#			pdb = Sequence::Set.new(taxon.name, "protein")
-#
-#			# TODO: have something like this:
-#			onfile = config.dir_result + "genome/fasta/" + ortholog.name + (id + "_nucleotide.fa")
-#			opfile = config.dir_result + "genome/fasta/" + ortholog.name + (id + "_protein.fa")
-#			onf = File.new(onfile, "w")
-#			opf = File.new(opfile, "w")
-#			each_value do |hit|
-#				ns = ndb.get_seq_by_acc(hit.id)
-#				ps = pdb.get_seq_by_acc(hit.id)
-#
-#				if ! ns.nil?
-#					onf.puts ns.to_fasta(ns.definition)
-#				end
-#
-#				if ! ps.nil?
-#					opf.puts ps.to_fasta(ps.definition)
-#				end
-#			end
-#			onf.close
-#			opf.close
-#		end
-
 		def debug
 			warn "+ RESULT +"
 			warn "* result id: " + id
@@ -603,12 +576,12 @@ module Result
 		end
 
 		# Exports data in format suitable for varDB (a.k.a. Nelson format).
-		def export_nelson
-			warn "+ EXPORT NELSON +" 
+		def write_nelson
+			warn "+ WRITE NELSON +" 
 			each_result do |result|
 				if result.length > 0
 					warn "* " + result.taxon.name + " / " + result.ortholog.name
-					result.export_nelson
+					result.write_nelson
 				end
 			end
 		end

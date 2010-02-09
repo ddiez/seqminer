@@ -21,4 +21,4 @@ sm.taxon.filter_by_type("clade")
 sm.build_search
 sm.search.debug
 #sm.run_all
-sm.export_nelson
+sm.write_nelson
