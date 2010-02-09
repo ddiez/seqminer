@@ -75,7 +75,6 @@ module Download
 		end
 		
 		# This method downloads a file using NCBI Eutils.
-		# Currently leverages the job to the Bioperl NCBI API since I couldn't find a way to mimic the output with
 		# Bioruby.
 		# Parameters:
 		# term:: Term to search.
