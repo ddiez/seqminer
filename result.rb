@@ -330,6 +330,7 @@ module Result
 			ofile = config.dir_result + "isolate/sequence" + ortholog.name + (id + ".txt")
 			of = File.new(ofile, "w")
 			of.puts	"SEQUENCE\t" +
+				"accession\t" +
 				"family\t" +
 				"genome\t" +
 				"taxid\t" +
@@ -350,7 +351,8 @@ module Result
 				pseudo = "FALSE"
 				pseudo = "TRUE" if iseq.pseudogene == 1
 				
-				of.puts iseq.accession + "\t" +
+				of.puts iseq.id + "\t" +
+					iseq.accession + "\t" +
 					taxon.binomial + "." + fn + "\t" +
 					taxon.binomial + "." + taxon.id + "\t" +
 					taxon.id + "\t" +

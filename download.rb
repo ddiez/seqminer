@@ -85,19 +85,16 @@ module Download
 			Bio::NCBI.default_email = "diez@kuicr.kyoto-u.ac.jp"
 			ncbi = Bio::NCBI::REST.new
 			
-			system("./ncbi_download.pl \"#{term}\" #{db} #{ofile}")
+			# WARNING: Still not tested! (see test_ncbi2.rb for details)
+			rid = ncbi.esearch(term, {:db => db}, limit = 0)
 			
-			# TODO: how to do it in ruby??
-			#gpid = ncbi.esearch(term, {:db => "nuccore", :rettype => "gb", :retmode => "txt", :usehistory => 'y'})
-			#puts gpid.length
-
-			#gpid.each do |gid|
-				#of = File.new(outfile, "a")
-				#genome = ncbi.efetch(gid, {"db"=>"genome", "rettype"=>"gbwithparts", "retmode" => "txt"})
-				#of.puts genome
-				#of.close
-			#end
-			#refseq_process_source(outfile)
+			res = ncbi.efetch(rid, {:db => db, :rettype => "gb", :retmode => "txt"})
+			out = File.open(ofile, "w")
+			out.puts res
+			out.close
+			
+			# Old method. Just uncomment (and comment out the code above) to revert to it.
+			#system("./ncbi_download.pl \"#{term}\" #{db} #{ofile}")
 		end
 	end
 
