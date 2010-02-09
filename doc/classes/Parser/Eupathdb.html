@@ -129,22 +129,118 @@
             onclick="toggleCode('M000025-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000025-source">
 <pre>
-     <span class="ruby-comment cmt"># File parser.rb, line 564</span>
-564:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">taxon</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
-565:             <span class="ruby-keyword kw">super</span>
-566:             
-567:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">subtype</span>
-568:                 <span class="ruby-ivar">@file</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">subtype</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gff&quot;</span>)
-569:             <span class="ruby-keyword kw">else</span>
-570:                 <span class="ruby-ivar">@file</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gff&quot;</span>)
-571:             <span class="ruby-keyword kw">end</span>
-572:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File parser.rb, line 568</span>
+568:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">taxon</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
+569:             <span class="ruby-keyword kw">super</span>
+570:             
+571:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">subtype</span>
+572:                 <span class="ruby-ivar">@file</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">subtype</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gff&quot;</span>)
+573:             <span class="ruby-keyword kw">else</span>
+574:                 <span class="ruby-ivar">@file</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gff&quot;</span>)
+575:             <span class="ruby-keyword kw">end</span>
+576:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
       <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000026" class="method-detail">
+        <a name="M000026"></a>
+
+        <div class="method-heading">
+          <a href="#M000026" class="method-signature">
+          <span class="method-name">parse</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000026-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000026-source">
+<pre>
+     <span class="ruby-comment cmt"># File parser.rb, line 578</span>
+578:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parse</span>
+579:             <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* file: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">file</span>
+580:             
+581:             <span class="ruby-identifier">genome</span> = <span class="ruby-constant">Genome</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">taxon</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:empty</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>})
+582: 
+583:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* processing GFF file: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">file</span>
+584:             <span class="ruby-identifier">p</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">GFF</span><span class="ruby-operator">::</span><span class="ruby-constant">GFF3</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">file</span>, <span class="ruby-value str">&quot;r&quot;</span>))
+585: 
+586:             <span class="ruby-identifier">sequences</span> = {}
+587:             <span class="ruby-identifier">chrs</span> = {}
+588:             <span class="ruby-identifier">p</span>.<span class="ruby-identifier">sequences</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">seq</span><span class="ruby-operator">|</span>
+589:                 <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">na</span>
+590:                 <span class="ruby-identifier">sequences</span>[<span class="ruby-identifier">seq</span>.<span class="ruby-identifier">entry_id</span>] = <span class="ruby-identifier">seq</span>
+591:             <span class="ruby-keyword kw">end</span>
+592: 
+593:             <span class="ruby-identifier">p</span>.<span class="ruby-identifier">records</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">record</span><span class="ruby-operator">|</span>
+594:                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;gene&quot;</span>
+595:                     <span class="ruby-identifier">chr</span> = <span class="ruby-identifier">record</span>.<span class="ruby-identifier">seqname</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/.+\|(.+)/</span>, <span class="ruby-value str">'\1'</span>)
+596:                     <span class="ruby-identifier">attr</span> = <span class="ruby-identifier">_parse_attributes</span>(<span class="ruby-identifier">record</span>.<span class="ruby-identifier">attributes</span>, <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span>)
+597: 
+598:                     <span class="ruby-identifier">gene</span> = <span class="ruby-constant">Genome</span><span class="ruby-operator">::</span><span class="ruby-constant">Gene</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">attr</span>[<span class="ruby-identifier">:id</span>])
+599:                     <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">chromosome</span> = <span class="ruby-identifier">chr</span>
+600:                     <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">source</span> = <span class="ruby-identifier">record</span>.<span class="ruby-identifier">source</span>
+601:                     <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">strand</span> = <span class="ruby-identifier">_get_strand</span>(<span class="ruby-identifier">record</span>.<span class="ruby-identifier">strand</span>)
+602:                     <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">from</span> = <span class="ruby-identifier">record</span>.<span class="ruby-identifier">start</span>.<span class="ruby-identifier">to_i</span>
+603:                     <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">to</span> = <span class="ruby-identifier">record</span>.<span class="ruby-identifier">end</span>.<span class="ruby-identifier">to_i</span>
+604:                     <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">description</span> = <span class="ruby-identifier">attr</span>[<span class="ruby-identifier">:desc</span>]
+605:                     <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">pseudogene</span> = <span class="ruby-identifier">attr</span>[<span class="ruby-identifier">:pseudo</span>]
+606:                     <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">sequence</span> = <span class="ruby-identifier">sequences</span>[<span class="ruby-identifier">record</span>.<span class="ruby-identifier">seqname</span>].<span class="ruby-identifier">subseq</span>(<span class="ruby-identifier">record</span>.<span class="ruby-identifier">start</span>, <span class="ruby-identifier">record</span>.<span class="ruby-identifier">end</span>)
+607:                     <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">trans_table</span> = <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">trans_table</span>
+608:                     <span class="ruby-identifier">genome</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">gene</span>
+609:                 <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;exon&quot;</span>
+610:                     <span class="ruby-identifier">attr</span> = <span class="ruby-identifier">_parse_attributes</span>(<span class="ruby-identifier">record</span>.<span class="ruby-identifier">attributes</span>, <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span>)
+611:                     <span class="ruby-identifier">gene</span> = <span class="ruby-identifier">genome</span>.<span class="ruby-identifier">get_gene_by_acc</span>(<span class="ruby-identifier">attr</span>[<span class="ruby-identifier">:parent</span>])
+612:                     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">nil?</span>
+613:                         <span class="ruby-identifier">exon</span> = <span class="ruby-constant">Genome</span><span class="ruby-operator">::</span><span class="ruby-constant">Exon</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">gene</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
+614:                         <span class="ruby-identifier">exon</span>.<span class="ruby-identifier">strand</span> = <span class="ruby-identifier">_get_strand</span>(<span class="ruby-identifier">record</span>.<span class="ruby-identifier">strand</span>)
+615:                         <span class="ruby-identifier">exon</span>.<span class="ruby-identifier">from</span> = <span class="ruby-identifier">record</span>.<span class="ruby-identifier">start</span>.<span class="ruby-identifier">to_i</span>
+616:                         <span class="ruby-identifier">exon</span>.<span class="ruby-identifier">to</span> = <span class="ruby-identifier">record</span>.<span class="ruby-identifier">end</span>.<span class="ruby-identifier">to_i</span>
+617:                         <span class="ruby-identifier">gene</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">exon</span>
+618:                     <span class="ruby-keyword kw">else</span>
+619:                         <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;ERROR: parent &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">attr</span>[<span class="ruby-identifier">:parent</span>] <span class="ruby-operator">+</span> <span class="ruby-value str">&quot; not found for child &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">attr</span>[<span class="ruby-identifier">:id</span>]
+620:                     <span class="ruby-keyword kw">end</span>
+621:                 <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;CDS&quot;</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;tRNA&quot;</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;rRNA&quot;</span> <span class="ruby-keyword kw">or</span> \
+622:                     <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;snRNA&quot;</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;transcript&quot;</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;ncRNA&quot;</span> <span class="ruby-keyword kw">or</span> \
+623:                     <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;scRNA_encoding&quot;</span>
+624:                     
+625:                     <span class="ruby-identifier">attr</span> = <span class="ruby-identifier">_parse_attributes</span>(<span class="ruby-identifier">record</span>.<span class="ruby-identifier">attributes</span>, <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span>)
+626:                     <span class="ruby-identifier">gene</span> = <span class="ruby-identifier">genome</span>.<span class="ruby-identifier">get_gene_by_acc</span>(<span class="ruby-identifier">attr</span>[<span class="ruby-identifier">:parent</span>])
+627:                     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">nil?</span>
+628:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;transcript&quot;</span>
+629:                             <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">type</span> = <span class="ruby-value str">&quot;CDS&quot;</span>
+630:                         <span class="ruby-keyword kw">else</span>
+631:                             <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">type</span> = <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span>
+632:                         <span class="ruby-keyword kw">end</span>
+633:                     <span class="ruby-keyword kw">else</span>
+634:                         <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;ERROR: parent &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">attr</span>[<span class="ruby-identifier">:parent</span>] <span class="ruby-operator">+</span> <span class="ruby-value str">&quot; not found for child &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">attr</span>[<span class="ruby-identifier">:id</span>]
+635:                     <span class="ruby-keyword kw">end</span>
+636:                 <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;mRNA&quot;</span>
+637:                     <span class="ruby-comment cmt"># skip this.</span>
+638:                 <span class="ruby-comment cmt">#elsif record.feature == &quot;transcript&quot;</span>
+639:                     <span class="ruby-comment cmt">#gene.type = &quot;CDS&quot;</span>
+640:                 <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;supercontig&quot;</span>
+641:                     <span class="ruby-comment cmt"># TODO: add extra info (start, end)</span>
+642:                     <span class="ruby-identifier">id</span> = <span class="ruby-identifier">record</span>.<span class="ruby-identifier">seqname</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/^.+\|(.+)/</span>, <span class="ruby-value str">'\1'</span>)
+643:                     <span class="ruby-identifier">chrs</span>[<span class="ruby-identifier">id</span>] = <span class="ruby-identifier">sequences</span>[<span class="ruby-identifier">record</span>.<span class="ruby-identifier">seqname</span>]
+644:                 <span class="ruby-keyword kw">else</span>
+645:                     <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;%%%%%%% &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span>
+646:                 <span class="ruby-keyword kw">end</span>
+647:             <span class="ruby-keyword kw">end</span>
+648:             <span class="ruby-identifier">genome</span>.<span class="ruby-identifier">chromosome</span> = <span class="ruby-identifier">chrs</span>
+649:             <span class="ruby-identifier">genome</span>.<span class="ruby-identifier">auto_clean</span>
+650:             <span class="ruby-identifier">genome</span>
+651:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Private Instance methods</h3>
 
       <div id="method-M000030" class="method-detail">
         <a name="M000030"></a>
@@ -160,14 +256,14 @@
             onclick="toggleCode('M000030-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000030-source">
 <pre>
-     <span class="ruby-comment cmt"># File parser.rb, line 705</span>
-705:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_array2hash</span>(<span class="ruby-identifier">a</span>)
-706:             <span class="ruby-identifier">h</span> = {}
-707:             <span class="ruby-identifier">a</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
-708:                 <span class="ruby-identifier">h</span>[<span class="ruby-identifier">val</span>[<span class="ruby-value">0</span>]] = <span class="ruby-identifier">val</span>[<span class="ruby-value">1</span>]
-709:             <span class="ruby-keyword kw">end</span>
-710:             <span class="ruby-identifier">h</span>
-711:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File parser.rb, line 711</span>
+711:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_array2hash</span>(<span class="ruby-identifier">a</span>)
+712:             <span class="ruby-identifier">h</span> = {}
+713:             <span class="ruby-identifier">a</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
+714:                 <span class="ruby-identifier">h</span>[<span class="ruby-identifier">val</span>[<span class="ruby-value">0</span>]] = <span class="ruby-identifier">val</span>[<span class="ruby-value">1</span>]
+715:             <span class="ruby-keyword kw">end</span>
+716:             <span class="ruby-identifier">h</span>
+717:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -187,16 +283,16 @@
             onclick="toggleCode('M000028-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000028-source">
 <pre>
-     <span class="ruby-comment cmt"># File parser.rb, line 655</span>
-655:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_get_strand</span>(<span class="ruby-identifier">s</span>)
-656:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">s</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;+&quot;</span>
-657:                 <span class="ruby-keyword kw">return</span> <span class="ruby-value">1</span>
-658:             <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">s</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;-&quot;</span>
-659:                 <span class="ruby-keyword kw">return</span> <span class="ruby-value">-1</span>
-660:             <span class="ruby-keyword kw">else</span>
-661:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span>
-662:             <span class="ruby-keyword kw">end</span>
-663:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File parser.rb, line 661</span>
+661:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_get_strand</span>(<span class="ruby-identifier">s</span>)
+662:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">s</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;+&quot;</span>
+663:                 <span class="ruby-keyword kw">return</span> <span class="ruby-value">1</span>
+664:             <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">s</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;-&quot;</span>
+665:                 <span class="ruby-keyword kw">return</span> <span class="ruby-value">-1</span>
+666:             <span class="ruby-keyword kw">else</span>
+667:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span>
+668:             <span class="ruby-keyword kw">end</span>
+669:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -216,46 +312,46 @@
             onclick="toggleCode('M000029-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000029-source">
 <pre>
-     <span class="ruby-comment cmt"># File parser.rb, line 665</span>
-665:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_parse_attributes</span>(<span class="ruby-identifier">c</span>, <span class="ruby-identifier">type</span>)
-666:             <span class="ruby-identifier">f</span> = <span class="ruby-identifier">_array2hash</span>(<span class="ruby-identifier">c</span>)
-667:             <span class="ruby-identifier">h</span> = {
-668:                 <span class="ruby-identifier">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>,
-669:                 <span class="ruby-identifier">:parent</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>,
-670:                 <span class="ruby-identifier">:desc</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;&quot;</span>,
-671:                 <span class="ruby-identifier">:pseudo</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
-672:             }
-673: 
-674:             <span class="ruby-identifier">h</span>[<span class="ruby-identifier">:id</span>] = <span class="ruby-identifier">f</span>[<span class="ruby-value str">&quot;ID&quot;</span>]
-675:             <span class="ruby-identifier">h</span>[<span class="ruby-identifier">:id</span>].<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/^.+\|/</span>, <span class="ruby-value str">&quot;&quot;</span>)
-676: 
-677:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">f</span>[<span class="ruby-value str">&quot;Parent&quot;</span>]
-678:                 <span class="ruby-identifier">h</span>[<span class="ruby-identifier">:parent</span>] = <span class="ruby-identifier">f</span>[<span class="ruby-value str">&quot;Parent&quot;</span>]
-679:                 <span class="ruby-identifier">h</span>[<span class="ruby-identifier">:parent</span>].<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/^.+\|/</span>, <span class="ruby-value str">&quot;&quot;</span>)
-680:             <span class="ruby-keyword kw">end</span>
-681: 
-682:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;plasmodium.vivax_salvador1&quot;</span>
-683:                 <span class="ruby-identifier">h</span>[<span class="ruby-identifier">:parent</span>] = <span class="ruby-identifier">f</span>[<span class="ruby-value str">&quot;ID&quot;</span>]
-684:                 <span class="ruby-identifier">h</span>[<span class="ruby-identifier">:parent</span>].<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/^.+?_(.+)-.+$/</span>, <span class="ruby-value str">'\1'</span>)
-685:             <span class="ruby-keyword kw">end</span>
-686:             
-687:             <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">type</span>
-688:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;supercontig&quot;</span>, <span class="ruby-value str">&quot;gene&quot;</span>
-689:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;tRNA&quot;</span>, <span class="ruby-value str">&quot;mRNA&quot;</span>, <span class="ruby-value str">&quot;transcript&quot;</span>, <span class="ruby-value str">&quot;ncRNA&quot;</span>, <span class="ruby-value str">&quot;scRNA_encoding&quot;</span>
-690:                 <span class="ruby-identifier">h</span>[<span class="ruby-identifier">:id</span>].<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/^.+?_(.+)-.+$/</span>, <span class="ruby-value str">'\1'</span>)
-691:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;exon&quot;</span>, <span class="ruby-value str">&quot;CDS&quot;</span>
-692:                 <span class="ruby-identifier">h</span>[<span class="ruby-identifier">:id</span>].<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/^.+?_(.+)-.+$/</span>, <span class="ruby-value str">'\1'</span>)
-693:                 <span class="ruby-identifier">h</span>[<span class="ruby-identifier">:parent</span>].<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/^.+?_(.+)-.+$/</span>, <span class="ruby-value str">'\1'</span>)
-694:             <span class="ruby-keyword kw">end</span>          
-695:         
-696:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">f</span>[<span class="ruby-value str">&quot;description&quot;</span>]
-697:                 <span class="ruby-identifier">h</span>[<span class="ruby-identifier">:desc</span>] = <span class="ruby-identifier">_unescape</span>(<span class="ruby-identifier">f</span>[<span class="ruby-value str">&quot;description&quot;</span>])
-698:             <span class="ruby-keyword kw">end</span>
-699: 
-700:             <span class="ruby-identifier">h</span>[<span class="ruby-identifier">:pseudo</span>] = <span class="ruby-value">1</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">h</span>[<span class="ruby-identifier">:desc</span>].<span class="ruby-identifier">match</span>(<span class="ruby-value str">'pseudogene'</span>)
-701:             
-702:             <span class="ruby-identifier">h</span>
-703:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File parser.rb, line 671</span>
+671:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_parse_attributes</span>(<span class="ruby-identifier">c</span>, <span class="ruby-identifier">type</span>)
+672:             <span class="ruby-identifier">f</span> = <span class="ruby-identifier">_array2hash</span>(<span class="ruby-identifier">c</span>)
+673:             <span class="ruby-identifier">h</span> = {
+674:                 <span class="ruby-identifier">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>,
+675:                 <span class="ruby-identifier">:parent</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>,
+676:                 <span class="ruby-identifier">:desc</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;&quot;</span>,
+677:                 <span class="ruby-identifier">:pseudo</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+678:             }
+679: 
+680:             <span class="ruby-identifier">h</span>[<span class="ruby-identifier">:id</span>] = <span class="ruby-identifier">f</span>[<span class="ruby-value str">&quot;ID&quot;</span>]
+681:             <span class="ruby-identifier">h</span>[<span class="ruby-identifier">:id</span>].<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/^.+\|/</span>, <span class="ruby-value str">&quot;&quot;</span>)
+682: 
+683:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">f</span>[<span class="ruby-value str">&quot;Parent&quot;</span>]
+684:                 <span class="ruby-identifier">h</span>[<span class="ruby-identifier">:parent</span>] = <span class="ruby-identifier">f</span>[<span class="ruby-value str">&quot;Parent&quot;</span>]
+685:                 <span class="ruby-identifier">h</span>[<span class="ruby-identifier">:parent</span>].<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/^.+\|/</span>, <span class="ruby-value str">&quot;&quot;</span>)
+686:             <span class="ruby-keyword kw">end</span>
+687: 
+688:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;plasmodium.vivax_salvador1&quot;</span>
+689:                 <span class="ruby-identifier">h</span>[<span class="ruby-identifier">:parent</span>] = <span class="ruby-identifier">f</span>[<span class="ruby-value str">&quot;ID&quot;</span>]
+690:                 <span class="ruby-identifier">h</span>[<span class="ruby-identifier">:parent</span>].<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/^.+?_(.+)-.+$/</span>, <span class="ruby-value str">'\1'</span>)
+691:             <span class="ruby-keyword kw">end</span>
+692:             
+693:             <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">type</span>
+694:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;supercontig&quot;</span>, <span class="ruby-value str">&quot;gene&quot;</span>
+695:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;tRNA&quot;</span>, <span class="ruby-value str">&quot;mRNA&quot;</span>, <span class="ruby-value str">&quot;transcript&quot;</span>, <span class="ruby-value str">&quot;ncRNA&quot;</span>, <span class="ruby-value str">&quot;scRNA_encoding&quot;</span>
+696:                 <span class="ruby-identifier">h</span>[<span class="ruby-identifier">:id</span>].<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/^.+?_(.+)-.+$/</span>, <span class="ruby-value str">'\1'</span>)
+697:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;exon&quot;</span>, <span class="ruby-value str">&quot;CDS&quot;</span>
+698:                 <span class="ruby-identifier">h</span>[<span class="ruby-identifier">:id</span>].<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/^.+?_(.+)-.+$/</span>, <span class="ruby-value str">'\1'</span>)
+699:                 <span class="ruby-identifier">h</span>[<span class="ruby-identifier">:parent</span>].<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/^.+?_(.+)-.+$/</span>, <span class="ruby-value str">'\1'</span>)
+700:             <span class="ruby-keyword kw">end</span>          
+701:         
+702:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">f</span>[<span class="ruby-value str">&quot;description&quot;</span>]
+703:                 <span class="ruby-identifier">h</span>[<span class="ruby-identifier">:desc</span>] = <span class="ruby-identifier">_unescape</span>(<span class="ruby-identifier">f</span>[<span class="ruby-value str">&quot;description&quot;</span>])
+704:             <span class="ruby-keyword kw">end</span>
+705: 
+706:             <span class="ruby-identifier">h</span>[<span class="ruby-identifier">:pseudo</span>] = <span class="ruby-value">1</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">h</span>[<span class="ruby-identifier">:desc</span>].<span class="ruby-identifier">match</span>(<span class="ruby-value str">'pseudogene'</span>)
+707:             
+708:             <span class="ruby-identifier">h</span>
+709:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -275,106 +371,12 @@
             onclick="toggleCode('M000027-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000027-source">
 <pre>
-     <span class="ruby-comment cmt"># File parser.rb, line 649</span>
-649:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_unescape</span>(<span class="ruby-identifier">str</span>)
-650:             <span class="ruby-identifier">str</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">unescape</span>(<span class="ruby-identifier">str</span>)
-651:             <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/\+/</span>, <span class="ruby-value str">' '</span>)
-652:             <span class="ruby-identifier">str</span>
-653:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000026" class="method-detail">
-        <a name="M000026"></a>
-
-        <div class="method-heading">
-          <a href="#M000026" class="method-signature">
-          <span class="method-name">parse</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000026-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000026-source">
-<pre>
-     <span class="ruby-comment cmt"># File parser.rb, line 574</span>
-574:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parse</span>
-575:             <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* file: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">file</span>
-576:             
-577:             <span class="ruby-identifier">genome</span> = <span class="ruby-constant">Genome</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">taxon</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:empty</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>})
-578: 
-579:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* processing GFF file: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">file</span>
-580:             <span class="ruby-identifier">p</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">GFF</span><span class="ruby-operator">::</span><span class="ruby-constant">GFF3</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">file</span>, <span class="ruby-value str">&quot;r&quot;</span>))
-581: 
-582:             <span class="ruby-identifier">sequences</span> = {}
-583:             <span class="ruby-identifier">chrs</span> = {}
-584:             <span class="ruby-identifier">p</span>.<span class="ruby-identifier">sequences</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">seq</span><span class="ruby-operator">|</span>
-585:                 <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">na</span>
-586:                 <span class="ruby-identifier">sequences</span>[<span class="ruby-identifier">seq</span>.<span class="ruby-identifier">entry_id</span>] = <span class="ruby-identifier">seq</span>
-587:             <span class="ruby-keyword kw">end</span>
-588: 
-589:             <span class="ruby-identifier">p</span>.<span class="ruby-identifier">records</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">record</span><span class="ruby-operator">|</span>
-590:                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;gene&quot;</span>
-591:                     <span class="ruby-identifier">chr</span> = <span class="ruby-identifier">record</span>.<span class="ruby-identifier">seqname</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/.+\|(.+)/</span>, <span class="ruby-value str">'\1'</span>)
-592:                     <span class="ruby-identifier">attr</span> = <span class="ruby-identifier">_parse_attributes</span>(<span class="ruby-identifier">record</span>.<span class="ruby-identifier">attributes</span>, <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span>)
-593: 
-594:                     <span class="ruby-identifier">gene</span> = <span class="ruby-constant">Genome</span><span class="ruby-operator">::</span><span class="ruby-constant">Gene</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">attr</span>[<span class="ruby-identifier">:id</span>])
-595:                     <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">chromosome</span> = <span class="ruby-identifier">chr</span>
-596:                     <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">source</span> = <span class="ruby-identifier">record</span>.<span class="ruby-identifier">source</span>
-597:                     <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">strand</span> = <span class="ruby-identifier">_get_strand</span>(<span class="ruby-identifier">record</span>.<span class="ruby-identifier">strand</span>)
-598:                     <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">from</span> = <span class="ruby-identifier">record</span>.<span class="ruby-identifier">start</span>.<span class="ruby-identifier">to_i</span>
-599:                     <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">to</span> = <span class="ruby-identifier">record</span>.<span class="ruby-identifier">end</span>.<span class="ruby-identifier">to_i</span>
-600:                     <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">description</span> = <span class="ruby-identifier">attr</span>[<span class="ruby-identifier">:desc</span>]
-601:                     <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">pseudogene</span> = <span class="ruby-identifier">attr</span>[<span class="ruby-identifier">:pseudo</span>]
-602:                     <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">sequence</span> = <span class="ruby-identifier">sequences</span>[<span class="ruby-identifier">record</span>.<span class="ruby-identifier">seqname</span>].<span class="ruby-identifier">subseq</span>(<span class="ruby-identifier">record</span>.<span class="ruby-identifier">start</span>, <span class="ruby-identifier">record</span>.<span class="ruby-identifier">end</span>)
-603:                     <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">trans_table</span> = <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">trans_table</span>
-604:                     <span class="ruby-identifier">genome</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">gene</span>
-605:                 <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;exon&quot;</span>
-606:                     <span class="ruby-identifier">attr</span> = <span class="ruby-identifier">_parse_attributes</span>(<span class="ruby-identifier">record</span>.<span class="ruby-identifier">attributes</span>, <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span>)
-607:                     <span class="ruby-identifier">gene</span> = <span class="ruby-identifier">genome</span>.<span class="ruby-identifier">get_gene_by_acc</span>(<span class="ruby-identifier">attr</span>[<span class="ruby-identifier">:parent</span>])
-608:                     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">nil?</span>
-609:                         <span class="ruby-identifier">exon</span> = <span class="ruby-constant">Genome</span><span class="ruby-operator">::</span><span class="ruby-constant">Exon</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">gene</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
-610:                         <span class="ruby-identifier">exon</span>.<span class="ruby-identifier">strand</span> = <span class="ruby-identifier">_get_strand</span>(<span class="ruby-identifier">record</span>.<span class="ruby-identifier">strand</span>)
-611:                         <span class="ruby-identifier">exon</span>.<span class="ruby-identifier">from</span> = <span class="ruby-identifier">record</span>.<span class="ruby-identifier">start</span>.<span class="ruby-identifier">to_i</span>
-612:                         <span class="ruby-identifier">exon</span>.<span class="ruby-identifier">to</span> = <span class="ruby-identifier">record</span>.<span class="ruby-identifier">end</span>.<span class="ruby-identifier">to_i</span>
-613:                         <span class="ruby-identifier">gene</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">exon</span>
-614:                     <span class="ruby-keyword kw">else</span>
-615:                         <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;ERROR: parent &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">attr</span>[<span class="ruby-identifier">:parent</span>] <span class="ruby-operator">+</span> <span class="ruby-value str">&quot; not found for child &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">attr</span>[<span class="ruby-identifier">:id</span>]
-616:                     <span class="ruby-keyword kw">end</span>
-617:                 <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;CDS&quot;</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;tRNA&quot;</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;rRNA&quot;</span> <span class="ruby-keyword kw">or</span> \
-618:                     <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;snRNA&quot;</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;transcript&quot;</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;ncRNA&quot;</span> <span class="ruby-keyword kw">or</span> \
-619:                     <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;scRNA_encoding&quot;</span>
-620:                     
-621:                     <span class="ruby-identifier">attr</span> = <span class="ruby-identifier">_parse_attributes</span>(<span class="ruby-identifier">record</span>.<span class="ruby-identifier">attributes</span>, <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span>)
-622:                     <span class="ruby-identifier">gene</span> = <span class="ruby-identifier">genome</span>.<span class="ruby-identifier">get_gene_by_acc</span>(<span class="ruby-identifier">attr</span>[<span class="ruby-identifier">:parent</span>])
-623:                     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">nil?</span>
-624:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;transcript&quot;</span>
-625:                             <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">type</span> = <span class="ruby-value str">&quot;CDS&quot;</span>
-626:                         <span class="ruby-keyword kw">else</span>
-627:                             <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">type</span> = <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span>
-628:                         <span class="ruby-keyword kw">end</span>
-629:                     <span class="ruby-keyword kw">else</span>
-630:                         <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;ERROR: parent &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">attr</span>[<span class="ruby-identifier">:parent</span>] <span class="ruby-operator">+</span> <span class="ruby-value str">&quot; not found for child &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">attr</span>[<span class="ruby-identifier">:id</span>]
-631:                     <span class="ruby-keyword kw">end</span>
-632:                 <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;mRNA&quot;</span>
-633:                     <span class="ruby-comment cmt"># skip this.</span>
-634:                 <span class="ruby-comment cmt">#elsif record.feature == &quot;transcript&quot;</span>
-635:                     <span class="ruby-comment cmt">#gene.type = &quot;CDS&quot;</span>
-636:                 <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;supercontig&quot;</span>
-637:                     <span class="ruby-comment cmt"># TODO: add extra info (start, end)</span>
-638:                     <span class="ruby-identifier">id</span> = <span class="ruby-identifier">record</span>.<span class="ruby-identifier">seqname</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/^.+\|(.+)/</span>, <span class="ruby-value str">'\1'</span>)
-639:                     <span class="ruby-identifier">chrs</span>[<span class="ruby-identifier">id</span>] = <span class="ruby-identifier">sequences</span>[<span class="ruby-identifier">record</span>.<span class="ruby-identifier">seqname</span>]
-640:                 <span class="ruby-keyword kw">else</span>
-641:                     <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;%%%%%%% &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span>
-642:                 <span class="ruby-keyword kw">end</span>
-643:             <span class="ruby-keyword kw">end</span>
-644:             <span class="ruby-identifier">genome</span>.<span class="ruby-identifier">chromosome</span> = <span class="ruby-identifier">chrs</span>
-645:             <span class="ruby-identifier">genome</span>.<span class="ruby-identifier">auto_clean</span>
-646:             <span class="ruby-identifier">genome</span>
-647:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File parser.rb, line 655</span>
+655:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_unescape</span>(<span class="ruby-identifier">str</span>)
+656:             <span class="ruby-identifier">str</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">unescape</span>(<span class="ruby-identifier">str</span>)
+657:             <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/\+/</span>, <span class="ruby-value str">' '</span>)
+658:             <span class="ruby-identifier">str</span>
+659:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

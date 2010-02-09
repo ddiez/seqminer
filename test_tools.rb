@@ -16,3 +16,8 @@ ts.debug
 ts = Tools::Hmmer.new("hmmpress")
 ts.infile = "foo.hmm"
 ts.debug
+
+ts = Tools::Meme.new("meme")
+ts.infile = "foo.fa"
+ts.outdir = "meme_100"
+ts.debug

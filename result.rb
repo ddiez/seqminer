@@ -780,6 +780,15 @@ module Result
 			result
 		end
 		
+		# Prints some information for debugging.
+		def debug
+			warn "+ HmmerParser +"
+			warn "* file: " + @file
+			result.debug
+		end
+		
+		private
+		
 		def _parse_line(line)
 			tmp = line.match(/\[(.+)\]$/)
 			if ! tmp.nil?
@@ -795,13 +804,6 @@ module Result
 				return [strand, frame]
 			end
 			return nil
-		end
-
-		# Prints some information for debugging.
-		def debug
-			warn "+ HmmerParser +"
-			warn "* file: " + @file
-			result.debug
 		end
 	end
 end

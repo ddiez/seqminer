@@ -21,7 +21,13 @@ module Tools
 			end
 			
 			@tool = tool
-		end		
+		end
+		
+		def execute
+			super.build_cmd
+			res = system cmd
+			res
+		end
 	end
 	
 	class Hmmer < Tools
@@ -49,11 +55,11 @@ module Tools
 			@table_file = outfile.sub(/\.log$/, ".txt")
 		end
 		
-		def execute
-			build_cmd
-			res = system cmd
-			res
-		end
+#		def execute
+#			build_cmd
+#			res = system cmd
+#			res
+#		end
 		
 		def build_cmd
 			case tool
@@ -101,12 +107,6 @@ module Tools
 			end
 		end
 		
-		def execute
-			build_cmd
-			res = system cmd
-			res
-		end
-		
 		def build_cmd
 			case tool
 			when 'tblastn'
@@ -132,6 +132,51 @@ module Tools
 			warn "* outfile: " + outfile.to_s
 			warn "* seed_file: " + seed_file.to_s
 			warn "* model: " + pssm_file.to_s
+			warn "* parameters: " + parameters.to_s
+			warn "* cmd: " + cmd.to_s
+			warn ""
+		end
+	end
+	
+	class Meme < Tools
+		attr_accessor :outdir, :db, :query, :target
+		def initialize(tool, options = {:config => nil})
+			super
+			
+			@path = config.dir_meme + tool
+			
+			case tool
+			when 'meme'
+				@parameters = "-text"
+			when 'mast'
+				@parameters = "-text" 
+			when 'tomtom'
+				@parameters = "-text"
+			end
+		end
+		
+		def build_cmd
+			case tool
+			when 'meme'
+				cmd = [path, infile, "-o", outdir, parameters]
+			when 'mast'
+				cmd = [path, infile, "-d", db, parameters] 
+			when 'tomtom'
+				cmd = [path, parameters, "-query", query, "-target", target]
+			end
+			@cmd = cmd.join(" ")
+		end
+		
+		def debug
+			build_cmd
+			warn "+ Tool +"
+			warn "* tool: " + tool.to_s
+			warn "* path: " + path.to_s
+			warn "* infile: " + infile.to_s
+			warn "* outdir: " + outdir.to_s
+			warn "* db: " + db.to_s
+			warn "* query: " + query.to_s
+			warn "* target: " + target.to_s
 			warn "* parameters: " + parameters.to_s
 			warn "* cmd: " + cmd.to_s
 			warn ""

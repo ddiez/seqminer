@@ -103,16 +103,15 @@ href="../Item.html">Item</a>
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000051">_parse_desc</a>&nbsp;&nbsp;
-      <a href="#M000053">auto_clean</a>&nbsp;&nbsp;
-      <a href="#M000059">debug</a>&nbsp;&nbsp;
-      <a href="#M000052">each_gene</a>&nbsp;&nbsp;
-      <a href="#M000055">filter_by_acc</a>&nbsp;&nbsp;
-      <a href="#M000054">get_gene_by_acc</a>&nbsp;&nbsp;
+      <a href="#M000052">auto_clean</a>&nbsp;&nbsp;
+      <a href="#M000058">debug</a>&nbsp;&nbsp;
+      <a href="#M000051">each_gene</a>&nbsp;&nbsp;
+      <a href="#M000054">filter_by_acc</a>&nbsp;&nbsp;
+      <a href="#M000053">get_gene_by_acc</a>&nbsp;&nbsp;
       <a href="#M000050">new</a>&nbsp;&nbsp;
-      <a href="#M000056">write_fasta</a>&nbsp;&nbsp;
-      <a href="#M000057">write_gff</a>&nbsp;&nbsp;
-      <a href="#M000058">write_table</a>&nbsp;&nbsp;
+      <a href="#M000055">write_fasta</a>&nbsp;&nbsp;
+      <a href="#M000056">write_gff</a>&nbsp;&nbsp;
+      <a href="#M000057">write_table</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -244,51 +243,19 @@ href="../Item.html">Item</a>
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000051" class="method-detail">
-        <a name="M000051"></a>
+      <div id="method-M000052" class="method-detail">
+        <a name="M000052"></a>
 
         <div class="method-heading">
-          <a href="#M000051" class="method-signature">
-          <span class="method-name">_parse_desc</span><span class="method-args">(line)</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000051-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000051-source">
-<pre>
-    <span class="ruby-comment cmt"># File genome.rb, line 79</span>
-79:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_parse_desc</span>(<span class="ruby-identifier">line</span>)
-80:             <span class="ruby-identifier">valid_fields</span> = [<span class="ruby-value str">&quot;description&quot;</span>, <span class="ruby-value str">&quot;pseudogene&quot;</span>]
-81:             <span class="ruby-identifier">a</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp re">/=|;/</span>)
-82:             <span class="ruby-identifier">h</span> = {}
-83:             <span class="ruby-identifier">valid_fields</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">field</span><span class="ruby-operator">|</span>
-84:                 <span class="ruby-identifier">fi</span> = <span class="ruby-identifier">a</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">field</span>)
-85:                 <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">fi</span>.<span class="ruby-identifier">nil?</span>
-86:                     <span class="ruby-identifier">h</span>[<span class="ruby-identifier">field</span>] = <span class="ruby-identifier">a</span>[<span class="ruby-identifier">fi</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>]
-87:                 <span class="ruby-keyword kw">end</span>
-88:             <span class="ruby-keyword kw">end</span>
-89:             <span class="ruby-identifier">h</span>
-90:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000053" class="method-detail">
-        <a name="M000053"></a>
-
-        <div class="method-heading">
-          <a href="#M000053" class="method-signature">
+          <a href="#M000052" class="method-signature">
           <span class="method-name">auto_clean</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000053-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000053-source">
+            onclick="toggleCode('M000052-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000052-source">
 <pre>
      <span class="ruby-comment cmt"># File genome.rb, line 98</span>
  98:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">auto_clean</span>
@@ -301,19 +268,19 @@ href="../Item.html">Item</a>
         </div>
       </div>
 
-      <div id="method-M000059" class="method-detail">
-        <a name="M000059"></a>
+      <div id="method-M000058" class="method-detail">
+        <a name="M000058"></a>
 
         <div class="method-heading">
-          <a href="#M000059" class="method-signature">
+          <a href="#M000058" class="method-signature">
           <span class="method-name">debug</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000059-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000059-source">
+            onclick="toggleCode('M000058-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000058-source">
 <pre>
      <span class="ruby-comment cmt"># File genome.rb, line 255</span>
 255:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
@@ -327,19 +294,37 @@ href="../Item.html">Item</a>
         </div>
       </div>
 
-      <div id="method-M000052" class="method-detail">
-        <a name="M000052"></a>
+      <div id="method-M000051" class="method-detail">
+        <a name="M000051"></a>
 
         <div class="method-heading">
-          <a href="#M000052" class="method-signature">
+          <a href="#M000051" class="method-signature">
           <span class="method-name">each_gene</span><span class="method-args">() {|value| ...}</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+def _parse_desc(line)
+</p>
+<pre>
+    valid_fields = [&quot;description&quot;, &quot;pseudogene&quot;]
+    a = line.split(/=|;/)
+    h = {}
+    valid_fields.each do |field|
+        fi = a.index(field)
+        if ! fi.nil?
+            h[field] = a[fi + 1]
+        end
+    end
+    h
+</pre>
+<p>
+end
+</p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000052-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000052-source">
+            onclick="toggleCode('M000051-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000051-source">
 <pre>
     <span class="ruby-comment cmt"># File genome.rb, line 92</span>
 92:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each_gene</span>
@@ -352,19 +337,19 @@ href="../Item.html">Item</a>
         </div>
       </div>
 
-      <div id="method-M000055" class="method-detail">
-        <a name="M000055"></a>
+      <div id="method-M000054" class="method-detail">
+        <a name="M000054"></a>
 
         <div class="method-heading">
-          <a href="#M000055" class="method-signature">
+          <a href="#M000054" class="method-signature">
           <span class="method-name">filter_by_acc</span><span class="method-args">(acc)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000055-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000055-source">
+            onclick="toggleCode('M000054-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000054-source">
 <pre>
      <span class="ruby-comment cmt"># File genome.rb, line 109</span>
 109:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filter_by_acc</span>(<span class="ruby-identifier">acc</span>)
@@ -377,11 +362,11 @@ href="../Item.html">Item</a>
         </div>
       </div>
 
-      <div id="method-M000054" class="method-detail">
-        <a name="M000054"></a>
+      <div id="method-M000053" class="method-detail">
+        <a name="M000053"></a>
 
         <div class="method-heading">
-          <a href="#M000054" class="method-signature">
+          <a href="#M000053" class="method-signature">
           <span class="method-name">get_gene_by_acc</span><span class="method-args">(acc)</span>
           </a>
         </div>
@@ -391,8 +376,8 @@ href="../Item.html">Item</a>
 returns a gene item based on the accession value.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000054-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000054-source">
+            onclick="toggleCode('M000053-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000053-source">
 <pre>
      <span class="ruby-comment cmt"># File genome.rb, line 105</span>
 105:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_gene_by_acc</span>(<span class="ruby-identifier">acc</span>)
@@ -403,19 +388,19 @@ returns a gene item based on the accession value.
         </div>
       </div>
 
-      <div id="method-M000056" class="method-detail">
-        <a name="M000056"></a>
+      <div id="method-M000055" class="method-detail">
+        <a name="M000055"></a>
 
         <div class="method-heading">
-          <a href="#M000056" class="method-signature">
+          <a href="#M000055" class="method-signature">
           <span class="method-name">write_fasta</span><span class="method-args">(type, file = nil)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000056-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000056-source">
+            onclick="toggleCode('M000055-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000055-source">
 <pre>
      <span class="ruby-comment cmt"># File genome.rb, line 115</span>
 115:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_fasta</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">file</span> = <span class="ruby-keyword kw">nil</span>)
@@ -473,19 +458,19 @@ returns a gene item based on the accession value.
         </div>
       </div>
 
-      <div id="method-M000057" class="method-detail">
-        <a name="M000057"></a>
+      <div id="method-M000056" class="method-detail">
+        <a name="M000056"></a>
 
         <div class="method-heading">
-          <a href="#M000057" class="method-signature">
+          <a href="#M000056" class="method-signature">
           <span class="method-name">write_gff</span><span class="method-args">(file = nil)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000057-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000057-source">
+            onclick="toggleCode('M000056-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000056-source">
 <pre>
      <span class="ruby-comment cmt"># File genome.rb, line 166</span>
 166:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_gff</span>(<span class="ruby-identifier">file</span> = <span class="ruby-keyword kw">nil</span>)
@@ -531,19 +516,19 @@ returns a gene item based on the accession value.
         </div>
       </div>
 
-      <div id="method-M000058" class="method-detail">
-        <a name="M000058"></a>
+      <div id="method-M000057" class="method-detail">
+        <a name="M000057"></a>
 
         <div class="method-heading">
-          <a href="#M000058" class="method-signature">
+          <a href="#M000057" class="method-signature">
           <span class="method-name">write_table</span><span class="method-args">(file = nil)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000058-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000058-source">
+            onclick="toggleCode('M000057-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000057-source">
 <pre>
      <span class="ruby-comment cmt"># File genome.rb, line 205</span>
 205:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_table</span>(<span class="ruby-identifier">file</span> = <span class="ruby-keyword kw">nil</span>)

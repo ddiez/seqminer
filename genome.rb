@@ -76,18 +76,18 @@ module Genome
 			end
 		end
 		
-		def _parse_desc(line)
-			valid_fields = ["description", "pseudogene"]
-			a = line.split(/=|;/)
-			h = {}
-			valid_fields.each do |field|
-				fi = a.index(field)
-				if ! fi.nil?
-					h[field] = a[fi + 1]
-				end
-			end
-			h
-		end
+#		def _parse_desc(line)
+#			valid_fields = ["description", "pseudogene"]
+#			a = line.split(/=|;/)
+#			h = {}
+#			valid_fields.each do |field|
+#				fi = a.index(field)
+#				if ! fi.nil?
+#					h[field] = a[fi + 1]
+#				end
+#			end
+#			h
+#		end
 		
 		def each_gene
 			items.each_value do |value|

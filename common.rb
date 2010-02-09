@@ -14,6 +14,7 @@ class String
 end
 
 module Common
+	private
 	# Checks the result of a tool and exits if it fails and the argument exitonfail is true (default).
 	# It uses term/ansicolor for fancy terminal coloring.
 	# === Arguments:

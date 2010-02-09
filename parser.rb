@@ -262,6 +262,8 @@ module Parser
 			is
 		end
 		
+		private
+		
 		def _check_in_source(entry, what)
 			entry.features.each do |feat|
 				if feat.feature == "source"
@@ -531,6 +533,8 @@ module Parser
 			genome
 		end
 		
+		private
+		
 		def _parse_attributes(c)
 			f = _array2hash(c)
 			h = {
@@ -645,6 +649,8 @@ module Parser
 			genome.auto_clean
 			genome
 		end
+		
+		private
 
 		def _unescape(str)
 			str = URI.unescape(str)

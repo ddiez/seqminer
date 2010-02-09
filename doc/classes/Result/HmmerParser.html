@@ -86,10 +86,10 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000181">_parse_line</a>&nbsp;&nbsp;
+      <a href="#M000183">_parse_line</a>&nbsp;&nbsp;
       <a href="#M000182">debug</a>&nbsp;&nbsp;
-      <a href="#M000179">new</a>&nbsp;&nbsp;
-      <a href="#M000180">parse</a>&nbsp;&nbsp;
+      <a href="#M000180">new</a>&nbsp;&nbsp;
+      <a href="#M000181">parse</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -149,19 +149,19 @@
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000179" class="method-detail">
-        <a name="M000179"></a>
+      <div id="method-M000180" class="method-detail">
+        <a name="M000180"></a>
 
         <div class="method-heading">
-          <a href="#M000179" class="method-signature">
+          <a href="#M000180" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(options = {:config =&gt; nil, :taxon =&gt; nil, :ortholog =&gt; nil, :empty =&gt; false})</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000179-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000179-source">
+            onclick="toggleCode('M000180-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000180-source">
 <pre>
      <span class="ruby-comment cmt"># File result.rb, line 700</span>
 700:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">:taxon</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">:ortholog</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">:empty</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>})
@@ -186,42 +186,6 @@
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000181" class="method-detail">
-        <a name="M000181"></a>
-
-        <div class="method-heading">
-          <a href="#M000181" class="method-signature">
-          <span class="method-name">_parse_line</span><span class="method-args">(line)</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000181-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000181-source">
-<pre>
-     <span class="ruby-comment cmt"># File result.rb, line 783</span>
-783:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_parse_line</span>(<span class="ruby-identifier">line</span>)
-784:             <span class="ruby-identifier">tmp</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/\[(.+)\]$/</span>)
-785:             <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">nil?</span>
-786:                 <span class="ruby-identifier">tmp</span> = <span class="ruby-identifier">tmp</span>[<span class="ruby-value">0</span>]
-787:                 <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/\[|\]/</span>, <span class="ruby-value str">&quot;&quot;</span>)
-788:                 <span class="ruby-identifier">strand</span>, <span class="ruby-identifier">frame</span> = <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">';'</span>)
-789:                 <span class="ruby-identifier">strand</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/strand=/</span>, <span class="ruby-value str">&quot;&quot;</span>)
-790:                 <span class="ruby-identifier">frame</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/frame=/</span>, <span class="ruby-value str">&quot;&quot;</span>)
-791: 
-792:                 <span class="ruby-comment cmt">#warn &quot;* strand: &quot; + strand</span>
-793:                 <span class="ruby-comment cmt">#warn &quot;* frame: &quot; + frame</span>
-794:                 
-795:                 <span class="ruby-keyword kw">return</span> [<span class="ruby-identifier">strand</span>, <span class="ruby-identifier">frame</span>]
-796:             <span class="ruby-keyword kw">end</span>
-797:             <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span>
-798:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
       <div id="method-M000182" class="method-detail">
         <a name="M000182"></a>
 
@@ -239,30 +203,30 @@ Prints some information for debugging.
             onclick="toggleCode('M000182-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000182-source">
 <pre>
-     <span class="ruby-comment cmt"># File result.rb, line 801</span>
-801:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
-802:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ HmmerParser +&quot;</span>
-803:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* file: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@file</span>
-804:             <span class="ruby-identifier">result</span>.<span class="ruby-identifier">debug</span>
-805:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File result.rb, line 784</span>
+784:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+785:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ HmmerParser +&quot;</span>
+786:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* file: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@file</span>
+787:             <span class="ruby-identifier">result</span>.<span class="ruby-identifier">debug</span>
+788:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000180" class="method-detail">
-        <a name="M000180"></a>
+      <div id="method-M000181" class="method-detail">
+        <a name="M000181"></a>
 
         <div class="method-heading">
-          <a href="#M000180" class="method-signature">
+          <a href="#M000181" class="method-signature">
           <span class="method-name">parse</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000180-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000180-source">
+            onclick="toggleCode('M000181-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000181-source">
 <pre>
      <span class="ruby-comment cmt"># File result.rb, line 716</span>
 716:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parse</span>
@@ -331,6 +295,44 @@ Prints some information for debugging.
 779:             
 780:             <span class="ruby-identifier">result</span>
 781:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Private Instance methods</h3>
+
+      <div id="method-M000183" class="method-detail">
+        <a name="M000183"></a>
+
+        <div class="method-heading">
+          <a href="#M000183" class="method-signature">
+          <span class="method-name">_parse_line</span><span class="method-args">(line)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000183-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000183-source">
+<pre>
+     <span class="ruby-comment cmt"># File result.rb, line 792</span>
+792:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_parse_line</span>(<span class="ruby-identifier">line</span>)
+793:             <span class="ruby-identifier">tmp</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/\[(.+)\]$/</span>)
+794:             <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">nil?</span>
+795:                 <span class="ruby-identifier">tmp</span> = <span class="ruby-identifier">tmp</span>[<span class="ruby-value">0</span>]
+796:                 <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/\[|\]/</span>, <span class="ruby-value str">&quot;&quot;</span>)
+797:                 <span class="ruby-identifier">strand</span>, <span class="ruby-identifier">frame</span> = <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">';'</span>)
+798:                 <span class="ruby-identifier">strand</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/strand=/</span>, <span class="ruby-value str">&quot;&quot;</span>)
+799:                 <span class="ruby-identifier">frame</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/frame=/</span>, <span class="ruby-value str">&quot;&quot;</span>)
+800: 
+801:                 <span class="ruby-comment cmt">#warn &quot;* strand: &quot; + strand</span>
+802:                 <span class="ruby-comment cmt">#warn &quot;* frame: &quot; + frame</span>
+803:                 
+804:                 <span class="ruby-keyword kw">return</span> [<span class="ruby-identifier">strand</span>, <span class="ruby-identifier">frame</span>]
+805:             <span class="ruby-keyword kw">end</span>
+806:             <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span>
+807:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
