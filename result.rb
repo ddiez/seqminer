@@ -337,6 +337,7 @@ module Result
 				"source\t" +
 				"locus\t" +
 				"sequence\t" +
+				"cds\t" + 
 				"translation\t" +
 				"pseudogene\t" +
 				"method\t" +
@@ -359,6 +360,7 @@ module Result
 					iseq.source + "\t" +
 					iseq.locus + "\t" +
 					iseq.gene + "\t" +
+					iseq.cds + "\t" +
 					iseq.translation + "\t" +
 					pseudo + "\t" +
 					"psitblastn" + "\t" +
@@ -392,6 +394,7 @@ module Result
 				"source\t" + 
 				"chromosome\t" +
 				"sequence\t" +
+				"cds\t" +
 				"translation\t" +
 				"start\t" +
 				"end\t" +
@@ -422,12 +425,13 @@ module Result
 				taxon.source + "\t" +
 				g.chromosome + "\t" +
 				g.gene + "\t" +
+				g.cds + "\t" +
 				g.translation + "\t" +
 				g.from.to_s + "\t" +
 				g.to.to_s + "\t" +
 				g.strand.to_s + "\t" +
 				g.length.to_s + "\t" +
-				g.splicing + "\t" +
+				g.splicing_nelson + "\t" +
 				pseudo + "\t" +
 				"hmmsearch" + "\t" +
 				ortholog.hmm + "\t" +

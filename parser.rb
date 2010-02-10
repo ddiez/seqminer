@@ -104,7 +104,7 @@ module Parser
 										acc = h['locus_tag'][0]
 									elsif h['gene']
 										id = gb.accession + "|" + h['gene'][0]
-										acc = h['gene'][0]
+										#acc = h['gene'][0]
 									else
 										warn "******* NOT VALID TAG TO CREATE <gene> ENTRY IN LOCUS: " + gb.accession
 										next
@@ -166,7 +166,7 @@ module Parser
 											
 											seq = Isolate::Seq.new(id)
 											seq.subid = id
-											seq.accession = id
+											seq.accession = ""
 											seq.strand = feat.locations[0].strand.to_i
 											seq.from = feat.locations[0].from.to_i
 											seq.to = feat.locations[0].to.to_i

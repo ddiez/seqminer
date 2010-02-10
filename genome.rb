@@ -338,6 +338,30 @@ module Genome
 			loc
 		end
 		
+		# This method is just a variation of splicing, that does not use the join() and complement() notation.
+		# It is used for Nelson files.
+		def splicing_nelson
+			loc =[]
+						
+			case strand
+			when 1
+				exons = oitems
+			when -1
+				exons = oitems.reverse
+			end
+			
+			f0 = exons[0].from
+			exons.each do |exon|
+				x0 = exon.from - f0 + 1
+				x1 = exon.to - f0 + 1
+				loc << x0.to_s + ".." + x1.to_s
+			end
+			loc = loc.join(",")
+			#loc = "join(" + loc + ")" if length > 1
+			#loc = "complement(" + loc + ")" if strand == -1
+			loc
+		end
+		
 		# This methods displays the original splicing pattern based on the genomic coordinates. It can be used to 
 		# extract the exons from the genome sequence. It is intended mainly as a check method.
 		def splicing_original
