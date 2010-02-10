@@ -88,8 +88,8 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000243">debug</a>&nbsp;&nbsp;
-      <a href="#M000242">new</a>&nbsp;&nbsp;
+      <a href="#M000248">debug</a>&nbsp;&nbsp;
+      <a href="#M000247">new</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -114,6 +114,16 @@
           <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
           <td class="context-item-desc"></td>
         </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">ortholog</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">taxon</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
         </table>
       </div>
     </div>
@@ -124,24 +134,24 @@
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000242" class="method-detail">
-        <a name="M000242"></a>
+      <div id="method-M000247" class="method-detail">
+        <a name="M000247"></a>
 
         <div class="method-heading">
-          <a href="#M000242" class="method-signature">
+          <a href="#M000247" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(id)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000242-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000242-source">
+            onclick="toggleCode('M000247-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000247-source">
 <pre>
-    <span class="ruby-comment cmt"># File family.rb, line 56</span>
-56:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>)
-57:             <span class="ruby-keyword kw">super</span>
-58:         <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File family.rb, line 58</span>
+58:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>)
+59:             <span class="ruby-keyword kw">super</span>
+60:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -149,26 +159,28 @@
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000243" class="method-detail">
-        <a name="M000243"></a>
+      <div id="method-M000248" class="method-detail">
+        <a name="M000248"></a>
 
         <div class="method-heading">
-          <a href="#M000243" class="method-signature">
+          <a href="#M000248" class="method-signature">
           <span class="method-name">debug</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000243-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000243-source">
+            onclick="toggleCode('M000248-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000248-source">
 <pre>
-    <span class="ruby-comment cmt"># File family.rb, line 60</span>
-60:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
-61:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Family +&quot;</span>
-62:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
-63:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* name: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name</span>
-64:         <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File family.rb, line 62</span>
+62:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+63:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Family +&quot;</span>
+64:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
+65:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* taxon: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>
+66:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* ortholog: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ortholog</span>
+67:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* name: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name</span>
+68:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

@@ -80,8 +80,9 @@
 
     <div id="description">
       <p>
-This class helps commit the file to a given directory, either for uploading
-into the database or othe uses. TODO: Not implemented.
+This class helps <a href="Commit.html#M000137">commit</a> the file to a
+given directory, either for uploading into the database or othe uses. TODO:
+Not implemented.
 </p>
 
     </div>
@@ -89,6 +90,15 @@ into the database or othe uses. TODO: Not implemented.
 
    </div>
 
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000137">commit</a>&nbsp;&nbsp;
+      <a href="#M000138">debug</a>&nbsp;&nbsp;
+      <a href="#M000136">new</a>&nbsp;&nbsp;
+      </div>
+    </div>
 
   </div>
 
@@ -101,10 +111,134 @@ into the database or othe uses. TODO: Not implemented.
 
 
 
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">config</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">family</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        </table>
+      </div>
+    </div>
       
 
 
     <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000136" class="method-detail">
+        <a name="M000136"></a>
+
+        <div class="method-heading">
+          <a href="#M000136" class="method-signature">
+          <span class="method-name">new</span><span class="method-args">(options = {:config =&gt; nil})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000136-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000136-source">
+<pre>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 516</span>
+516:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
+517: 
+518:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+519:                 <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+520:             <span class="ruby-keyword kw">else</span>
+521:                 <span class="ruby-ivar">@config</span> = <span class="ruby-constant">Config</span>.<span class="ruby-identifier">new</span>
+522:             <span class="ruby-keyword kw">end</span>
+523: 
+524:             <span class="ruby-ivar">@family</span> = <span class="ruby-constant">Family</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+525:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000137" class="method-detail">
+        <a name="M000137"></a>
+
+        <div class="method-heading">
+          <a href="#M000137" class="method-signature">
+          <span class="method-name">commit</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000137-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000137-source">
+<pre>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 527</span>
+527:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">commit</span>
+528:             <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_commit</span>.<span class="ruby-identifier">exist?</span>
+529:                 <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* creating output directory: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_commit</span>
+530:                 <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_commit</span>.<span class="ruby-identifier">mkpath</span>
+531:             <span class="ruby-keyword kw">end</span>
+532:             
+533:             <span class="ruby-identifier">family</span>.<span class="ruby-identifier">each_family</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+534:                 <span class="ruby-identifier">ts</span> = <span class="ruby-constant">Taxon</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+535:                 <span class="ruby-identifier">ts</span>.<span class="ruby-identifier">filter_by_name</span>(<span class="ruby-identifier">f</span>.<span class="ruby-identifier">taxon</span>)
+536:                 <span class="ruby-identifier">ts</span>.<span class="ruby-identifier">each_taxon</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">taxon</span><span class="ruby-operator">|</span>
+537:                     <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">type</span>
+538:                     <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'spp'</span>
+539:                         <span class="ruby-identifier">subdir</span> = <span class="ruby-value str">&quot;genome/sequence&quot;</span>
+540:                     <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'clade'</span>
+541:                         <span class="ruby-identifier">subdir</span> = <span class="ruby-value str">&quot;isolate/sequence&quot;</span>
+542:                     <span class="ruby-keyword kw">end</span>
+543:                     <span class="ruby-identifier">file</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">subdir</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">f</span>.<span class="ruby-identifier">ortholog</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.txt&quot;</span>)
+544:                     <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* commiting file: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">file</span>
+545:                     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">exist?</span>
+546:                         <span class="ruby-constant">File</span>.<span class="ruby-identifier">cp</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_commit</span>)
+547:                     <span class="ruby-keyword kw">else</span>
+548:                         <span class="ruby-identifier">raise</span>(<span class="ruby-value str">&quot;!!! file &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">file</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot; does not exist!&quot;</span>)
+549:                     <span class="ruby-keyword kw">end</span>
+550:                 <span class="ruby-keyword kw">end</span>
+551:             <span class="ruby-keyword kw">end</span>
+552:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000138" class="method-detail">
+        <a name="M000138"></a>
+
+        <div class="method-heading">
+          <a href="#M000138" class="method-signature">
+          <span class="method-name">debug</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000138-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000138-source">
+<pre>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 554</span>
+554:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+555:             <span class="ruby-identifier">config</span>.<span class="ruby-identifier">debug</span>
+556:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
 
 
   </div>
