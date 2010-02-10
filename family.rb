@@ -26,6 +26,7 @@ module Family
 			file = config.dir_config + "family.txt"
 			fo = File.open(file)
 			fo.each_line do |line|
+				next if line.match(/^#/)
 				line.chomp!
 				t, o, fn = line.split("\t")
 				family = Family.new(t + "-" + o)

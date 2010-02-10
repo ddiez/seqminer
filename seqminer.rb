@@ -391,6 +391,7 @@ module SeqMiner
 			get_results
 			write_nelson
 			write_fasta
+			run_domain_finder
 		end
 		
 		def build_search
@@ -401,6 +402,26 @@ module SeqMiner
 		# Initializes the result directory structure if needed, then performs the searches.
 		def run_search
 			search.search
+		end
+
+		# Search Pfam domains in protein sequence.
+		def run_domain_finder
+			ortholog.each_ortholog do |o|
+				taxon.each_taxon do |t|
+					case t.type
+					when 'spp'
+						file = config.dir_result + "genome/fasta" + o.name + (t.name + "-" + o.name + "_protein.fa") 
+					when 'clade'
+						file = config.dir_result + "isolate/fasta" + o.name + (t.name + "-" + o.name + "_protein.fa") 
+					end
+					if file.exist?
+						warn "* search domains in: " + file
+						ts = Tools::Hmmer.new("hmmscan")
+						ts.infile = file
+						ts.debug
+					end
+				end
+			end
 		end
 		
 		# Parses the HMMER files, performs auto_merge and obtains the results (given an Evalue thereshold).
@@ -532,19 +553,24 @@ module SeqMiner
 			end
 			
 			family.each_family do |f|
+				outdir = config.dir_commit + f.ortholog
+				if ! outdir.exist?
+					outdir.mkpath
+				end
+
 				ts = Taxon::Set.new(options = {:config => config})
 				ts.filter_by_name(f.taxon)
 				ts.each_taxon do |taxon|
 					case taxon.type
 					when 'spp'
-						subdir = "genome/sequence"
+						dir = config.dir_result + "genome/sequence" + f.ortholog
 					when 'clade'
-						subdir = "isolate/sequence"
+						dir = config.dir_result + "isolate/sequence" + f.ortholog
 					end
-					file = config.dir_result + subdir + (f.ortholog + "-" + taxon.name + ".txt")
+					file = dir + (taxon.name + "-" + f.ortholog + ".txt")
 					warn "* commiting file: " + file
 					if file.exist?
-						File.cp(file, config.dir_commit)
+						File.cp(file, outdir)
 					else
 						raise("!!! file " + file + " does not exist!")
 					end

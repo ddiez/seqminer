@@ -21,5 +21,6 @@ sm = SeqMiner::Pipeline.new
 sm.build_search
 sm.search.debug
 #sm.run_all
-sm.write_fasta
+#sm.write_fasta
 #sm.write_nelson
+sm.run_domain_finder
