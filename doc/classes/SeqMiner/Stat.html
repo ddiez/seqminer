@@ -148,18 +148,18 @@
             onclick="toggleCode('M000120-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000120-source">
 <pre>
-     <span class="ruby-comment cmt"># File seqminer.rb, line 454</span>
-454:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
-455: 
-456:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
-457:                 <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
-458:             <span class="ruby-keyword kw">else</span>
-459:                 <span class="ruby-ivar">@config</span> = <span class="ruby-constant">Config</span>.<span class="ruby-identifier">new</span>
-460:             <span class="ruby-keyword kw">end</span>
-461: 
-462:             <span class="ruby-ivar">@taxon</span> = <span class="ruby-constant">Taxon</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
-463:             <span class="ruby-ivar">@ortholog</span> = <span class="ruby-constant">Ortholog</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
-464:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 455</span>
+455:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
+456: 
+457:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+458:                 <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+459:             <span class="ruby-keyword kw">else</span>
+460:                 <span class="ruby-ivar">@config</span> = <span class="ruby-constant">Config</span>.<span class="ruby-identifier">new</span>
+461:             <span class="ruby-keyword kw">end</span>
+462: 
+463:             <span class="ruby-ivar">@taxon</span> = <span class="ruby-constant">Taxon</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+464:             <span class="ruby-ivar">@ortholog</span> = <span class="ruby-constant">Ortholog</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+465:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -181,10 +181,10 @@
             onclick="toggleCode('M000123-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000123-source">
 <pre>
-     <span class="ruby-comment cmt"># File seqminer.rb, line 506</span>
-506:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
-507:             <span class="ruby-identifier">config</span>.<span class="ruby-identifier">debug</span>
-508:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 507</span>
+507:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+508:             <span class="ruby-identifier">config</span>.<span class="ruby-identifier">debug</span>
+509:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -204,27 +204,27 @@
             onclick="toggleCode('M000121-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000121-source">
 <pre>
-     <span class="ruby-comment cmt"># File seqminer.rb, line 466</span>
-466:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">result_stat</span>
-467:             <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Ortholog\tTaxon\tType\tCount&quot;</span>
-468:             <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">each_ortholog</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>
-469:                 <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">each_taxon</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
-470:                     <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">type</span>
-471:                     <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'spp'</span>
-472:                         <span class="ruby-identifier">file</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;genome/sequence&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.txt&quot;</span>)
-473:                     <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'clade'</span>
-474:                         <span class="ruby-identifier">file</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;isolate/sequence&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.txt&quot;</span>)
-475:                     <span class="ruby-keyword kw">end</span>
-476:                     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">exist?</span>
-477:                         <span class="ruby-identifier">n</span> = <span class="ruby-value">0</span>
-478:                         <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">file</span>, <span class="ruby-value str">&quot;r&quot;</span>).<span class="ruby-identifier">each_line</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-479:                             <span class="ruby-identifier">n</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
-480:                         <span class="ruby-keyword kw">end</span>
-481:                         <span class="ruby-identifier">puts</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">to_s</span>
-482:                     <span class="ruby-keyword kw">end</span>
-483:                 <span class="ruby-keyword kw">end</span>
-484:             <span class="ruby-keyword kw">end</span>
-485:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 467</span>
+467:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">result_stat</span>
+468:             <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Ortholog\tTaxon\tType\tCount&quot;</span>
+469:             <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">each_ortholog</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>
+470:                 <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">each_taxon</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+471:                     <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">type</span>
+472:                     <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'spp'</span>
+473:                         <span class="ruby-identifier">file</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;genome/sequence&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.txt&quot;</span>)
+474:                     <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'clade'</span>
+475:                         <span class="ruby-identifier">file</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;isolate/sequence&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.txt&quot;</span>)
+476:                     <span class="ruby-keyword kw">end</span>
+477:                     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">exist?</span>
+478:                         <span class="ruby-identifier">n</span> = <span class="ruby-value">0</span>
+479:                         <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">file</span>, <span class="ruby-value str">&quot;r&quot;</span>).<span class="ruby-identifier">each_line</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+480:                             <span class="ruby-identifier">n</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+481:                         <span class="ruby-keyword kw">end</span>
+482:                         <span class="ruby-identifier">puts</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">to_s</span>
+483:                     <span class="ruby-keyword kw">end</span>
+484:                 <span class="ruby-keyword kw">end</span>
+485:             <span class="ruby-keyword kw">end</span>
+486:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -244,25 +244,25 @@
             onclick="toggleCode('M000122-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000122-source">
 <pre>
-     <span class="ruby-comment cmt"># File seqminer.rb, line 487</span>
-487:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">source_stat</span>
-488:             <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Taxon\tnuccore_pass\tnuccore_skip\tnucest_pass\tnucest_skip\taccepted&quot;</span>
-489:             <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">each_taxon</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
-490:                 <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;spp&quot;</span>
-491:                 <span class="ruby-identifier">n</span> = {}
-492:                 [<span class="ruby-value str">&quot;accepted&quot;</span>, <span class="ruby-value str">&quot;nuccore_pass&quot;</span>, <span class="ruby-value str">&quot;nuccore_skip&quot;</span>, <span class="ruby-value str">&quot;nucest_pass&quot;</span>, <span class="ruby-value str">&quot;nucest_skip&quot;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
-493:                     <span class="ruby-identifier">n</span>[<span class="ruby-identifier">f</span>] = <span class="ruby-value">0</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">n</span>[<span class="ruby-identifier">f</span>]
-494:                     <span class="ruby-identifier">file</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">f</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.txt&quot;</span>)
-495:                     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">exist?</span>
-496:                         <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">file</span>, <span class="ruby-value str">&quot;r&quot;</span>).<span class="ruby-identifier">each_line</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-497:                             <span class="ruby-identifier">n</span>[<span class="ruby-identifier">f</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
-498:                         <span class="ruby-keyword kw">end</span>
-499:                     <span class="ruby-keyword kw">end</span>
-500:                 <span class="ruby-keyword kw">end</span>
-501:                 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">n</span>[<span class="ruby-value str">&quot;nuccore_pass&quot;</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">n</span>[<span class="ruby-value str">&quot;nuccore_skip&quot;</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span> \
-502:                     <span class="ruby-identifier">n</span>[<span class="ruby-value str">&quot;nucest_pass&quot;</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">n</span>[<span class="ruby-value str">&quot;nucest_skip&quot;</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">n</span>[<span class="ruby-value str">&quot;accepted&quot;</span>].<span class="ruby-identifier">to_s</span>
-503:             <span class="ruby-keyword kw">end</span>
-504:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 488</span>
+488:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">source_stat</span>
+489:             <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Taxon\tnuccore_pass\tnuccore_skip\tnucest_pass\tnucest_skip\taccepted&quot;</span>
+490:             <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">each_taxon</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+491:                 <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;spp&quot;</span>
+492:                 <span class="ruby-identifier">n</span> = {}
+493:                 [<span class="ruby-value str">&quot;accepted&quot;</span>, <span class="ruby-value str">&quot;nuccore_pass&quot;</span>, <span class="ruby-value str">&quot;nuccore_skip&quot;</span>, <span class="ruby-value str">&quot;nucest_pass&quot;</span>, <span class="ruby-value str">&quot;nucest_skip&quot;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+494:                     <span class="ruby-identifier">n</span>[<span class="ruby-identifier">f</span>] = <span class="ruby-value">0</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">n</span>[<span class="ruby-identifier">f</span>]
+495:                     <span class="ruby-identifier">file</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">f</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.txt&quot;</span>)
+496:                     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">exist?</span>
+497:                         <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">file</span>, <span class="ruby-value str">&quot;r&quot;</span>).<span class="ruby-identifier">each_line</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+498:                             <span class="ruby-identifier">n</span>[<span class="ruby-identifier">f</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+499:                         <span class="ruby-keyword kw">end</span>
+500:                     <span class="ruby-keyword kw">end</span>
+501:                 <span class="ruby-keyword kw">end</span>
+502:                 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">n</span>[<span class="ruby-value str">&quot;nuccore_pass&quot;</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">n</span>[<span class="ruby-value str">&quot;nuccore_skip&quot;</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span> \
+503:                     <span class="ruby-identifier">n</span>[<span class="ruby-value str">&quot;nucest_pass&quot;</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">n</span>[<span class="ruby-value str">&quot;nucest_skip&quot;</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">n</span>[<span class="ruby-value str">&quot;accepted&quot;</span>].<span class="ruby-identifier">to_s</span>
+504:             <span class="ruby-keyword kw">end</span>
+505:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

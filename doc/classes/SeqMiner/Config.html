@@ -171,6 +171,14 @@ Directories.
           <td class="context-item-desc"></td>
         </tr>
         <tr class="top-aligned-row context-row">
+          <td class="context-item-name">dir_r</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+<a href="../Tools.html">Tools</a> directories.
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
           <td class="context-item-name">dir_result</td>
           <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
           <td class="context-item-desc">
@@ -255,10 +263,10 @@ Files.
             onclick="toggleCode('M000142-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000142-source">
 <pre>
-    <span class="ruby-comment cmt"># File seqminer.rb, line 64</span>
-64:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">basedir</span>
-65:             <span class="ruby-ivar">@dir_home</span>
-66:         <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File seqminer.rb, line 65</span>
+65:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">basedir</span>
+66:             <span class="ruby-ivar">@dir_home</span>
+67:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -278,11 +286,11 @@ Files.
             onclick="toggleCode('M000141-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000141-source">
 <pre>
-    <span class="ruby-comment cmt"># File seqminer.rb, line 59</span>
-59:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">basedir=</span>(<span class="ruby-identifier">dir</span>)
-60:             <span class="ruby-ivar">@dir_home</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">dir</span>).<span class="ruby-identifier">expand_path</span>
-61:             <span class="ruby-identifier">update</span>
-62:         <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File seqminer.rb, line 60</span>
+60:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">basedir=</span>(<span class="ruby-identifier">dir</span>)
+61:             <span class="ruby-ivar">@dir_home</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">dir</span>).<span class="ruby-identifier">expand_path</span>
+62:             <span class="ruby-identifier">update</span>
+63:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -302,22 +310,22 @@ Files.
             onclick="toggleCode('M000143-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000143-source">
 <pre>
-    <span class="ruby-comment cmt"># File seqminer.rb, line 68</span>
-68:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
-69:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Config +&quot;</span>
-70:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* dir_home: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir_home</span>
-71:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* dir_config: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir_config</span>
-72:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* dir_source: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir_source</span>
-73:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* dir_sequence: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir_sequence</span>
-74:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* dir_model: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir_model</span>
-75:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* dir_pfam: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir_pfam</span>
-76:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* dir_result: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir_result</span>
-77:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* dir_hmmer: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir_hmmer</span>
-78:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* dir_blast: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir_blast</span>
-79:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* dir_meme: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir_meme</span>
-80:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* dir_commit: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir_commit</span>
-81:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;&quot;</span>
-82:         <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File seqminer.rb, line 69</span>
+69:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+70:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Config +&quot;</span>
+71:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* dir_home: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir_home</span>
+72:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* dir_config: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir_config</span>
+73:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* dir_source: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir_source</span>
+74:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* dir_sequence: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir_sequence</span>
+75:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* dir_model: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir_model</span>
+76:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* dir_pfam: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir_pfam</span>
+77:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* dir_result: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir_result</span>
+78:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* dir_hmmer: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir_hmmer</span>
+79:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* dir_blast: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir_blast</span>
+80:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* dir_meme: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir_meme</span>
+81:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* dir_commit: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir_commit</span>
+82:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;&quot;</span>
+83:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -358,10 +366,11 @@ Files.
 51:             <span class="ruby-ivar">@dir_hmmer</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;/Users/diez/local/hmmer3/bin&quot;</span>)
 52:             <span class="ruby-ivar">@dir_blast</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;/usr/local/ncbi/blast/bin&quot;</span>)
 53:             <span class="ruby-ivar">@dir_meme</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;/Users/diez/local/meme/bin&quot;</span>)
-54:             
-55:             <span class="ruby-comment cmt"># Commit</span>
-56:             <span class="ruby-ivar">@dir_commit</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;/Volumes/Biodev/projects/vardb/commit/&quot;</span>)
-57:         <span class="ruby-keyword kw">end</span>
+54:             <span class="ruby-ivar">@dir_r</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;/usr/bin&quot;</span>)
+55:             
+56:             <span class="ruby-comment cmt"># Commit</span>
+57:             <span class="ruby-ivar">@dir_commit</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;/Volumes/Biodev/projects/vardb/commit/&quot;</span>)
+58:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
