@@ -18,7 +18,7 @@ require 'tools'
 module SeqMiner
 	class Config
 		# Directories.
-		attr_accessor :dir_home, :dir_result
+		attr_accessor :dir_home, :dir_result, :dir_commit
 		attr_reader :dir_source, :dir_sequence, :dir_model, :dir_pfam, :dir_pfam_current, :dir_config
 		# Tools directories.
 		attr_accessor :dir_hmmer, :dir_blast, :dir_meme
@@ -46,12 +46,14 @@ module SeqMiner
 			
 			# Results.
 			@dir_result = dir_home + "result"
-			#@dir_result = dir_result_base + "last"
 			
 			# Tools.
 			@dir_hmmer = Pathname.new("/Users/diez/local/hmmer3/bin")
 			@dir_blast = Pathname.new("/usr/local/ncbi/blast/bin")
 			@dir_meme = Pathname.new("/Users/diez/local/meme/bin")
+			
+			# Commit
+			@dir_commit = Pathname.new("/Volumes/Biodev/projects/vardb/commit/")
 		end
 		
 		def basedir=(dir)
@@ -74,6 +76,8 @@ module SeqMiner
 			warn "* dir_result: " + dir_result
 			warn "* dir_hmmer: " + dir_hmmer
 			warn "* dir_blast: " + dir_blast
+			warn "* dir_meme: " + dir_meme
+			warn "* dir_commit: " + dir_commit
 			warn ""
 		end
 	end
@@ -521,6 +525,11 @@ module SeqMiner
 		end
 		
 		def commit
+			if ! config.dir_commit.exist?
+				warn "* creating output directory: " + config.dir_commit
+				config.dir_commit.mkpath
+			end
+			
 			family.each_family do |f|
 				ts = Taxon::Set.new(options = {:config => config})
 				ts.filter_by_name(f.taxon)
@@ -532,14 +541,18 @@ module SeqMiner
 						subdir = "isolate/sequence"
 					end
 					file = config.dir_result + subdir + (f.ortholog + "-" + taxon.name + ".txt")
-					puts file
+					warn "* commiting file: " + file
+					if file.exist?
+						File.cp(file, config.dir_commit)
+					else
+						raise("!!! file " + file + " does not exist!")
+					end
 				end
 			end
 		end
 		
 		def debug
 			config.debug
-			family.debug
 		end
 	end
 end
