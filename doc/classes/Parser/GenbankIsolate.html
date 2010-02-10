@@ -224,7 +224,7 @@
 104:                                         <span class="ruby-identifier">acc</span> = <span class="ruby-identifier">h</span>[<span class="ruby-value str">'locus_tag'</span>][<span class="ruby-value">0</span>]
 105:                                     <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">h</span>[<span class="ruby-value str">'gene'</span>]
 106:                                         <span class="ruby-identifier">id</span> = <span class="ruby-identifier">gb</span>.<span class="ruby-identifier">accession</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;|&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">h</span>[<span class="ruby-value str">'gene'</span>][<span class="ruby-value">0</span>]
-107:                                         <span class="ruby-identifier">acc</span> = <span class="ruby-identifier">h</span>[<span class="ruby-value str">'gene'</span>][<span class="ruby-value">0</span>]
+107:                                         <span class="ruby-comment cmt">#acc = h['gene'][0]</span>
 108:                                     <span class="ruby-keyword kw">else</span>
 109:                                         <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;******* NOT VALID TAG TO CREATE &lt;gene&gt; ENTRY IN LOCUS: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">gb</span>.<span class="ruby-identifier">accession</span>
 110:                                         <span class="ruby-keyword kw">next</span>
@@ -286,7 +286,7 @@
 166:                                             
 167:                                             <span class="ruby-identifier">seq</span> = <span class="ruby-constant">Isolate</span><span class="ruby-operator">::</span><span class="ruby-constant">Seq</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">id</span>)
 168:                                             <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">subid</span> = <span class="ruby-identifier">id</span>
-169:                                             <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">accession</span> = <span class="ruby-identifier">id</span>
+169:                                             <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">accession</span> = <span class="ruby-value str">&quot;&quot;</span>
 170:                                             <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">strand</span> = <span class="ruby-identifier">feat</span>.<span class="ruby-identifier">locations</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">strand</span>.<span class="ruby-identifier">to_i</span>
 171:                                             <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">from</span> = <span class="ruby-identifier">feat</span>.<span class="ruby-identifier">locations</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">from</span>.<span class="ruby-identifier">to_i</span>
 172:                                             <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">to</span> = <span class="ruby-identifier">feat</span>.<span class="ruby-identifier">locations</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">to</span>.<span class="ruby-identifier">to_i</span>
