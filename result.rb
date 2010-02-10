@@ -508,9 +508,12 @@ module Result
 		end
 		
 		# Finds the best hit in all the Results.
-		def best_hit
+		def best_hit(limit = nil)
 			bh = nil
 			items.each_value do |result|
+				if ! limit.nil?
+					next if ! limit.include?(result.type)
+				end
 				ch = result.best_hit
 				bh = ch if bh.nil? or ch.eval < bh.eval
 			end

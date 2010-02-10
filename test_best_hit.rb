@@ -15,10 +15,11 @@ o = os.get_ortholog_by_name("var")
 	p.type = "nucleotide"
 	r = p.parse
 	r.taxon = taxon
+	r.type = "6frame"
 	rs << r
 end
 
 
 rs.debug
-bh = rs.best_hit
+bh = rs.best_hit(limit = ["protein", "nucleotide"])
 bh.debug

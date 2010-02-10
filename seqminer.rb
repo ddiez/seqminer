@@ -278,9 +278,7 @@ module SeqMiner
 		end
 		
 		# This method computes the best hit for a series of genomic searches belonging to the same species and
-		# then returns the best hit as seed for a PSI-Blast search.
-		# TODO: This works but requires refinement, using a Tool object for PSI-Blast and putting some default
-		# parameters into Config.
+		# then returns the best hit (for protein searched) as seed for a PSI-Blast search.
 		def update_pssm
 			typeset = Search::TypeSet.new
 			ortholog.each_ortholog do |o|
@@ -307,7 +305,7 @@ module SeqMiner
 				next if rs.length == 0
 				#o.debug
 				#rs.debug
-				bh = rs.best_hit
+				bh = rs.best_hit(limit = "protein")
 				bh.debug
 				bh.taxon.debug
 				
@@ -504,5 +502,10 @@ module SeqMiner
 		def debug
 			config.debug
 		end
+	end
+	
+	# This class helps commit the file to a given directory, either for uploading into the database or othe uses.
+	# TODO: Not implemented.
+	class Commit
 	end
 end
