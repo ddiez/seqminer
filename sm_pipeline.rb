@@ -14,11 +14,12 @@ sm = SeqMiner::Pipeline.new
 # filter taxons.
 #sm.taxon.filter_by_name("anaplasma.marginale")
 #sm.taxon.filter_by_type("spp")
-sm.taxon.filter_by_type("clade")
+#sm.taxon.filter_by_type("clade")
 
 # filter orthologs.
 #sm.ortholog.filter_by_name("msp2")
 sm.build_search
 sm.search.debug
-sm.run_all
+#sm.run_all
+sm.write_fasta
 #sm.write_nelson

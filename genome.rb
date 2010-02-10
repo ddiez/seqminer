@@ -44,6 +44,7 @@ module Genome
 				fi = File.open(file, "r")
 				fi.each do |line|
 					next if line.match(/^id\t/)
+					line.chomp!
 					id, chromosome, source, type, exon, strand, from, to, pseudogene, references, mol_type, description = line.split("\t")
 					if type == "gene"
 						gene = Gene.new(id)
@@ -55,7 +56,7 @@ module Genome
 						gene.pseudogene = pseudogene.to_i
 						gene.references = references
 						gene.type = mol_type
-						gene.description = description
+						gene.description = description if description
 						seq = gdb.get_item_by_id(id)
 						gene.sequence = seq
 						add(gene)
@@ -122,25 +123,25 @@ module Genome
 			case type
 			when 'gene'
 				items.each_value do |gene|
-					id = gene.id + " " + gene.description
+					id = gene.id + " description=" + gene.description + ";"
 					seq = gene.sequence
 					fo.puts seq.to_fasta(id, 60)
 				end
 			when 'cds'
 				items.each_value do |gene|
-					id = gene.id + " " + gene.description
+					id = gene.id + " description=" + gene.description + ";"
 					seq = gene.cds
 					fo.puts seq.to_fasta(id, 60)
 				end
 			when 'protein'
 				items.each_value do |gene|
-					id = gene.id + " " + gene.description
+					id = gene.id + " description=" + gene.description + ";"
 					seq = gene.translation
 					fo.puts seq.to_fasta(id, 60)
 				end
 			when '6frame'
 				items.each_value do |gene|
-					id = gene.id + " " + gene.description
+					id = gene.id + " description=" + gene.description + ";"
 					seq = gene.translation(1)
 					fo.puts seq.to_fasta(id + " [strand=#{gene.strand};frame=1]", 60)
 					seq = gene.translation(2)
@@ -267,6 +268,7 @@ module Genome
 
 		def initialize(id)
 			super
+			@description = ""
 			@pseudogene = 0
 			@trans_table = 1 # assume the default and pray we can get the information somewhere.
 			@oitems = []

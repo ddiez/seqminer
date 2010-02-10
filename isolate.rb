@@ -41,6 +41,7 @@ module Isolate
 				fi = File.open(file, "r")
 				fi.each do |line|
 					next if line.match(/^id\t/)
+					line.chomp!
 					id, accession, subid, locus, division, source, isolate, strain, clone, country, type, \
 						pseudogene, strand, from, to, trans_table, references, description = line.split("\t")
 					seq = Isolate::Seq.new(id)
@@ -60,7 +61,7 @@ module Isolate
 					seq.to = to.to_i
 					seq.trans_table = trans_table
 					seq.references = references
-					seq.description = description
+					seq.description = description if description
 					gseq = gdb.get_seq_by_acc(id)
 					seq.sequence = gseq
 					seq.translation = ""
@@ -128,7 +129,7 @@ module Isolate
 				end
 			when "protein"
 				each_sequence do |seq|
-					next if ! seq.translation
+					next if seq.translation == ""
 					id = seq.id + " accession=" + seq.accession + ";source=" + seq.source + ";type=" + \
 						seq.type + ";trans_table=" + seq.trans_table.to_s + ";description=" + seq.description + ";"
 					fo.puts seq.translation.to_fasta(id, 60)
@@ -209,6 +210,7 @@ module Isolate
 		def initialize(id)
 			super
 			
+			@description = ""
 			@pseudogene = 0
 			# Assume the default and pray we can get the information somewhere.
 			@trans_table = nil
@@ -274,6 +276,14 @@ module Isolate
 				t = Bio::CodonTable[@trans_table.to_i]
 			end
 			cds.translate(frame, t)
+		end
+		
+		def translation=(seq)
+			@translation = Bio::Sequence::AA.new(seq)
+		end
+		
+		def translation
+			@translation
 		end
 
 		def debug

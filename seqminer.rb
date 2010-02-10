@@ -507,5 +507,39 @@ module SeqMiner
 	# This class helps commit the file to a given directory, either for uploading into the database or othe uses.
 	# TODO: Not implemented.
 	class Commit
+		attr_reader :config, :family
+		
+		def initialize(options = {:config => nil})
+
+			if options[:config]
+				@config = options[:config]
+			else
+				@config = Config.new
+			end
+
+			@family = Family::Set.new(options = {:config => config})
+		end
+		
+		def commit
+			family.each_family do |f|
+				ts = Taxon::Set.new(options = {:config => config})
+				ts.filter_by_name(f.taxon)
+				ts.each_taxon do |taxon|
+					case taxon.type
+					when 'spp'
+						subdir = "genome/sequence"
+					when 'clade'
+						subdir = "isolate/sequence"
+					end
+					file = config.dir_result + subdir + (f.ortholog + "-" + taxon.name + ".txt")
+					puts file
+				end
+			end
+		end
+		
+		def debug
+			config.debug
+			family.debug
+		end
 	end
 end

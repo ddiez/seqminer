@@ -599,8 +599,10 @@ module Result
 
 		# Exports sequences in FASTA format.
 		def write_fasta
+			warn "+ WRITE FASTA +"
 			each_value do |result|
 				if result.length > 0
+					warn "* " + result.taxon.name + " / " + result.ortholog.name
 					result.write_fasta
 				end
 			end

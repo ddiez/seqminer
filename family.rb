@@ -30,6 +30,8 @@ module Family
 				t, o, fn = line.split("\t")
 				family = Family.new(t + "-" + o)
 				family.name = fn
+				family.taxon = t
+				family.ortholog = o
 				self << family
 			end
 			fo.close
@@ -51,7 +53,7 @@ module Family
 	end
 	
 	class Family < Item
-		attr_accessor :name
+		attr_accessor :name, :taxon, :ortholog
 		
 		def initialize(id)
 			super
@@ -60,6 +62,8 @@ module Family
 		def debug
 			warn "+ Family +"
 			warn "* id: " + id
+			warn "* taxon: " + taxon
+			warn "* ortholog: " + ortholog
 			warn "* name: " + name
 		end
 	end
