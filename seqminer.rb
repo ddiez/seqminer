@@ -288,7 +288,7 @@ module SeqMiner
 				taxon.each_taxon do |t|
 					next if t.type != 'spp'
 					typeset.each_value do |type|
-						next if type.name == "cds"
+						next if type.name != "protein"
 						sid = t.name + "-" + o.name + "-" + type.name
 						file = config.dir_result + "genome/search" + o.name + (sid + ".txt") 
 						p = Result::HmmerParser.new(options = {:config => config, :taxon => t, :ortholog => o})
@@ -305,7 +305,7 @@ module SeqMiner
 				next if rs.length == 0
 				#o.debug
 				#rs.debug
-				bh = rs.best_hit(limit = "protein")
+				bh = rs.best_hit
 				bh.debug
 				bh.taxon.debug
 				

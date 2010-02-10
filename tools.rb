@@ -24,7 +24,6 @@ module Tools
 		end
 		
 		def execute
-			super.build_cmd
 			res = system cmd
 			res
 		end
@@ -55,11 +54,10 @@ module Tools
 			@table_file = outfile.sub(/\.log$/, ".txt")
 		end
 		
-#		def execute
-#			build_cmd
-#			res = system cmd
-#			res
-#		end
+		def execute
+			build_cmd
+			super
+		end
 		
 		def build_cmd
 			case tool
@@ -105,6 +103,11 @@ module Tools
 			when 'makeblastdb'
 				@parameters = "-hash_index -parse_seqids"
 			end
+		end
+		
+		def execute
+			build_cmd
+			super
 		end
 		
 		def build_cmd
@@ -153,6 +156,11 @@ module Tools
 			when 'tomtom'
 				@parameters = "-text"
 			end
+		end
+		
+		def execute
+			build_cmd
+			super
 		end
 		
 		def build_cmd

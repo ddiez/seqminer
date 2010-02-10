@@ -20,5 +20,5 @@ sm.taxon.filter_by_type("clade")
 #sm.ortholog.filter_by_name("msp2")
 sm.build_search
 sm.search.debug
-#sm.run_all
-sm.write_nelson
+sm.run_all
+#sm.write_nelson

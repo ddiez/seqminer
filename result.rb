@@ -508,6 +508,8 @@ module Result
 		end
 		
 		# Finds the best hit in all the Results.
+		# TODO: have an eye on this limit thing. currently not used. in update_pssm we filter first the
+		# results based on type, so only protein results are included in the set.
 		def best_hit(limit = nil)
 			bh = nil
 			items.each_value do |result|
