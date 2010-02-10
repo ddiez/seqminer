@@ -190,4 +190,46 @@ module Tools
 			warn ""
 		end
 	end
+	
+	class R < Tools
+		attr_accessor :script
+		
+		def initialize(tool = "R", options = {:config => nil})
+			super
+			
+			@path = config.dir_r + tool
+			@parameters = ""
+		end
+		
+		def execute
+			build_cmd
+			super
+		end
+		
+		def build_cmd
+			# TODO: how to pass the script as stdin?
+			# For example, using pipes:
+#			def send_message message, netbiosname
+#			  IO.popen "smbclient -M #{netbiosname}", 'w' do |io|
+#			    message.each_line do |line|
+#			      io.write line
+#			    end
+#			  end
+#			  raise 'smbclient failed' unless $?.success?
+#			end
+			cmd = [path, parameters, "<", script]
+			@cmd = cmd.join(" ")
+		end
+		
+		def debug
+			build_cmd
+			warn "+ Tool +"
+			warn "* tool: " + tool.to_s
+			warn "* path: " + path.to_s
+			warn "* infile: " + infile.to_s
+			warn "* parameters: " + parameters.to_s
+			warn "* cmd: " + cmd.to_s
+			warn ""
+		end
+	end
 end

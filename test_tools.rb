@@ -21,3 +21,8 @@ ts = Tools::Meme.new("meme")
 ts.infile = "foo.fa"
 ts.outdir = "meme_100"
 ts.debug
+
+
+ts = Tools::R.new
+ts.script = "plot(rnorm(1000))"
+ts.debug

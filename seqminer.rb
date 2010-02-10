@@ -21,7 +21,7 @@ module SeqMiner
 		attr_accessor :dir_home, :dir_result, :dir_commit
 		attr_reader :dir_source, :dir_sequence, :dir_model, :dir_pfam, :dir_pfam_current, :dir_config
 		# Tools directories.
-		attr_accessor :dir_hmmer, :dir_blast, :dir_meme
+		attr_accessor :dir_hmmer, :dir_blast, :dir_meme, :dir_r
 		# Files.
 		attr_reader :file_taxon, :file_ortholog
 
@@ -51,6 +51,7 @@ module SeqMiner
 			@dir_hmmer = Pathname.new("/Users/diez/local/hmmer3/bin")
 			@dir_blast = Pathname.new("/usr/local/ncbi/blast/bin")
 			@dir_meme = Pathname.new("/Users/diez/local/meme/bin")
+			@dir_r = Pathname.new("/usr/bin")
 			
 			# Commit
 			@dir_commit = Pathname.new("/Volumes/Biodev/projects/vardb/commit/")
