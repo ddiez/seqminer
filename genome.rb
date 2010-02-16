@@ -253,6 +253,75 @@ module Genome
 			fo.close
 		end
 		
+		def write_nelson(ortholog, file = nil)
+			if file
+				fo = File.new(file, "w")
+			else
+				fo = $stdout
+			end
+			
+			# sets the family name (default == to the ortholog family name)
+			fn = ortholog
+			fs = Family::Set.new(options = {:config => config})
+			family = fs.get_item_by_id(taxon.binomial + "-" + ortholog)
+			if family
+				fn = family.name
+			end
+
+			fo.puts	"SEQUENCE\t" +
+				"family\t" +
+				"genome\t" +
+				"strain\t" +
+				"taxid\t" +
+				"source\t" + 
+				"chromosome\t" +
+				"sequence\t" +
+				"cds\t" +
+				"translation\t" +
+				"start\t" +
+				"end\t" +
+				"strand\t" +
+				"numexons\t" +
+				"splicing\t" +
+				"pseudogene\t" +
+				"method\t" +
+				"model\t" +
+				"score\t" +
+				"evalue\t" +
+				"hmmloc\t" +
+				"description"
+			each_gene do |g|
+				pseudo = "FALSE"
+				pseudo = "TRUE" if g.pseudogene == 1
+
+				# FIX?: I am not including where the best hit is located (protein, gene, etc)
+				# bh.type + "\t" +  # TODO: update to take care of new class SubHit
+				fo.puts g.id + "\t" +
+					taxon.binomial + "." + fn + "\t" +
+					taxon.binomial + "." + taxon.id + "\t" +
+					taxon.strain + "\t" +
+					taxon.id + "\t" +
+					taxon.source + "\t" +
+					g.chromosome + "\t" +
+					g.gene + "\t" +
+					g.cds + "\t" +
+					g.translation + "\t" +
+					g.from.to_s + "\t" +
+					g.to.to_s + "\t" +
+					g.strand.to_s + "\t" +
+					g.length.to_s + "\t" +
+					g.splicing_nelson + "\t" +
+					pseudo + "\t" +
+					"vsgdb" + "\t" +
+					"" + "\t" +
+					"" + "\t" +
+					"" + "\t" +
+					"" + "\t" +
+					g.description
+			end
+			fo.close
+		end
+		
 		def debug
 			warn "+ Genome +"
 			warn "* file: " + file
