@@ -342,6 +342,8 @@ module SeqMiner
 	end
 	
 	class Pipeline
+		include Common
+
 		attr_accessor :taxon, :ortholog, :search, :result
 		attr_reader :config
 		
@@ -369,7 +371,7 @@ module SeqMiner
 		
 		def dir_initialize
 			dir_level1 = ['genome', 'isolate']
-			dir_level2 = ['search', 'sequence', 'fasta']
+			dir_level2 = ['search', 'sequence', 'fasta', 'domain']
 			
 			warn "+ CREATE RESULT DIR STRUCTURE +"
 			#warn "* " + dir_result
@@ -406,19 +408,28 @@ module SeqMiner
 
 		# Search Pfam domains in protein sequence.
 		def run_domain_finder
+			# TODO: move the implementation to other place (maybe search?)
 			ortholog.each_ortholog do |o|
 				taxon.each_taxon do |t|
 					case t.type
 					when 'spp'
-						file = config.dir_result + "genome/fasta" + o.name + (t.name + "-" + o.name + "_protein.fa") 
+						dir = config.dir_result + "genome/fasta" + o.name
+						outdir = config.dir_result + "genome/domain" + o.name
 					when 'clade'
-						file = config.dir_result + "isolate/fasta" + o.name + (t.name + "-" + o.name + "_protein.fa") 
+						dir = config.dir_result + "isolate/fasta" + o.name
+						outdir = config.dir_result + "isolate/domain" + o.name
 					end
+					file = dir + (t.name + "-" + o.name + "_protein.fa")
 					if file.exist?
 						warn "* search domains in: " + file
 						ts = Tools::Hmmer.new("hmmscan")
+						ts.model = config.dir_pfam_current + "Pfam-A.hmm"
 						ts.infile = file
+						ts.outfile = outdir + (t.name + "-" + o.name + "_protein.log")
+						ts.table_file = outdir + (t.name + "-" + o.name + "_protein.txt")
 						ts.debug
+						res = ts.execute
+						_check_result(res)
 					end
 				end
 			end
@@ -531,7 +542,6 @@ module SeqMiner
 	end
 	
 	# This class helps commit the file to a given directory, either for uploading into the database or othe uses.
-	# TODO: Not implemented.
 	class Commit
 		attr_reader :config, :family
 		
@@ -573,6 +583,37 @@ module SeqMiner
 						File.cp(file, outdir)
 					else
 						raise("!!! file " + file + " does not exist!")
+					end
+				end
+			end
+		end
+		
+		def stat_sequences
+			family.each_family do |f|
+				outdir = config.dir_commit + f.ortholog
+				if ! outdir.exist?
+					outdir.mkpath
+				end
+				ts = Taxon::Set.new(options = {:config => config})
+				ts.filter_by_name(f.taxon)
+				ts.each_taxon do |taxon|
+					case taxon.type
+					when 'spp'
+						dir = config.dir_result + "genome/fasta" + f.ortholog
+					when 'clade'
+						dir = config.dir_result + "isolate/fasta" + f.ortholog
+					end
+					gene_file = dir + (taxon.name + "-" + f.ortholog + "_gene.fa")
+					protein_file = dir + (taxon.name + "-" + f.ortholog + "_protein.fa")
+					if gene_file.exist?
+						system "grep \">\" #{gene_file} >> ~/gene_list.txt"
+					else
+						raise("!!! file " + gene_file + " does not exist!")
+					end
+					if gene_file.exist?
+						system "grep \">\" #{protein_file} >> ~/protein_list.txt"
+					else
+						raise("!!! file " + protein_file + " does not exist!")
 					end
 				end
 			end

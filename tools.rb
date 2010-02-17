@@ -64,7 +64,7 @@ module Tools
 			when 'hmmsearch'
 				cmd = [path, parameters, "--domtblout", table_file, model, infile, ">", outfile]
 			when 'hmmscan'
-				cmd = [path, parameters, model, infile, ">", outfile]
+				cmd = [path, parameters, "--domtblout", table_file, model, infile, ">", outfile]
 			when 'hmmalign'
 				cmd = [path, parameters, model, infile, ">", outfile]
 			when 'hmmpress'
