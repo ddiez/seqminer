@@ -371,7 +371,7 @@ module SeqMiner
 		
 		def dir_initialize
 			dir_level1 = ['genome', 'isolate']
-			dir_level2 = ['search', 'sequence', 'fasta', 'domain']
+			dir_level2 = ['search', 'sequence', 'fasta', 'scan', 'domain']
 			
 			warn "+ CREATE RESULT DIR STRUCTURE +"
 			#warn "* " + dir_result
@@ -414,10 +414,10 @@ module SeqMiner
 					case t.type
 					when 'spp'
 						dir = config.dir_result + "genome/fasta" + o.name
-						outdir = config.dir_result + "genome/domain" + o.name
+						outdir = config.dir_result + "genome/scan" + o.name
 					when 'clade'
 						dir = config.dir_result + "isolate/fasta" + o.name
-						outdir = config.dir_result + "isolate/domain" + o.name
+						outdir = config.dir_result + "isolate/scan" + o.name
 					end
 					file = dir + (t.name + "-" + o.name + "_protein.fa")
 					if file.exist?

@@ -1,6 +1,7 @@
 require 'seqminer'
 
 sm = SeqMiner::Pipeline.new
+#sm.dir_initialize
 #sm.taxon.filter_by_name("anaplasma.marginale")
 #sm.taxon.filter_by_type("spp")
 #sm.taxon.filter_by_type("clade")
