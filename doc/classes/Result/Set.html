@@ -88,17 +88,17 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000204">auto_merge</a>&nbsp;&nbsp;
-      <a href="#M000203">best_hit</a>&nbsp;&nbsp;
-      <a href="#M000205">clean_up</a>&nbsp;&nbsp;
-      <a href="#M000211">debug</a>&nbsp;&nbsp;
-      <a href="#M000202">each_result</a>&nbsp;&nbsp;
-      <a href="#M000210">filter_by_eval</a>&nbsp;&nbsp;
-      <a href="#M000201">new</a>&nbsp;&nbsp;
-      <a href="#M000206">report</a>&nbsp;&nbsp;
-      <a href="#M000207">report_summary</a>&nbsp;&nbsp;
-      <a href="#M000209">write_fasta</a>&nbsp;&nbsp;
-      <a href="#M000208">write_nelson</a>&nbsp;&nbsp;
+      <a href="#M000205">auto_merge</a>&nbsp;&nbsp;
+      <a href="#M000204">best_hit</a>&nbsp;&nbsp;
+      <a href="#M000206">clean_up</a>&nbsp;&nbsp;
+      <a href="#M000212">debug</a>&nbsp;&nbsp;
+      <a href="#M000203">each_result</a>&nbsp;&nbsp;
+      <a href="#M000211">filter_by_eval</a>&nbsp;&nbsp;
+      <a href="#M000202">new</a>&nbsp;&nbsp;
+      <a href="#M000207">report</a>&nbsp;&nbsp;
+      <a href="#M000208">report_summary</a>&nbsp;&nbsp;
+      <a href="#M000210">write_fasta</a>&nbsp;&nbsp;
+      <a href="#M000209">write_nelson</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -120,19 +120,19 @@
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000201" class="method-detail">
-        <a name="M000201"></a>
+      <div id="method-M000202" class="method-detail">
+        <a name="M000202"></a>
 
         <div class="method-heading">
-          <a href="#M000201" class="method-signature">
+          <a href="#M000202" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(options = {:config =&gt; nil})</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000201-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000201-source">
+            onclick="toggleCode('M000202-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000202-source">
 <pre>
      <span class="ruby-comment cmt"># File result.rb, line 494</span>
 494:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
@@ -151,19 +151,19 @@
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000204" class="method-detail">
-        <a name="M000204"></a>
+      <div id="method-M000205" class="method-detail">
+        <a name="M000205"></a>
 
         <div class="method-heading">
-          <a href="#M000204" class="method-signature">
+          <a href="#M000205" class="method-signature">
           <span class="method-name">auto_merge</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000204-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000204-source">
+            onclick="toggleCode('M000205-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000205-source">
 <pre>
      <span class="ruby-comment cmt"># File result.rb, line 525</span>
 525:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">auto_merge</span>
@@ -198,11 +198,11 @@
         </div>
       </div>
 
-      <div id="method-M000203" class="method-detail">
-        <a name="M000203"></a>
+      <div id="method-M000204" class="method-detail">
+        <a name="M000204"></a>
 
         <div class="method-heading">
-          <a href="#M000203" class="method-signature">
+          <a href="#M000204" class="method-signature">
           <span class="method-name">best_hit</span><span class="method-args">(limit = nil)</span>
           </a>
         </div>
@@ -214,8 +214,8 @@ thing. currently not used. in update_pssm we filter first the results based
 on type, so only protein results are included in the set.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000203-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000203-source">
+            onclick="toggleCode('M000204-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000204-source">
 <pre>
      <span class="ruby-comment cmt"># File result.rb, line 513</span>
 513:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">best_hit</span>(<span class="ruby-identifier">limit</span> = <span class="ruby-keyword kw">nil</span>)
@@ -234,11 +234,11 @@ on type, so only protein results are included in the set.
         </div>
       </div>
 
-      <div id="method-M000205" class="method-detail">
-        <a name="M000205"></a>
+      <div id="method-M000206" class="method-detail">
+        <a name="M000206"></a>
 
         <div class="method-heading">
-          <a href="#M000205" class="method-signature">
+          <a href="#M000206" class="method-signature">
           <span class="method-name">clean_up</span><span class="method-args">()</span>
           </a>
         </div>
@@ -249,8 +249,8 @@ Removes <a href="../Result.html">Result</a> instances in a <a
 href="Set.html">Set</a> if they not contain any hit.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000205-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000205-source">
+            onclick="toggleCode('M000206-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000206-source">
 <pre>
      <span class="ruby-comment cmt"># File result.rb, line 554</span>
 554:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">clean_up</span>
@@ -263,19 +263,19 @@ href="Set.html">Set</a> if they not contain any hit.
         </div>
       </div>
 
-      <div id="method-M000211" class="method-detail">
-        <a name="M000211"></a>
+      <div id="method-M000212" class="method-detail">
+        <a name="M000212"></a>
 
         <div class="method-heading">
-          <a href="#M000211" class="method-signature">
+          <a href="#M000212" class="method-signature">
           <span class="method-name">debug</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000211-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000211-source">
+            onclick="toggleCode('M000212-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000212-source">
 <pre>
      <span class="ruby-comment cmt"># File result.rb, line 620</span>
 620:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
@@ -290,19 +290,19 @@ href="Set.html">Set</a> if they not contain any hit.
         </div>
       </div>
 
-      <div id="method-M000202" class="method-detail">
-        <a name="M000202"></a>
+      <div id="method-M000203" class="method-detail">
+        <a name="M000203"></a>
 
         <div class="method-heading">
-          <a href="#M000202" class="method-signature">
+          <a href="#M000203" class="method-signature">
           <span class="method-name">each_result</span><span class="method-args">() {|value| ...}</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000202-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000202-source">
+            onclick="toggleCode('M000203-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000203-source">
 <pre>
      <span class="ruby-comment cmt"># File result.rb, line 504</span>
 504:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each_result</span>
@@ -315,19 +315,19 @@ href="Set.html">Set</a> if they not contain any hit.
         </div>
       </div>
 
-      <div id="method-M000210" class="method-detail">
-        <a name="M000210"></a>
+      <div id="method-M000211" class="method-detail">
+        <a name="M000211"></a>
 
         <div class="method-heading">
-          <a href="#M000210" class="method-signature">
+          <a href="#M000211" class="method-signature">
           <span class="method-name">filter_by_eval</span><span class="method-args">(cut = 0.001)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000210-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000210-source">
+            onclick="toggleCode('M000211-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000211-source">
 <pre>
      <span class="ruby-comment cmt"># File result.rb, line 612</span>
 612:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filter_by_eval</span>(<span class="ruby-identifier">cut</span> = <span class="ruby-value">0</span><span class="ruby-value">.001</span>)
@@ -342,22 +342,22 @@ href="Set.html">Set</a> if they not contain any hit.
         </div>
       </div>
 
-      <div id="method-M000206" class="method-detail">
-        <a name="M000206"></a>
+      <div id="method-M000207" class="method-detail">
+        <a name="M000207"></a>
 
         <div class="method-heading">
-          <a href="#M000206" class="method-signature">
+          <a href="#M000207" class="method-signature">
           <span class="method-name">report</span><span class="method-args">(cut = 1)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Produces a tabulated <a href="Set.html#M000206">report</a>.
+Produces a tabulated <a href="Set.html#M000207">report</a>.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000206-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000206-source">
+            onclick="toggleCode('M000207-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000207-source">
 <pre>
      <span class="ruby-comment cmt"># File result.rb, line 561</span>
 561:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">report</span>(<span class="ruby-identifier">cut</span> = <span class="ruby-value">1</span>)
@@ -384,11 +384,11 @@ Produces a tabulated <a href="Set.html#M000206">report</a>.
         </div>
       </div>
 
-      <div id="method-M000207" class="method-detail">
-        <a name="M000207"></a>
+      <div id="method-M000208" class="method-detail">
+        <a name="M000208"></a>
 
         <div class="method-heading">
-          <a href="#M000207" class="method-signature">
+          <a href="#M000208" class="method-signature">
           <span class="method-name">report_summary</span><span class="method-args">()</span>
           </a>
         </div>
@@ -398,8 +398,8 @@ Produces a tabulated <a href="Set.html#M000206">report</a>.
 Produces a tabulated summary.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000207-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000207-source">
+            onclick="toggleCode('M000208-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000208-source">
 <pre>
      <span class="ruby-comment cmt"># File result.rb, line 582</span>
 582:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">report_summary</span>
@@ -413,11 +413,11 @@ Produces a tabulated summary.
         </div>
       </div>
 
-      <div id="method-M000209" class="method-detail">
-        <a name="M000209"></a>
+      <div id="method-M000210" class="method-detail">
+        <a name="M000210"></a>
 
         <div class="method-heading">
-          <a href="#M000209" class="method-signature">
+          <a href="#M000210" class="method-signature">
           <span class="method-name">write_fasta</span><span class="method-args">()</span>
           </a>
         </div>
@@ -427,8 +427,8 @@ Produces a tabulated summary.
 Exports sequences in FASTA format.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000209-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000209-source">
+            onclick="toggleCode('M000210-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000210-source">
 <pre>
      <span class="ruby-comment cmt"># File result.rb, line 601</span>
 601:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_fasta</span>
@@ -445,11 +445,11 @@ Exports sequences in FASTA format.
         </div>
       </div>
 
-      <div id="method-M000208" class="method-detail">
-        <a name="M000208"></a>
+      <div id="method-M000209" class="method-detail">
+        <a name="M000209"></a>
 
         <div class="method-heading">
-          <a href="#M000208" class="method-signature">
+          <a href="#M000209" class="method-signature">
           <span class="method-name">write_nelson</span><span class="method-args">()</span>
           </a>
         </div>
@@ -459,8 +459,8 @@ Exports sequences in FASTA format.
 Exports data in format suitable for varDB (a.k.a. Nelson format).
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000208-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000208-source">
+            onclick="toggleCode('M000209-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000209-source">
 <pre>
      <span class="ruby-comment cmt"># File result.rb, line 590</span>
 590:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_nelson</span>
