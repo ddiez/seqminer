@@ -390,7 +390,7 @@ module SeqMiner
 		def run_all
 			dir_initialize if ! dir_initialized?
 			run_search
-			get_results
+			get_search_results
 			write_nelson
 			write_fasta
 			run_domain_finder
@@ -407,7 +407,8 @@ module SeqMiner
 		end
 
 		# Search Pfam domains in protein sequence.
-		def run_domain_finder
+		def run_scan
+			#scan.scan # This is how eventually will be.
 			# TODO: move the implementation to other place (maybe search?)
 			ortholog.each_ortholog do |o|
 				taxon.each_taxon do |t|
@@ -436,7 +437,7 @@ module SeqMiner
 		end
 		
 		# Parses the HMMER files, performs auto_merge and obtains the results (given an Evalue thereshold).
-		def get_results(eval = 0.001)
+		def get_search_results(eval = 0.001)
 			@result = search.parse
 			@result = result.auto_merge
 			result.filter_by_eval(eval)
@@ -444,7 +445,7 @@ module SeqMiner
 
 		def write_nelson
 			if result.nil?
-				get_results
+				get_search_results
 			end
 			result.write_nelson
 		end
@@ -452,7 +453,7 @@ module SeqMiner
 		# Pipeline-wise write_fasta.
 		def write_fasta
 			if result.nil?
-				get_results
+				get_search_results
 			end
 			result.write_fasta
 		end
@@ -460,7 +461,7 @@ module SeqMiner
 		# Pipeline-wise report.
 		def report(completeness = 1)
 			if result.nil?
-				get_results
+				get_search_results
 			end
 			result.report(cut = completeness)
 		end
@@ -468,7 +469,7 @@ module SeqMiner
 		# Pipeline-wise summary report.
 		def report_summary
 			if result.nil?
-				get_results
+				get_search_results
 			end
 			result.report_summary
 		end

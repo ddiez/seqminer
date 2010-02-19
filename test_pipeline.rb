@@ -9,4 +9,4 @@ sm = SeqMiner::Pipeline.new
 #sm.build_search
 #sm.search.debug
 #sm.run_all
-sm.run_domain_finder
+sm.run_scan
