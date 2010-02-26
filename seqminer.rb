@@ -393,7 +393,7 @@ module SeqMiner
 			get_search_results
 			write_nelson
 			write_fasta
-			run_domain_finder
+			#run_domain_finder
 		end
 		
 		def build_search
@@ -409,7 +409,7 @@ module SeqMiner
 		# Search Pfam domains in protein sequence.
 		def run_scan
 			#scan.scan # This is how eventually will be.
-			# TODO: move the implementation to other place (maybe search?)
+			# TODO: move the implementation to other place.
 			ortholog.each_ortholog do |o|
 				taxon.each_taxon do |t|
 					case t.type
@@ -434,6 +434,27 @@ module SeqMiner
 					end
 				end
 			end
+		end
+		
+		#
+		def get_scan_results(eval = 0.001)
+			ortholog.each_ortholog do |o|
+				taxon.each_taxon do |t|
+					case t.type
+					when 'spp'
+						dir = config.dir_result + "genome/scan" + o.name
+						outdir = config.dir_result + "genome/domain" + o.name
+					when 'clade'
+						dir = config.dir_result + "isolate/scan" + o.name
+						outdir = config.dir_result + "isolate/domain" + o.name
+					end
+					file = dir + (t.name + "-" + o.name + "_protein.txt")
+					if file.exist?
+						warn "* parse domains in: " + file
+					end
+				end
+			end
+			#@scan_result = 
 		end
 		
 		# Parses the HMMER files, performs auto_merge and obtains the results (given an Evalue thereshold).
@@ -564,7 +585,8 @@ module SeqMiner
 			end
 			
 			family.each_family do |f|
-				outdir = config.dir_commit + f.ortholog
+				#outdir = config.dir_commit + f.ortholog
+				outdir = config.dir_commit
 				if ! outdir.exist?
 					outdir.mkpath
 				end
@@ -591,9 +613,10 @@ module SeqMiner
 		
 		def stat_sequences
 			family.each_family do |f|
-				outdir = config.dir_commit + f.ortholog
+				#outdir = config.dir_commit + f.ortholog
+				outdir = config.dir_commit
 				if ! outdir.exist?
-					outdir.mkpath
+					raise "ERROR: commit directory does not exist!"
 				end
 				ts = Taxon::Set.new(options = {:config => config})
 				ts.filter_by_name(f.taxon)
@@ -607,12 +630,12 @@ module SeqMiner
 					gene_file = dir + (taxon.name + "-" + f.ortholog + "_gene.fa")
 					protein_file = dir + (taxon.name + "-" + f.ortholog + "_protein.fa")
 					if gene_file.exist?
-						system "grep \">\" #{gene_file} >> ~/gene_list.txt"
+						system "grep \">\" #{gene_file} >> #{outdir}/gene_list.txt"
 					else
 						raise("!!! file " + gene_file + " does not exist!")
 					end
 					if gene_file.exist?
-						system "grep \">\" #{protein_file} >> ~/protein_list.txt"
+						system "grep \">\" #{protein_file} >> #{outdir}/protein_list.txt"
 					else
 						raise("!!! file " + protein_file + " does not exist!")
 					end

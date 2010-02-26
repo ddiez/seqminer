@@ -10,3 +10,4 @@ sm = SeqMiner::Pipeline.new
 #sm.search.debug
 #sm.run_all
 sm.run_scan
+#sm.get_scan_results
