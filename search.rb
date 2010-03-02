@@ -172,6 +172,9 @@ module Search
 		# this method parses results from a search.
 		def parse
 			rs = Result::Set.new
+			
+			transferred = 0
+			pb = ProgressBar.new("Search results", 100)
 			each_value do |search|
 				case search.taxon.type
 				when 'spp'
@@ -201,7 +204,12 @@ module Search
 					r.type = search.type
 					rs << r
 				end
+				transferred += 1
+				percent_finished = 100 * (transferred.to_f / length.to_f)
+				pb.set(percent_finished)
 			end
+			pb.finish
+			
 			rs
 		end
 		

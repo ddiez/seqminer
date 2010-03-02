@@ -18,73 +18,6 @@ require 'download'
 require 'tools'
 
 module SeqMiner
-#	class Config
-#		# Directories.
-#		attr_accessor :dir_home, :dir_result, :dir_commit
-#		attr_reader :dir_source, :dir_sequence, :dir_model, :dir_pfam, :dir_pfam_current, :dir_config
-#		# Tools directories.
-#		attr_accessor :dir_hmmer, :dir_blast, :dir_meme, :dir_r
-#		# Files.
-#		attr_reader :file_taxon, :file_ortholog
-#
-#		def initialize
-#			# Basedir.
-#			@dir_home = Pathname.new("/Volumes/Biodev/projects/vardb/dr-3")
-#			update
-#		end
-#		
-#		def update
-#			# Configuration.
-#			@dir_config = dir_home + "etc"
-#			@file_taxon = dir_config + "taxon.txt"
-#			@file_ortholog = dir_config + "ortholog.txt"
-#			
-#			# Databases.
-#			@dir_source = dir_home + "source"
-#			@dir_sequence = dir_home + "sequence"
-#			@dir_model = dir_home + "model"
-#			@dir_pfam = dir_home + "pfam"
-#			@dir_pfam_current = @dir_pfam + "current"
-#			
-#			# Results.
-#			@dir_result = dir_home + "result"
-#			
-#			# Tools.
-#			@dir_hmmer = Pathname.new("/Users/diez/local/hmmer3/bin")
-#			@dir_blast = Pathname.new("/usr/local/ncbi/blast/bin")
-#			@dir_meme = Pathname.new("/Users/diez/local/meme/bin")
-#			@dir_r = Pathname.new("/usr/bin")
-#			
-#			# Commit
-#			@dir_commit = Pathname.new("/Volumes/Biodev/projects/vardb/commit/")
-#		end
-#		
-#		def basedir=(dir)
-#			@dir_home = Pathname.new(dir).expand_path
-#			update
-#		end
-#		
-#		def basedir
-#			@dir_home
-#		end
-#
-#		def debug
-#			warn "+ Config +"
-#			warn "* dir_home: " + dir_home
-#			warn "* dir_config: " + dir_config
-#			warn "* dir_source: " + dir_source
-#			warn "* dir_sequence: " + dir_sequence
-#			warn "* dir_model: " + dir_model
-#			warn "* dir_pfam: " + dir_pfam
-#			warn "* dir_result: " + dir_result
-#			warn "* dir_hmmer: " + dir_hmmer
-#			warn "* dir_blast: " + dir_blast
-#			warn "* dir_meme: " + dir_meme
-#			warn "* dir_commit: " + dir_commit
-#			warn ""
-#		end
-#	end
-	
 	class Install
 		include Common
 
@@ -167,10 +100,6 @@ module SeqMiner
 						ts.debug
 						res = ts.execute
 						_check_result(res, true, "trying to overwrite previous pressing [SKIPPED]")
-#						ok = system("hmmpress #{file} 1 > /dev/null")
-#						if ! ok
-#							puts "WARNING: trying to overwrite previous pressing [SKIPPED]."
-#						end
 					end
 				end
 			end
@@ -346,7 +275,7 @@ module SeqMiner
 	class Pipeline
 		include Common
 
-		attr_accessor :taxon, :ortholog, :search, :result, :scan_result
+		attr_accessor :taxon, :ortholog, :search, :result, :scan_result, :scan
 		attr_reader :config
 		
 		def initialize(options = {:config => nil})
@@ -354,7 +283,7 @@ module SeqMiner
 			if options[:config]
 				@config = options[:config]
 			else
-				@config = Config.new
+				@config = Config::General.new
 			end
 
 			config.debug
@@ -417,64 +346,11 @@ module SeqMiner
 		# Search Pfam domains in protein sequence.
 		def run_scan
 			scan.scan
-
-			# TODO: move the implementation to other place.
-#			ortholog.each_ortholog do |o|
-#				taxon.each_taxon do |t|
-#					case t.type
-#					when 'spp'
-#						dir = config.dir_result + "genome/fasta" + o.name
-#						outdir = config.dir_result + "genome/scan" + o.name
-#					when 'clade'
-#						dir = config.dir_result + "isolate/fasta" + o.name
-#						outdir = config.dir_result + "isolate/scan" + o.name
-#					end
-#					file = dir + (t.name + "-" + o.name + "_protein.fa")
-#					if file.exist?
-#						warn "* search domains in: " + file
-#						ts = Tools::Hmmer.new("hmmscan")
-#						ts.model = config.dir_pfam_current + "Pfam-A.hmm"
-#						ts.infile = file
-#						ts.outfile = outdir + (t.name + "-" + o.name + "_protein.log")
-#						ts.table_file = outdir + (t.name + "-" + o.name + "_protein.txt")
-#						ts.debug
-#						res = ts.execute
-#						_check_result(res)
-#					end
-#				end
-#			end
 		end
 		
 		#
 		def get_scan_results(eval = 0.001)
-			rs = Result::Set.new
-			ortholog.each_ortholog do |o|
-				taxon.each_taxon do |t|
-					case t.type
-					when 'spp'
-						dir = config.dir_result + "genome/scan" + o.name
-						outdir = config.dir_result + "genome/domain" + o.name
-					when 'clade'
-						dir = config.dir_result + "isolate/scan" + o.name
-						outdir = config.dir_result + "isolate/domain" + o.name
-					end
-					file = dir + (t.name + "-" + o.name + "_protein.txt")
-					if file.exist?
-						warn "* parse domains in: " + file
-						rp = Result::HmmerParser.new
-						rp.file = file
-						rp.result_id = t.name + "." + o.name
-						rp.type = "protein"
-						rp.config = config
-						r = rp.parse
-						r.taxon = t
-						r.ortholog = o
-						r.type = "protein"
-						rs << r
-					end
-				end
-			end
-			@scan_result = rs 
+			@scan_result = scan.parse 
 		end
 		
 		# Parses the HMMER files, performs auto_merge and obtains the results (given an Evalue thereshold).
@@ -532,7 +408,7 @@ module SeqMiner
 			if options[:config]
 				@config = options[:config]
 			else
-				@config = Config.new
+				@config = Config::General.new
 			end
 
 			@taxon = Taxon::Set.new(options = {:config => config})
@@ -593,7 +469,7 @@ module SeqMiner
 			if options[:config]
 				@config = options[:config]
 			else
-				@config = Config.new
+				@config = Config::General.new
 			end
 
 			@family = Family::Set.new(options = {:config => config})

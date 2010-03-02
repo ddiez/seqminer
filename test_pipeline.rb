@@ -9,10 +9,10 @@ sm = SeqMiner::Pipeline.new
 #sm.build_search
 #sm.search.debug
 #sm.run_all
-sm.run_scan
+#sm.run_scan
 
 
-#sm.get_scan_results
+sm.get_scan_results
 #rs = sm.scan_result
 #r = rs.get_item_by_id("plasmodium.falciparum_3d7.var")
 #r.debug

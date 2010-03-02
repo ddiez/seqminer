@@ -1,8 +1,11 @@
+require 'item'
 require 'config'
 require 'ortholog'
 require 'taxon'
 require 'tools'
+require 'common'
 
+require 'progressbar'
 
 module Scan
 	include Item
@@ -44,8 +47,62 @@ module Scan
 		def scan
 			warn "+ Running scan +"
 			each_value do |scan|
-				scan.scan
+				case scan.taxon.type
+				when 'spp'
+					dir = config.dir_result + "genome/fasta" + scan.ortholog.name
+					outdir = config.dir_result + "genome/scan" + scan.ortholog.name
+				when 'clade'
+					dir = config.dir_result + "isolate/fasta" + scan.ortholog.name
+					outdir = config.dir_result + "isolate/scan" + scan.ortholog.name
+				end
+				file = dir + (scan.taxon.name + "-" + scan.ortholog.name + "_protein.fa")
+				if file.exist?
+					warn "* search domains in: " + file
+					ts = Tools::Hmmer.new("hmmscan")
+					ts.model = config.dir_pfam_current + "Pfam-A.hmm"
+					ts.infile = file
+					ts.outfile = outdir + (scan.taxon.name + "-" + scan.ortholog.name + "_protein.log")
+					ts.table_file = outdir + (scan.taxon.name + "-" + scan.ortholog.name + "_protein.txt")
+					ts.debug
+					res = ts.execute
+					_check_result(res)
+				end
 			end
+		end
+		
+		def parse
+			rs = Result::Set.new
+			
+			transferred = 0
+			pb = ProgressBar.new("Scan results", 100)
+			each_value do |scan|
+				case scan.taxon.type
+				when 'spp'
+					dir = config.dir_result + "genome/scan" + scan.ortholog.name
+					outdir = config.dir_result + "genome/domain" + scan.ortholog.name
+				when 'clade'
+					dir = config.dir_result + "isolate/scan" + scan.ortholog.name
+					outdir = config.dir_result + "isolate/domain" + scan.ortholog.name
+				end
+				file = dir + (scan.taxon.name + "-" + scan.ortholog.name + "_protein.txt")
+				if file.exist?
+					rp = Result::HmmerParser.new
+					rp.file = file
+					rp.result_id = scan.taxon.name + "." + scan.ortholog.name
+					rp.type = "protein"
+					rp.config = config
+					r = rp.parse
+					r.taxon = scan.taxon
+					r.ortholog = scan.ortholog
+					r.type = "protein"
+					rs << r
+				end
+				transferred += 1
+				percent_finished = 100 * (transferred.to_f / length.to_f)
+				pb.set(percent_finished)
+			end
+			pb.finish
+			rs
 		end
 	end
 	
@@ -57,32 +114,6 @@ module Scan
 			@taxon = taxon
 			@ortholog = ortholog
 			super(taxon.name + "-" + ortholog.name)
-		end
-		
-		def scan
-			case taxon.type
-			when 'spp'
-				dir = config.dir_result + "genome/fasta" + o.name
-				outdir = config.dir_result + "genome/scan" + o.name
-			when 'clade'
-				dir = config.dir_result + "isolate/fasta" + o.name
-				outdir = config.dir_result + "isolate/scan" + o.name
-			end
-			file = dir + (t.name + "-" + o.name + "_protein.fa")
-			if file.exist?
-				warn "* search domains in: " + file
-				ts = Tools::Hmmer.new("hmmscan")
-				ts.model = config.dir_pfam_current + "Pfam-A.hmm"
-				ts.infile = file
-				ts.outfile = outdir + (t.name + "-" + o.name + "_protein.log")
-				ts.table_file = outdir + (t.name + "-" + o.name + "_protein.txt")
-				ts.debug
-#				res = ts.execute
-#				_check_result(res)
-			end
-		end
-		
-		def parse
 		end
 		
 		def debug
