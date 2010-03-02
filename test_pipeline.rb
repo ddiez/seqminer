@@ -10,4 +10,16 @@ sm = SeqMiner::Pipeline.new
 #sm.search.debug
 #sm.run_all
 sm.run_scan
+
+
 #sm.get_scan_results
+#rs = sm.scan_result
+#r = rs.get_item_by_id("plasmodium.falciparum_3d7.var")
+#r.debug
+#hit = r.get_item_by_id("PFEMP")
+#hit.debug
+#sh = hit.get_item_by_id("PFEMP")
+#sh.debug
+#sh.each_domain do |domain|
+#	domain.debug
+#end

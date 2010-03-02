@@ -6,7 +6,7 @@
 # License::   Distributes under the same terms as Ruby
 
 require 'item'
-require 'seqminer'
+require 'config'
 require 'parser'
 
 require 'progressbar'
@@ -103,7 +103,7 @@ module Download
 			super()
 
 			if ! options[:config]
-				@config = SeqMiner::Config.new
+				@config = Config::General.new
 			else
 				@config = options[:config]
 			end
@@ -340,7 +340,7 @@ module Download
 			if options[:config]
 				@config = options[:config]
 			else
-				@config = SeqMiner::Config.new
+				@config = Config::General.new
 			end
 		end
 

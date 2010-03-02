@@ -5,7 +5,7 @@
 # Copyright:: Copyright (c) 2010
 # License::   Distributes under the same terms as Ruby
 
-require 'seqminer'
+require 'config'
 require 'ortholog'
 require 'taxon'
 require 'tools'
@@ -98,7 +98,7 @@ module Search
 			super()
 			
 			if ! options[:config]
-				@config = SeqMiner::Config.new
+				@config = Config::General.new
 			else
 				@config = options[:config]
 			end

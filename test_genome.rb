@@ -1,6 +1,7 @@
 require 'genome'
+require 'taxon'
 
-config = SeqMiner::Config.new
+config = Config::General.new
 #config.basedir = "/Volumes/Biodev/projects/vardb/"
 #config.debug
 

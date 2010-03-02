@@ -1,4 +1,4 @@
-require 'seqminer'
+require 'config'
 require 'ortholog'
 require 'taxon'
 require 'tools'
@@ -8,17 +8,54 @@ module Scan
 	include Item
 
 	class Set < Set
+		attr_accessor :parameters
+		attr_reader :config
+		include Common
 		
+		def initialize(ps, options = {:empty => false, :config => nil})
+			super()
+			
+			if ! options[:config]
+				@config = Config::General.new
+			else
+				@config = options[:config]
+			end
+
+			if ! options[:empty]
+				if ! ps.nil?
+					@parameters = ps
+					populate
+				else
+					raise "ERROR: need a valid ParameterSet object"
+					exit
+				end
+			end
+		end
+		
+		def populate
+			parameters.taxon.each_value do |taxon|
+				parameters.ortholog.each_value do |ortholog|
+!						scan = Scan.new(taxon, ortholog)
+						add(scan)
+				end
+			end
+		end
+		
+		def scan
+			warn "+ Running scan +"
+			each_value do |scan|
+				scan.scan
+			end
+		end
 	end
 	
 	class Scan < Item
 		attr_accessor :taxon, :ortholog, :config
 		
 		# TODO: fix config method.
-		def initialize (taxon, ortholog, config)
+		def initialize (taxon, ortholog)
 			@taxon = taxon
 			@ortholog = ortholog
-			@config = config
 			super(taxon.name + "-" + ortholog.name)
 		end
 		
@@ -40,9 +77,12 @@ module Scan
 				ts.outfile = outdir + (t.name + "-" + o.name + "_protein.log")
 				ts.table_file = outdir + (t.name + "-" + o.name + "_protein.txt")
 				ts.debug
-				res = ts.execute
-				_check_result(res)
+#				res = ts.execute
+#				_check_result(res)
 			end
+		end
+		
+		def parse
 		end
 		
 		def debug

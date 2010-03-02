@@ -31,7 +31,7 @@ module Parser
 			if options[:config]
 				@config = options[:config]
 			else
-				@config = SeqMiner::Config.new
+				@config = Config::General.new
 			end
 		
 			@taxon = taxon	

@@ -5,7 +5,7 @@
 # Copyright:: Copyright (c) 2010
 # License::   Distributes under the same terms as Ruby
 
-require 'seqminer'
+require 'config'
 require 'item'
 require 'bio'
 require 'progressbar'
@@ -23,7 +23,7 @@ module Sequence
 			if options[:config]
 				@config = options[:config]
 			else
-				@config = SeqMiner::Config.new
+				@config = Config::General.new
 			end
 			@dir = config.dir_sequence + name
 			@type = type

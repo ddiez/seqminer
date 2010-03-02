@@ -6,7 +6,7 @@
 # License::   Distributes under the same terms as Ruby
 
 require 'item'
-require 'seqminer'
+require 'config'
 
 module Family
 	include Item
@@ -20,7 +20,7 @@ module Family
 			if options[:config]
 				@config = options[:config]
 			else
-				@config = SeqMiner::Config.new
+				@config = Config::General.new
 			end
 			
 			file = config.dir_config + "family.txt"

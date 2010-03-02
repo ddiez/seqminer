@@ -1,6 +1,6 @@
 require 'isolate'
 
-config = SeqMiner::Config.new
+config = Config::General.new
 
 ts = Taxon::Set.new
 taxon = ts.get_taxon_by_name("plasmodium.falciparum")

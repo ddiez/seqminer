@@ -5,7 +5,7 @@
 # Copyright:: Copyright (c) 2010
 # License::   Distributes under the same terms as Ruby
 
-require 'seqminer'
+require 'config'
 require 'item'
 require 'genome'
 require 'sequence'
@@ -242,7 +242,7 @@ module Result
 			if options[:config]
 				@config = options[:config]
 			else
-				@config = SeqMiner::Config.new
+				@config = Config::General.new
 			end
 		end
 		
@@ -497,7 +497,7 @@ module Result
 			if options[:config]
 				@config = options[:config]
 			else
-				@config = SeqMiner::Config.new
+				@config = Config::General.new
 			end
 		end
 		
@@ -634,7 +634,7 @@ module Result
 			if options[:config]
 				@config = options[:config]
 			else
-				@config = SeqMiner::Config.new
+				@config = Config::General.new
 			end
 			
 			
@@ -703,6 +703,30 @@ module Result
 			result
 		end
 	end
+	
+	class HmmscanParser
+		attr_reader :taxon, :ortholog
+		attr_accessor :file, :result_id, :type, :config
+
+		def initialize(options = {:config => nil, :taxon => nil, :ortholog => nil, :empty => false})
+			if options[:config]
+				@config = options[:config]
+			else
+				@config = Config::General.new
+			end
+			
+			
+			@taxon = options[:taxon] if options[:taxon]
+			@ortholog = options[:ortholog] if options[:ortholog]
+			
+			@file = nil
+			@result_id = nil
+			@type = nil
+		end
+		
+		def parse
+		end
+	end
 
 	class HmmerParser
 		attr_reader :taxon, :ortholog
@@ -712,13 +736,13 @@ module Result
 			if options[:config]
 				@config = options[:config]
 			else
-				@config = SeqMiner::Config.new
+				@config = Config::General.new
 			end
 			
 			
 			@taxon = options[:taxon] if options[:taxon]
 			@ortholog = options[:ortholog] if options[:ortholog]
-
+			
 			@file = nil
 			@result_id = nil
 			@type = nil

@@ -1,6 +1,6 @@
 require 'parser'
 
-config = SeqMiner::Config.new
+config = Config::General.new
 
 p = Parser::Eupathdb.new(config.dir_source + "plasmodium.vivax_salvador1" + "plasmodium.vivax_salvador1.gff", "plasmodium.vivax_salvador1", options = {:config => config})
 g = p.parse

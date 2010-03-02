@@ -5,7 +5,7 @@
 # Copyright:: Copyright (c) 2010
 # License::   Distributes under the same terms as Ruby
 
-require 'seqminer'
+require 'config'
 require 'item'
 require 'bio'
 require 'rexml/document'
@@ -20,7 +20,7 @@ module Taxon
 			super()
 			
 			if ! options[:config]
-				@config = SeqMiner::Config.new
+				@config = Config::General.new
 			else
 				@config = options[:config]
 			end

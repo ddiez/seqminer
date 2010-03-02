@@ -5,7 +5,7 @@
 # Copyright:: Copyright (c) 2010
 # License::   Distributes under the same terms as Ruby
 
-require 'seqminer'
+require 'config'
 
 module Tools
 	
@@ -17,7 +17,7 @@ module Tools
 			if options[:config]
 				@config = options[:config]
 			else
-				@config = SeqMiner::Config.new
+				@config = Config::General.new
 			end
 			
 			@tool = tool
