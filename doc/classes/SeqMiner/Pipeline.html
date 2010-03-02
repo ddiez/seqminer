@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: SeqMiner::Pipeline</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">SeqMiner::Pipeline</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/seqminer_rb.html">
+                seqminer.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000131">build_scan</a>&nbsp;&nbsp;
+      <a href="#M000129">build_search</a>&nbsp;&nbsp;
+      <a href="#M000127">dir_initialize</a>&nbsp;&nbsp;
+      <a href="#M000126">dir_initialized?</a>&nbsp;&nbsp;
+      <a href="#M000139">generate_alignments</a>&nbsp;&nbsp;
+      <a href="#M000133">get_scan_results</a>&nbsp;&nbsp;
+      <a href="#M000134">get_search_results</a>&nbsp;&nbsp;
+      <a href="#M000125">new</a>&nbsp;&nbsp;
+      <a href="#M000137">report</a>&nbsp;&nbsp;
+      <a href="#M000138">report_summary</a>&nbsp;&nbsp;
+      <a href="#M000128">run_all</a>&nbsp;&nbsp;
+      <a href="#M000132">run_scan</a>&nbsp;&nbsp;
+      <a href="#M000130">run_search</a>&nbsp;&nbsp;
+      <a href="#M000136">write_fasta</a>&nbsp;&nbsp;
+      <a href="#M000135">write_nelson</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name"><a href="../Common.html">Common</a></span>
+      </div>
+    </div>
+
+    <div id="section">
+
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">config</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">ortholog</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">result</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">scan_result</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">search</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">taxon</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000125" class="method-detail">
+        <a name="M000125"></a>
+
+        <div class="method-heading">
+          <a href="#M000125" class="method-signature">
+          <span class="method-name">new</span><span class="method-args">(options = {:config =&gt; nil})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000125-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000125-source">
+<pre>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 352</span>
+352:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
+353: 
+354:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+355:                 <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+356:             <span class="ruby-keyword kw">else</span>
+357:                 <span class="ruby-ivar">@config</span> = <span class="ruby-constant">Config</span>.<span class="ruby-identifier">new</span>
+358:             <span class="ruby-keyword kw">end</span>
+359: 
+360:             <span class="ruby-identifier">config</span>.<span class="ruby-identifier">debug</span>
+361: 
+362:             <span class="ruby-ivar">@taxon</span> = <span class="ruby-constant">Taxon</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+363:             <span class="ruby-ivar">@ortholog</span> = <span class="ruby-constant">Ortholog</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+364:             <span class="ruby-ivar">@type</span> = <span class="ruby-constant">Search</span><span class="ruby-operator">::</span><span class="ruby-constant">TypeSet</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+365:             <span class="ruby-identifier">build_search</span>
+366:             <span class="ruby-identifier">build_scan</span>
+367:             
+368:             <span class="ruby-ivar">@dir_initialized</span> = <span class="ruby-keyword kw">false</span>
+369:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000131" class="method-detail">
+        <a name="M000131"></a>
+
+        <div class="method-heading">
+          <a href="#M000131" class="method-signature">
+          <span class="method-name">build_scan</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000131-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000131-source">
+<pre>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 412</span>
+412:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">build_scan</span>
+413:             <span class="ruby-identifier">ps</span> = <span class="ruby-constant">Search</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@taxon</span>, <span class="ruby-ivar">@ortholog</span>, <span class="ruby-ivar">@type</span>)
+414:             <span class="ruby-ivar">@scan</span> = <span class="ruby-constant">Scan</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">ps</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+415:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000129" class="method-detail">
+        <a name="M000129"></a>
+
+        <div class="method-heading">
+          <a href="#M000129" class="method-signature">
+          <span class="method-name">build_search</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000129-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000129-source">
+<pre>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 402</span>
+402:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">build_search</span>
+403:             <span class="ruby-identifier">ps</span> = <span class="ruby-constant">Search</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@taxon</span>, <span class="ruby-ivar">@ortholog</span>, <span class="ruby-ivar">@type</span>)
+404:             <span class="ruby-ivar">@search</span> = <span class="ruby-constant">Search</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">ps</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+405:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000127" class="method-detail">
+        <a name="M000127"></a>
+
+        <div class="method-heading">
+          <a href="#M000127" class="method-signature">
+          <span class="method-name">dir_initialize</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000127-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000127-source">
+<pre>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 375</span>
+375:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">dir_initialize</span>
+376:             <span class="ruby-identifier">dir_level1</span> = [<span class="ruby-value str">'genome'</span>, <span class="ruby-value str">'isolate'</span>]
+377:             <span class="ruby-identifier">dir_level2</span> = [<span class="ruby-value str">'search'</span>, <span class="ruby-value str">'sequence'</span>, <span class="ruby-value str">'fasta'</span>, <span class="ruby-value str">'scan'</span>, <span class="ruby-value str">'domain'</span>]
+378:             
+379:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ CREATE RESULT DIR STRUCTURE +&quot;</span>
+380:             <span class="ruby-comment cmt">#warn &quot;* &quot; + dir_result</span>
+381:             <span class="ruby-comment cmt">#dir_result.mkpath</span>
+382:             <span class="ruby-identifier">dir_level1</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">level1</span><span class="ruby-operator">|</span>
+383:                 <span class="ruby-identifier">dir_level2</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">level2</span><span class="ruby-operator">|</span>
+384:                     <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">items</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ortholog</span><span class="ruby-operator">|</span>
+385:                         <span class="ruby-identifier">dir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">level1</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">level2</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span>
+386:                         <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir</span>
+387:                         <span class="ruby-identifier">dir</span>.<span class="ruby-identifier">mkpath</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">dir</span>.<span class="ruby-identifier">exist?</span>
+388:                     <span class="ruby-keyword kw">end</span>
+389:                 <span class="ruby-keyword kw">end</span>
+390:             <span class="ruby-keyword kw">end</span>
+391:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000126" class="method-detail">
+        <a name="M000126"></a>
+
+        <div class="method-heading">
+          <a href="#M000126" class="method-signature">
+          <span class="method-name">dir_initialized?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000126-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000126-source">
+<pre>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 371</span>
+371:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">dir_initialized?</span>
+372:             <span class="ruby-ivar">@dir_initialized</span>
+373:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000139" class="method-detail">
+        <a name="M000139"></a>
+
+        <div class="method-heading">
+          <a href="#M000139" class="method-signature">
+          <span class="method-name">generate_alignments</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This function automatically generate protein alignments by concatenating
+the FASTA files for protein for sequences in the same gene family. Then
+runs Clustalw-mpi on the concatenated FASTA file. TODO: not implemented.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000139-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000139-source">
+<pre>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 522</span>
+522:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">generate_alignments</span>
+523:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000133" class="method-detail">
+        <a name="M000133"></a>
+
+        <div class="method-heading">
+          <a href="#M000133" class="method-signature">
+          <span class="method-name">get_scan_results</span><span class="method-args">(eval = 0.001)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000133-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000133-source">
+<pre>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 449</span>
+449:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_scan_results</span>(<span class="ruby-identifier">eval</span> = <span class="ruby-value">0</span><span class="ruby-value">.001</span>)
+450:             <span class="ruby-identifier">rs</span> = <span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
+451:             <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">each_ortholog</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>
+452:                 <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">each_taxon</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+453:                     <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">type</span>
+454:                     <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'spp'</span>
+455:                         <span class="ruby-identifier">dir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;genome/scan&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span>
+456:                         <span class="ruby-identifier">outdir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;genome/domain&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span>
+457:                     <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'clade'</span>
+458:                         <span class="ruby-identifier">dir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;isolate/scan&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span>
+459:                         <span class="ruby-identifier">outdir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;isolate/domain&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span>
+460:                     <span class="ruby-keyword kw">end</span>
+461:                     <span class="ruby-identifier">file</span> = <span class="ruby-identifier">dir</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_protein.txt&quot;</span>)
+462:                     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">exist?</span>
+463:                         <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* parse domains in: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">file</span>
+464:                         <span class="ruby-identifier">rp</span> = <span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">HmmerParser</span>.<span class="ruby-identifier">new</span>
+465:                         <span class="ruby-identifier">rp</span>.<span class="ruby-identifier">file</span> = <span class="ruby-identifier">file</span>
+466:                         <span class="ruby-identifier">rp</span>.<span class="ruby-identifier">result_id</span> = <span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span>
+467:                         <span class="ruby-identifier">rp</span>.<span class="ruby-identifier">type</span> = <span class="ruby-value str">&quot;protein&quot;</span>
+468:                         <span class="ruby-identifier">rp</span>.<span class="ruby-identifier">config</span> = <span class="ruby-identifier">config</span>
+469:                         <span class="ruby-identifier">r</span> = <span class="ruby-identifier">rp</span>.<span class="ruby-identifier">parse</span>
+470:                         <span class="ruby-identifier">r</span>.<span class="ruby-identifier">taxon</span> = <span class="ruby-identifier">t</span>
+471:                         <span class="ruby-identifier">r</span>.<span class="ruby-identifier">ortholog</span> = <span class="ruby-identifier">o</span>
+472:                         <span class="ruby-identifier">r</span>.<span class="ruby-identifier">type</span> = <span class="ruby-value str">&quot;protein&quot;</span>
+473:                         <span class="ruby-identifier">rs</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">r</span>
+474:                     <span class="ruby-keyword kw">end</span>
+475:                 <span class="ruby-keyword kw">end</span>
+476:             <span class="ruby-keyword kw">end</span>
+477:             <span class="ruby-ivar">@scan_result</span> = <span class="ruby-identifier">rs</span> 
+478:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000134" class="method-detail">
+        <a name="M000134"></a>
+
+        <div class="method-heading">
+          <a href="#M000134" class="method-signature">
+          <span class="method-name">get_search_results</span><span class="method-args">(eval = 0.001)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Parses the HMMER files, performs auto_merge and obtains the results (given
+an Evalue thereshold).
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000134-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000134-source">
+<pre>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 481</span>
+481:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_search_results</span>(<span class="ruby-identifier">eval</span> = <span class="ruby-value">0</span><span class="ruby-value">.001</span>)
+482:             <span class="ruby-ivar">@result</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">parse</span>
+483:             <span class="ruby-ivar">@result</span> = <span class="ruby-identifier">result</span>.<span class="ruby-identifier">auto_merge</span>
+484:             <span class="ruby-identifier">result</span>.<span class="ruby-identifier">filter_by_eval</span>(<span class="ruby-identifier">eval</span>)
+485:             <span class="ruby-identifier">result</span>.<span class="ruby-identifier">clean_up</span>
+486:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000137" class="method-detail">
+        <a name="M000137"></a>
+
+        <div class="method-heading">
+          <a href="#M000137" class="method-signature">
+          <span class="method-name">report</span><span class="method-args">(completeness = 1)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+<a href="Pipeline.html">Pipeline</a>-wise <a
+href="Pipeline.html#M000137">report</a>.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000137-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000137-source">
+<pre>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 504</span>
+504:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">report</span>(<span class="ruby-identifier">completeness</span> = <span class="ruby-value">1</span>)
+505:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">nil?</span>
+506:                 <span class="ruby-identifier">get_search_results</span>
+507:             <span class="ruby-keyword kw">end</span>
+508:             <span class="ruby-identifier">result</span>.<span class="ruby-identifier">report</span>(<span class="ruby-identifier">cut</span> = <span class="ruby-identifier">completeness</span>)
+509:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000138" class="method-detail">
+        <a name="M000138"></a>
+
+        <div class="method-heading">
+          <a href="#M000138" class="method-signature">
+          <span class="method-name">report_summary</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+<a href="Pipeline.html">Pipeline</a>-wise summary <a
+href="Pipeline.html#M000137">report</a>.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000138-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000138-source">
+<pre>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 512</span>
+512:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">report_summary</span>
+513:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">nil?</span>
+514:                 <span class="ruby-identifier">get_search_results</span>
+515:             <span class="ruby-keyword kw">end</span>
+516:             <span class="ruby-identifier">result</span>.<span class="ruby-identifier">report_summary</span>
+517:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000128" class="method-detail">
+        <a name="M000128"></a>
+
+        <div class="method-heading">
+          <a href="#M000128" class="method-signature">
+          <span class="method-name">run_all</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000128-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000128-source">
+<pre>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 393</span>
+393:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run_all</span>
+394:             <span class="ruby-identifier">dir_initialize</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">dir_initialized?</span>
+395:             <span class="ruby-identifier">run_search</span>
+396:             <span class="ruby-identifier">get_search_results</span>
+397:             <span class="ruby-identifier">write_nelson</span>
+398:             <span class="ruby-identifier">write_fasta</span>
+399:             <span class="ruby-comment cmt">#run_domain_finder</span>
+400:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000132" class="method-detail">
+        <a name="M000132"></a>
+
+        <div class="method-heading">
+          <a href="#M000132" class="method-signature">
+          <span class="method-name">run_scan</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+<a href="../Search.html">Search</a> Pfam domains in protein sequence.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000132-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000132-source">
+<pre>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 418</span>
+418:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run_scan</span>
+419:             <span class="ruby-identifier">scan</span>.<span class="ruby-identifier">scan</span>
+420: 
+421:             <span class="ruby-comment cmt"># TODO: move the implementation to other place.</span>
+422: <span class="ruby-comment cmt">#           ortholog.each_ortholog do |o|</span>
+423: <span class="ruby-comment cmt">#               taxon.each_taxon do |t|</span>
+424: <span class="ruby-comment cmt">#                   case t.type</span>
+425: <span class="ruby-comment cmt">#                   when 'spp'</span>
+426: <span class="ruby-comment cmt">#                       dir = config.dir_result + &quot;genome/fasta&quot; + o.name</span>
+427: <span class="ruby-comment cmt">#                       outdir = config.dir_result + &quot;genome/scan&quot; + o.name</span>
+428: <span class="ruby-comment cmt">#                   when 'clade'</span>
+429: <span class="ruby-comment cmt">#                       dir = config.dir_result + &quot;isolate/fasta&quot; + o.name</span>
+430: <span class="ruby-comment cmt">#                       outdir = config.dir_result + &quot;isolate/scan&quot; + o.name</span>
+431: <span class="ruby-comment cmt">#                   end</span>
+432: <span class="ruby-comment cmt">#                   file = dir + (t.name + &quot;-&quot; + o.name + &quot;_protein.fa&quot;)</span>
+433: <span class="ruby-comment cmt">#                   if file.exist?</span>
+434: <span class="ruby-comment cmt">#                       warn &quot;* search domains in: &quot; + file</span>
+435: <span class="ruby-comment cmt">#                       ts = Tools::Hmmer.new(&quot;hmmscan&quot;)</span>
+436: <span class="ruby-comment cmt">#                       ts.model = config.dir_pfam_current + &quot;Pfam-A.hmm&quot;</span>
+437: <span class="ruby-comment cmt">#                       ts.infile = file</span>
+438: <span class="ruby-comment cmt">#                       ts.outfile = outdir + (t.name + &quot;-&quot; + o.name + &quot;_protein.log&quot;)</span>
+439: <span class="ruby-comment cmt">#                       ts.table_file = outdir + (t.name + &quot;-&quot; + o.name + &quot;_protein.txt&quot;)</span>
+440: <span class="ruby-comment cmt">#                       ts.debug</span>
+441: <span class="ruby-comment cmt">#                       res = ts.execute</span>
+442: <span class="ruby-comment cmt">#                       _check_result(res)</span>
+443: <span class="ruby-comment cmt">#                   end</span>
+444: <span class="ruby-comment cmt">#               end</span>
+445: <span class="ruby-comment cmt">#           end</span>
+446:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000130" class="method-detail">
+        <a name="M000130"></a>
+
+        <div class="method-heading">
+          <a href="#M000130" class="method-signature">
+          <span class="method-name">run_search</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Initializes the result directory structure if needed, then performs the
+searches.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000130-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000130-source">
+<pre>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 408</span>
+408:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run_search</span>
+409:             <span class="ruby-identifier">search</span>.<span class="ruby-identifier">search</span>
+410:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000136" class="method-detail">
+        <a name="M000136"></a>
+
+        <div class="method-heading">
+          <a href="#M000136" class="method-signature">
+          <span class="method-name">write_fasta</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+<a href="Pipeline.html">Pipeline</a>-wise <a
+href="Pipeline.html#M000136">write_fasta</a>.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000136-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000136-source">
+<pre>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 496</span>
+496:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_fasta</span>
+497:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">nil?</span>
+498:                 <span class="ruby-identifier">get_search_results</span>
+499:             <span class="ruby-keyword kw">end</span>
+500:             <span class="ruby-identifier">result</span>.<span class="ruby-identifier">write_fasta</span>
+501:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000135" class="method-detail">
+        <a name="M000135"></a>
+
+        <div class="method-heading">
+          <a href="#M000135" class="method-signature">
+          <span class="method-name">write_nelson</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000135-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000135-source">
+<pre>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 488</span>
+488:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_nelson</span>
+489:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">nil?</span>
+490:                 <span class="ruby-identifier">get_search_results</span>
+491:             <span class="ruby-keyword kw">end</span>
+492:             <span class="ruby-identifier">result</span>.<span class="ruby-identifier">write_nelson</span>
+493:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

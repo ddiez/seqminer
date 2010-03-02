@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Scan::Scan</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Scan::Scan</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/scan_rb.html">
+                scan.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="../Item.html">
+                Item
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000266">debug</a>&nbsp;&nbsp;
+      <a href="#M000263">new</a>&nbsp;&nbsp;
+      <a href="#M000265">parse</a>&nbsp;&nbsp;
+      <a href="#M000264">scan</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">config</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">ortholog</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">taxon</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000263" class="method-detail">
+        <a name="M000263"></a>
+
+        <div class="method-heading">
+          <a href="#M000263" class="method-signature">
+          <span class="method-name">new</span><span class="method-args">(taxon, ortholog)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+TODO: fix config method.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000263-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000263-source">
+<pre>
+    <span class="ruby-comment cmt"># File scan.rb, line 56</span>
+56:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span> (<span class="ruby-identifier">taxon</span>, <span class="ruby-identifier">ortholog</span>)
+57:             <span class="ruby-ivar">@taxon</span> = <span class="ruby-identifier">taxon</span>
+58:             <span class="ruby-ivar">@ortholog</span> = <span class="ruby-identifier">ortholog</span>
+59:             <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span>)
+60:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000266" class="method-detail">
+        <a name="M000266"></a>
+
+        <div class="method-heading">
+          <a href="#M000266" class="method-signature">
+          <span class="method-name">debug</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000266-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000266-source">
+<pre>
+    <span class="ruby-comment cmt"># File scan.rb, line 88</span>
+88:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+89:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Scan +&quot;</span>
+90:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
+91:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* taxon: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>
+92:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* ortholog: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span>
+93:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* type: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">type</span>.<span class="ruby-identifier">name</span>
+94:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* hmm: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">hmm</span>
+95:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000265" class="method-detail">
+        <a name="M000265"></a>
+
+        <div class="method-heading">
+          <a href="#M000265" class="method-signature">
+          <span class="method-name">parse</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000265-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000265-source">
+<pre>
+    <span class="ruby-comment cmt"># File scan.rb, line 85</span>
+85:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parse</span>
+86:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000264" class="method-detail">
+        <a name="M000264"></a>
+
+        <div class="method-heading">
+          <a href="#M000264" class="method-signature">
+          <span class="method-name">scan</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000264-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000264-source">
+<pre>
+    <span class="ruby-comment cmt"># File scan.rb, line 62</span>
+62:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">scan</span>
+63:             <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">type</span>
+64:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'spp'</span>
+65:                 <span class="ruby-identifier">dir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;genome/fasta&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span>
+66:                 <span class="ruby-identifier">outdir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;genome/scan&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span>
+67:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'clade'</span>
+68:                 <span class="ruby-identifier">dir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;isolate/fasta&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span>
+69:                 <span class="ruby-identifier">outdir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;isolate/scan&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span>
+70:             <span class="ruby-keyword kw">end</span>
+71:             <span class="ruby-identifier">file</span> = <span class="ruby-identifier">dir</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_protein.fa&quot;</span>)
+72:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">exist?</span>
+73:                 <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* search domains in: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">file</span>
+74:                 <span class="ruby-identifier">ts</span> = <span class="ruby-constant">Tools</span><span class="ruby-operator">::</span><span class="ruby-constant">Hmmer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;hmmscan&quot;</span>)
+75:                 <span class="ruby-identifier">ts</span>.<span class="ruby-identifier">model</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_pfam_current</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;Pfam-A.hmm&quot;</span>
+76:                 <span class="ruby-identifier">ts</span>.<span class="ruby-identifier">infile</span> = <span class="ruby-identifier">file</span>
+77:                 <span class="ruby-identifier">ts</span>.<span class="ruby-identifier">outfile</span> = <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_protein.log&quot;</span>)
+78:                 <span class="ruby-identifier">ts</span>.<span class="ruby-identifier">table_file</span> = <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_protein.txt&quot;</span>)
+79:                 <span class="ruby-identifier">ts</span>.<span class="ruby-identifier">debug</span>
+80: <span class="ruby-comment cmt">#               res = ts.execute</span>
+81: <span class="ruby-comment cmt">#               _check_result(res)</span>
+82:             <span class="ruby-keyword kw">end</span>
+83:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

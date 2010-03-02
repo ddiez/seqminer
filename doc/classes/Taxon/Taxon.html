@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Taxon::Taxon</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Taxon::Taxon</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/taxon_rb.html">
+                taxon.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="../Item.html">
+                Item
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000277">debug</a>&nbsp;&nbsp;
+      <a href="#M000276">new</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">binomial</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">kegg_name</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">name</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">short_name</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">source</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">strain</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">trans_table</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">type</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000276" class="method-detail">
+        <a name="M000276"></a>
+
+        <div class="method-heading">
+          <a href="#M000276" class="method-signature">
+          <span class="method-name">new</span><span class="method-args">(id, name1, name2, strain, type, source)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000276-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000276-source">
+<pre>
+     <span class="ruby-comment cmt"># File taxon.rb, line 142</span>
+142:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span> (<span class="ruby-identifier">id</span>, <span class="ruby-identifier">name1</span>, <span class="ruby-identifier">name2</span>, <span class="ruby-identifier">strain</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">source</span>)
+143:             <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">id</span>)
+144:             <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name1</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name2</span>
+145:             <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">strain</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">strain</span> <span class="ruby-operator">!=</span> <span class="ruby-value str">&quot;&quot;</span>
+146:             <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">name</span>
+147:             <span class="ruby-ivar">@strain</span> = <span class="ruby-identifier">strain</span>
+148:             <span class="ruby-ivar">@type</span> = <span class="ruby-identifier">type</span>
+149:             <span class="ruby-ivar">@source</span> = <span class="ruby-identifier">source</span>
+150:             <span class="ruby-ivar">@binomial</span> = <span class="ruby-identifier">name1</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name2</span>
+151:             <span class="ruby-ivar">@short_name</span> = <span class="ruby-identifier">name1</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/^(.)/</span>)[<span class="ruby-value">0</span>].<span class="ruby-identifier">upcase</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name2</span>
+152:             <span class="ruby-ivar">@kegg_name</span> = <span class="ruby-identifier">name1</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/^(.)/</span>)[<span class="ruby-value">0</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">name2</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/^(..)/</span>)[<span class="ruby-value">0</span>] <span class="ruby-operator">+</span> (<span class="ruby-identifier">strain</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;&quot;</span> <span class="ruby-operator">?</span> <span class="ruby-value str">&quot;&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-value str">&quot;_&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">strain</span>)
+153:             <span class="ruby-ivar">@trans_table</span> = <span class="ruby-value">1</span>
+154:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000277" class="method-detail">
+        <a name="M000277"></a>
+
+        <div class="method-heading">
+          <a href="#M000277" class="method-signature">
+          <span class="method-name">debug</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000277-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000277-source">
+<pre>
+     <span class="ruby-comment cmt"># File taxon.rb, line 157</span>
+157:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+158:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Taxon +&quot;</span>
+159:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* taxon_id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
+160:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* organism: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name</span>
+161:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* type: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">type</span>
+162:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* source: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">source</span>
+163:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* trans_table: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">trans_table</span>.<span class="ruby-identifier">to_s</span>
+164:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
