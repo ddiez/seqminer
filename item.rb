@@ -8,10 +8,11 @@
 module Item
 
 	class Set
-		attr_reader :items
+		attr_reader :items, :ids
 
 		def initialize
 			@items = {}
+			@ids = []
 		end
 		
 		def << (*args)
@@ -32,6 +33,7 @@ module Item
 				raise "Item with id #{id} already exists, use replace instead!"
 			else	
 				items[id] = item
+				ids << id
 			end
 		end
 
@@ -56,8 +58,8 @@ module Item
 		end
 		
 		def each_value
-			items.each_value do |value|
-				yield value
+			ids.each do |id|
+				yield items[id]
 			end
 		end
 

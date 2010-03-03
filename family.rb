@@ -39,7 +39,7 @@ module Family
 		end
 		
 		def each_family
-			items.each_value do |val|
+			each_value do |val|
 				yield val
 			end
 		end

@@ -40,7 +40,7 @@ module Ortholog
 		end
 		
 		def each_ortholog
-			items.each_value do |value|
+			each_value do |value|
 				yield value
 			end
 		end

@@ -45,7 +45,7 @@ module Taxon
 		end
 		
 		def each_taxon
-			items.each_value do |value|
+			each_value do |value|
 				yield value
 			end
 		end

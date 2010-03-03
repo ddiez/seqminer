@@ -15,7 +15,45 @@ require 'family'
 
 module Result
 	include Item
+	
 	class Domain < Item
+		attr_accessor :score, :eval, :bias
+		
+		def initialize(id)
+			super
+		end
+		
+		def each_domainhit
+			each_value do |value|
+				yield value
+			end
+		end
+		
+		def has_complete?(cut = 1)
+			each_domainhit do |dh|
+				return true if dh.complete?(cut)
+			end
+			return false
+		end
+		
+		def has_fragment?(cut = 1)
+			each_domainhit do |dh|
+				return true if ! dh.complete?(cut)
+			end
+			return false
+		end
+		
+		def debug
+			warn "+ Domain +"
+			warn "* id: " + id.to_s
+			warn "* length: " + length.to_s
+			warn "* eval: " + eval.to_s
+			warn "* score: " + score.to_s
+			warn "* bias: " + bias.to_s
+		end
+	end
+
+	class DomainHit < Item
 		attr_accessor :ceval, :ieval, :score, :bias, :aln_from, :aln_to, :hmm_from, :hmm_to
 		attr_accessor :env_from, :env_to, :query_length, :seq_eval, :seq_score, :eval
 		
@@ -36,19 +74,30 @@ module Result
 			l = hmm_to - hmm_from + 1
 			l.to_f/query_length.to_f
 		end
+		
+		def debug
+			warn "+ DomainHit +"
+			warn "* id: " + id.to_s
+			warn "* ceval: " + ceval.to_s
+			warn "* ieval: " + ieval.to_s
+			warn "* score: " + score.to_s
+			warn "* bias: " + bias.to_s
+			warn "* aln_from: " + aln_from.to_s
+			warn "* aln_to: " + aln_to.to_s
+		end
 	end
 
 	# Class: SubHit
 	# Purpose: Store information about sequence matches to different strand/frame
 	# Date: 6/1/2010
-	class SubHit < Item
-		attr_accessor :score, :eval, :type, :desc, :target_name, :target_acc, :target_length, :query_name, :query_acc, :query_length, :strand, :frame
+	class SequenceHit < Item
+		attr_accessor :score, :eval, :bias, :type, :desc, :target_name, :target_acc, :target_length, :query_name, :query_acc, :query_length, :strand, :frame
 		def initialize(id)
 			super
 		end
 		
 		def each_domain
-			items.each_value do |value|
+			each_value do |value|
 				yield value
 			end
 		end
@@ -66,7 +115,7 @@ module Result
 		# Checks whether there is any Domain <b>not complete</b> (fragment) in the Hit.
 		def has_fragment?(cut = 1)
 			each_domain do |domain|
-				return true if ! domain.complete?(cut)
+				return true if domain.has_complete?(cut)
 			end
 			return false
 		end
@@ -74,7 +123,7 @@ module Result
 		# Checks whether there is any Domain <b>complete</b> in the Hit. See #complete?.
 		def has_complete?(cut = 1)
 			each_domain do |domain|
-				return true if domain.complete?(cut)
+				return true if domain.has_complete?(cut)
 			end
 			return false
 		end
@@ -109,19 +158,19 @@ module Result
 		end
 	end
 	
-	# Hit is a container class. It stores sequence-wise hits. For protein searches the
+	# Sequence is a container class. It stores sequence-wise hits. For protein searches the
 	# number of hits and subhits will be the same. But for nucleotide searches one hit may
 	# contain several subhits. For a merge result, subhits may contain a mix of protein and
 	# nucleotide results in the same sequence hit.
-	class Hit < Item
+	class Sequence < Item
 		attr_accessor :taxon, :ortholog
 		
 		def initialize(id)
 			super
 		end
 		
-		def each_subhit
-			items.each_value do |value|
+		def each_sequencehit
+			each_value do |value|
 				yield value
 			end
 		end
@@ -226,14 +275,14 @@ module Result
 			warn "* e-value: " + eval.to_s
 			warn "* has_complete?: " + has_complete?.to_s
 			warn "* has_fragment?: " + has_fragment?.to_s
-			warn "* coherent?: " + coherent?.to_s
+#			warn "* coherent?: " + coherent?.to_s
 			warn "* taxon: " + taxon.name if ! taxon.nil?
 			warn "* ortholog: " + ortholog.name if ! ortholog.nil?
 		end
 	end
 
 	class Result < Item
-		attr_accessor :taxon, :ortholog, :type
+		attr_accessor :taxon, :ortholog, :type, :tool
 		attr_reader :config
 
 		def initialize(id, options = {:config => nil})
@@ -259,8 +308,8 @@ module Result
 		end
 		
 		# Simple access method for each hit.
-		def each_hit
-			items.each_value do |value|
+		def each_sequence
+			each_value do |value|
 				yield value
 			end
 		end
@@ -474,6 +523,7 @@ module Result
 		def debug
 			warn "+ RESULT +"
 			warn "* result id: " + id
+			warn "* tool: " + tool
 			warn "* hits: " + length.to_s
 			nsh = 0
 			ndom = 0
@@ -502,7 +552,7 @@ module Result
 		end
 		
 		def each_result
-			items.each_value do |value|
+			each_value do |value|
 				yield value
 			end
 		end
@@ -538,7 +588,7 @@ module Result
 				result.each_value do |hit|
 					h = r.get_item_by_id(hit.id)
 					if h.nil?
-						h = Hit.new(hit.id)
+						h = Sequence.new(hit.id)
 						r << h
 					end
 
@@ -659,7 +709,7 @@ module Result
 				qid, tid, piden, alen, mis, gaps, qs, qe, ts, te, eval, score, sframe = line.split("\t")
 				h = result.get_item_by_id(tid)
 				if h.nil?
-					h = Hit.new(tid)
+					h = Sequence.new(tid)
 					result << h
 				end
 			
@@ -668,7 +718,7 @@ module Result
 				#warn "* subhit id: " + sid
 				sh = h.get_item_by_id(sid)
 				if sh.nil?
-					sh = SubHit.new(sid)
+					sh = SequenceHit.new(sid)
 					sh.score = score.to_f
 					sh.eval = eval.to_f
 					sh.target_name = tid
@@ -725,14 +775,19 @@ module Result
 		end
 		
 		def parse
+			result = Result.new(result_id, options = {:config => config})
+			result.taxon = taxon if taxon
+			result.ortholog = ortholog if ortholog
+			
+			result
 		end
 	end
 
 	class HmmerParser
-		attr_reader :taxon, :ortholog
+		attr_reader :taxon, :ortholog, :tool
 		attr_accessor :file, :result_id, :type, :config
 		
-		def initialize(options = {:config => nil, :taxon => nil, :ortholog => nil, :empty => false})
+		def initialize(options = {:config => nil, :taxon => nil, :ortholog => nil, :empty => false, :tool => nil})
 			if options[:config]
 				@config = options[:config]
 			else
@@ -742,6 +797,7 @@ module Result
 			
 			@taxon = options[:taxon] if options[:taxon]
 			@ortholog = options[:ortholog] if options[:ortholog]
+			@tool = options[:tool]
 			
 			@file = nil
 			@result_id = nil
@@ -752,6 +808,7 @@ module Result
 			result = Result.new(result_id, options = {:config => config})
 			result.taxon = taxon if taxon
 			result.ortholog = ortholog if ortholog
+			result.tool = tool
 			
 			fi = File.open(file)
 			fi.each do |line|
@@ -760,55 +817,95 @@ module Result
 				tid, tacc, tlen, qid, qacc, qlen, seval, sscore,
 				sbias, dn, dtot, dceval, dieval, dscore, dbias, hf, ht,
 				af, at, ef, et, acc = line.split(' ')
-				h = result.get_item_by_id(tid)
-				if h.nil?
-					h = Hit.new(tid)
-					result.add(h)
-				end
-			
-				sp = []	
-				#if type == "nucleotide"
-				if type == "6frame"
-					sp = _parse_line(line)
-					if sp.nil?
-						raise "ERROR: nucleotide result does not contain strand/frame information"
-					else
-						sid = tid + "[" + sp[0] + "|" + sp[1] + "]"
+				
+				case tool
+				when 'hmmsearch'
+					h = result.get_item_by_id(tid)
+					if h.nil?
+						h = Sequence.new(tid)
+						result.add(h)
 					end
-				else
-					sid = tid
+				
+					sp = []	
+					#if type == "nucleotide"
+					if type == "6frame"
+						sp = _parse_line(line)
+						if sp.nil?
+							raise "ERROR: nucleotide result does not contain strand/frame information"
+						else
+							sid = tid + "[" + sp[0] + "|" + sp[1] + "]"
+						end
+					else
+						sid = tid
+					end
+					#warn "* subhit id: " + sid
+					sh = h.get_item_by_id(sid)
+					if sh.nil?
+						sh = SequenceHit.new(sid)
+						sh.score = sscore.to_f
+						sh.eval = seval.to_f
+						sh.target_name = tid
+						sh.target_acc = tacc
+						sh.target_length = tlen.to_i
+						sh.query_name = qid
+						sh.query_acc = qacc
+						sh.query_length = qlen.to_i
+						sh.type = type
+						sh.strand = sp[0]
+						sh.frame = sp[1]
+						h << sh
+					end
+					dom = Domain.new(sh.length + 1)
+					dom.hmm_from = hf.to_i
+					dom.hmm_to = ht.to_i
+					dom.aln_from = af.to_i
+					dom.aln_to = at.to_i
+					dom.env_from = ef.to_i
+					dom.env_to = et.to_i
+					dom.ceval = dceval
+					dom.ieval = dieval
+					dom.score = dscore
+					dom.bias = dbias
+					# TODO: may be better to do this by referencing the parent class?
+					dom.query_length = qlen.to_i
+					sh.add(dom)
+				when 'hmmscan'
+					h = result.get_item_by_id(qid)
+					if h.nil?
+						h = Sequence.new(qid)
+						result.add(h)
+					end
+					
+					sh = h.get_item_by_id(qid)
+					if sh.nil?
+						sh = SequenceHit.new(qid)
+						h << sh
+					end
+					
+					dom = sh.get_item_by_id(tid)
+					if dom.nil?
+						dom = Domain.new(tid)
+						dom.eval = seval.to_f
+						dom.score = sscore.to_f
+						dom.bias = sbias.to_f
+						sh << dom
+					end
+					
+					dh = DomainHit.new(dom.length + 1)
+					dh.hmm_from = hf.to_i
+					dh.hmm_to = ht.to_i
+					dh.aln_from = af.to_i
+					dh.aln_to = at.to_i
+					dh.env_from = ef.to_i
+					dh.env_to = et.to_i
+					dh.ceval = dceval
+					dh.ieval = dieval
+					dh.score = dscore
+					dh.bias = dbias
+					# TODO: may be better to do this by referencing the parent class?
+					dh.query_length = tlen.to_i
+					dom << dh
 				end
-				#warn "* subhit id: " + sid
-				sh = h.get_item_by_id(sid)
-				if sh.nil?
-					sh = SubHit.new(sid)
-					sh.score = sscore.to_f
-					sh.eval = seval.to_f
-					sh.target_name = tid
-					sh.target_acc = tacc
-					sh.target_length = tlen.to_i
-					sh.query_name = qid
-					sh.query_acc = qacc
-					sh.query_length = qlen.to_i
-					sh.type = type
-					sh.strand = sp[0]
-					sh.frame = sp[1]
-					h << sh
-				end
-				dom = Domain.new(sh.length + 1)
-				dom.hmm_from = hf.to_i
-				dom.hmm_to = ht.to_i
-				dom.aln_from = af.to_i
-				dom.aln_to = at.to_i
-				dom.env_from = ef.to_i
-				dom.env_to = et.to_i
-				dom.ceval = dceval
-				dom.ieval = dieval
-				dom.score = dscore
-				dom.bias = dbias
-				# TODO: may be better to do this by referencing the parent class?
-				dom.query_length = qlen.to_i
-				sh.add(dom)
 			end
 			fi.close
 			

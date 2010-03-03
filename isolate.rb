@@ -73,7 +73,7 @@ module Isolate
 		end
 		
 		def each_sequence
-			items.each_value do |value|
+			each_value do |value|
 				yield value
 			end
 		end

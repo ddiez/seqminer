@@ -91,7 +91,7 @@ module Genome
 #		end
 		
 		def each_gene
-			items.each_value do |value|
+			each_value do |value|
 				yield value
 			end
 		end

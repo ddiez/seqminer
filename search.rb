@@ -122,7 +122,7 @@ module Search
 		end
 		
 		def each_search
-			items.each_value do |value|
+			each_value do |value|
 				yield value
 			end
 		end
@@ -180,7 +180,7 @@ module Search
 				when 'spp'
 					file = config.dir_result + "genome/search" + search.ortholog.name + (search.id + ".txt")
 					
-					rp = Result::HmmerParser.new
+					rp = Result::HmmerParser.new(options = {:tool => 'hmmsearch'})
 					rp.file = file
 					rp.result_id = search.id
 					rp.type = search.type.name
