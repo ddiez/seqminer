@@ -190,7 +190,7 @@ module Result
 			hp = has_protein?
 			csh = nil
 			cbe = nil
-			each_subhit do |subhit|
+			each_sequencehit do |subhit|
 				return subhit if hp and subhit.type == "protein"
 				if cbe.nil? or subhit.eval < cbe
 					csh = subhit
@@ -202,7 +202,7 @@ module Result
 		
 		# Checks whether a hit contains a SubHit of type "nucleotide"
 		def has_nucleotide?
-			each_subhit do |subhit|
+			each_sequencehit do |subhit|
 				#return true if subhit.type == "nucleotide"
 				return true if subhit.type == "6frame"
 			end
@@ -210,7 +210,7 @@ module Result
 		end
 		
 		def has_protein?
-			each_subhit do |subhit|
+			each_sequencehit do |subhit|
 				return true if subhit.type == "protein"
 			end
 			return false
@@ -223,7 +223,7 @@ module Result
 			s = []
 			p = []
 			
-			each_subhit do |subhit|
+			each_sequencehit do |subhit|
 				if subhit.type == "nucleotide"
 					s << subhit.strand
 					p << subhit.frame
@@ -234,7 +234,7 @@ module Result
 		
 		# A Hit has_fragment if any of the SubHit has_fragment.
 		def has_fragment?(cut = 1)
-			each_subhit do |subhit|
+			each_sequencehit do |subhit|
 				return true if subhit.has_fragment?(cut)
 			end
 			return false
@@ -242,7 +242,7 @@ module Result
 		
 		# A Hit has_complete if any of the SubHit has_complete.
 		def has_complete?(cut = 1)
-			each_subhit do |subhit|
+			each_sequencehit do |subhit|
 				return true if subhit.has_complete?(cut)
 			end
 			return false
@@ -251,7 +251,7 @@ module Result
 		# Obtains the maximum completeness found in any of the SubHits within the Hit.
 		def max_completeness
 			mc = 0
-			each_subhit do |subhit|
+			each_sequencehit do |subhit|
 				smc = subhit.max_completeness
 				mc = smc if smc > mc
 			end
@@ -261,7 +261,7 @@ module Result
 		# Obtains the minimum completeness found in any of the SubHits within the Hit.
 		def min_completeness
 			mc = 1
-			each_subhit do |subhit|
+			each_sequencehit do |subhit|
 				smc = subhit.min_completeness
 				mc = smc if smc < mc
 			end
@@ -317,7 +317,7 @@ module Result
 		# Removes subhits on the basis of an E-value cutoff (>). If no subhits remain the it
 		# removes the hit from the result.
 		def filter_by_eval(val)
-			each_hit do |hit|
+			each_sequence do |hit|
 				hit.items.delete_if do |key, subhit|
 					subhit.eval > val
 				end
@@ -331,7 +331,7 @@ module Result
 		# Removes subhits on the basis of an Score cutoff (<). If no subhits remain the it
 		# removes the hit from the result.
 		def filter_by_score(val)
-			each_hit do |hit|
+			each_sequence do |hit|
 				hit.items.delete_if do |key, subhit|
 					subhit.score < val
 				end
@@ -347,7 +347,7 @@ module Result
 			ch = nil
 			cbe = nil
 
-			each_hit do |hit|
+			each_sequence do |hit|
 				if cbe.nil? or hit.eval < cbe
 					ch = hit
 					cbe = hit.eval
@@ -394,7 +394,7 @@ module Result
 				"evalue\t" +
 				"hmmloc\t" +
 				"description"
-			each_hit do |hit|
+			each_sequence do |hit|
 				iseq = idb.get_seq_by_acc(hit.id)
 				bh = hit.best_subhit
 				
@@ -457,7 +457,7 @@ module Result
 				"evalue\t" +
 				"hmmloc\t" +
 				"description"
-			each_hit do |hit|
+			each_sequence do |hit|
 				g = gdb.get_gene_by_acc(hit.id)
 				
 				bh = hit.best_subhit

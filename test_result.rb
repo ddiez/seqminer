@@ -9,14 +9,14 @@ r.debug
 
 r.filter_by_eval(0.001)
 r.debug
-r.each_hit do |hit|
+r.each_sequence do |hit|
 	hit.debug
 end
 
 rs = Result::Set.new
 rs << r
 
-r.each_hit do |hit|
+r.each_sequence do |hit|
 	warn "+ HIT +"
 	warn "* hit id: " + hit.id
 	warn hit.best_subhit.debug
