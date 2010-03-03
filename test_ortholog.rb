@@ -9,5 +9,6 @@ os = Ortholog::Set.new
 #os.add(o)
 os.debug
 
+#os.filter_by_name(["var", "vir"])
 os.filter_by_name("var")
 os.debug

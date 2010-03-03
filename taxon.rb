@@ -59,15 +59,57 @@ module Taxon
 		end
 		
 		def filter_by_name(filter)
-			items.delete_if {|name, taxon| ! taxon.name.match(/#{filter}/) }
+			dt = []
+			each_taxon do |taxon|
+#				dt << taxon if ! taxon.name.match(/#{filter}/)
+				m = false
+				filter.each do |f|
+					if taxon.name.match(/#{f}/)
+						m = true
+						break
+					end
+				end
+				dt << taxon if ! m
+			end
+			dt.each do |taxon|
+				delete(taxon)
+			end
 		end
 		
 		def filter_by_type(filter)
-			items.delete_if {|name, taxon| ! taxon.type.match(/#{filter}/) }
+			dt = []
+			each_taxon do |taxon|
+#				dt << taxon if ! taxon.type.match(/#{filter}/)
+				m = false
+				filter.each do |f|
+					if taxon.type.match(/#{f}/)
+						m = true
+						break
+					end
+				end
+				dt << taxon if ! m
+			end
+			dt.each do |taxon|
+				delete(taxon)
+			end
 		end
 
 		def filter_by_source(filter)
-			items.delete_if {|name, taxon| ! taxon.source.match(/#{filter}/) }
+			dt = []
+			each_taxon do |taxon|
+#				dt << taxon if ! taxon.source.match(/#{filter}/)
+				m = false
+				filter.each do |f|
+					if taxon.source.match(/#{f}/)
+						m = true
+						break
+					end
+				end
+				dt << taxon if ! m
+			end
+			dt.each do |taxon|
+				delete(taxon)
+			end
 		end
 		
 		# This function connects to the NCBI taxonomy and gets updated information of all the taxons in the set.
@@ -129,7 +171,7 @@ module Taxon
 		def debug
 			warn "+ Taxon Set +"
 			warn "* length: " + length.to_s
-			items.each_value do |taxon|
+			each_taxon do |taxon|
 				taxon.debug
 			end
 			warn ""

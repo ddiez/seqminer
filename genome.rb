@@ -97,8 +97,12 @@ module Genome
 		end
 		
 		def auto_clean
-			items.delete_if do |id, gene|
-				gene.size < 5 # This is because it give us at least one residue in the 6frame translations.
+			dg = []
+			each_gene do |gene|
+				dg << gene if gene.size < 5
+			end
+			dg.each do |i|
+				delete(i)
 			end
 		end
 
@@ -108,8 +112,12 @@ module Genome
 		end
 
 		def filter_by_acc(acc)
-			items.delete_if do |id, gene|
-				! acc.include?(id)
+			dg = []
+			each_gene do |gene|
+				dg << gene if ! acc.include?(gene.id)
+			end
+			dg.each do |i|
+				delete(i)
 			end
 		end
 		

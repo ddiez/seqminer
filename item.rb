@@ -62,6 +62,11 @@ module Item
 				yield items[id]
 			end
 		end
+		
+		def delete(i)
+			items.delete(i.id)
+			ids.delete(i.id)
+		end
 
 		def debug
 			warn "* length: " + self.length.to_s

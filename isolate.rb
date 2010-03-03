@@ -79,8 +79,12 @@ module Isolate
 		end
 		
 		def filter_by_acc(acc)
-			items.delete_if do |id, iso|
-				! acc.include?(id)
+			ds = []
+			each_sequence do |seq|
+				ds << seq if ! acc.include?(seq.id)
+			end
+			ds.each do |i|
+				delete(i)
 			end
 		end
 		
@@ -98,8 +102,12 @@ module Isolate
 		end
 		
 		def auto_clean
-			items.delete_if do |id, seq|
-				seq.size < 5 # This is because this give us at least one residue in the different translations.
+			ds = []
+			each_sequence do |seq|
+				ds << seq if seq.size < 5
+			end
+			ds.each do |i|
+				delete(i)
 			end
 		end
 

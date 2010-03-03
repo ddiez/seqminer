@@ -44,7 +44,7 @@ module Result
 		end
 		
 		def debug
-			warn "+ Domain +"
+			warn "+ Result::Sequence::SequenceHit::Domain +"
 			warn "* id: " + id.to_s
 			warn "* length: " + length.to_s
 			warn "* eval: " + eval.to_s
@@ -55,7 +55,7 @@ module Result
 
 	class DomainHit < Item
 		attr_accessor :ceval, :ieval, :score, :bias, :aln_from, :aln_to, :hmm_from, :hmm_to
-		attr_accessor :env_from, :env_to, :query_length, :seq_eval, :seq_score, :eval
+		attr_accessor :env_from, :env_to, :domain_length, :seq_eval, :seq_score, :eval
 		
 		def initialize(id)
 			super
@@ -71,12 +71,16 @@ module Result
 		# the domain and the length of the domain.
 		def completeness
 			# TODO: may be better to do this by referencing the parent class?
-			l = hmm_to - hmm_from + 1
-			l.to_f/query_length.to_f
+			l = match_length
+			l.to_f/domain_length.to_f
+		end
+		
+		def match_length
+			hmm_to - hmm_from + 1
 		end
 		
 		def debug
-			warn "+ DomainHit +"
+			warn "+ Result::Sequence::SequenceHit::Domain::DomainHit +"
 			warn "* id: " + id.to_s
 			warn "* ceval: " + ceval.to_s
 			warn "* ieval: " + ieval.to_s
@@ -84,6 +88,9 @@ module Result
 			warn "* bias: " + bias.to_s
 			warn "* aln_from: " + aln_from.to_s
 			warn "* aln_to: " + aln_to.to_s
+			warn "* domain length: " + domain_length.to_s
+			warn "* match length: " + match_length.to_s
+			warn "* completeness: " + completeness.to_s
 		end
 	end
 
@@ -91,7 +98,7 @@ module Result
 	# Purpose: Store information about sequence matches to different strand/frame
 	# Date: 6/1/2010
 	class SequenceHit < Item
-		attr_accessor :score, :eval, :bias, :type, :desc, :target_name, :target_acc, :target_length, :query_name, :query_acc, :query_length, :strand, :frame
+		attr_accessor :score, :eval, :bias, :type, :desc, :target_name, :target_acc, :target_length, :query_name, :query_acc, :domain_length, :strand, :frame
 		def initialize(id)
 			super
 		end
@@ -149,7 +156,7 @@ module Result
 		end
 		
 		def debug
-			warn "+ SubHit +"
+			warn "+ Result::Sequence::SequenceHit +"
 			warn "* id: " + id
 			warn "* eval: " + eval.to_s
 			warn "* score: " + score.to_s
@@ -269,13 +276,13 @@ module Result
 		end
 		
 		def debug
-			warn "+ HIT +"
+			warn "+ Result::Sequence +"
 			warn "* id: " + id
 			warn "* score: " + score.to_s
 			warn "* e-value: " + eval.to_s
 			warn "* has_complete?: " + has_complete?.to_s
 			warn "* has_fragment?: " + has_fragment?.to_s
-#			warn "* coherent?: " + coherent?.to_s
+			warn "* coherent?: " + coherent?.to_s
 			warn "* taxon: " + taxon.name if ! taxon.nil?
 			warn "* ortholog: " + ortholog.name if ! ortholog.nil?
 		end
@@ -317,28 +324,38 @@ module Result
 		# Removes subhits on the basis of an E-value cutoff (>). If no subhits remain the it
 		# removes the hit from the result.
 		def filter_by_eval(val)
+			dh = []
 			each_sequence do |hit|
-				hit.items.delete_if do |key, subhit|
-					subhit.eval > val
+				dsh = []
+				hit.each_sequencehit do |sh|
+					dsh << sh if sh.eval > val
 				end
+				dsh.each do |i|
+					hit.delete(i)
+				end
+				dh << hit if hit.length == 0
 			end
-			
-			items.delete_if do |key, hit|
-				hit.length == 0
+			dh.each do |i|
+				delete(i)
 			end
 		end
 
 		# Removes subhits on the basis of an Score cutoff (<). If no subhits remain the it
 		# removes the hit from the result.
 		def filter_by_score(val)
+			dh = []
 			each_sequence do |hit|
-				hit.items.delete_if do |key, subhit|
-					subhit.score < val
+				dsh = []
+				hit.each_sequencehit do |sh|
+					dsh << sh if sh.score < val
 				end
-			end
-			
-			items.delete_if do |key, hit|
-				hit.length == 0
+				dsh.each do |i|
+					hit.delete(i)
+				end
+				dh << hit if hit.length == 0
+			end	
+			dh.each do |i|
+				delete(i)
 			end
 		end
 		
@@ -521,22 +538,25 @@ module Result
 		end
 		
 		def debug
-			warn "+ RESULT +"
+			warn "+ Result +"
 			warn "* result id: " + id
 			warn "* tool: " + tool
-			warn "* hits: " + length.to_s
+			warn "* sequences: " + length.to_s
 			nsh = 0
 			ndom = 0
-			each_value do |hit|
-				#warn "* hit id: " + hit.id
+			ndomh = 0
+			each_sequence do |hit|
 				nsh += hit.length
-				hit.items.each_value do |subhit|
-					#warn "* subhit id: " + subhit.id
+				hit.each_sequencehit do |subhit|
 					ndom += subhit.length
+					subhit.each_domain do |domain|
+						ndomh += domain.length
+					end
 				end
 			end
-			warn "* subhits: " + nsh.to_s
+			warn "* sequence hits: " + nsh.to_s
 			warn "* domains: " + ndom.to_s
+			warn "* domain hits: " + ndomh.to_s
 		end
 	end
 
@@ -602,8 +622,12 @@ module Result
 		
 		# Removes Result instances in a Set if they not contain any hit.
 		def clean_up
-			items.delete_if do |key, result|
-				result.length == 0
+			dr = []
+			each_result do |result|
+				dr << result if result.length == 0
+			end
+			dr.each do |i|
+				delete(i)
 			end
 		end
 		
@@ -612,9 +636,9 @@ module Result
 			puts "hit_name\tsearch_id\ttaxon\tortholog\tnsubhits\tndomains\tmin_completeness\tmax_completeness\tfragment\tcomplete\tcoherent\tbest_eval\tbest_score"
 			each_value do |result|
 				next if ! (result.length > 0)
-				result.each_value do |hit|
+				result.each_sequence do |hit|
 					dl = 0
-					hit.items.each_value do |subhit|
+					hit.each_sequencehit do |subhit|
 						dl += subhit.length
 					end
 					
@@ -668,7 +692,7 @@ module Result
 		end
 
 		def debug
-			warn "+ RESULT SET +"
+			warn "+ Result Set +"
 			warn "* results: " + length.to_s
 			each_result do |result|
 				result.debug
@@ -726,7 +750,7 @@ module Result
 					#sh.target_length = tlen.to_i
 					sh.query_name = qid
 					#sh.query_acc = qacc
-					sh.query_length = (qe.to_i - qs.to_i + 1).to_s
+					sh.domain_length = (qe.to_i - qs.to_i + 1).to_s
 					sh.type = type
 					sh.strand = sp[0]
 					sh.frame = sp[1]
@@ -745,7 +769,7 @@ module Result
 				dom.score = score
 				#dom.bias = dbias
 				# TODO: may be better to do this by referencing the parent class?
-				#dom.query_length = qlen.to_i
+				#dom.domain_length = qlen.to_i
 				sh.add(dom)
 			end
 			fi.close
@@ -820,7 +844,7 @@ module Result
 						sh.target_length = tlen.to_i
 						sh.query_name = qid
 						sh.query_acc = qacc
-						sh.query_length = qlen.to_i
+						sh.domain_length = qlen.to_i
 						sh.type = type
 						sh.strand = sp[0]
 						sh.frame = sp[1]
@@ -838,7 +862,7 @@ module Result
 					dom.score = dscore
 					dom.bias = dbias
 					# TODO: may be better to do this by referencing the parent class?
-					dom.query_length = qlen.to_i
+					dom.domain_length = qlen.to_i
 					sh.add(dom)
 				when 'hmmscan'
 					h = result.get_item_by_id(qid)
@@ -874,7 +898,7 @@ module Result
 					dh.score = dscore
 					dh.bias = dbias
 					# TODO: may be better to do this by referencing the parent class?
-					dh.query_length = tlen.to_i
+					dh.domain_length = tlen.to_i
 					dom << dh
 				end
 			end

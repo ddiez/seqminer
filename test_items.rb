@@ -9,3 +9,13 @@ is.debug
 is.each_value do |i|
 	i.debug
 end
+
+i = is.get_item_by_id(2)
+puts
+i.debug
+
+is.delete(i)
+is.debug
+is.each_value do |i|
+	i.debug
+end

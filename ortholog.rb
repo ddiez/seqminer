@@ -53,7 +53,20 @@ module Ortholog
 		end
 		
 		def filter_by_name(filter)
-			items.delete_if { |name, ortholog| ! name.match(/#{filter}/) }
+			dor = []
+			each_ortholog do |ortholog|
+				m = false
+				filter.each do |f|
+					if ortholog.name.match(/#{f}/)
+						m = true
+						break
+					end
+				end
+				dor << ortholog if ! m
+			end
+			dor.each do |i|
+				delete(i)
+			end
 		end
 
 		def debug
