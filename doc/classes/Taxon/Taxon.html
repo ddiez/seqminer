@@ -173,20 +173,20 @@
             onclick="toggleCode('M000281-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000281-source">
 <pre>
-     <span class="ruby-comment cmt"># File taxon.rb, line 184</span>
-184:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span> (<span class="ruby-identifier">id</span>, <span class="ruby-identifier">name1</span>, <span class="ruby-identifier">name2</span>, <span class="ruby-identifier">strain</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">source</span>)
-185:             <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">id</span>)
-186:             <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name1</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name2</span>
-187:             <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">strain</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">strain</span> <span class="ruby-operator">!=</span> <span class="ruby-value str">&quot;&quot;</span>
-188:             <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">name</span>
-189:             <span class="ruby-ivar">@strain</span> = <span class="ruby-identifier">strain</span>
-190:             <span class="ruby-ivar">@type</span> = <span class="ruby-identifier">type</span>
-191:             <span class="ruby-ivar">@source</span> = <span class="ruby-identifier">source</span>
-192:             <span class="ruby-ivar">@binomial</span> = <span class="ruby-identifier">name1</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name2</span>
-193:             <span class="ruby-ivar">@short_name</span> = <span class="ruby-identifier">name1</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/^(.)/</span>)[<span class="ruby-value">0</span>].<span class="ruby-identifier">upcase</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name2</span>
-194:             <span class="ruby-ivar">@kegg_name</span> = <span class="ruby-identifier">name1</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/^(.)/</span>)[<span class="ruby-value">0</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">name2</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/^(..)/</span>)[<span class="ruby-value">0</span>] <span class="ruby-operator">+</span> (<span class="ruby-identifier">strain</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;&quot;</span> <span class="ruby-operator">?</span> <span class="ruby-value str">&quot;&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-value str">&quot;_&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">strain</span>)
-195:             <span class="ruby-ivar">@trans_table</span> = <span class="ruby-value">1</span>
-196:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File taxon.rb, line 181</span>
+181:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span> (<span class="ruby-identifier">id</span>, <span class="ruby-identifier">name1</span>, <span class="ruby-identifier">name2</span>, <span class="ruby-identifier">strain</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">source</span>)
+182:             <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">id</span>)
+183:             <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name1</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name2</span>
+184:             <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">strain</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">strain</span> <span class="ruby-operator">!=</span> <span class="ruby-value str">&quot;&quot;</span>
+185:             <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">name</span>
+186:             <span class="ruby-ivar">@strain</span> = <span class="ruby-identifier">strain</span>
+187:             <span class="ruby-ivar">@type</span> = <span class="ruby-identifier">type</span>
+188:             <span class="ruby-ivar">@source</span> = <span class="ruby-identifier">source</span>
+189:             <span class="ruby-ivar">@binomial</span> = <span class="ruby-identifier">name1</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name2</span>
+190:             <span class="ruby-ivar">@short_name</span> = <span class="ruby-identifier">name1</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/^(.)/</span>)[<span class="ruby-value">0</span>].<span class="ruby-identifier">upcase</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name2</span>
+191:             <span class="ruby-ivar">@kegg_name</span> = <span class="ruby-identifier">name1</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/^(.)/</span>)[<span class="ruby-value">0</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">name2</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/^(..)/</span>)[<span class="ruby-value">0</span>] <span class="ruby-operator">+</span> (<span class="ruby-identifier">strain</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;&quot;</span> <span class="ruby-operator">?</span> <span class="ruby-value str">&quot;&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-value str">&quot;_&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">strain</span>)
+192:             <span class="ruby-ivar">@trans_table</span> = <span class="ruby-value">1</span>
+193:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -208,15 +208,15 @@
             onclick="toggleCode('M000282-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000282-source">
 <pre>
-     <span class="ruby-comment cmt"># File taxon.rb, line 199</span>
-199:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
-200:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Taxon +&quot;</span>
-201:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* taxon_id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
-202:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* organism: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name</span>
-203:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* type: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">type</span>
-204:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* source: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">source</span>
-205:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* trans_table: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">trans_table</span>.<span class="ruby-identifier">to_s</span>
-206:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File taxon.rb, line 196</span>
+196:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+197:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Taxon +&quot;</span>
+198:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* taxon_id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
+199:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* organism: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name</span>
+200:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* type: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">type</span>
+201:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* source: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">source</span>
+202:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* trans_table: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">trans_table</span>.<span class="ruby-identifier">to_s</span>
+203:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

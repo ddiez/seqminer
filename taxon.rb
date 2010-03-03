@@ -61,7 +61,6 @@ module Taxon
 		def filter_by_name(filter)
 			dt = []
 			each_taxon do |taxon|
-#				dt << taxon if ! taxon.name.match(/#{filter}/)
 				m = false
 				filter.each do |f|
 					if taxon.name.match(/#{f}/)
@@ -79,7 +78,6 @@ module Taxon
 		def filter_by_type(filter)
 			dt = []
 			each_taxon do |taxon|
-#				dt << taxon if ! taxon.type.match(/#{filter}/)
 				m = false
 				filter.each do |f|
 					if taxon.type.match(/#{f}/)
@@ -93,11 +91,10 @@ module Taxon
 				delete(taxon)
 			end
 		end
-
+		
 		def filter_by_source(filter)
 			dt = []
 			each_taxon do |taxon|
-#				dt << taxon if ! taxon.source.match(/#{filter}/)
 				m = false
 				filter.each do |f|
 					if taxon.source.match(/#{f}/)
