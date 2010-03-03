@@ -122,7 +122,7 @@ module Result
 		# Checks whether there is any Domain <b>not complete</b> (fragment) in the Hit.
 		def has_fragment?(cut = 1)
 			each_domain do |domain|
-				return true if domain.has_complete?(cut)
+				return true if domain.has_fragment?(cut)
 			end
 			return false
 		end
@@ -241,8 +241,8 @@ module Result
 		
 		# A Hit has_fragment if any of the SubHit has_fragment.
 		def has_fragment?(cut = 1)
-			each_sequencehit do |subhit|
-				return true if subhit.has_fragment?(cut)
+			each_sequencehit do |sh|
+				return true if sh.has_fragment?(cut)
 			end
 			return false
 		end
@@ -540,7 +540,7 @@ module Result
 		def debug
 			warn "+ Result +"
 			warn "* result id: " + id
-			warn "* tool: " + tool
+			warn "* tool: " + tool.to_s
 			warn "* sequences: " + length.to_s
 			nsh = 0
 			ndom = 0
@@ -701,10 +701,10 @@ module Result
 	end
 	
 	class BlastParser
-		attr_reader :taxon, :ortholog
+		attr_reader :taxon, :ortholog, :tool
 		attr_accessor :file, :result_id, :type, :config
 
-		def initialize(options = {:config => nil, :taxon => nil, :ortholog => nil, :empty => false})
+		def initialize(options = {:config => nil, :taxon => nil, :ortholog => nil, :empty => false, :tool => nil})
 			if options[:config]
 				@config = options[:config]
 			else
@@ -714,7 +714,8 @@ module Result
 			
 			@taxon = options[:taxon] if options[:taxon]
 			@ortholog = options[:ortholog] if options[:ortholog]
-
+			@tool = options[:tool]
+			
 			@file = nil
 			@result_id = nil
 			@type = nil
@@ -725,6 +726,7 @@ module Result
 			result.taxon = taxon if taxon
 			result.ortholog = ortholog if ortholog
 			result.type = type if type
+			result.tool = tool
 			
 			fi = File.open(file)
 			fi.each do |line|
@@ -756,21 +758,32 @@ module Result
 					sh.frame = sp[1]
 					h << sh
 				end
-				dom = Domain.new(sh.length + 1)
-				dom.hmm_from = qs.to_i
-				dom.hmm_to = qe.to_i
-				dom.aln_from = ts.to_i
-				dom.aln_to = te.to_i
-				#dom.env_from = ef.to_i
-				#dom.env_to = et.to_i
-				#dom.ceval = dceval
-				#dom.ieval = dieval
-				dom.eval = eval
-				dom.score = score
-				#dom.bias = dbias
+
+				dom = sh.get_item_by_id(qid)
+				if dom.nil?
+					dom = Domain.new(qid)
+#					dom.eval = eval.to_f
+#					dom.score = score.to_f
+#					dom.bias = sbias.to_f
+					sh << dom
+				end
+				
+				dh = DomainHit.new(dom.length + 1)
+				#dom = Domain.new(sh.length + 1)
+				dh.hmm_from = qs.to_i
+				dh.hmm_to = qe.to_i
+				dh.aln_from = ts.to_i
+				dh.aln_to = te.to_i
+				#dh.env_from = ef.to_i
+				#dh.env_to = et.to_i
+				#dh.ceval = dceval
+				#dh.ieval = dieval
+				dh.eval = eval
+				dh.score = score
+				#dh.bias = dbias
 				# TODO: may be better to do this by referencing the parent class?
-				#dom.domain_length = qlen.to_i
-				sh.add(dom)
+				#dh.domain_length = qlen.to_i
+				dom << dh
 			end
 			fi.close
 			
@@ -850,20 +863,31 @@ module Result
 						sh.frame = sp[1]
 						h << sh
 					end
-					dom = Domain.new(sh.length + 1)
-					dom.hmm_from = hf.to_i
-					dom.hmm_to = ht.to_i
-					dom.aln_from = af.to_i
-					dom.aln_to = at.to_i
-					dom.env_from = ef.to_i
-					dom.env_to = et.to_i
-					dom.ceval = dceval
-					dom.ieval = dieval
-					dom.score = dscore
-					dom.bias = dbias
+					
+					dom = sh.get_item_by_id(qid)
+					if dom.nil?
+						dom = Domain.new(qid)
+						#dom.eval = seval.to_f
+						#dom.score = sscore.to_f
+						#dom.bias = sbias.to_f
+						sh << dom
+					end
+					
+					dh = DomainHit.new(dom.length + 1)
+					#dom = Domain.new(sh.length + 1)
+					dh.hmm_from = hf.to_i
+					dh.hmm_to = ht.to_i
+					dh.aln_from = af.to_i
+					dh.aln_to = at.to_i
+					dh.env_from = ef.to_i
+					dh.env_to = et.to_i
+					dh.ceval = dceval
+					dh.ieval = dieval
+					dh.score = dscore
+					dh.bias = dbias
 					# TODO: may be better to do this by referencing the parent class?
-					dom.domain_length = qlen.to_i
-					sh.add(dom)
+					dh.domain_length = qlen.to_i
+					dom << dh
 				when 'hmmscan'
 					h = result.get_item_by_id(qid)
 					if h.nil?

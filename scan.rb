@@ -88,7 +88,7 @@ module Scan
 				if file.exist?
 					rp = Result::HmmerParser.new(options = {:tool => 'hmmscan'})
 					rp.file = file
-					rp.result_id = scan.taxon.name + "." + scan.ortholog.name
+					rp.result_id = scan.taxon.name + "-" + scan.ortholog.name
 					rp.type = "protein"
 					rp.config = config
 					r = rp.parse
