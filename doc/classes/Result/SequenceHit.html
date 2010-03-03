@@ -326,7 +326,7 @@ complete</b> (fragment) in the Hit.
      <span class="ruby-comment cmt"># File result.rb, line 123</span>
 123:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">has_fragment?</span>(<span class="ruby-identifier">cut</span> = <span class="ruby-value">1</span>)
 124:             <span class="ruby-identifier">each_domain</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">domain</span><span class="ruby-operator">|</span>
-125:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">domain</span>.<span class="ruby-identifier">has_complete?</span>(<span class="ruby-identifier">cut</span>)
+125:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">domain</span>.<span class="ruby-identifier">has_fragment?</span>(<span class="ruby-identifier">cut</span>)
 126:             <span class="ruby-keyword kw">end</span>
 127:             <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
 128:         <span class="ruby-keyword kw">end</span>

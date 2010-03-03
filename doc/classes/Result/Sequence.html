@@ -377,8 +377,8 @@ A Hit has_fragment if any of the SubHit has_fragment.
 <pre>
      <span class="ruby-comment cmt"># File result.rb, line 243</span>
 243:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">has_fragment?</span>(<span class="ruby-identifier">cut</span> = <span class="ruby-value">1</span>)
-244:             <span class="ruby-identifier">each_sequencehit</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subhit</span><span class="ruby-operator">|</span>
-245:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">subhit</span>.<span class="ruby-identifier">has_fragment?</span>(<span class="ruby-identifier">cut</span>)
+244:             <span class="ruby-identifier">each_sequencehit</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">sh</span><span class="ruby-operator">|</span>
+245:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">has_fragment?</span>(<span class="ruby-identifier">cut</span>)
 246:             <span class="ruby-keyword kw">end</span>
 247:             <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
 248:         <span class="ruby-keyword kw">end</span>
