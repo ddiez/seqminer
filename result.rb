@@ -754,35 +754,6 @@ module Result
 		end
 	end
 	
-	class HmmscanParser
-		attr_reader :taxon, :ortholog
-		attr_accessor :file, :result_id, :type, :config
-
-		def initialize(options = {:config => nil, :taxon => nil, :ortholog => nil, :empty => false})
-			if options[:config]
-				@config = options[:config]
-			else
-				@config = Config::General.new
-			end
-			
-			
-			@taxon = options[:taxon] if options[:taxon]
-			@ortholog = options[:ortholog] if options[:ortholog]
-			
-			@file = nil
-			@result_id = nil
-			@type = nil
-		end
-		
-		def parse
-			result = Result.new(result_id, options = {:config => config})
-			result.taxon = taxon if taxon
-			result.ortholog = ortholog if ortholog
-			
-			result
-		end
-	end
-
 	class HmmerParser
 		attr_reader :taxon, :ortholog, :tool
 		attr_accessor :file, :result_id, :type, :config
