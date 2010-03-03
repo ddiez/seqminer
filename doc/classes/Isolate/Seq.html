@@ -238,19 +238,19 @@
             onclick="toggleCode('M000082-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000082-source">
 <pre>
-     <span class="ruby-comment cmt"># File isolate.rb, line 210</span>
-210:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>)
-211:             <span class="ruby-keyword kw">super</span>
-212:             
-213:             <span class="ruby-ivar">@description</span> = <span class="ruby-value str">&quot;&quot;</span>
-214:             <span class="ruby-ivar">@pseudogene</span> = <span class="ruby-value">0</span>
-215:             <span class="ruby-comment cmt"># Assume the default and pray we can get the information somewhere.</span>
-216:             <span class="ruby-ivar">@trans_table</span> = <span class="ruby-keyword kw">nil</span>
-217:             <span class="ruby-comment cmt"># For isolates we usually get the translation from the CDS, and this is stored in the @translation holder.</span>
-218:             <span class="ruby-comment cmt"># There is a method translate() that computes a translation based on the corresponding cds. It accepts</span>
-219:             <span class="ruby-comment cmt"># a different frame and translation table.</span>
-220:             <span class="ruby-ivar">@translation</span> = <span class="ruby-keyword kw">nil</span>
-221:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File isolate.rb, line 218</span>
+218:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>)
+219:             <span class="ruby-keyword kw">super</span>
+220:             
+221:             <span class="ruby-ivar">@description</span> = <span class="ruby-value str">&quot;&quot;</span>
+222:             <span class="ruby-ivar">@pseudogene</span> = <span class="ruby-value">0</span>
+223:             <span class="ruby-comment cmt"># Assume the default and pray we can get the information somewhere.</span>
+224:             <span class="ruby-ivar">@trans_table</span> = <span class="ruby-keyword kw">nil</span>
+225:             <span class="ruby-comment cmt"># For isolates we usually get the translation from the CDS, and this is stored in the @translation holder.</span>
+226:             <span class="ruby-comment cmt"># There is a method translate() that computes a translation based on the corresponding cds. It accepts</span>
+227:             <span class="ruby-comment cmt"># a different frame and translation table.</span>
+228:             <span class="ruby-ivar">@translation</span> = <span class="ruby-keyword kw">nil</span>
+229:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -276,10 +276,10 @@ pattern.
             onclick="toggleCode('M000089-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000089-source">
 <pre>
-     <span class="ruby-comment cmt"># File isolate.rb, line 267</span>
-267:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cds</span>
-268:             <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">splice</span>(<span class="ruby-identifier">splicing</span>)
-269:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File isolate.rb, line 275</span>
+275:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cds</span>
+276:             <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">splice</span>(<span class="ruby-identifier">splicing</span>)
+277:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -299,25 +299,25 @@ pattern.
             onclick="toggleCode('M000093-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000093-source">
 <pre>
-     <span class="ruby-comment cmt"># File isolate.rb, line 289</span>
-289:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
-290:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Sequence +&quot;</span>
-291:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
-292:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* subid: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">subid</span>
-293:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* locus: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">locus</span>
-294:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* accession: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">accession</span>
-295:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* description: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">description</span>
-296:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* source: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">source</span>
-297:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* strand: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">strand</span>.<span class="ruby-identifier">to_s</span>
-298:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* location: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">location</span>
-299:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* location (original): &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">location_original</span>
-300:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* splicing: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">splicing</span>
-301:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* splicing (original): &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">splicing_original</span>
-302:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* pseudogene: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">pseudogene</span>.<span class="ruby-identifier">to_s</span>
-303:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* type: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">type</span>
-304:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* trans_table: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">trans_table</span>.<span class="ruby-identifier">to_s</span>
-305:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;&quot;</span>
-306:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File isolate.rb, line 297</span>
+297:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+298:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Sequence +&quot;</span>
+299:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
+300:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* subid: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">subid</span>
+301:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* locus: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">locus</span>
+302:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* accession: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">accession</span>
+303:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* description: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">description</span>
+304:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* source: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">source</span>
+305:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* strand: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">strand</span>.<span class="ruby-identifier">to_s</span>
+306:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* location: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">location</span>
+307:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* location (original): &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">location_original</span>
+308:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* splicing: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">splicing</span>
+309:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* splicing (original): &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">splicing_original</span>
+310:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* pseudogene: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">pseudogene</span>.<span class="ruby-identifier">to_s</span>
+311:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* type: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">type</span>
+312:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* trans_table: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">trans_table</span>.<span class="ruby-identifier">to_s</span>
+313:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;&quot;</span>
+314:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -337,10 +337,10 @@ pattern.
             onclick="toggleCode('M000086-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000086-source">
 <pre>
-     <span class="ruby-comment cmt"># File isolate.rb, line 241</span>
-241:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">gene</span>
-242:             <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">splice</span>(<span class="ruby-identifier">location</span>)
-243:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File isolate.rb, line 249</span>
+249:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">gene</span>
+250:             <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">splice</span>(<span class="ruby-identifier">location</span>)
+251:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -360,14 +360,14 @@ pattern.
             onclick="toggleCode('M000085-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000085-source">
 <pre>
-     <span class="ruby-comment cmt"># File isolate.rb, line 233</span>
-233:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">location</span>
-234:             <span class="ruby-identifier">x0</span> = <span class="ruby-value">1</span>
-235:             <span class="ruby-identifier">x1</span> = <span class="ruby-identifier">to</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">from</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-236:             <span class="ruby-identifier">loc</span> = <span class="ruby-identifier">x0</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;..&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">x1</span>.<span class="ruby-identifier">to_s</span>
-237:             <span class="ruby-identifier">loc</span> = <span class="ruby-value str">&quot;complement(&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loc</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;)&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>
-238:             <span class="ruby-identifier">loc</span>
-239:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File isolate.rb, line 241</span>
+241:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">location</span>
+242:             <span class="ruby-identifier">x0</span> = <span class="ruby-value">1</span>
+243:             <span class="ruby-identifier">x1</span> = <span class="ruby-identifier">to</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">from</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+244:             <span class="ruby-identifier">loc</span> = <span class="ruby-identifier">x0</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;..&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">x1</span>.<span class="ruby-identifier">to_s</span>
+245:             <span class="ruby-identifier">loc</span> = <span class="ruby-value str">&quot;complement(&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loc</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;)&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>
+246:             <span class="ruby-identifier">loc</span>
+247:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -387,12 +387,12 @@ pattern.
             onclick="toggleCode('M000084-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000084-source">
 <pre>
-     <span class="ruby-comment cmt"># File isolate.rb, line 227</span>
-227:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">location_original</span>
-228:             <span class="ruby-identifier">loc</span> = <span class="ruby-identifier">from</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;..&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">to</span>.<span class="ruby-identifier">to_s</span>
-229:             <span class="ruby-identifier">loc</span> = <span class="ruby-value str">&quot;complement(&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loc</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;)&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>
-230:             <span class="ruby-identifier">loc</span>
-231:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File isolate.rb, line 235</span>
+235:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">location_original</span>
+236:             <span class="ruby-identifier">loc</span> = <span class="ruby-identifier">from</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;..&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">to</span>.<span class="ruby-identifier">to_s</span>
+237:             <span class="ruby-identifier">loc</span> = <span class="ruby-value str">&quot;complement(&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loc</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;)&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>
+238:             <span class="ruby-identifier">loc</span>
+239:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -412,10 +412,10 @@ pattern.
             onclick="toggleCode('M000083-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000083-source">
 <pre>
-     <span class="ruby-comment cmt"># File isolate.rb, line 223</span>
-223:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">size</span>
-224:             <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">length</span>
-225:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File isolate.rb, line 231</span>
+231:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">size</span>
+232:             <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">length</span>
+233:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -444,15 +444,15 @@ whole thing even simpler).
             onclick="toggleCode('M000087-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000087-source">
 <pre>
-     <span class="ruby-comment cmt"># File isolate.rb, line 249</span>
-249:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">splicing</span>
-250:             <span class="ruby-identifier">x0</span> = <span class="ruby-value">1</span>
-251:             <span class="ruby-identifier">x1</span> = <span class="ruby-identifier">to</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">from</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-252:             <span class="ruby-identifier">loc</span> = <span class="ruby-identifier">x0</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;..&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">x1</span>.<span class="ruby-identifier">to_s</span>
-253:             
-254:             <span class="ruby-identifier">loc</span> = <span class="ruby-value str">&quot;complement(&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loc</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;)&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>
-255:             <span class="ruby-identifier">loc</span>
-256:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File isolate.rb, line 257</span>
+257:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">splicing</span>
+258:             <span class="ruby-identifier">x0</span> = <span class="ruby-value">1</span>
+259:             <span class="ruby-identifier">x1</span> = <span class="ruby-identifier">to</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">from</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+260:             <span class="ruby-identifier">loc</span> = <span class="ruby-identifier">x0</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;..&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">x1</span>.<span class="ruby-identifier">to_s</span>
+261:             
+262:             <span class="ruby-identifier">loc</span> = <span class="ruby-value str">&quot;complement(&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loc</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;)&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>
+263:             <span class="ruby-identifier">loc</span>
+264:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -477,12 +477,12 @@ href="Seq.html#M000087">splicing</a> pattern found in the Genbank entry.
             onclick="toggleCode('M000088-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000088-source">
 <pre>
-     <span class="ruby-comment cmt"># File isolate.rb, line 260</span>
-260:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">splicing_original</span>
-261:             <span class="ruby-identifier">loc</span> = <span class="ruby-identifier">from</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;..&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">to</span>.<span class="ruby-identifier">to_s</span>
-262:             <span class="ruby-identifier">loc</span> = <span class="ruby-value str">&quot;complement(&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loc</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;)&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>
-263:             <span class="ruby-identifier">loc</span>
-264:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File isolate.rb, line 268</span>
+268:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">splicing_original</span>
+269:             <span class="ruby-identifier">loc</span> = <span class="ruby-identifier">from</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;..&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">to</span>.<span class="ruby-identifier">to_s</span>
+270:             <span class="ruby-identifier">loc</span> = <span class="ruby-value str">&quot;complement(&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loc</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;)&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>
+271:             <span class="ruby-identifier">loc</span>
+272:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -506,15 +506,15 @@ table.
             onclick="toggleCode('M000090-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000090-source">
 <pre>
-     <span class="ruby-comment cmt"># File isolate.rb, line 272</span>
-272:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">translate</span>(<span class="ruby-identifier">frame</span> = <span class="ruby-value">1</span>, <span class="ruby-identifier">table</span> = <span class="ruby-keyword kw">nil</span>)
-273:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">table</span>
-274:                 <span class="ruby-identifier">t</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">CodonTable</span>[<span class="ruby-identifier">table</span>]
-275:             <span class="ruby-keyword kw">else</span>
-276:                 <span class="ruby-identifier">t</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">CodonTable</span>[<span class="ruby-ivar">@trans_table</span>.<span class="ruby-identifier">to_i</span>]
-277:             <span class="ruby-keyword kw">end</span>
-278:             <span class="ruby-identifier">cds</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-identifier">frame</span>, <span class="ruby-identifier">t</span>)
-279:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File isolate.rb, line 280</span>
+280:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">translate</span>(<span class="ruby-identifier">frame</span> = <span class="ruby-value">1</span>, <span class="ruby-identifier">table</span> = <span class="ruby-keyword kw">nil</span>)
+281:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">table</span>
+282:                 <span class="ruby-identifier">t</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">CodonTable</span>[<span class="ruby-identifier">table</span>]
+283:             <span class="ruby-keyword kw">else</span>
+284:                 <span class="ruby-identifier">t</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">CodonTable</span>[<span class="ruby-ivar">@trans_table</span>.<span class="ruby-identifier">to_i</span>]
+285:             <span class="ruby-keyword kw">end</span>
+286:             <span class="ruby-identifier">cds</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-identifier">frame</span>, <span class="ruby-identifier">t</span>)
+287:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -534,10 +534,10 @@ table.
             onclick="toggleCode('M000092-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000092-source">
 <pre>
-     <span class="ruby-comment cmt"># File isolate.rb, line 285</span>
-285:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">translation</span>
-286:             <span class="ruby-ivar">@translation</span>
-287:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File isolate.rb, line 293</span>
+293:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">translation</span>
+294:             <span class="ruby-ivar">@translation</span>
+295:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -557,10 +557,10 @@ table.
             onclick="toggleCode('M000091-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000091-source">
 <pre>
-     <span class="ruby-comment cmt"># File isolate.rb, line 281</span>
-281:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">translation=</span>(<span class="ruby-identifier">seq</span>)
-282:             <span class="ruby-ivar">@translation</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">seq</span>)
-283:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File isolate.rb, line 289</span>
+289:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">translation=</span>(<span class="ruby-identifier">seq</span>)
+290:             <span class="ruby-ivar">@translation</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">seq</span>)
+291:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

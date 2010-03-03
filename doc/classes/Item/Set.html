@@ -88,7 +88,8 @@
       <div class="name-list">
       <a href="#M000170">&lt;&lt;</a>&nbsp;&nbsp;
       <a href="#M000171">add</a>&nbsp;&nbsp;
-      <a href="#M000176">debug</a>&nbsp;&nbsp;
+      <a href="#M000177">debug</a>&nbsp;&nbsp;
+      <a href="#M000176">delete</a>&nbsp;&nbsp;
       <a href="#M000175">each_value</a>&nbsp;&nbsp;
       <a href="#M000174">get_item_by_id</a>&nbsp;&nbsp;
       <a href="#M000173">length</a>&nbsp;&nbsp;
@@ -219,12 +220,39 @@
         </div>
       </div>
 
+      <div id="method-M000177" class="method-detail">
+        <a name="M000177"></a>
+
+        <div class="method-heading">
+          <a href="#M000177" class="method-signature">
+          <span class="method-name">debug</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000177-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000177-source">
+<pre>
+    <span class="ruby-comment cmt"># File item.rb, line 71</span>
+71:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+72:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* length: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
+73: <span class="ruby-comment cmt">#           each_value do |item|</span>
+74: <span class="ruby-comment cmt">#               item.debug</span>
+75: <span class="ruby-comment cmt">#           end</span>
+76:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;&quot;</span>
+77:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
       <div id="method-M000176" class="method-detail">
         <a name="M000176"></a>
 
         <div class="method-heading">
           <a href="#M000176" class="method-signature">
-          <span class="method-name">debug</span><span class="method-args">()</span>
+          <span class="method-name">delete</span><span class="method-args">(i)</span>
           </a>
         </div>
       
@@ -234,13 +262,10 @@
           <div class="method-source-code" id="M000176-source">
 <pre>
     <span class="ruby-comment cmt"># File item.rb, line 66</span>
-66:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
-67:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* length: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
-68: <span class="ruby-comment cmt">#           each_value do |item|</span>
-69: <span class="ruby-comment cmt">#               item.debug</span>
-70: <span class="ruby-comment cmt">#           end</span>
-71:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;&quot;</span>
-72:         <span class="ruby-keyword kw">end</span>
+66:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">delete</span>(<span class="ruby-identifier">i</span>)
+67:             <span class="ruby-identifier">items</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">i</span>.<span class="ruby-identifier">id</span>)
+68:             <span class="ruby-identifier">ids</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">i</span>.<span class="ruby-identifier">id</span>)
+69:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
