@@ -86,8 +86,8 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000253">new</a>&nbsp;&nbsp;
-      <a href="#M000254">parse</a>&nbsp;&nbsp;
+      <a href="#M000259">new</a>&nbsp;&nbsp;
+      <a href="#M000260">parse</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -147,36 +147,36 @@
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000253" class="method-detail">
-        <a name="M000253"></a>
+      <div id="method-M000259" class="method-detail">
+        <a name="M000259"></a>
 
         <div class="method-heading">
-          <a href="#M000253" class="method-signature">
+          <a href="#M000259" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(options = {:config =&gt; nil, :taxon =&gt; nil, :ortholog =&gt; nil, :empty =&gt; false})</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000253-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000253-source">
+            onclick="toggleCode('M000259-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000259-source">
 <pre>
-     <span class="ruby-comment cmt"># File result.rb, line 711</span>
-711:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">:taxon</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">:ortholog</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">:empty</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>})
-712:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
-713:                 <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
-714:             <span class="ruby-keyword kw">else</span>
-715:                 <span class="ruby-ivar">@config</span> = <span class="ruby-constant">Config</span><span class="ruby-operator">::</span><span class="ruby-constant">General</span>.<span class="ruby-identifier">new</span>
-716:             <span class="ruby-keyword kw">end</span>
-717:             
-718:             
-719:             <span class="ruby-ivar">@taxon</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:taxon</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:taxon</span>]
-720:             <span class="ruby-ivar">@ortholog</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ortholog</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ortholog</span>]
-721:             
-722:             <span class="ruby-ivar">@file</span> = <span class="ruby-keyword kw">nil</span>
-723:             <span class="ruby-ivar">@result_id</span> = <span class="ruby-keyword kw">nil</span>
-724:             <span class="ruby-ivar">@type</span> = <span class="ruby-keyword kw">nil</span>
-725:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File result.rb, line 761</span>
+761:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">:taxon</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">:ortholog</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">:empty</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>})
+762:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+763:                 <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+764:             <span class="ruby-keyword kw">else</span>
+765:                 <span class="ruby-ivar">@config</span> = <span class="ruby-constant">Config</span><span class="ruby-operator">::</span><span class="ruby-constant">General</span>.<span class="ruby-identifier">new</span>
+766:             <span class="ruby-keyword kw">end</span>
+767:             
+768:             
+769:             <span class="ruby-ivar">@taxon</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:taxon</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:taxon</span>]
+770:             <span class="ruby-ivar">@ortholog</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ortholog</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ortholog</span>]
+771:             
+772:             <span class="ruby-ivar">@file</span> = <span class="ruby-keyword kw">nil</span>
+773:             <span class="ruby-ivar">@result_id</span> = <span class="ruby-keyword kw">nil</span>
+774:             <span class="ruby-ivar">@type</span> = <span class="ruby-keyword kw">nil</span>
+775:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -184,23 +184,28 @@
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000254" class="method-detail">
-        <a name="M000254"></a>
+      <div id="method-M000260" class="method-detail">
+        <a name="M000260"></a>
 
         <div class="method-heading">
-          <a href="#M000254" class="method-signature">
+          <a href="#M000260" class="method-signature">
           <span class="method-name">parse</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000254-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000254-source">
+            onclick="toggleCode('M000260-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000260-source">
 <pre>
-     <span class="ruby-comment cmt"># File result.rb, line 727</span>
-727:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parse</span>
-728:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File result.rb, line 777</span>
+777:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parse</span>
+778:             <span class="ruby-identifier">result</span> = <span class="ruby-constant">Result</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">result_id</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+779:             <span class="ruby-identifier">result</span>.<span class="ruby-identifier">taxon</span> = <span class="ruby-identifier">taxon</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">taxon</span>
+780:             <span class="ruby-identifier">result</span>.<span class="ruby-identifier">ortholog</span> = <span class="ruby-identifier">ortholog</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ortholog</span>
+781:             
+782:             <span class="ruby-identifier">result</span>
+783:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

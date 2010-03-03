@@ -88,10 +88,8 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000266">debug</a>&nbsp;&nbsp;
-      <a href="#M000263">new</a>&nbsp;&nbsp;
-      <a href="#M000265">parse</a>&nbsp;&nbsp;
-      <a href="#M000264">scan</a>&nbsp;&nbsp;
+      <a href="#M000271">debug</a>&nbsp;&nbsp;
+      <a href="#M000270">new</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -136,11 +134,11 @@
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000263" class="method-detail">
-        <a name="M000263"></a>
+      <div id="method-M000270" class="method-detail">
+        <a name="M000270"></a>
 
         <div class="method-heading">
-          <a href="#M000263" class="method-signature">
+          <a href="#M000270" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(taxon, ortholog)</span>
           </a>
         </div>
@@ -150,15 +148,15 @@
 TODO: fix config method.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000263-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000263-source">
+            onclick="toggleCode('M000270-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000270-source">
 <pre>
-    <span class="ruby-comment cmt"># File scan.rb, line 56</span>
-56:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span> (<span class="ruby-identifier">taxon</span>, <span class="ruby-identifier">ortholog</span>)
-57:             <span class="ruby-ivar">@taxon</span> = <span class="ruby-identifier">taxon</span>
-58:             <span class="ruby-ivar">@ortholog</span> = <span class="ruby-identifier">ortholog</span>
-59:             <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span>)
-60:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File scan.rb, line 113</span>
+113:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span> (<span class="ruby-identifier">taxon</span>, <span class="ruby-identifier">ortholog</span>)
+114:             <span class="ruby-ivar">@taxon</span> = <span class="ruby-identifier">taxon</span>
+115:             <span class="ruby-ivar">@ortholog</span> = <span class="ruby-identifier">ortholog</span>
+116:             <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span>)
+117:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -166,93 +164,29 @@ TODO: fix config method.
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000266" class="method-detail">
-        <a name="M000266"></a>
+      <div id="method-M000271" class="method-detail">
+        <a name="M000271"></a>
 
         <div class="method-heading">
-          <a href="#M000266" class="method-signature">
+          <a href="#M000271" class="method-signature">
           <span class="method-name">debug</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000266-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000266-source">
+            onclick="toggleCode('M000271-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000271-source">
 <pre>
-    <span class="ruby-comment cmt"># File scan.rb, line 88</span>
-88:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
-89:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Scan +&quot;</span>
-90:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
-91:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* taxon: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>
-92:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* ortholog: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span>
-93:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* type: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">type</span>.<span class="ruby-identifier">name</span>
-94:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* hmm: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">hmm</span>
-95:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000265" class="method-detail">
-        <a name="M000265"></a>
-
-        <div class="method-heading">
-          <a href="#M000265" class="method-signature">
-          <span class="method-name">parse</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000265-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000265-source">
-<pre>
-    <span class="ruby-comment cmt"># File scan.rb, line 85</span>
-85:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parse</span>
-86:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000264" class="method-detail">
-        <a name="M000264"></a>
-
-        <div class="method-heading">
-          <a href="#M000264" class="method-signature">
-          <span class="method-name">scan</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000264-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000264-source">
-<pre>
-    <span class="ruby-comment cmt"># File scan.rb, line 62</span>
-62:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">scan</span>
-63:             <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">type</span>
-64:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'spp'</span>
-65:                 <span class="ruby-identifier">dir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;genome/fasta&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span>
-66:                 <span class="ruby-identifier">outdir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;genome/scan&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span>
-67:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'clade'</span>
-68:                 <span class="ruby-identifier">dir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;isolate/fasta&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span>
-69:                 <span class="ruby-identifier">outdir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;isolate/scan&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span>
-70:             <span class="ruby-keyword kw">end</span>
-71:             <span class="ruby-identifier">file</span> = <span class="ruby-identifier">dir</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_protein.fa&quot;</span>)
-72:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">exist?</span>
-73:                 <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* search domains in: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">file</span>
-74:                 <span class="ruby-identifier">ts</span> = <span class="ruby-constant">Tools</span><span class="ruby-operator">::</span><span class="ruby-constant">Hmmer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;hmmscan&quot;</span>)
-75:                 <span class="ruby-identifier">ts</span>.<span class="ruby-identifier">model</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_pfam_current</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;Pfam-A.hmm&quot;</span>
-76:                 <span class="ruby-identifier">ts</span>.<span class="ruby-identifier">infile</span> = <span class="ruby-identifier">file</span>
-77:                 <span class="ruby-identifier">ts</span>.<span class="ruby-identifier">outfile</span> = <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_protein.log&quot;</span>)
-78:                 <span class="ruby-identifier">ts</span>.<span class="ruby-identifier">table_file</span> = <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_protein.txt&quot;</span>)
-79:                 <span class="ruby-identifier">ts</span>.<span class="ruby-identifier">debug</span>
-80: <span class="ruby-comment cmt">#               res = ts.execute</span>
-81: <span class="ruby-comment cmt">#               _check_result(res)</span>
-82:             <span class="ruby-keyword kw">end</span>
-83:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File scan.rb, line 119</span>
+119:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+120:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Scan +&quot;</span>
+121:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
+122:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* taxon: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>
+123:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* ortholog: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span>
+124:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* type: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">type</span>.<span class="ruby-identifier">name</span>
+125:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* hmm: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">hmm</span>
+126:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

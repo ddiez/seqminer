@@ -202,12 +202,12 @@
             onclick="toggleCode('M000040-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000040-source">
 <pre>
-     <span class="ruby-comment cmt"># File search.rb, line 208</span>
-208:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
-209:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ SEARCH SET +&quot;</span>
-210:             <span class="ruby-keyword kw">super</span>
-211:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;&quot;</span>
-212:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File search.rb, line 216</span>
+216:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+217:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ SEARCH SET +&quot;</span>
+218:             <span class="ruby-keyword kw">super</span>
+219:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;&quot;</span>
+220:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -229,7 +229,7 @@
 <pre>
      <span class="ruby-comment cmt"># File search.rb, line 124</span>
 124:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each_search</span>
-125:             <span class="ruby-identifier">items</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+125:             <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
 126:                 <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">value</span>
 127:             <span class="ruby-keyword kw">end</span>
 128:         <span class="ruby-keyword kw">end</span>
@@ -258,38 +258,46 @@ this method parses results from a <a href="Set.html#M000038">search</a>.
      <span class="ruby-comment cmt"># File search.rb, line 173</span>
 173:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parse</span>
 174:             <span class="ruby-identifier">rs</span> = <span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
-175:             <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">search</span><span class="ruby-operator">|</span>
-176:                 <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">search</span>.<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">type</span>
-177:                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'spp'</span>
-178:                     <span class="ruby-identifier">file</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;genome/search&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">search</span>.<span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">search</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.txt&quot;</span>)
-179:                     
-180:                     <span class="ruby-identifier">rp</span> = <span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">HmmerParser</span>.<span class="ruby-identifier">new</span>
-181:                     <span class="ruby-identifier">rp</span>.<span class="ruby-identifier">file</span> = <span class="ruby-identifier">file</span>
-182:                     <span class="ruby-identifier">rp</span>.<span class="ruby-identifier">result_id</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">id</span>
-183:                     <span class="ruby-identifier">rp</span>.<span class="ruby-identifier">type</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">type</span>.<span class="ruby-identifier">name</span>
-184:                     <span class="ruby-identifier">rp</span>.<span class="ruby-identifier">config</span> = <span class="ruby-identifier">config</span> <span class="ruby-comment cmt"># this makes sense in this case since HmmerParse is not using Config, but passing it to the Result.</span>
-185:                     <span class="ruby-identifier">r</span> = <span class="ruby-identifier">rp</span>.<span class="ruby-identifier">parse</span>
-186:                     <span class="ruby-identifier">r</span>.<span class="ruby-identifier">taxon</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">taxon</span>
-187:                     <span class="ruby-identifier">r</span>.<span class="ruby-identifier">ortholog</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">ortholog</span>
-188:                     <span class="ruby-identifier">r</span>.<span class="ruby-identifier">type</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">type</span>
-189:                     <span class="ruby-identifier">rs</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">r</span>
-190:                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'clade'</span>
-191:                     <span class="ruby-identifier">file</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;isolate/search&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">search</span>.<span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">search</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.txt&quot;</span>)
-192:                     
-193:                     <span class="ruby-identifier">rp</span> = <span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">BlastParser</span>.<span class="ruby-identifier">new</span>
-194:                     <span class="ruby-identifier">rp</span>.<span class="ruby-identifier">file</span> = <span class="ruby-identifier">file</span>
-195:                     <span class="ruby-identifier">rp</span>.<span class="ruby-identifier">result_id</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">id</span>
-196:                     <span class="ruby-identifier">rp</span>.<span class="ruby-identifier">type</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">type</span>.<span class="ruby-identifier">name</span>
-197:                     <span class="ruby-identifier">rp</span>.<span class="ruby-identifier">config</span> = <span class="ruby-identifier">config</span>
-198:                     <span class="ruby-identifier">r</span> = <span class="ruby-identifier">rp</span>.<span class="ruby-identifier">parse</span>
-199:                     <span class="ruby-identifier">r</span>.<span class="ruby-identifier">taxon</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">taxon</span>
-200:                     <span class="ruby-identifier">r</span>.<span class="ruby-identifier">ortholog</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">ortholog</span>
-201:                     <span class="ruby-identifier">r</span>.<span class="ruby-identifier">type</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">type</span>
-202:                     <span class="ruby-identifier">rs</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">r</span>
-203:                 <span class="ruby-keyword kw">end</span>
-204:             <span class="ruby-keyword kw">end</span>
-205:             <span class="ruby-identifier">rs</span>
-206:         <span class="ruby-keyword kw">end</span>
+175:             
+176:             <span class="ruby-identifier">transferred</span> = <span class="ruby-value">0</span>
+177:             <span class="ruby-identifier">pb</span> = <span class="ruby-constant">ProgressBar</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;Search results&quot;</span>, <span class="ruby-value">100</span>)
+178:             <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">search</span><span class="ruby-operator">|</span>
+179:                 <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">search</span>.<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">type</span>
+180:                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'spp'</span>
+181:                     <span class="ruby-identifier">file</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;genome/search&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">search</span>.<span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">search</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.txt&quot;</span>)
+182:                     
+183:                     <span class="ruby-identifier">rp</span> = <span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">HmmerParser</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:tool</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'hmmsearch'</span>})
+184:                     <span class="ruby-identifier">rp</span>.<span class="ruby-identifier">file</span> = <span class="ruby-identifier">file</span>
+185:                     <span class="ruby-identifier">rp</span>.<span class="ruby-identifier">result_id</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">id</span>
+186:                     <span class="ruby-identifier">rp</span>.<span class="ruby-identifier">type</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">type</span>.<span class="ruby-identifier">name</span>
+187:                     <span class="ruby-identifier">rp</span>.<span class="ruby-identifier">config</span> = <span class="ruby-identifier">config</span> <span class="ruby-comment cmt"># this makes sense in this case since HmmerParse is not using Config, but passing it to the Result.</span>
+188:                     <span class="ruby-identifier">r</span> = <span class="ruby-identifier">rp</span>.<span class="ruby-identifier">parse</span>
+189:                     <span class="ruby-identifier">r</span>.<span class="ruby-identifier">taxon</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">taxon</span>
+190:                     <span class="ruby-identifier">r</span>.<span class="ruby-identifier">ortholog</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">ortholog</span>
+191:                     <span class="ruby-identifier">r</span>.<span class="ruby-identifier">type</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">type</span>
+192:                     <span class="ruby-identifier">rs</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">r</span>
+193:                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'clade'</span>
+194:                     <span class="ruby-identifier">file</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;isolate/search&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">search</span>.<span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">search</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.txt&quot;</span>)
+195:                     
+196:                     <span class="ruby-identifier">rp</span> = <span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">BlastParser</span>.<span class="ruby-identifier">new</span>
+197:                     <span class="ruby-identifier">rp</span>.<span class="ruby-identifier">file</span> = <span class="ruby-identifier">file</span>
+198:                     <span class="ruby-identifier">rp</span>.<span class="ruby-identifier">result_id</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">id</span>
+199:                     <span class="ruby-identifier">rp</span>.<span class="ruby-identifier">type</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">type</span>.<span class="ruby-identifier">name</span>
+200:                     <span class="ruby-identifier">rp</span>.<span class="ruby-identifier">config</span> = <span class="ruby-identifier">config</span>
+201:                     <span class="ruby-identifier">r</span> = <span class="ruby-identifier">rp</span>.<span class="ruby-identifier">parse</span>
+202:                     <span class="ruby-identifier">r</span>.<span class="ruby-identifier">taxon</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">taxon</span>
+203:                     <span class="ruby-identifier">r</span>.<span class="ruby-identifier">ortholog</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">ortholog</span>
+204:                     <span class="ruby-identifier">r</span>.<span class="ruby-identifier">type</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">type</span>
+205:                     <span class="ruby-identifier">rs</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">r</span>
+206:                 <span class="ruby-keyword kw">end</span>
+207:                 <span class="ruby-identifier">transferred</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+208:                 <span class="ruby-identifier">percent_finished</span> = <span class="ruby-value">100</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">transferred</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_f</span>)
+209:                 <span class="ruby-identifier">pb</span>.<span class="ruby-identifier">set</span>(<span class="ruby-identifier">percent_finished</span>)
+210:             <span class="ruby-keyword kw">end</span>
+211:             <span class="ruby-identifier">pb</span>.<span class="ruby-identifier">finish</span>
+212:             
+213:             <span class="ruby-identifier">rs</span>
+214:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
