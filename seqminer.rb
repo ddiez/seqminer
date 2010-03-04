@@ -349,8 +349,10 @@ module SeqMiner
 		end
 		
 		#
-		def get_scan_results(eval = 0.001)
+		def get_scan_results(eval = 0.01)
 			@scan_result = scan.parse 
+			scan_result.filter_domain_by_eval(eval)
+			scan_result.clean_up
 		end
 		
 		# Parses the HMMER files, performs auto_merge and obtains the results (given an Evalue thereshold).
@@ -366,6 +368,13 @@ module SeqMiner
 				get_search_results
 			end
 			result.write_nelson
+		end
+		
+		def write_domain
+			if scan_result.nil?
+				get_scan_results
+			end
+			scan_result.write_domain
 		end
 
 		# Pipeline-wise write_fasta.

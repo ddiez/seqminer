@@ -193,7 +193,7 @@ module Search
 				when 'clade'
 					file = config.dir_result + "isolate/search" + search.ortholog.name + (search.id + ".txt")
 					
-					rp = Result::BlastParser.new(options = {:tool => 'tblastn'})
+					rp = Result::BlastParser.new(options = {:tool => 'psitblastn'})
 					rp.file = file
 					rp.result_id = search.id
 					rp.type = search.type.name

@@ -345,6 +345,22 @@ module Result
 				delete(i)
 			end
 		end
+		
+		def filter_domain_by_eval(val = 0.001)
+			each_sequence do |seq|
+				seq.each_sequencehit do |sh|
+					dd = []
+					sh.each_domain do |domain|
+						dd << domain if domain.eval > val
+					end
+					dd.each do |i|
+						sh.delete(i)
+					end
+					seq.delete(sh) if sh.length == 0
+				end
+				delete(seq) if seq.length == 0
+			end
+		end
 
 		# Removes subhits on the basis of an Score cutoff (<). If no subhits remain the it
 		# removes the hit from the result.
@@ -543,6 +559,33 @@ module Result
 			end
 		end
 		
+		def write_domain
+			puts "SEQUENCE\tdomnum\tdomnumtot\tdoms"
+			each_sequence do |seq|
+				doms = []
+				domsn = 0
+				dhn = 0
+				loc = []
+				seq.each_sequencehit do |sh|
+					sh.each_domain do |dom|
+						#next if dom.eval > 0.01
+						domc = dom.id + ":"
+						domsn += 1
+						tmp = []
+						dom.each_domainhit do |dh|
+							tmp << dh.hmm_from.to_s + ".." + dh.hmm_to.to_s + "[" + dh.score.to_s + "|" + dh.ieval.to_s + "]"
+							dhn += 1
+						end
+						tmp = tmp.join(",")
+						loc << "[" + tmp + "]"
+						doms << domc + tmp
+					end
+				end
+				doms = doms.join(";")
+				puts seq.id + "\t" + domsn.to_s + "\t" + dhn.to_s + "\t" + doms
+			end
+		end
+		
 		def debug
 			warn "+ Result +"
 			warn "* result id: " + id
@@ -677,6 +720,18 @@ module Result
 			end
 		end
 
+		# Exports domain data in format suitable for varDB (a.k.a. Nelson format).
+		def write_domain
+			warn "+ WRITE DOMAIN +"
+			debug 
+			each_result do |result|
+				if result.length > 0
+					warn "* " + result.taxon.name + " / " + result.ortholog.name
+					result.write_domain
+				end
+			end
+		end
+
 		# Exports sequences in FASTA format.
 		def write_fasta
 			warn "+ WRITE FASTA +"
@@ -694,6 +749,12 @@ module Result
 				if result.length > 0
 					result.filter_by_eval(cut)
 				end
+			end
+		end
+		
+		def filter_domain_by_eval(cut = 0.001)
+			each_result do |result|
+				result.filter_domain_by_eval(cut)
 			end
 		end
 
