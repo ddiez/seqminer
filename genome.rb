@@ -195,7 +195,7 @@ module Genome
 					gene.to.to_s + "\t" + \
 					"-" + "\t" + \
 					desc
-				gene.oitems.each do |exon|
+				gene.each_exon do |exon|
 					fo.puts gene.id + "\t" + \
 						gene.source + "\t" + \
 						"exon" + "\t" + \
@@ -243,7 +243,7 @@ module Genome
 					gene.references.to_s + "\t" +
 					gene.type + "\t" +
 					gene.description
-				gene.oitems.each do |exon|
+				gene.each_exon do |exon|
 					fo.puts gene.id + "\t" +
 						"\t" +
 						"\t" +
@@ -341,19 +341,23 @@ module Genome
 	class Gene < Item
 		attr_accessor :source, :chromosome, :strand, :from, :to, :description, :pseudogene, :sequence
 		attr_accessor :trans_table, :type, :references
-		attr_reader :oitems, :size
+		attr_reader :size
 
 		def initialize(id)
 			super
 			@description = ""
 			@pseudogene = 0
 			@trans_table = 1 # assume the default and pray we can get the information somewhere.
-			@oitems = []
 		end
-
+		
+		def each_exon
+			each_value do |value|
+				yield value
+			end
+		end
+		
 		def size
 			sequence.length
-			#to.to_i - from.to_i
 		end
 		
 		def location_original
@@ -375,7 +379,6 @@ module Genome
 		end
 
 		def cds
-			#debug(verbose = TRUE)
 			sequence.splice(splicing)
 		end
 		
@@ -396,19 +399,18 @@ module Genome
 		# This methods returns the splicing pattern in gene coordinates. In other words, it is used to extract
 		# the exonic sequence (and potentially the introns) from the gene sequence.
 		def splicing
-			loc =[]
-			
+			loc = []
 			case strand
 			when 1
-				exons = oitems
+				exons = ids
 			when -1
-				exons = oitems.reverse
+				exons = ids.reverse
 			end
 			
-			f0 = exons[0].from
+			f0 = items[exons[0]].from
 			exons.each do |exon|
-				x0 = exon.from - f0 + 1
-				x1 = exon.to - f0 + 1
+				x0 = items[exon].from - f0 + 1
+				x1 = items[exon].to - f0 + 1
 				loc << x0.to_s + ".." + x1.to_s
 			end
 			loc = loc.join(",")
@@ -420,43 +422,38 @@ module Genome
 		# This method is just a variation of splicing, that does not use the join() and complement() notation.
 		# It is used for Nelson files.
 		def splicing_nelson
-			loc =[]
-						
+			loc = []
 			case strand
 			when 1
-				exons = oitems
+				exons = ids
 			when -1
-				exons = oitems.reverse
+				exons = ids.reverse
 			end
 			
-			f0 = exons[0].from
+			f0 = items[exons[0]].from
 			exons.each do |exon|
-				x0 = exon.from - f0 + 1
-				x1 = exon.to - f0 + 1
+				x0 = items[exon].from - f0 + 1
+				x1 = items[exon].to - f0 + 1
 				loc << x0.to_s + ".." + x1.to_s
 			end
 			loc = loc.join(",")
-			#loc = "join(" + loc + ")" if length > 1
-			#loc = "complement(" + loc + ")" if strand == -1
 			loc
 		end
 		
 		# This methods displays the original splicing pattern based on the genomic coordinates. It can be used to 
 		# extract the exons from the genome sequence. It is intended mainly as a check method.
 		def splicing_original
-			loc =[]
-						
+			loc = []
 			case strand
 			when 1
-				exons = oitems
+				exons = ids
 			when -1
-				exons = oitems.reverse
+				exons = ids.reverse
 			end
 			
-			#f0 = exons[0].from
 			exons.each do |exon|
-				x0 = exon.from #- f0 + 1
-				x1 = exon.to #- f0 + 1
+				x0 = items[exon].from
+				x1 = items[exon].to
 				loc << x0.to_s + ".." + x1.to_s
 			end
 			loc = loc.join(",")
@@ -465,15 +462,6 @@ module Genome
 			loc
 		end
 		
-		def << (exon)
-			add(exon)
-		end
-		
-		def add(exon)
-			@oitems << exon
-			super(exon)
-		end
-
 		def debug(verbose = false)
 			warn "+ Gene +"
 			warn "* id: " + id
@@ -487,6 +475,7 @@ module Genome
 			warn "* exons: " + length.to_s
 			warn "* splicing: " + splicing
 			warn "* splicing (original): " + splicing_original
+			warn "* splicing (nelson): " + splicing_nelson
 			warn "* pseudogene: " + pseudogene.to_s
 			if verbose
 				each_value do |exon|

@@ -98,19 +98,19 @@ nucleotide results in the same sequence hit.
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000220">best_subhit</a>&nbsp;&nbsp;
-      <a href="#M000223">coherent?</a>&nbsp;&nbsp;
-      <a href="#M000228">debug</a>&nbsp;&nbsp;
-      <a href="#M000217">each_sequencehit</a>&nbsp;&nbsp;
-      <a href="#M000218">eval</a>&nbsp;&nbsp;
-      <a href="#M000225">has_complete?</a>&nbsp;&nbsp;
-      <a href="#M000224">has_fragment?</a>&nbsp;&nbsp;
-      <a href="#M000221">has_nucleotide?</a>&nbsp;&nbsp;
-      <a href="#M000222">has_protein?</a>&nbsp;&nbsp;
-      <a href="#M000226">max_completeness</a>&nbsp;&nbsp;
-      <a href="#M000227">min_completeness</a>&nbsp;&nbsp;
-      <a href="#M000216">new</a>&nbsp;&nbsp;
-      <a href="#M000219">score</a>&nbsp;&nbsp;
+      <a href="#M000219">best_subhit</a>&nbsp;&nbsp;
+      <a href="#M000222">coherent?</a>&nbsp;&nbsp;
+      <a href="#M000227">debug</a>&nbsp;&nbsp;
+      <a href="#M000216">each_sequencehit</a>&nbsp;&nbsp;
+      <a href="#M000217">eval</a>&nbsp;&nbsp;
+      <a href="#M000224">has_complete?</a>&nbsp;&nbsp;
+      <a href="#M000223">has_fragment?</a>&nbsp;&nbsp;
+      <a href="#M000220">has_nucleotide?</a>&nbsp;&nbsp;
+      <a href="#M000221">has_protein?</a>&nbsp;&nbsp;
+      <a href="#M000225">max_completeness</a>&nbsp;&nbsp;
+      <a href="#M000226">min_completeness</a>&nbsp;&nbsp;
+      <a href="#M000215">new</a>&nbsp;&nbsp;
+      <a href="#M000218">score</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -150,24 +150,24 @@ nucleotide results in the same sequence hit.
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000216" class="method-detail">
-        <a name="M000216"></a>
+      <div id="method-M000215" class="method-detail">
+        <a name="M000215"></a>
 
         <div class="method-heading">
-          <a href="#M000216" class="method-signature">
+          <a href="#M000215" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(id)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000216-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000216-source">
+            onclick="toggleCode('M000215-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000215-source">
 <pre>
-     <span class="ruby-comment cmt"># File result.rb, line 175</span>
-175:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>)
-176:             <span class="ruby-keyword kw">super</span>
-177:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File result.rb, line 181</span>
+181:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>)
+182:             <span class="ruby-keyword kw">super</span>
+183:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -175,11 +175,11 @@ nucleotide results in the same sequence hit.
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000220" class="method-detail">
-        <a name="M000220"></a>
+      <div id="method-M000219" class="method-detail">
+        <a name="M000219"></a>
 
         <div class="method-heading">
-          <a href="#M000220" class="method-signature">
+          <a href="#M000219" class="method-signature">
           <span class="method-name">best_subhit</span><span class="method-args">()</span>
           </a>
         </div>
@@ -189,229 +189,25 @@ nucleotide results in the same sequence hit.
 Finds the best SubHit in a Hit.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000220-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000220-source">
+            onclick="toggleCode('M000219-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000219-source">
 <pre>
-     <span class="ruby-comment cmt"># File result.rb, line 194</span>
-194:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">best_subhit</span>
-195:             <span class="ruby-comment cmt"># If there is a &quot;protein&quot; SubHit that will be the best one. This assumes that only</span>
-196:             <span class="ruby-comment cmt"># one protein SubHit will be present. This may change in the future.</span>
-197:             <span class="ruby-identifier">hp</span> = <span class="ruby-identifier">has_protein?</span>
-198:             <span class="ruby-identifier">csh</span> = <span class="ruby-keyword kw">nil</span>
-199:             <span class="ruby-identifier">cbe</span> = <span class="ruby-keyword kw">nil</span>
-200:             <span class="ruby-identifier">each_sequencehit</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subhit</span><span class="ruby-operator">|</span>
-201:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">subhit</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">hp</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">subhit</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;protein&quot;</span>
-202:                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">cbe</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">subhit</span>.<span class="ruby-identifier">eval</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">cbe</span>
-203:                     <span class="ruby-identifier">csh</span> = <span class="ruby-identifier">subhit</span>
-204:                     <span class="ruby-identifier">cbe</span> = <span class="ruby-identifier">subhit</span>.<span class="ruby-identifier">eval</span>
-205:                 <span class="ruby-keyword kw">end</span>
-206:             <span class="ruby-keyword kw">end</span>
-207:             <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">csh</span>
-208:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000223" class="method-detail">
-        <a name="M000223"></a>
-
-        <div class="method-heading">
-          <a href="#M000223" class="method-signature">
-          <span class="method-name">coherent?</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-A Hit is coherent if all of the SubHit are coherent.
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000223-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000223-source">
-<pre>
-     <span class="ruby-comment cmt"># File result.rb, line 227</span>
-227:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">coherent?</span>
-228:             <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">has_nucleotide?</span>
-229:             
-230:             <span class="ruby-identifier">s</span> = []
-231:             <span class="ruby-identifier">p</span> = []
-232:             
-233:             <span class="ruby-identifier">each_sequencehit</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subhit</span><span class="ruby-operator">|</span>
-234:                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">subhit</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;nucleotide&quot;</span>
-235:                     <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">subhit</span>.<span class="ruby-identifier">strand</span>
-236:                     <span class="ruby-identifier">p</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">subhit</span>.<span class="ruby-identifier">frame</span>
-237:                 <span class="ruby-keyword kw">end</span>
-238:             <span class="ruby-keyword kw">end</span>
-239:             <span class="ruby-identifier">p</span>.<span class="ruby-identifier">uniq</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">uniq</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
-240:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000228" class="method-detail">
-        <a name="M000228"></a>
-
-        <div class="method-heading">
-          <a href="#M000228" class="method-signature">
-          <span class="method-name">debug</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000228-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000228-source">
-<pre>
-     <span class="ruby-comment cmt"># File result.rb, line 278</span>
-278:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
-279:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Result::Sequence +&quot;</span>
-280:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
-281:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* score: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">score</span>.<span class="ruby-identifier">to_s</span>
-282:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* e-value: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">eval</span>.<span class="ruby-identifier">to_s</span>
-283:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* has_complete?: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">has_complete?</span>.<span class="ruby-identifier">to_s</span>
-284:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* has_fragment?: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">has_fragment?</span>.<span class="ruby-identifier">to_s</span>
-285:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* coherent?: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">coherent?</span>.<span class="ruby-identifier">to_s</span>
-286:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* taxon: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">nil?</span>
-287:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* ortholog: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">nil?</span>
-288:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000217" class="method-detail">
-        <a name="M000217"></a>
-
-        <div class="method-heading">
-          <a href="#M000217" class="method-signature">
-          <span class="method-name">each_sequencehit</span><span class="method-args">() {|value| ...}</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000217-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000217-source">
-<pre>
-     <span class="ruby-comment cmt"># File result.rb, line 179</span>
-179:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each_sequencehit</span>
-180:             <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
-181:                 <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">value</span>
-182:             <span class="ruby-keyword kw">end</span>
-183:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000218" class="method-detail">
-        <a name="M000218"></a>
-
-        <div class="method-heading">
-          <a href="#M000218" class="method-signature">
-          <span class="method-name">eval</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000218-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000218-source">
-<pre>
-     <span class="ruby-comment cmt"># File result.rb, line 185</span>
-185:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">eval</span>
-186:             <span class="ruby-identifier">best_subhit</span>.<span class="ruby-identifier">eval</span>
-187:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000225" class="method-detail">
-        <a name="M000225"></a>
-
-        <div class="method-heading">
-          <a href="#M000225" class="method-signature">
-          <span class="method-name">has_complete?</span><span class="method-args">(cut = 1)</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-A Hit has_complete if any of the SubHit has_complete.
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000225-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000225-source">
-<pre>
-     <span class="ruby-comment cmt"># File result.rb, line 251</span>
-251:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">has_complete?</span>(<span class="ruby-identifier">cut</span> = <span class="ruby-value">1</span>)
-252:             <span class="ruby-identifier">each_sequencehit</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subhit</span><span class="ruby-operator">|</span>
-253:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">subhit</span>.<span class="ruby-identifier">has_complete?</span>(<span class="ruby-identifier">cut</span>)
-254:             <span class="ruby-keyword kw">end</span>
-255:             <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
-256:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000224" class="method-detail">
-        <a name="M000224"></a>
-
-        <div class="method-heading">
-          <a href="#M000224" class="method-signature">
-          <span class="method-name">has_fragment?</span><span class="method-args">(cut = 1)</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-A Hit has_fragment if any of the SubHit has_fragment.
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000224-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000224-source">
-<pre>
-     <span class="ruby-comment cmt"># File result.rb, line 243</span>
-243:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">has_fragment?</span>(<span class="ruby-identifier">cut</span> = <span class="ruby-value">1</span>)
-244:             <span class="ruby-identifier">each_sequencehit</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">sh</span><span class="ruby-operator">|</span>
-245:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">has_fragment?</span>(<span class="ruby-identifier">cut</span>)
-246:             <span class="ruby-keyword kw">end</span>
-247:             <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
-248:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000221" class="method-detail">
-        <a name="M000221"></a>
-
-        <div class="method-heading">
-          <a href="#M000221" class="method-signature">
-          <span class="method-name">has_nucleotide?</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-Checks whether a hit contains a SubHit of type &quot;nucleotide&quot;
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000221-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000221-source">
-<pre>
-     <span class="ruby-comment cmt"># File result.rb, line 211</span>
-211:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">has_nucleotide?</span>
-212:             <span class="ruby-identifier">each_sequencehit</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subhit</span><span class="ruby-operator">|</span>
-213:                 <span class="ruby-comment cmt">#return true if subhit.type == &quot;nucleotide&quot;</span>
-214:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">subhit</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;6frame&quot;</span>
-215:             <span class="ruby-keyword kw">end</span>
-216:             <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
-217:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File result.rb, line 200</span>
+200:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">best_subhit</span>
+201:             <span class="ruby-comment cmt"># If there is a &quot;protein&quot; SubHit that will be the best one. This assumes that only</span>
+202:             <span class="ruby-comment cmt"># one protein SubHit will be present. This may change in the future.</span>
+203:             <span class="ruby-identifier">hp</span> = <span class="ruby-identifier">has_protein?</span>
+204:             <span class="ruby-identifier">csh</span> = <span class="ruby-keyword kw">nil</span>
+205:             <span class="ruby-identifier">cbe</span> = <span class="ruby-keyword kw">nil</span>
+206:             <span class="ruby-identifier">each_sequencehit</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subhit</span><span class="ruby-operator">|</span>
+207:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">subhit</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">hp</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">subhit</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;protein&quot;</span>
+208:                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">cbe</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">subhit</span>.<span class="ruby-identifier">eval</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">cbe</span>
+209:                     <span class="ruby-identifier">csh</span> = <span class="ruby-identifier">subhit</span>
+210:                     <span class="ruby-identifier">cbe</span> = <span class="ruby-identifier">subhit</span>.<span class="ruby-identifier">eval</span>
+211:                 <span class="ruby-keyword kw">end</span>
+212:             <span class="ruby-keyword kw">end</span>
+213:             <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">csh</span>
+214:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -422,54 +218,33 @@ Checks whether a hit contains a SubHit of type &quot;nucleotide&quot;
 
         <div class="method-heading">
           <a href="#M000222" class="method-signature">
-          <span class="method-name">has_protein?</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000222-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000222-source">
-<pre>
-     <span class="ruby-comment cmt"># File result.rb, line 219</span>
-219:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">has_protein?</span>
-220:             <span class="ruby-identifier">each_sequencehit</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subhit</span><span class="ruby-operator">|</span>
-221:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">subhit</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;protein&quot;</span>
-222:             <span class="ruby-keyword kw">end</span>
-223:             <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
-224:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000226" class="method-detail">
-        <a name="M000226"></a>
-
-        <div class="method-heading">
-          <a href="#M000226" class="method-signature">
-          <span class="method-name">max_completeness</span><span class="method-args">()</span>
+          <span class="method-name">coherent?</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Obtains the maximum completeness found in any of the SubHits within the
-Hit.
+A Hit is coherent if all of the SubHit are coherent.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000226-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000226-source">
+            onclick="toggleCode('M000222-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000222-source">
 <pre>
-     <span class="ruby-comment cmt"># File result.rb, line 259</span>
-259:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">max_completeness</span>
-260:             <span class="ruby-identifier">mc</span> = <span class="ruby-value">0</span>
-261:             <span class="ruby-identifier">each_sequencehit</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subhit</span><span class="ruby-operator">|</span>
-262:                 <span class="ruby-identifier">smc</span> = <span class="ruby-identifier">subhit</span>.<span class="ruby-identifier">max_completeness</span>
-263:                 <span class="ruby-identifier">mc</span> = <span class="ruby-identifier">smc</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">smc</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">mc</span>
-264:             <span class="ruby-keyword kw">end</span>
-265:             <span class="ruby-identifier">mc</span>
-266:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File result.rb, line 233</span>
+233:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">coherent?</span>
+234:             <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">has_nucleotide?</span>
+235:             
+236:             <span class="ruby-identifier">s</span> = []
+237:             <span class="ruby-identifier">p</span> = []
+238:             
+239:             <span class="ruby-identifier">each_sequencehit</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subhit</span><span class="ruby-operator">|</span>
+240:                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">subhit</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;nucleotide&quot;</span>
+241:                     <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">subhit</span>.<span class="ruby-identifier">strand</span>
+242:                     <span class="ruby-identifier">p</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">subhit</span>.<span class="ruby-identifier">frame</span>
+243:                 <span class="ruby-keyword kw">end</span>
+244:             <span class="ruby-keyword kw">end</span>
+245:             <span class="ruby-identifier">p</span>.<span class="ruby-identifier">uniq</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">uniq</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+246:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -480,6 +255,231 @@ Hit.
 
         <div class="method-heading">
           <a href="#M000227" class="method-signature">
+          <span class="method-name">debug</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000227-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000227-source">
+<pre>
+     <span class="ruby-comment cmt"># File result.rb, line 284</span>
+284:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+285:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Result::Sequence +&quot;</span>
+286:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
+287:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* score: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">score</span>.<span class="ruby-identifier">to_s</span>
+288:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* e-value: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">eval</span>.<span class="ruby-identifier">to_s</span>
+289:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* has_complete?: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">has_complete?</span>.<span class="ruby-identifier">to_s</span>
+290:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* has_fragment?: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">has_fragment?</span>.<span class="ruby-identifier">to_s</span>
+291:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* coherent?: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">coherent?</span>.<span class="ruby-identifier">to_s</span>
+292:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* taxon: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">nil?</span>
+293:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* ortholog: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">nil?</span>
+294:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000216" class="method-detail">
+        <a name="M000216"></a>
+
+        <div class="method-heading">
+          <a href="#M000216" class="method-signature">
+          <span class="method-name">each_sequencehit</span><span class="method-args">() {|value| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000216-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000216-source">
+<pre>
+     <span class="ruby-comment cmt"># File result.rb, line 185</span>
+185:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each_sequencehit</span>
+186:             <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+187:                 <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">value</span>
+188:             <span class="ruby-keyword kw">end</span>
+189:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000217" class="method-detail">
+        <a name="M000217"></a>
+
+        <div class="method-heading">
+          <a href="#M000217" class="method-signature">
+          <span class="method-name">eval</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000217-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000217-source">
+<pre>
+     <span class="ruby-comment cmt"># File result.rb, line 191</span>
+191:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">eval</span>
+192:             <span class="ruby-identifier">best_subhit</span>.<span class="ruby-identifier">eval</span>
+193:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000224" class="method-detail">
+        <a name="M000224"></a>
+
+        <div class="method-heading">
+          <a href="#M000224" class="method-signature">
+          <span class="method-name">has_complete?</span><span class="method-args">(cut = 1)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+A Hit has_complete if any of the SubHit has_complete.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000224-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000224-source">
+<pre>
+     <span class="ruby-comment cmt"># File result.rb, line 257</span>
+257:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">has_complete?</span>(<span class="ruby-identifier">cut</span> = <span class="ruby-value">1</span>)
+258:             <span class="ruby-identifier">each_sequencehit</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subhit</span><span class="ruby-operator">|</span>
+259:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">subhit</span>.<span class="ruby-identifier">has_complete?</span>(<span class="ruby-identifier">cut</span>)
+260:             <span class="ruby-keyword kw">end</span>
+261:             <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+262:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000223" class="method-detail">
+        <a name="M000223"></a>
+
+        <div class="method-heading">
+          <a href="#M000223" class="method-signature">
+          <span class="method-name">has_fragment?</span><span class="method-args">(cut = 1)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+A Hit has_fragment if any of the SubHit has_fragment.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000223-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000223-source">
+<pre>
+     <span class="ruby-comment cmt"># File result.rb, line 249</span>
+249:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">has_fragment?</span>(<span class="ruby-identifier">cut</span> = <span class="ruby-value">1</span>)
+250:             <span class="ruby-identifier">each_sequencehit</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">sh</span><span class="ruby-operator">|</span>
+251:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">has_fragment?</span>(<span class="ruby-identifier">cut</span>)
+252:             <span class="ruby-keyword kw">end</span>
+253:             <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+254:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000220" class="method-detail">
+        <a name="M000220"></a>
+
+        <div class="method-heading">
+          <a href="#M000220" class="method-signature">
+          <span class="method-name">has_nucleotide?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Checks whether a hit contains a SubHit of type &quot;nucleotide&quot;
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000220-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000220-source">
+<pre>
+     <span class="ruby-comment cmt"># File result.rb, line 217</span>
+217:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">has_nucleotide?</span>
+218:             <span class="ruby-identifier">each_sequencehit</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subhit</span><span class="ruby-operator">|</span>
+219:                 <span class="ruby-comment cmt">#return true if subhit.type == &quot;nucleotide&quot;</span>
+220:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">subhit</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;6frame&quot;</span>
+221:             <span class="ruby-keyword kw">end</span>
+222:             <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+223:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000221" class="method-detail">
+        <a name="M000221"></a>
+
+        <div class="method-heading">
+          <a href="#M000221" class="method-signature">
+          <span class="method-name">has_protein?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000221-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000221-source">
+<pre>
+     <span class="ruby-comment cmt"># File result.rb, line 225</span>
+225:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">has_protein?</span>
+226:             <span class="ruby-identifier">each_sequencehit</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subhit</span><span class="ruby-operator">|</span>
+227:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">subhit</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;protein&quot;</span>
+228:             <span class="ruby-keyword kw">end</span>
+229:             <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+230:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000225" class="method-detail">
+        <a name="M000225"></a>
+
+        <div class="method-heading">
+          <a href="#M000225" class="method-signature">
+          <span class="method-name">max_completeness</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Obtains the maximum completeness found in any of the SubHits within the
+Hit.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000225-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000225-source">
+<pre>
+     <span class="ruby-comment cmt"># File result.rb, line 265</span>
+265:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">max_completeness</span>
+266:             <span class="ruby-identifier">mc</span> = <span class="ruby-value">0</span>
+267:             <span class="ruby-identifier">each_sequencehit</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subhit</span><span class="ruby-operator">|</span>
+268:                 <span class="ruby-identifier">smc</span> = <span class="ruby-identifier">subhit</span>.<span class="ruby-identifier">max_completeness</span>
+269:                 <span class="ruby-identifier">mc</span> = <span class="ruby-identifier">smc</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">smc</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">mc</span>
+270:             <span class="ruby-keyword kw">end</span>
+271:             <span class="ruby-identifier">mc</span>
+272:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000226" class="method-detail">
+        <a name="M000226"></a>
+
+        <div class="method-heading">
+          <a href="#M000226" class="method-signature">
           <span class="method-name">min_completeness</span><span class="method-args">()</span>
           </a>
         </div>
@@ -490,41 +490,41 @@ Obtains the minimum completeness found in any of the SubHits within the
 Hit.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000227-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000227-source">
+            onclick="toggleCode('M000226-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000226-source">
 <pre>
-     <span class="ruby-comment cmt"># File result.rb, line 269</span>
-269:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">min_completeness</span>
-270:             <span class="ruby-identifier">mc</span> = <span class="ruby-value">1</span>
-271:             <span class="ruby-identifier">each_sequencehit</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subhit</span><span class="ruby-operator">|</span>
-272:                 <span class="ruby-identifier">smc</span> = <span class="ruby-identifier">subhit</span>.<span class="ruby-identifier">min_completeness</span>
-273:                 <span class="ruby-identifier">mc</span> = <span class="ruby-identifier">smc</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">smc</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">mc</span>
-274:             <span class="ruby-keyword kw">end</span>
-275:             <span class="ruby-identifier">mc</span>
-276:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File result.rb, line 275</span>
+275:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">min_completeness</span>
+276:             <span class="ruby-identifier">mc</span> = <span class="ruby-value">1</span>
+277:             <span class="ruby-identifier">each_sequencehit</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subhit</span><span class="ruby-operator">|</span>
+278:                 <span class="ruby-identifier">smc</span> = <span class="ruby-identifier">subhit</span>.<span class="ruby-identifier">min_completeness</span>
+279:                 <span class="ruby-identifier">mc</span> = <span class="ruby-identifier">smc</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">smc</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">mc</span>
+280:             <span class="ruby-keyword kw">end</span>
+281:             <span class="ruby-identifier">mc</span>
+282:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000219" class="method-detail">
-        <a name="M000219"></a>
+      <div id="method-M000218" class="method-detail">
+        <a name="M000218"></a>
 
         <div class="method-heading">
-          <a href="#M000219" class="method-signature">
+          <a href="#M000218" class="method-signature">
           <span class="method-name">score</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000219-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000219-source">
+            onclick="toggleCode('M000218-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000218-source">
 <pre>
-     <span class="ruby-comment cmt"># File result.rb, line 189</span>
-189:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">score</span>
-190:             <span class="ruby-identifier">best_subhit</span>.<span class="ruby-identifier">score</span>
-191:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File result.rb, line 195</span>
+195:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">score</span>
+196:             <span class="ruby-identifier">best_subhit</span>.<span class="ruby-identifier">score</span>
+197:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

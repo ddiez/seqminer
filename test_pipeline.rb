@@ -1,20 +1,20 @@
 require 'seqminer'
 
 sm = SeqMiner::Pipeline.new
-#sm.dir_initialize
+sm.dir_initialize
 sm.taxon.filter_by_name("anaplasma.marginale")
 #sm.taxon.filter_by_type("spp")
 #sm.taxon.filter_by_type("clade")
 sm.ortholog.filter_by_name("msp2")
 sm.build_search
-sm.search.debug
-sm.search.each_search do |s|
-	s.debug
-end
+sm.search.search
+
 #sm.run_all
 #sm.run_scan
 
 sm.get_search_results
+sm.write_nelson
+
 rs = sm.result
 rs.debug
 r = rs.get_item_by_id("anaplasma.marginale_st_maries-msp2_p44_map1_omp")

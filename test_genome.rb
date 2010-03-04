@@ -2,7 +2,7 @@ require 'genome'
 require 'taxon'
 
 config = Config::General.new
-#config.basedir = "/Volumes/Biodev/projects/vardb/"
+config.basedir = "."
 #config.debug
 
 ts = Taxon::Set.new
@@ -41,4 +41,4 @@ g.gene
 #puts g.translation(6).to_fasta("protein", 300)
 #puts
 
-#gdb.write_fasta("6frame")
+gdb.write_table("6frame")

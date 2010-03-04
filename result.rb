@@ -113,8 +113,14 @@ module Result
 		def localization
 			loc = []
 			# we have to sort the hash in this case.
-			items.sort.each_index do |index|
-				loc << items[index+1].aln_from.to_s + ".." + items[index+1].aln_to.to_s
+#			items.sort.each_index do |index|
+#				loc << items[index+1].aln_from.to_s + ".." + items[index+1].aln_to.to_s
+#			end
+#			loc.join(",")
+			each_domain do |domain|
+				domain.each_domainhit do |dh|
+					loc << dh.aln_from.to_s + ".." + dh.aln_to.to_s
+				end
 			end
 			loc.join(",")
 		end
