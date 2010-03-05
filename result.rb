@@ -559,8 +559,15 @@ module Result
 			end
 		end
 		
-		def write_domain
-			puts "SEQUENCE\tdomnum\tdomnumtot\tdoms"
+		def write_domain(file = nil)
+			case taxon.type
+			when 'spp'
+				file = config.dir_result + "genome/domain" + ortholog.name + (id + ".txt")
+			when 'clade'
+				file = config.dir_result + "isolate/domain" + ortholog.name + (id + ".txt")
+			end
+			fo = File.new(file, "w")
+			fo.puts "SEQUENCE\tdomainnum\ttotaldomainnum\tdomains"
 			each_sequence do |seq|
 				doms = []
 				domsn = 0
@@ -573,7 +580,7 @@ module Result
 						domsn += 1
 						tmp = []
 						dom.each_domainhit do |dh|
-							tmp << dh.hmm_from.to_s + ".." + dh.hmm_to.to_s + "[" + dh.score.to_s + "|" + dh.ieval.to_s + "]"
+							tmp << dh.aln_from.to_s + ".." + dh.aln_to.to_s + "[" + dh.score.to_s + "|" + dh.ieval.to_s + "]"
 							dhn += 1
 						end
 						tmp = tmp.join(",")
@@ -582,8 +589,9 @@ module Result
 					end
 				end
 				doms = doms.join(";")
-				puts seq.id + "\t" + domsn.to_s + "\t" + dhn.to_s + "\t" + doms
+				fo.puts seq.id + "\t" + domsn.to_s + "\t" + dhn.to_s + "\t" + doms
 			end
+			fo.close
 		end
 		
 		def debug
@@ -723,7 +731,6 @@ module Result
 		# Exports domain data in format suitable for varDB (a.k.a. Nelson format).
 		def write_domain
 			warn "+ WRITE DOMAIN +"
-			debug 
 			each_result do |result|
 				if result.length > 0
 					warn "* " + result.taxon.name + " / " + result.ortholog.name

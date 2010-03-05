@@ -490,21 +490,22 @@ module SeqMiner
 				config.dir_commit.mkpath
 			end
 			
-			family.each_family do |f|
-				#outdir = config.dir_commit + f.ortholog
-				outdir = config.dir_commit
+			
+			["sequence", "domain"].each do |type|
+				outdir = config.dir_commit + type
 				if ! outdir.exist?
 					outdir.mkpath
 				end
-
+			
+			family.each_family do |f|
 				ts = Taxon::Set.new(options = {:config => config})
 				ts.filter_by_name(f.taxon)
 				ts.each_taxon do |taxon|
 					case taxon.type
 					when 'spp'
-						dir = config.dir_result + "genome/sequence" + f.ortholog
+						dir = config.dir_result + "genome" + type + f.ortholog
 					when 'clade'
-						dir = config.dir_result + "isolate/sequence" + f.ortholog
+						dir = config.dir_result + "isolate" + type + f.ortholog
 					end
 					file = dir + (taxon.name + "-" + f.ortholog + ".txt")
 					warn "* commiting file: " + file
@@ -514,6 +515,7 @@ module SeqMiner
 						raise("!!! file " + file + " does not exist!")
 					end
 				end
+			end
 			end
 		end
 		
