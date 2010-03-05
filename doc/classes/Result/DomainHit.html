@@ -88,11 +88,11 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000229">complete?</a>&nbsp;&nbsp;
-      <a href="#M000230">completeness</a>&nbsp;&nbsp;
-      <a href="#M000232">debug</a>&nbsp;&nbsp;
-      <a href="#M000231">match_length</a>&nbsp;&nbsp;
-      <a href="#M000228">new</a>&nbsp;&nbsp;
+      <a href="#M000232">complete?</a>&nbsp;&nbsp;
+      <a href="#M000233">completeness</a>&nbsp;&nbsp;
+      <a href="#M000235">debug</a>&nbsp;&nbsp;
+      <a href="#M000234">match_length</a>&nbsp;&nbsp;
+      <a href="#M000231">new</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -192,129 +192,12 @@
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000228" class="method-detail">
-        <a name="M000228"></a>
-
-        <div class="method-heading">
-          <a href="#M000228" class="method-signature">
-          <span class="method-name">new</span><span class="method-args">(id)</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000228-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000228-source">
-<pre>
-    <span class="ruby-comment cmt"># File result.rb, line 60</span>
-60:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>)
-61:             <span class="ruby-keyword kw">super</span>
-62:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <h3 class="section-bar">Public Instance methods</h3>
-
-      <div id="method-M000229" class="method-detail">
-        <a name="M000229"></a>
-
-        <div class="method-heading">
-          <a href="#M000229" class="method-signature">
-          <span class="method-name">complete?</span><span class="method-args">(cut = 1)</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-Checks whether the <a href="Domain.html">Domain</a> hit is complete
-compared to the query length. By default checks for full <a
-href="DomainHit.html#M000230">completeness</a> (cutoff = 1) but this can be
-changed.
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000229-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000229-source">
-<pre>
-    <span class="ruby-comment cmt"># File result.rb, line 66</span>
-66:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">complete?</span>(<span class="ruby-identifier">cut</span> = <span class="ruby-value">1</span>)            
-67:             <span class="ruby-identifier">completeness</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">cut</span>
-68:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000230" class="method-detail">
-        <a name="M000230"></a>
-
-        <div class="method-heading">
-          <a href="#M000230" class="method-signature">
-          <span class="method-name">completeness</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-Computes the <a href="DomainHit.html#M000230">completeness</a>, i.e. the
-ration between the number of residues matching the domain and the length of
-the domain.
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000230-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000230-source">
-<pre>
-    <span class="ruby-comment cmt"># File result.rb, line 72</span>
-72:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">completeness</span>
-73:             <span class="ruby-comment cmt"># TODO: may be better to do this by referencing the parent class?</span>
-74:             <span class="ruby-identifier">l</span> = <span class="ruby-identifier">match_length</span>
-75:             <span class="ruby-identifier">l</span>.<span class="ruby-identifier">to_f</span><span class="ruby-operator">/</span><span class="ruby-identifier">domain_length</span>.<span class="ruby-identifier">to_f</span>
-76:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000232" class="method-detail">
-        <a name="M000232"></a>
-
-        <div class="method-heading">
-          <a href="#M000232" class="method-signature">
-          <span class="method-name">debug</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000232-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000232-source">
-<pre>
-    <span class="ruby-comment cmt"># File result.rb, line 82</span>
-82:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
-83:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Result::Sequence::SequenceHit::Domain::DomainHit +&quot;</span>
-84:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_s</span>
-85:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* ceval: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ceval</span>.<span class="ruby-identifier">to_s</span>
-86:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* ieval: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ieval</span>.<span class="ruby-identifier">to_s</span>
-87:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* score: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">score</span>.<span class="ruby-identifier">to_s</span>
-88:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* bias: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">bias</span>.<span class="ruby-identifier">to_s</span>
-89:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* aln_from: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">aln_from</span>.<span class="ruby-identifier">to_s</span>
-90:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* aln_to: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">aln_to</span>.<span class="ruby-identifier">to_s</span>
-91:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* domain length: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">domain_length</span>.<span class="ruby-identifier">to_s</span>
-92:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* match length: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">match_length</span>.<span class="ruby-identifier">to_s</span>
-93:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* completeness: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">completeness</span>.<span class="ruby-identifier">to_s</span>
-94:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
       <div id="method-M000231" class="method-detail">
         <a name="M000231"></a>
 
         <div class="method-heading">
           <a href="#M000231" class="method-signature">
-          <span class="method-name">match_length</span><span class="method-args">()</span>
+          <span class="method-name">new</span><span class="method-args">(id)</span>
           </a>
         </div>
       
@@ -323,10 +206,127 @@ the domain.
             onclick="toggleCode('M000231-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000231-source">
 <pre>
+    <span class="ruby-comment cmt"># File result.rb, line 60</span>
+60:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>)
+61:                         <span class="ruby-keyword kw">super</span>
+62:                 <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000232" class="method-detail">
+        <a name="M000232"></a>
+
+        <div class="method-heading">
+          <a href="#M000232" class="method-signature">
+          <span class="method-name">complete?</span><span class="method-args">(cut = 1)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Checks whether the <a href="Domain.html">Domain</a> hit is complete
+compared to the query length. By default checks for full <a
+href="DomainHit.html#M000233">completeness</a> (cutoff = 1) but this can be
+changed.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000232-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000232-source">
+<pre>
+    <span class="ruby-comment cmt"># File result.rb, line 66</span>
+66:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">complete?</span>(<span class="ruby-identifier">cut</span> = <span class="ruby-value">1</span>)                        
+67:                         <span class="ruby-identifier">completeness</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">cut</span>
+68:                 <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000233" class="method-detail">
+        <a name="M000233"></a>
+
+        <div class="method-heading">
+          <a href="#M000233" class="method-signature">
+          <span class="method-name">completeness</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Computes the <a href="DomainHit.html#M000233">completeness</a>, i.e. the
+ration between the number of residues matching the domain and the length of
+the domain.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000233-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000233-source">
+<pre>
+    <span class="ruby-comment cmt"># File result.rb, line 72</span>
+72:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">completeness</span>
+73:                         <span class="ruby-comment cmt"># TODO: may be better to do this by referencing the parent class?</span>
+74:                         <span class="ruby-identifier">l</span> = <span class="ruby-identifier">match_length</span>
+75:                         <span class="ruby-identifier">l</span>.<span class="ruby-identifier">to_f</span><span class="ruby-operator">/</span><span class="ruby-identifier">domain_length</span>.<span class="ruby-identifier">to_f</span>
+76:                 <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000235" class="method-detail">
+        <a name="M000235"></a>
+
+        <div class="method-heading">
+          <a href="#M000235" class="method-signature">
+          <span class="method-name">debug</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000235-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000235-source">
+<pre>
+    <span class="ruby-comment cmt"># File result.rb, line 82</span>
+82:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+83:                         <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Result::Sequence::SequenceHit::Domain::DomainHit +&quot;</span>
+84:                         <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_s</span>
+85:                         <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* ceval: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ceval</span>.<span class="ruby-identifier">to_s</span>
+86:                         <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* ieval: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ieval</span>.<span class="ruby-identifier">to_s</span>
+87:                         <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* score: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">score</span>.<span class="ruby-identifier">to_s</span>
+88:                         <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* bias: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">bias</span>.<span class="ruby-identifier">to_s</span>
+89:                         <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* aln_from: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">aln_from</span>.<span class="ruby-identifier">to_s</span>
+90:                         <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* aln_to: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">aln_to</span>.<span class="ruby-identifier">to_s</span>
+91:                         <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* domain length: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">domain_length</span>.<span class="ruby-identifier">to_s</span>
+92:                         <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* match length: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">match_length</span>.<span class="ruby-identifier">to_s</span>
+93:                         <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* completeness: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">completeness</span>.<span class="ruby-identifier">to_s</span>
+94:                 <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000234" class="method-detail">
+        <a name="M000234"></a>
+
+        <div class="method-heading">
+          <a href="#M000234" class="method-signature">
+          <span class="method-name">match_length</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000234-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000234-source">
+<pre>
     <span class="ruby-comment cmt"># File result.rb, line 78</span>
-78:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">match_length</span>
-79:             <span class="ruby-identifier">hmm_to</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">hmm_from</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-80:         <span class="ruby-keyword kw">end</span>
+78:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">match_length</span>
+79:                         <span class="ruby-identifier">hmm_to</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">hmm_from</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+80:                 <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

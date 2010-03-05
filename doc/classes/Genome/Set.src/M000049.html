@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>write_nelson (Genome::Set)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File genome.rb, line 264</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_nelson</span>(<span class="ruby-identifier">ortholog</span>, <span class="ruby-identifier">file</span> = <span class="ruby-keyword kw">nil</span>)
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file</span>
+                                <span class="ruby-identifier">fo</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>, <span class="ruby-value str">&quot;w&quot;</span>)
+                        <span class="ruby-keyword kw">else</span>
+                                <span class="ruby-identifier">fo</span> = <span class="ruby-identifier">$stdout</span>
+                        <span class="ruby-keyword kw">end</span>
+                        
+                        <span class="ruby-comment cmt"># sets the family name (default == to the ortholog family name)</span>
+                        <span class="ruby-identifier">fn</span> = <span class="ruby-identifier">ortholog</span>
+                        <span class="ruby-identifier">fs</span> = <span class="ruby-constant">Family</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+                        <span class="ruby-identifier">family</span> = <span class="ruby-identifier">fs</span>.<span class="ruby-identifier">get_item_by_id</span>(<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">binomial</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ortholog</span>)
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">family</span>
+                                <span class="ruby-identifier">fn</span> = <span class="ruby-identifier">family</span>.<span class="ruby-identifier">name</span>
+                        <span class="ruby-keyword kw">end</span>
+
+                        <span class="ruby-identifier">fo</span>.<span class="ruby-identifier">puts</span>      <span class="ruby-value str">&quot;SEQUENCE\t&quot;</span> <span class="ruby-operator">+</span>
+                                <span class="ruby-value str">&quot;family\t&quot;</span> <span class="ruby-operator">+</span>
+                                <span class="ruby-value str">&quot;genome\t&quot;</span> <span class="ruby-operator">+</span>
+                                <span class="ruby-value str">&quot;strain\t&quot;</span> <span class="ruby-operator">+</span>
+                                <span class="ruby-value str">&quot;taxid\t&quot;</span> <span class="ruby-operator">+</span>
+                                <span class="ruby-value str">&quot;source\t&quot;</span> <span class="ruby-operator">+</span> 
+                                <span class="ruby-value str">&quot;chromosome\t&quot;</span> <span class="ruby-operator">+</span>
+                                <span class="ruby-value str">&quot;sequence\t&quot;</span> <span class="ruby-operator">+</span>
+                                <span class="ruby-value str">&quot;cds\t&quot;</span> <span class="ruby-operator">+</span>
+                                <span class="ruby-value str">&quot;translation\t&quot;</span> <span class="ruby-operator">+</span>
+                                <span class="ruby-value str">&quot;start\t&quot;</span> <span class="ruby-operator">+</span>
+                                <span class="ruby-value str">&quot;end\t&quot;</span> <span class="ruby-operator">+</span>
+                                <span class="ruby-value str">&quot;strand\t&quot;</span> <span class="ruby-operator">+</span>
+                                <span class="ruby-value str">&quot;numexons\t&quot;</span> <span class="ruby-operator">+</span>
+                                <span class="ruby-value str">&quot;splicing\t&quot;</span> <span class="ruby-operator">+</span>
+                                <span class="ruby-value str">&quot;pseudogene\t&quot;</span> <span class="ruby-operator">+</span>
+                                <span class="ruby-value str">&quot;method\t&quot;</span> <span class="ruby-operator">+</span>
+                                <span class="ruby-value str">&quot;model\t&quot;</span> <span class="ruby-operator">+</span>
+                                <span class="ruby-value str">&quot;score\t&quot;</span> <span class="ruby-operator">+</span>
+                                <span class="ruby-value str">&quot;evalue\t&quot;</span> <span class="ruby-operator">+</span>
+                                <span class="ruby-value str">&quot;hmmloc\t&quot;</span> <span class="ruby-operator">+</span>
+                                <span class="ruby-value str">&quot;description&quot;</span>
+                        <span class="ruby-identifier">each_gene</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">g</span><span class="ruby-operator">|</span>
+                                <span class="ruby-identifier">pseudo</span> = <span class="ruby-value str">&quot;FALSE&quot;</span>
+                                <span class="ruby-identifier">pseudo</span> = <span class="ruby-value str">&quot;TRUE&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">g</span>.<span class="ruby-identifier">pseudogene</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+
+                                <span class="ruby-comment cmt"># FIX?: I am not including where the best hit is located (protein, gene, etc)</span>
+                                <span class="ruby-comment cmt"># bh.type + &quot;\t&quot; +  # TODO: update to take care of new class SubHit</span>
+                                <span class="ruby-identifier">fo</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">g</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span>
+                                        <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">binomial</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">fn</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span>
+                                        <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">binomial</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span>
+                                        <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">strain</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span>
+                                        <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span>
+                                        <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">source</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span>
+                                        <span class="ruby-identifier">g</span>.<span class="ruby-identifier">chromosome</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span>
+                                        <span class="ruby-identifier">g</span>.<span class="ruby-identifier">gene</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span>
+                                        <span class="ruby-identifier">g</span>.<span class="ruby-identifier">cds</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span>
+                                        <span class="ruby-identifier">g</span>.<span class="ruby-identifier">translation</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span>
+                                        <span class="ruby-identifier">g</span>.<span class="ruby-identifier">from</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span>
+                                        <span class="ruby-identifier">g</span>.<span class="ruby-identifier">to</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span>
+                                        <span class="ruby-identifier">g</span>.<span class="ruby-identifier">strand</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span>
+                                        <span class="ruby-identifier">g</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span>
+                                        <span class="ruby-identifier">g</span>.<span class="ruby-identifier">splicing_nelson</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span>
+                                        <span class="ruby-identifier">pseudo</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span>
+                                        <span class="ruby-value str">&quot;vsgdb&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span>
+                                        <span class="ruby-value str">&quot;&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span>
+                                        <span class="ruby-value str">&quot;&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span>
+                                        <span class="ruby-value str">&quot;&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span>
+                                        <span class="ruby-value str">&quot;&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span>
+                                        <span class="ruby-identifier">g</span>.<span class="ruby-identifier">description</span>
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-identifier">fo</span>.<span class="ruby-identifier">close</span>
+                <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

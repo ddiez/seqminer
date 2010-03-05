@@ -86,10 +86,10 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000201">_parse_line</a>&nbsp;&nbsp;
-      <a href="#M000200">debug</a>&nbsp;&nbsp;
-      <a href="#M000198">new</a>&nbsp;&nbsp;
-      <a href="#M000199">parse</a>&nbsp;&nbsp;
+      <a href="#M000202">_parse_line</a>&nbsp;&nbsp;
+      <a href="#M000201">debug</a>&nbsp;&nbsp;
+      <a href="#M000199">new</a>&nbsp;&nbsp;
+      <a href="#M000200">parse</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -154,37 +154,37 @@
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000198" class="method-detail">
-        <a name="M000198"></a>
+      <div id="method-M000199" class="method-detail">
+        <a name="M000199"></a>
 
         <div class="method-heading">
-          <a href="#M000198" class="method-signature">
+          <a href="#M000199" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(options = {:config =&gt; nil, :taxon =&gt; nil, :ortholog =&gt; nil, :empty =&gt; false, :tool =&gt; nil})</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000198-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000198-source">
+            onclick="toggleCode('M000199-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000199-source">
 <pre>
-     <span class="ruby-comment cmt"># File result.rb, line 804</span>
-804:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">:taxon</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">:ortholog</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">:empty</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-identifier">:tool</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
-805:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
-806:                 <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
-807:             <span class="ruby-keyword kw">else</span>
-808:                 <span class="ruby-ivar">@config</span> = <span class="ruby-constant">Config</span><span class="ruby-operator">::</span><span class="ruby-constant">General</span>.<span class="ruby-identifier">new</span>
-809:             <span class="ruby-keyword kw">end</span>
-810:             
-811:             
-812:             <span class="ruby-ivar">@taxon</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:taxon</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:taxon</span>]
-813:             <span class="ruby-ivar">@ortholog</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ortholog</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ortholog</span>]
-814:             <span class="ruby-ivar">@tool</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:tool</span>]
-815:             
-816:             <span class="ruby-ivar">@file</span> = <span class="ruby-keyword kw">nil</span>
-817:             <span class="ruby-ivar">@result_id</span> = <span class="ruby-keyword kw">nil</span>
-818:             <span class="ruby-ivar">@type</span> = <span class="ruby-keyword kw">nil</span>
-819:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File result.rb, line 872</span>
+872:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">:taxon</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">:ortholog</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">:empty</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-identifier">:tool</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
+873:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+874:                                 <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+875:                         <span class="ruby-keyword kw">else</span>
+876:                                 <span class="ruby-ivar">@config</span> = <span class="ruby-constant">Config</span><span class="ruby-operator">::</span><span class="ruby-constant">General</span>.<span class="ruby-identifier">new</span>
+877:                         <span class="ruby-keyword kw">end</span>
+878:                         
+879:                         
+880:                         <span class="ruby-ivar">@taxon</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:taxon</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:taxon</span>]
+881:                         <span class="ruby-ivar">@ortholog</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ortholog</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ortholog</span>]
+882:                         <span class="ruby-ivar">@tool</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:tool</span>]
+883:                         
+884:                         <span class="ruby-ivar">@file</span> = <span class="ruby-keyword kw">nil</span>
+885:                         <span class="ruby-ivar">@result_id</span> = <span class="ruby-keyword kw">nil</span>
+886:                         <span class="ruby-ivar">@type</span> = <span class="ruby-keyword kw">nil</span>
+887:                 <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -192,11 +192,11 @@
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000200" class="method-detail">
-        <a name="M000200"></a>
+      <div id="method-M000201" class="method-detail">
+        <a name="M000201"></a>
 
         <div class="method-heading">
-          <a href="#M000200" class="method-signature">
+          <a href="#M000201" class="method-signature">
           <span class="method-name">debug</span><span class="method-args">()</span>
           </a>
         </div>
@@ -206,153 +206,153 @@
 Prints some information for debugging.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000200-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000200-source">
+            onclick="toggleCode('M000201-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000201-source">
 <pre>
-     <span class="ruby-comment cmt"># File result.rb, line 941</span>
-941:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
-942:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ HmmerParser +&quot;</span>
-943:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* file: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@file</span>
-944:             <span class="ruby-identifier">result</span>.<span class="ruby-identifier">debug</span>
-945:         <span class="ruby-keyword kw">end</span>
+      <span class="ruby-comment cmt"># File result.rb, line 1009</span>
+1009:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+1010:                         <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ HmmerParser +&quot;</span>
+1011:                         <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* file: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@file</span>
+1012:                         <span class="ruby-identifier">result</span>.<span class="ruby-identifier">debug</span>
+1013:                 <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000199" class="method-detail">
-        <a name="M000199"></a>
+      <div id="method-M000200" class="method-detail">
+        <a name="M000200"></a>
 
         <div class="method-heading">
-          <a href="#M000199" class="method-signature">
+          <a href="#M000200" class="method-signature">
           <span class="method-name">parse</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000199-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000199-source">
+            onclick="toggleCode('M000200-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000200-source">
 <pre>
-     <span class="ruby-comment cmt"># File result.rb, line 821</span>
-821:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parse</span>
-822:             <span class="ruby-identifier">result</span> = <span class="ruby-constant">Result</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">result_id</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
-823:             <span class="ruby-identifier">result</span>.<span class="ruby-identifier">taxon</span> = <span class="ruby-identifier">taxon</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">taxon</span>
-824:             <span class="ruby-identifier">result</span>.<span class="ruby-identifier">ortholog</span> = <span class="ruby-identifier">ortholog</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ortholog</span>
-825:             <span class="ruby-identifier">result</span>.<span class="ruby-identifier">tool</span> = <span class="ruby-identifier">tool</span>
-826:             
-827:             <span class="ruby-identifier">fi</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">file</span>)
-828:             <span class="ruby-identifier">fi</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-829:                 <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^#/</span>
-830:                 <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp</span>
-831:                 <span class="ruby-identifier">tid</span>, <span class="ruby-identifier">tacc</span>, <span class="ruby-identifier">tlen</span>, <span class="ruby-identifier">qid</span>, <span class="ruby-identifier">qacc</span>, <span class="ruby-identifier">qlen</span>, <span class="ruby-identifier">seval</span>, <span class="ruby-identifier">sscore</span>,
-832:                 <span class="ruby-identifier">sbias</span>, <span class="ruby-identifier">dn</span>, <span class="ruby-identifier">dtot</span>, <span class="ruby-identifier">dceval</span>, <span class="ruby-identifier">dieval</span>, <span class="ruby-identifier">dscore</span>, <span class="ruby-identifier">dbias</span>, <span class="ruby-identifier">hf</span>, <span class="ruby-identifier">ht</span>,
-833:                 <span class="ruby-identifier">af</span>, <span class="ruby-identifier">at</span>, <span class="ruby-identifier">ef</span>, <span class="ruby-identifier">et</span>, <span class="ruby-identifier">acc</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">' '</span>)
-834:                 
-835:                 <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">tool</span>
-836:                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'hmmsearch'</span>
-837:                     <span class="ruby-identifier">h</span> = <span class="ruby-identifier">result</span>.<span class="ruby-identifier">get_item_by_id</span>(<span class="ruby-identifier">tid</span>)
-838:                     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">h</span>.<span class="ruby-identifier">nil?</span>
-839:                         <span class="ruby-identifier">h</span> = <span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">tid</span>)
-840:                         <span class="ruby-identifier">result</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">h</span>)
-841:                     <span class="ruby-keyword kw">end</span>
-842:                 
-843:                     <span class="ruby-identifier">sp</span> = []    
-844:                     <span class="ruby-comment cmt">#if type == &quot;nucleotide&quot;</span>
-845:                     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;6frame&quot;</span>
-846:                         <span class="ruby-identifier">sp</span> = <span class="ruby-identifier">_parse_line</span>(<span class="ruby-identifier">line</span>)
-847:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">sp</span>.<span class="ruby-identifier">nil?</span>
-848:                             <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;ERROR: nucleotide result does not contain strand/frame information&quot;</span>
-849:                         <span class="ruby-keyword kw">else</span>
-850:                             <span class="ruby-identifier">sid</span> = <span class="ruby-identifier">tid</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;[&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">sp</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;|&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">sp</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;]&quot;</span>
-851:                         <span class="ruby-keyword kw">end</span>
-852:                     <span class="ruby-keyword kw">else</span>
-853:                         <span class="ruby-identifier">sid</span> = <span class="ruby-identifier">tid</span>
-854:                     <span class="ruby-keyword kw">end</span>
-855:                     <span class="ruby-comment cmt">#warn &quot;* subhit id: &quot; + sid</span>
-856:                     <span class="ruby-identifier">sh</span> = <span class="ruby-identifier">h</span>.<span class="ruby-identifier">get_item_by_id</span>(<span class="ruby-identifier">sid</span>)
-857:                     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">nil?</span>
-858:                         <span class="ruby-identifier">sh</span> = <span class="ruby-constant">SequenceHit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">sid</span>)
-859:                         <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">score</span> = <span class="ruby-identifier">sscore</span>.<span class="ruby-identifier">to_f</span>
-860:                         <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">eval</span> = <span class="ruby-identifier">seval</span>.<span class="ruby-identifier">to_f</span>
-861:                         <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">target_name</span> = <span class="ruby-identifier">tid</span>
-862:                         <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">target_acc</span> = <span class="ruby-identifier">tacc</span>
-863:                         <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">target_length</span> = <span class="ruby-identifier">tlen</span>.<span class="ruby-identifier">to_i</span>
-864:                         <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">query_name</span> = <span class="ruby-identifier">qid</span>
-865:                         <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">query_acc</span> = <span class="ruby-identifier">qacc</span>
-866:                         <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">domain_length</span> = <span class="ruby-identifier">qlen</span>.<span class="ruby-identifier">to_i</span>
-867:                         <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">type</span> = <span class="ruby-identifier">type</span>
-868:                         <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">strand</span> = <span class="ruby-identifier">sp</span>[<span class="ruby-value">0</span>]
-869:                         <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">frame</span> = <span class="ruby-identifier">sp</span>[<span class="ruby-value">1</span>]
-870:                         <span class="ruby-identifier">h</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">sh</span>
-871:                     <span class="ruby-keyword kw">end</span>
-872:                     
-873:                     <span class="ruby-identifier">dom</span> = <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">get_item_by_id</span>(<span class="ruby-identifier">qid</span>)
-874:                     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">dom</span>.<span class="ruby-identifier">nil?</span>
-875:                         <span class="ruby-identifier">dom</span> = <span class="ruby-constant">Domain</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">qid</span>)
-876:                         <span class="ruby-comment cmt">#dom.eval = seval.to_f</span>
-877:                         <span class="ruby-comment cmt">#dom.score = sscore.to_f</span>
-878:                         <span class="ruby-comment cmt">#dom.bias = sbias.to_f</span>
-879:                         <span class="ruby-identifier">sh</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">dom</span>
-880:                     <span class="ruby-keyword kw">end</span>
-881:                     
-882:                     <span class="ruby-identifier">dh</span> = <span class="ruby-constant">DomainHit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">dom</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
-883:                     <span class="ruby-comment cmt">#dom = Domain.new(sh.length + 1)</span>
-884:                     <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">hmm_from</span> = <span class="ruby-identifier">hf</span>.<span class="ruby-identifier">to_i</span>
-885:                     <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">hmm_to</span> = <span class="ruby-identifier">ht</span>.<span class="ruby-identifier">to_i</span>
-886:                     <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">aln_from</span> = <span class="ruby-identifier">af</span>.<span class="ruby-identifier">to_i</span>
-887:                     <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">aln_to</span> = <span class="ruby-identifier">at</span>.<span class="ruby-identifier">to_i</span>
-888:                     <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">env_from</span> = <span class="ruby-identifier">ef</span>.<span class="ruby-identifier">to_i</span>
-889:                     <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">env_to</span> = <span class="ruby-identifier">et</span>.<span class="ruby-identifier">to_i</span>
-890:                     <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">ceval</span> = <span class="ruby-identifier">dceval</span>
-891:                     <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">ieval</span> = <span class="ruby-identifier">dieval</span>
-892:                     <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">score</span> = <span class="ruby-identifier">dscore</span>
-893:                     <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">bias</span> = <span class="ruby-identifier">dbias</span>
-894:                     <span class="ruby-comment cmt"># TODO: may be better to do this by referencing the parent class?</span>
-895:                     <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">domain_length</span> = <span class="ruby-identifier">qlen</span>.<span class="ruby-identifier">to_i</span>
-896:                     <span class="ruby-identifier">dom</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">dh</span>
-897:                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'hmmscan'</span>
-898:                     <span class="ruby-identifier">h</span> = <span class="ruby-identifier">result</span>.<span class="ruby-identifier">get_item_by_id</span>(<span class="ruby-identifier">qid</span>)
-899:                     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">h</span>.<span class="ruby-identifier">nil?</span>
-900:                         <span class="ruby-identifier">h</span> = <span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">qid</span>)
-901:                         <span class="ruby-identifier">result</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">h</span>)
-902:                     <span class="ruby-keyword kw">end</span>
-903:                     
-904:                     <span class="ruby-identifier">sh</span> = <span class="ruby-identifier">h</span>.<span class="ruby-identifier">get_item_by_id</span>(<span class="ruby-identifier">qid</span>)
-905:                     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">nil?</span>
-906:                         <span class="ruby-identifier">sh</span> = <span class="ruby-constant">SequenceHit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">qid</span>)
-907:                         <span class="ruby-identifier">h</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">sh</span>
-908:                     <span class="ruby-keyword kw">end</span>
-909:                     
-910:                     <span class="ruby-identifier">dom</span> = <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">get_item_by_id</span>(<span class="ruby-identifier">tid</span>)
-911:                     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">dom</span>.<span class="ruby-identifier">nil?</span>
-912:                         <span class="ruby-identifier">dom</span> = <span class="ruby-constant">Domain</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">tid</span>)
-913:                         <span class="ruby-identifier">dom</span>.<span class="ruby-identifier">eval</span> = <span class="ruby-identifier">seval</span>.<span class="ruby-identifier">to_f</span>
-914:                         <span class="ruby-identifier">dom</span>.<span class="ruby-identifier">score</span> = <span class="ruby-identifier">sscore</span>.<span class="ruby-identifier">to_f</span>
-915:                         <span class="ruby-identifier">dom</span>.<span class="ruby-identifier">bias</span> = <span class="ruby-identifier">sbias</span>.<span class="ruby-identifier">to_f</span>
-916:                         <span class="ruby-identifier">sh</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">dom</span>
-917:                     <span class="ruby-keyword kw">end</span>
-918:                     
-919:                     <span class="ruby-identifier">dh</span> = <span class="ruby-constant">DomainHit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">dom</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
-920:                     <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">hmm_from</span> = <span class="ruby-identifier">hf</span>.<span class="ruby-identifier">to_i</span>
-921:                     <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">hmm_to</span> = <span class="ruby-identifier">ht</span>.<span class="ruby-identifier">to_i</span>
-922:                     <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">aln_from</span> = <span class="ruby-identifier">af</span>.<span class="ruby-identifier">to_i</span>
-923:                     <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">aln_to</span> = <span class="ruby-identifier">at</span>.<span class="ruby-identifier">to_i</span>
-924:                     <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">env_from</span> = <span class="ruby-identifier">ef</span>.<span class="ruby-identifier">to_i</span>
-925:                     <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">env_to</span> = <span class="ruby-identifier">et</span>.<span class="ruby-identifier">to_i</span>
-926:                     <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">ceval</span> = <span class="ruby-identifier">dceval</span>
-927:                     <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">ieval</span> = <span class="ruby-identifier">dieval</span>
-928:                     <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">score</span> = <span class="ruby-identifier">dscore</span>
-929:                     <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">bias</span> = <span class="ruby-identifier">dbias</span>
-930:                     <span class="ruby-comment cmt"># TODO: may be better to do this by referencing the parent class?</span>
-931:                     <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">domain_length</span> = <span class="ruby-identifier">tlen</span>.<span class="ruby-identifier">to_i</span>
-932:                     <span class="ruby-identifier">dom</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">dh</span>
-933:                 <span class="ruby-keyword kw">end</span>
-934:             <span class="ruby-keyword kw">end</span>
-935:             <span class="ruby-identifier">fi</span>.<span class="ruby-identifier">close</span>
-936:             
-937:             <span class="ruby-identifier">result</span>
-938:         <span class="ruby-keyword kw">end</span>
+      <span class="ruby-comment cmt"># File result.rb, line 889</span>
+ 889:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parse</span>
+ 890:                         <span class="ruby-identifier">result</span> = <span class="ruby-constant">Result</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">result_id</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+ 891:                         <span class="ruby-identifier">result</span>.<span class="ruby-identifier">taxon</span> = <span class="ruby-identifier">taxon</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">taxon</span>
+ 892:                         <span class="ruby-identifier">result</span>.<span class="ruby-identifier">ortholog</span> = <span class="ruby-identifier">ortholog</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ortholog</span>
+ 893:                         <span class="ruby-identifier">result</span>.<span class="ruby-identifier">tool</span> = <span class="ruby-identifier">tool</span>
+ 894:                         
+ 895:                         <span class="ruby-identifier">fi</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">file</span>)
+ 896:                         <span class="ruby-identifier">fi</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+ 897:                                 <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^#/</span>
+ 898:                                 <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp</span>
+ 899:                                 <span class="ruby-identifier">tid</span>, <span class="ruby-identifier">tacc</span>, <span class="ruby-identifier">tlen</span>, <span class="ruby-identifier">qid</span>, <span class="ruby-identifier">qacc</span>, <span class="ruby-identifier">qlen</span>, <span class="ruby-identifier">seval</span>, <span class="ruby-identifier">sscore</span>,
+ 900:                                 <span class="ruby-identifier">sbias</span>, <span class="ruby-identifier">dn</span>, <span class="ruby-identifier">dtot</span>, <span class="ruby-identifier">dceval</span>, <span class="ruby-identifier">dieval</span>, <span class="ruby-identifier">dscore</span>, <span class="ruby-identifier">dbias</span>, <span class="ruby-identifier">hf</span>, <span class="ruby-identifier">ht</span>,
+ 901:                                 <span class="ruby-identifier">af</span>, <span class="ruby-identifier">at</span>, <span class="ruby-identifier">ef</span>, <span class="ruby-identifier">et</span>, <span class="ruby-identifier">acc</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">' '</span>)
+ 902:                                 
+ 903:                                 <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">tool</span>
+ 904:                                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'hmmsearch'</span>
+ 905:                                         <span class="ruby-identifier">h</span> = <span class="ruby-identifier">result</span>.<span class="ruby-identifier">get_item_by_id</span>(<span class="ruby-identifier">tid</span>)
+ 906:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">h</span>.<span class="ruby-identifier">nil?</span>
+ 907:                                                 <span class="ruby-identifier">h</span> = <span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">tid</span>)
+ 908:                                                 <span class="ruby-identifier">result</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">h</span>)
+ 909:                                         <span class="ruby-keyword kw">end</span>
+ 910:                                 
+ 911:                                         <span class="ruby-identifier">sp</span> = []    
+ 912:                                         <span class="ruby-comment cmt">#if type == &quot;nucleotide&quot;</span>
+ 913:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;6frame&quot;</span>
+ 914:                                                 <span class="ruby-identifier">sp</span> = <span class="ruby-identifier">_parse_line</span>(<span class="ruby-identifier">line</span>)
+ 915:                                                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">sp</span>.<span class="ruby-identifier">nil?</span>
+ 916:                                                         <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;ERROR: nucleotide result does not contain strand/frame information&quot;</span>
+ 917:                                                 <span class="ruby-keyword kw">else</span>
+ 918:                                                         <span class="ruby-identifier">sid</span> = <span class="ruby-identifier">tid</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;[&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">sp</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;|&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">sp</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;]&quot;</span>
+ 919:                                                 <span class="ruby-keyword kw">end</span>
+ 920:                                         <span class="ruby-keyword kw">else</span>
+ 921:                                                 <span class="ruby-identifier">sid</span> = <span class="ruby-identifier">tid</span>
+ 922:                                         <span class="ruby-keyword kw">end</span>
+ 923:                                         <span class="ruby-comment cmt">#warn &quot;* subhit id: &quot; + sid</span>
+ 924:                                         <span class="ruby-identifier">sh</span> = <span class="ruby-identifier">h</span>.<span class="ruby-identifier">get_item_by_id</span>(<span class="ruby-identifier">sid</span>)
+ 925:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">nil?</span>
+ 926:                                                 <span class="ruby-identifier">sh</span> = <span class="ruby-constant">SequenceHit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">sid</span>)
+ 927:                                                 <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">score</span> = <span class="ruby-identifier">sscore</span>.<span class="ruby-identifier">to_f</span>
+ 928:                                                 <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">eval</span> = <span class="ruby-identifier">seval</span>.<span class="ruby-identifier">to_f</span>
+ 929:                                                 <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">target_name</span> = <span class="ruby-identifier">tid</span>
+ 930:                                                 <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">target_acc</span> = <span class="ruby-identifier">tacc</span>
+ 931:                                                 <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">target_length</span> = <span class="ruby-identifier">tlen</span>.<span class="ruby-identifier">to_i</span>
+ 932:                                                 <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">query_name</span> = <span class="ruby-identifier">qid</span>
+ 933:                                                 <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">query_acc</span> = <span class="ruby-identifier">qacc</span>
+ 934:                                                 <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">domain_length</span> = <span class="ruby-identifier">qlen</span>.<span class="ruby-identifier">to_i</span>
+ 935:                                                 <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">type</span> = <span class="ruby-identifier">type</span>
+ 936:                                                 <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">strand</span> = <span class="ruby-identifier">sp</span>[<span class="ruby-value">0</span>]
+ 937:                                                 <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">frame</span> = <span class="ruby-identifier">sp</span>[<span class="ruby-value">1</span>]
+ 938:                                                 <span class="ruby-identifier">h</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">sh</span>
+ 939:                                         <span class="ruby-keyword kw">end</span>
+ 940:                                         
+ 941:                                         <span class="ruby-identifier">dom</span> = <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">get_item_by_id</span>(<span class="ruby-identifier">qid</span>)
+ 942:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">dom</span>.<span class="ruby-identifier">nil?</span>
+ 943:                                                 <span class="ruby-identifier">dom</span> = <span class="ruby-constant">Domain</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">qid</span>)
+ 944:                                                 <span class="ruby-comment cmt">#dom.eval = seval.to_f</span>
+ 945:                                                 <span class="ruby-comment cmt">#dom.score = sscore.to_f</span>
+ 946:                                                 <span class="ruby-comment cmt">#dom.bias = sbias.to_f</span>
+ 947:                                                 <span class="ruby-identifier">sh</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">dom</span>
+ 948:                                         <span class="ruby-keyword kw">end</span>
+ 949:                                         
+ 950:                                         <span class="ruby-identifier">dh</span> = <span class="ruby-constant">DomainHit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">dom</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
+ 951:                                         <span class="ruby-comment cmt">#dom = Domain.new(sh.length + 1)</span>
+ 952:                                         <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">hmm_from</span> = <span class="ruby-identifier">hf</span>.<span class="ruby-identifier">to_i</span>
+ 953:                                         <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">hmm_to</span> = <span class="ruby-identifier">ht</span>.<span class="ruby-identifier">to_i</span>
+ 954:                                         <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">aln_from</span> = <span class="ruby-identifier">af</span>.<span class="ruby-identifier">to_i</span>
+ 955:                                         <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">aln_to</span> = <span class="ruby-identifier">at</span>.<span class="ruby-identifier">to_i</span>
+ 956:                                         <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">env_from</span> = <span class="ruby-identifier">ef</span>.<span class="ruby-identifier">to_i</span>
+ 957:                                         <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">env_to</span> = <span class="ruby-identifier">et</span>.<span class="ruby-identifier">to_i</span>
+ 958:                                         <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">ceval</span> = <span class="ruby-identifier">dceval</span>
+ 959:                                         <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">ieval</span> = <span class="ruby-identifier">dieval</span>
+ 960:                                         <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">score</span> = <span class="ruby-identifier">dscore</span>
+ 961:                                         <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">bias</span> = <span class="ruby-identifier">dbias</span>
+ 962:                                         <span class="ruby-comment cmt"># TODO: may be better to do this by referencing the parent class?</span>
+ 963:                                         <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">domain_length</span> = <span class="ruby-identifier">qlen</span>.<span class="ruby-identifier">to_i</span>
+ 964:                                         <span class="ruby-identifier">dom</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">dh</span>
+ 965:                                 <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'hmmscan'</span>
+ 966:                                         <span class="ruby-identifier">h</span> = <span class="ruby-identifier">result</span>.<span class="ruby-identifier">get_item_by_id</span>(<span class="ruby-identifier">qid</span>)
+ 967:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">h</span>.<span class="ruby-identifier">nil?</span>
+ 968:                                                 <span class="ruby-identifier">h</span> = <span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">qid</span>)
+ 969:                                                 <span class="ruby-identifier">result</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">h</span>)
+ 970:                                         <span class="ruby-keyword kw">end</span>
+ 971:                                         
+ 972:                                         <span class="ruby-identifier">sh</span> = <span class="ruby-identifier">h</span>.<span class="ruby-identifier">get_item_by_id</span>(<span class="ruby-identifier">qid</span>)
+ 973:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">nil?</span>
+ 974:                                                 <span class="ruby-identifier">sh</span> = <span class="ruby-constant">SequenceHit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">qid</span>)
+ 975:                                                 <span class="ruby-identifier">h</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">sh</span>
+ 976:                                         <span class="ruby-keyword kw">end</span>
+ 977:                                         
+ 978:                                         <span class="ruby-identifier">dom</span> = <span class="ruby-identifier">sh</span>.<span class="ruby-identifier">get_item_by_id</span>(<span class="ruby-identifier">tid</span>)
+ 979:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">dom</span>.<span class="ruby-identifier">nil?</span>
+ 980:                                                 <span class="ruby-identifier">dom</span> = <span class="ruby-constant">Domain</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">tid</span>)
+ 981:                                                 <span class="ruby-identifier">dom</span>.<span class="ruby-identifier">eval</span> = <span class="ruby-identifier">seval</span>.<span class="ruby-identifier">to_f</span>
+ 982:                                                 <span class="ruby-identifier">dom</span>.<span class="ruby-identifier">score</span> = <span class="ruby-identifier">sscore</span>.<span class="ruby-identifier">to_f</span>
+ 983:                                                 <span class="ruby-identifier">dom</span>.<span class="ruby-identifier">bias</span> = <span class="ruby-identifier">sbias</span>.<span class="ruby-identifier">to_f</span>
+ 984:                                                 <span class="ruby-identifier">sh</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">dom</span>
+ 985:                                         <span class="ruby-keyword kw">end</span>
+ 986:                                         
+ 987:                                         <span class="ruby-identifier">dh</span> = <span class="ruby-constant">DomainHit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">dom</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
+ 988:                                         <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">hmm_from</span> = <span class="ruby-identifier">hf</span>.<span class="ruby-identifier">to_i</span>
+ 989:                                         <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">hmm_to</span> = <span class="ruby-identifier">ht</span>.<span class="ruby-identifier">to_i</span>
+ 990:                                         <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">aln_from</span> = <span class="ruby-identifier">af</span>.<span class="ruby-identifier">to_i</span>
+ 991:                                         <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">aln_to</span> = <span class="ruby-identifier">at</span>.<span class="ruby-identifier">to_i</span>
+ 992:                                         <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">env_from</span> = <span class="ruby-identifier">ef</span>.<span class="ruby-identifier">to_i</span>
+ 993:                                         <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">env_to</span> = <span class="ruby-identifier">et</span>.<span class="ruby-identifier">to_i</span>
+ 994:                                         <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">ceval</span> = <span class="ruby-identifier">dceval</span>
+ 995:                                         <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">ieval</span> = <span class="ruby-identifier">dieval</span>
+ 996:                                         <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">score</span> = <span class="ruby-identifier">dscore</span>
+ 997:                                         <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">bias</span> = <span class="ruby-identifier">dbias</span>
+ 998:                                         <span class="ruby-comment cmt"># TODO: may be better to do this by referencing the parent class?</span>
+ 999:                                         <span class="ruby-identifier">dh</span>.<span class="ruby-identifier">domain_length</span> = <span class="ruby-identifier">tlen</span>.<span class="ruby-identifier">to_i</span>
+1000:                                         <span class="ruby-identifier">dom</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">dh</span>
+1001:                                 <span class="ruby-keyword kw">end</span>
+1002:                         <span class="ruby-keyword kw">end</span>
+1003:                         <span class="ruby-identifier">fi</span>.<span class="ruby-identifier">close</span>
+1004:                         
+1005:                         <span class="ruby-identifier">result</span>
+1006:                 <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -360,37 +360,37 @@ Prints some information for debugging.
 
       <h3 class="section-bar">Private Instance methods</h3>
 
-      <div id="method-M000201" class="method-detail">
-        <a name="M000201"></a>
+      <div id="method-M000202" class="method-detail">
+        <a name="M000202"></a>
 
         <div class="method-heading">
-          <a href="#M000201" class="method-signature">
+          <a href="#M000202" class="method-signature">
           <span class="method-name">_parse_line</span><span class="method-args">(line)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000201-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000201-source">
+            onclick="toggleCode('M000202-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000202-source">
 <pre>
-     <span class="ruby-comment cmt"># File result.rb, line 949</span>
-949:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_parse_line</span>(<span class="ruby-identifier">line</span>)
-950:             <span class="ruby-identifier">tmp</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/\[(.+)\]$/</span>)
-951:             <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">nil?</span>
-952:                 <span class="ruby-identifier">tmp</span> = <span class="ruby-identifier">tmp</span>[<span class="ruby-value">0</span>]
-953:                 <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/\[|\]/</span>, <span class="ruby-value str">&quot;&quot;</span>)
-954:                 <span class="ruby-identifier">strand</span>, <span class="ruby-identifier">frame</span> = <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">';'</span>)
-955:                 <span class="ruby-identifier">strand</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/strand=/</span>, <span class="ruby-value str">&quot;&quot;</span>)
-956:                 <span class="ruby-identifier">frame</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/frame=/</span>, <span class="ruby-value str">&quot;&quot;</span>)
-957: 
-958:                 <span class="ruby-comment cmt">#warn &quot;* strand: &quot; + strand</span>
-959:                 <span class="ruby-comment cmt">#warn &quot;* frame: &quot; + frame</span>
-960:                 
-961:                 <span class="ruby-keyword kw">return</span> [<span class="ruby-identifier">strand</span>, <span class="ruby-identifier">frame</span>]
-962:             <span class="ruby-keyword kw">end</span>
-963:             <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span>
-964:         <span class="ruby-keyword kw">end</span>
+      <span class="ruby-comment cmt"># File result.rb, line 1017</span>
+1017:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_parse_line</span>(<span class="ruby-identifier">line</span>)
+1018:                         <span class="ruby-identifier">tmp</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/\[(.+)\]$/</span>)
+1019:                         <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">nil?</span>
+1020:                                 <span class="ruby-identifier">tmp</span> = <span class="ruby-identifier">tmp</span>[<span class="ruby-value">0</span>]
+1021:                                 <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/\[|\]/</span>, <span class="ruby-value str">&quot;&quot;</span>)
+1022:                                 <span class="ruby-identifier">strand</span>, <span class="ruby-identifier">frame</span> = <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">';'</span>)
+1023:                                 <span class="ruby-identifier">strand</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/strand=/</span>, <span class="ruby-value str">&quot;&quot;</span>)
+1024:                                 <span class="ruby-identifier">frame</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/frame=/</span>, <span class="ruby-value str">&quot;&quot;</span>)
+1025: 
+1026:                                 <span class="ruby-comment cmt">#warn &quot;* strand: &quot; + strand</span>
+1027:                                 <span class="ruby-comment cmt">#warn &quot;* frame: &quot; + frame</span>
+1028:                                 
+1029:                                 <span class="ruby-keyword kw">return</span> [<span class="ruby-identifier">strand</span>, <span class="ruby-identifier">frame</span>]
+1030:                         <span class="ruby-keyword kw">end</span>
+1031:                         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span>
+1032:                 <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

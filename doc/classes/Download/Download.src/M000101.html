@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>download_nucest (Download::Download)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File download.rb, line 184</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">download_nucest</span>
+                        <span class="ruby-identifier">outdir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>
+                        <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">mkpath</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">exist?</span>
+                        <span class="ruby-identifier">outfile</span> = <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_nucest.gb&quot;</span>)
+                        <span class="ruby-identifier">outfile</span>.<span class="ruby-identifier">unlink</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">outfile</span>.<span class="ruby-identifier">exist?</span>
+                        
+                        <span class="ruby-identifier">term</span> = <span class="ruby-value str">&quot;txid&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;[Organism:exp]&quot;</span>
+                        
+                        <span class="ruby-identifier">ncbi_download</span>(<span class="ruby-identifier">term</span>, <span class="ruby-value str">&quot;nucest&quot;</span>, <span class="ruby-identifier">outfile</span>)
+                <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>debug (Isolate::Seq)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File isolate.rb, line 297</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Sequence +&quot;</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* subid: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">subid</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* locus: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">locus</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* accession: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">accession</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* description: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">description</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* source: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">source</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* strand: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">strand</span>.<span class="ruby-identifier">to_s</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* location: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">location</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* location (original): &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">location_original</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* splicing: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">splicing</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* splicing (original): &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">splicing_original</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* pseudogene: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">pseudogene</span>.<span class="ruby-identifier">to_s</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* type: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">type</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* trans_table: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">trans_table</span>.<span class="ruby-identifier">to_s</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;&quot;</span>
+                <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

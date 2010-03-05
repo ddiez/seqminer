@@ -164,25 +164,25 @@
           <div class="method-source-code" id="M000118-source">
 <pre>
      <span class="ruby-comment cmt"># File download.rb, line 327</span>
-327:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
-328:             <span class="ruby-ivar">@host</span> = <span class="ruby-value str">'ftp.sanger.ac.uk'</span>
-329:             <span class="ruby-ivar">@base_dir</span> = <span class="ruby-value str">'/pub/databases/Pfam/releases/'</span>
-330:             <span class="ruby-ivar">@release</span> = <span class="ruby-value str">'Pfam24.0'</span>
-331:             <span class="ruby-ivar">@files</span> = [
-332:                 <span class="ruby-value str">'Pfam-A.seed.gz'</span>,
-333:                 <span class="ruby-value str">'Pfam-A.full.gz'</span>,
-334:                 <span class="ruby-value str">'Pfam-A.hmm.gz'</span>,
-335:                 <span class="ruby-value str">'Pfam-B.gz'</span>,
-336:                 <span class="ruby-value str">'relnotes.txt'</span>,
-337:                 <span class="ruby-value str">'userman.txt'</span>
-338:             ]
+327:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
+328:                         <span class="ruby-ivar">@host</span> = <span class="ruby-value str">'ftp.sanger.ac.uk'</span>
+329:                         <span class="ruby-ivar">@base_dir</span> = <span class="ruby-value str">'/pub/databases/Pfam/releases/'</span>
+330:                         <span class="ruby-ivar">@release</span> = <span class="ruby-value str">'Pfam24.0'</span>
+331:                         <span class="ruby-ivar">@files</span> = [
+332:                                 <span class="ruby-value str">'Pfam-A.seed.gz'</span>,
+333:                                 <span class="ruby-value str">'Pfam-A.full.gz'</span>,
+334:                                 <span class="ruby-value str">'Pfam-A.hmm.gz'</span>,
+335:                                 <span class="ruby-value str">'Pfam-B.gz'</span>,
+336:                                 <span class="ruby-value str">'relnotes.txt'</span>,
+337:                                 <span class="ruby-value str">'userman.txt'</span>
+338:                         ]
 339: 
-340:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
-341:                 <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
-342:             <span class="ruby-keyword kw">else</span>
-343:                 <span class="ruby-ivar">@config</span> = <span class="ruby-constant">Config</span><span class="ruby-operator">::</span><span class="ruby-constant">General</span>.<span class="ruby-identifier">new</span>
-344:             <span class="ruby-keyword kw">end</span>
-345:         <span class="ruby-keyword kw">end</span>
+340:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+341:                                 <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+342:                         <span class="ruby-keyword kw">else</span>
+343:                                 <span class="ruby-ivar">@config</span> = <span class="ruby-constant">Config</span><span class="ruby-operator">::</span><span class="ruby-constant">General</span>.<span class="ruby-identifier">new</span>
+344:                         <span class="ruby-keyword kw">end</span>
+345:                 <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -205,21 +205,21 @@
           <div class="method-source-code" id="M000119-source">
 <pre>
      <span class="ruby-comment cmt"># File download.rb, line 347</span>
-347:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>
-348:             <span class="ruby-comment cmt"># TODO: check there are updates to download?</span>
-349:             
-350:             <span class="ruby-comment cmt"># Check directory exists.</span>
-351:             <span class="ruby-identifier">dir_pfam</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_pfam</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span>
-352:             <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">dir_pfam</span>.<span class="ruby-identifier">exist?</span>
-353:                 <span class="ruby-identifier">dir_pfam</span>.<span class="ruby-identifier">mkpath</span>
-354:                 <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_pfam_current</span>.<span class="ruby-identifier">make_symlink</span>(<span class="ruby-identifier">dir_pfam</span>)
-355:             <span class="ruby-keyword kw">end</span>
-356:             
-357:             <span class="ruby-comment cmt"># Download files (with progress bar).</span>
-358:             <span class="ruby-identifier">files</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
-359:                 <span class="ruby-identifier">ftp_download</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">base_dir</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">dir_pfam</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">file</span>)
-360:             <span class="ruby-keyword kw">end</span>
-361:         <span class="ruby-keyword kw">end</span>
+347:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>
+348:                         <span class="ruby-comment cmt"># TODO: check there are updates to download?</span>
+349:                         
+350:                         <span class="ruby-comment cmt"># Check directory exists.</span>
+351:                         <span class="ruby-identifier">dir_pfam</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_pfam</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span>
+352:                         <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">dir_pfam</span>.<span class="ruby-identifier">exist?</span>
+353:                                 <span class="ruby-identifier">dir_pfam</span>.<span class="ruby-identifier">mkpath</span>
+354:                                 <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_pfam_current</span>.<span class="ruby-identifier">make_symlink</span>(<span class="ruby-identifier">dir_pfam</span>)
+355:                         <span class="ruby-keyword kw">end</span>
+356:                         
+357:                         <span class="ruby-comment cmt"># Download files (with progress bar).</span>
+358:                         <span class="ruby-identifier">files</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+359:                                 <span class="ruby-identifier">ftp_download</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">base_dir</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">dir_pfam</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">file</span>)
+360:                         <span class="ruby-keyword kw">end</span>
+361:                 <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

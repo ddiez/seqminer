@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>eupathdb_process_source (Download::Download)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File download.rb, line 288</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">eupathdb_process_source</span>(<span class="ruby-identifier">infile</span>)
+                        <span class="ruby-identifier">p</span> = <span class="ruby-constant">Parser</span><span class="ruby-operator">::</span><span class="ruby-constant">Eupathdb</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">infile</span>, <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+                        <span class="ruby-identifier">g</span> = <span class="ruby-identifier">p</span>.<span class="ruby-identifier">parse</span>
+
+                        <span class="ruby-identifier">outdir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_sequence</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>
+                        <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">mkpath</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">exist?</span>
+
+                        <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">'gene'</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;gene.fa&quot;</span>)
+                        <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">'cds'</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;cds.fa&quot;</span>)
+                        <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">'protein'</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;protein.fa&quot;</span>)
+                        <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">'6frame'</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;6frame.fa&quot;</span>)
+                        <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">'genome'</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;genome.fa&quot;</span>)
+                        <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_gff</span>(<span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;genome.gff&quot;</span>)
+                <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>source_stat (SeqMiner::Stat)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File seqminer.rb, line 448</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">source_stat</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Taxon\tnuccore_pass\tnuccore_skip\tnucest_pass\tnucest_skip\taccepted&quot;</span>
+                        <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">each_taxon</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+                                <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;spp&quot;</span>
+                                <span class="ruby-identifier">n</span> = {}
+                                [<span class="ruby-value str">&quot;accepted&quot;</span>, <span class="ruby-value str">&quot;nuccore_pass&quot;</span>, <span class="ruby-value str">&quot;nuccore_skip&quot;</span>, <span class="ruby-value str">&quot;nucest_pass&quot;</span>, <span class="ruby-value str">&quot;nucest_skip&quot;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+                                        <span class="ruby-identifier">n</span>[<span class="ruby-identifier">f</span>] = <span class="ruby-value">0</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">n</span>[<span class="ruby-identifier">f</span>]
+                                        <span class="ruby-identifier">file</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">f</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.txt&quot;</span>)
+                                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">exist?</span>
+                                                <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">file</span>, <span class="ruby-value str">&quot;r&quot;</span>).<span class="ruby-identifier">each_line</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+                                                        <span class="ruby-identifier">n</span>[<span class="ruby-identifier">f</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+                                                <span class="ruby-keyword kw">end</span>
+                                        <span class="ruby-keyword kw">end</span>
+                                <span class="ruby-keyword kw">end</span>
+                                <span class="ruby-identifier">puts</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">n</span>[<span class="ruby-value str">&quot;nuccore_pass&quot;</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">n</span>[<span class="ruby-value str">&quot;nuccore_skip&quot;</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span> \
+                                        <span class="ruby-identifier">n</span>[<span class="ruby-value str">&quot;nucest_pass&quot;</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">n</span>[<span class="ruby-value str">&quot;nucest_skip&quot;</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\t&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">n</span>[<span class="ruby-value str">&quot;accepted&quot;</span>].<span class="ruby-identifier">to_s</span>
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>build_cmd (Tools::Blast)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File tools.rb, line 113</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">build_cmd</span>
+                        <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">tool</span>
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'tblastn'</span>
+                                <span class="ruby-identifier">cmd</span> = [<span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span>, <span class="ruby-value str">&quot;-db&quot;</span>, <span class="ruby-identifier">db</span>, <span class="ruby-value str">&quot;-in_pssm&quot;</span>, <span class="ruby-identifier">pssm_file</span>, <span class="ruby-value str">&quot;&gt;&quot;</span>, <span class="ruby-identifier">outfile</span>]
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'psiblast'</span>
+                                <span class="ruby-identifier">cmd</span> = [<span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span>, <span class="ruby-value str">&quot;-db&quot;</span>, <span class="ruby-identifier">db</span>, <span class="ruby-value str">&quot;-out_pssm&quot;</span>, <span class="ruby-identifier">pssm_file</span>, <span class="ruby-value str">&quot;-query&quot;</span>, <span class="ruby-identifier">seed_file</span>, <span class="ruby-value str">&quot;&gt;&quot;</span>, <span class="ruby-identifier">outfile</span>] 
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'makeblastdb'</span>
+                                <span class="ruby-ivar">@dbtitle</span> = <span class="ruby-identifier">outfile</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">dbtitle</span>
+                                <span class="ruby-identifier">cmd</span> = [<span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span>, <span class="ruby-value str">&quot;-in&quot;</span>, <span class="ruby-identifier">infile</span>, <span class="ruby-value str">&quot;-out&quot;</span>, <span class="ruby-identifier">outfile</span>, <span class="ruby-value str">&quot;-dbtype&quot;</span>, <span class="ruby-identifier">dbtype</span>, <span class="ruby-value str">&quot;-title&quot;</span>, <span class="ruby-value str">&quot;\&quot;&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dbtitle</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\&quot;&quot;</span>]
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-ivar">@cmd</span> = <span class="ruby-identifier">cmd</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot; &quot;</span>)
+                <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

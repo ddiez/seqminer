@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>process_spp (SeqMiner::Install)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File seqminer.rb, line 146</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">process_spp</span>(<span class="ruby-identifier">t</span>)
+                        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* source: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">source</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* dir: &quot;</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span>)
+                        
+                        <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">source</span>
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;plasmodb&quot;</span>, <span class="ruby-value str">&quot;giardiadb&quot;</span>, <span class="ruby-value str">&quot;tritrypdb&quot;</span>
+                                <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* parser: eupathdb&quot;</span>
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;trypanosoma.cruzi_CL_Brener&quot;</span>
+                                        <span class="ruby-identifier">p</span> = <span class="ruby-constant">Parser</span><span class="ruby-operator">::</span><span class="ruby-constant">Eupathdb</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">t</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>, <span class="ruby-identifier">:subtype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Esmeraldo&quot;</span>})
+                                <span class="ruby-keyword kw">else</span>
+                                        <span class="ruby-identifier">p</span> = <span class="ruby-constant">Parser</span><span class="ruby-operator">::</span><span class="ruby-constant">Eupathdb</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">t</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;broad&quot;</span>
+                                <span class="ruby-identifier">p</span> = <span class="ruby-constant">Parser</span><span class="ruby-operator">::</span><span class="ruby-constant">Broad</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">t</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;ncbi&quot;</span>
+                                <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* parser: refseq&quot;</span>
+                                <span class="ruby-identifier">p</span> = <span class="ruby-constant">Parser</span><span class="ruby-operator">::</span><span class="ruby-constant">Refseq</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">t</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-identifier">g</span> = <span class="ruby-identifier">p</span>.<span class="ruby-identifier">parse</span>
+                        <span class="ruby-identifier">g</span>.<span class="ruby-identifier">debug</span>
+                        
+                        <span class="ruby-identifier">outdir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_sequence</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span>
+                        <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">mkpath</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">exist?</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* writing gene FASTA file&quot;</span>
+                        <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">&quot;gene&quot;</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;gene.fa&quot;</span>)
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* writing CDS FASTA file&quot;</span>
+                        <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">&quot;cds&quot;</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;cds.fa&quot;</span>)
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* writing protein FASTA file&quot;</span>
+                        <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">&quot;protein&quot;</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;protein.fa&quot;</span>)
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* writing 6frame FASTA file&quot;</span>
+                        <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">&quot;6frame&quot;</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;6frame.fa&quot;</span>)
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* writing genome FASTA file&quot;</span>
+                        <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_fasta</span>(<span class="ruby-value str">&quot;genome&quot;</span>, <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;genome.fa&quot;</span>)
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* writing genome TABLE file&quot;</span>
+                        <span class="ruby-identifier">g</span>.<span class="ruby-identifier">write_table</span>(<span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;genome.txt&quot;</span>)
+                <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

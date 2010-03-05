@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>ncbi_download (Download::Common)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File download.rb, line 83</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">ncbi_download</span>(<span class="ruby-identifier">term</span>, <span class="ruby-identifier">db</span>, <span class="ruby-identifier">ofile</span>)
+                        <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NCBI</span>.<span class="ruby-identifier">default_email</span> = <span class="ruby-value str">&quot;diez@kuicr.kyoto-u.ac.jp&quot;</span>
+                        <span class="ruby-identifier">ncbi</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NCBI</span><span class="ruby-operator">::</span><span class="ruby-constant">REST</span>.<span class="ruby-identifier">new</span>
+                        
+                        <span class="ruby-comment cmt"># WARNING: Still not tested! (see test_ncbi2.rb for details)</span>
+                        <span class="ruby-identifier">rid</span> = <span class="ruby-identifier">ncbi</span>.<span class="ruby-identifier">esearch</span>(<span class="ruby-identifier">term</span>, {<span class="ruby-identifier">:db</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">db</span>}, <span class="ruby-identifier">limit</span> = <span class="ruby-value">0</span>)
+                        
+                        <span class="ruby-identifier">res</span> = <span class="ruby-identifier">ncbi</span>.<span class="ruby-identifier">efetch</span>(<span class="ruby-identifier">rid</span>, {<span class="ruby-identifier">:db</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">db</span>, <span class="ruby-identifier">:rettype</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;gb&quot;</span>, <span class="ruby-identifier">:retmode</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;txt&quot;</span>})
+                        <span class="ruby-identifier">out</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">ofile</span>, <span class="ruby-value str">&quot;w&quot;</span>)
+                        <span class="ruby-identifier">out</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">res</span>
+                        <span class="ruby-identifier">out</span>.<span class="ruby-identifier">close</span>
+                        
+                        <span class="ruby-comment cmt"># Old method. Just uncomment (and comment out the code above) to revert to it.</span>
+                        <span class="ruby-comment cmt">#system(&quot;./ncbi_download.pl \&quot;#{term}\&quot; #{db} #{ofile}&quot;)</span>
+                <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

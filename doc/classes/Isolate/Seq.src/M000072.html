@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (Isolate::Seq)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File isolate.rb, line 218</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>)
+                        <span class="ruby-keyword kw">super</span>
+                        
+                        <span class="ruby-ivar">@description</span> = <span class="ruby-value str">&quot;&quot;</span>
+                        <span class="ruby-ivar">@pseudogene</span> = <span class="ruby-value">0</span>
+                        <span class="ruby-comment cmt"># Assume the default and pray we can get the information somewhere.</span>
+                        <span class="ruby-ivar">@trans_table</span> = <span class="ruby-keyword kw">nil</span>
+                        <span class="ruby-comment cmt"># For isolates we usually get the translation from the CDS, and this is stored in the @translation holder.</span>
+                        <span class="ruby-comment cmt"># There is a method translate() that computes a translation based on the corresponding cds. It accepts</span>
+                        <span class="ruby-comment cmt"># a different frame and translation table.</span>
+                        <span class="ruby-ivar">@translation</span> = <span class="ruby-keyword kw">nil</span>
+                <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>debug (Result::Result)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File result.rb, line 597</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Result +&quot;</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* result id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* tool: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">tool</span>.<span class="ruby-identifier">to_s</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* sequences: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
+                        <span class="ruby-identifier">nsh</span> = <span class="ruby-value">0</span>
+                        <span class="ruby-identifier">ndom</span> = <span class="ruby-value">0</span>
+                        <span class="ruby-identifier">ndomh</span> = <span class="ruby-value">0</span>
+                        <span class="ruby-identifier">each_sequence</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">hit</span><span class="ruby-operator">|</span>
+                                <span class="ruby-identifier">nsh</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">hit</span>.<span class="ruby-identifier">length</span>
+                                <span class="ruby-identifier">hit</span>.<span class="ruby-identifier">each_sequencehit</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subhit</span><span class="ruby-operator">|</span>
+                                        <span class="ruby-identifier">ndom</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">subhit</span>.<span class="ruby-identifier">length</span>
+                                        <span class="ruby-identifier">subhit</span>.<span class="ruby-identifier">each_domain</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">domain</span><span class="ruby-operator">|</span>
+                                                <span class="ruby-identifier">ndomh</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">domain</span>.<span class="ruby-identifier">length</span>
+                                        <span class="ruby-keyword kw">end</span>
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* sequence hits: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">nsh</span>.<span class="ruby-identifier">to_s</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* domains: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ndom</span>.<span class="ruby-identifier">to_s</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* domain hits: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ndomh</span>.<span class="ruby-identifier">to_s</span>
+                <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

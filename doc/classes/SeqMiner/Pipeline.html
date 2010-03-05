@@ -90,16 +90,17 @@
       <a href="#M000128">build_search</a>&nbsp;&nbsp;
       <a href="#M000126">dir_initialize</a>&nbsp;&nbsp;
       <a href="#M000125">dir_initialized?</a>&nbsp;&nbsp;
-      <a href="#M000138">generate_alignments</a>&nbsp;&nbsp;
+      <a href="#M000139">generate_alignments</a>&nbsp;&nbsp;
       <a href="#M000132">get_scan_results</a>&nbsp;&nbsp;
       <a href="#M000133">get_search_results</a>&nbsp;&nbsp;
       <a href="#M000124">new</a>&nbsp;&nbsp;
-      <a href="#M000136">report</a>&nbsp;&nbsp;
-      <a href="#M000137">report_summary</a>&nbsp;&nbsp;
+      <a href="#M000137">report</a>&nbsp;&nbsp;
+      <a href="#M000138">report_summary</a>&nbsp;&nbsp;
       <a href="#M000127">run_all</a>&nbsp;&nbsp;
       <a href="#M000131">run_scan</a>&nbsp;&nbsp;
       <a href="#M000129">run_search</a>&nbsp;&nbsp;
-      <a href="#M000135">write_fasta</a>&nbsp;&nbsp;
+      <a href="#M000135">write_domain</a>&nbsp;&nbsp;
+      <a href="#M000136">write_fasta</a>&nbsp;&nbsp;
       <a href="#M000134">write_nelson</a>&nbsp;&nbsp;
       </div>
     </div>
@@ -187,24 +188,24 @@
           <div class="method-source-code" id="M000124-source">
 <pre>
      <span class="ruby-comment cmt"># File seqminer.rb, line 281</span>
-281:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
+281:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
 282: 
-283:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
-284:                 <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
-285:             <span class="ruby-keyword kw">else</span>
-286:                 <span class="ruby-ivar">@config</span> = <span class="ruby-constant">Config</span><span class="ruby-operator">::</span><span class="ruby-constant">General</span>.<span class="ruby-identifier">new</span>
-287:             <span class="ruby-keyword kw">end</span>
+283:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+284:                                 <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+285:                         <span class="ruby-keyword kw">else</span>
+286:                                 <span class="ruby-ivar">@config</span> = <span class="ruby-constant">Config</span><span class="ruby-operator">::</span><span class="ruby-constant">General</span>.<span class="ruby-identifier">new</span>
+287:                         <span class="ruby-keyword kw">end</span>
 288: 
-289:             <span class="ruby-identifier">config</span>.<span class="ruby-identifier">debug</span>
+289:                         <span class="ruby-identifier">config</span>.<span class="ruby-identifier">debug</span>
 290: 
-291:             <span class="ruby-ivar">@taxon</span> = <span class="ruby-constant">Taxon</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
-292:             <span class="ruby-ivar">@ortholog</span> = <span class="ruby-constant">Ortholog</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
-293:             <span class="ruby-ivar">@type</span> = <span class="ruby-constant">Search</span><span class="ruby-operator">::</span><span class="ruby-constant">TypeSet</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
-294:             <span class="ruby-identifier">build_search</span>
-295:             <span class="ruby-identifier">build_scan</span>
-296:             
-297:             <span class="ruby-ivar">@dir_initialized</span> = <span class="ruby-keyword kw">false</span>
-298:         <span class="ruby-keyword kw">end</span>
+291:                         <span class="ruby-ivar">@taxon</span> = <span class="ruby-constant">Taxon</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+292:                         <span class="ruby-ivar">@ortholog</span> = <span class="ruby-constant">Ortholog</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+293:                         <span class="ruby-ivar">@type</span> = <span class="ruby-constant">Search</span><span class="ruby-operator">::</span><span class="ruby-constant">TypeSet</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+294:                         <span class="ruby-identifier">build_search</span>
+295:                         <span class="ruby-identifier">build_scan</span>
+296:                         
+297:                         <span class="ruby-ivar">@dir_initialized</span> = <span class="ruby-keyword kw">false</span>
+298:                 <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -227,10 +228,10 @@
           <div class="method-source-code" id="M000130-source">
 <pre>
      <span class="ruby-comment cmt"># File seqminer.rb, line 341</span>
-341:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">build_scan</span>
-342:             <span class="ruby-identifier">ps</span> = <span class="ruby-constant">Search</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@taxon</span>, <span class="ruby-ivar">@ortholog</span>, <span class="ruby-ivar">@type</span>)
-343:             <span class="ruby-ivar">@scan</span> = <span class="ruby-constant">Scan</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">ps</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
-344:         <span class="ruby-keyword kw">end</span>
+341:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">build_scan</span>
+342:                         <span class="ruby-identifier">ps</span> = <span class="ruby-constant">Search</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@taxon</span>, <span class="ruby-ivar">@ortholog</span>, <span class="ruby-ivar">@type</span>)
+343:                         <span class="ruby-ivar">@scan</span> = <span class="ruby-constant">Scan</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">ps</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+344:                 <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -251,10 +252,10 @@
           <div class="method-source-code" id="M000128-source">
 <pre>
      <span class="ruby-comment cmt"># File seqminer.rb, line 331</span>
-331:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">build_search</span>
-332:             <span class="ruby-identifier">ps</span> = <span class="ruby-constant">Search</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@taxon</span>, <span class="ruby-ivar">@ortholog</span>, <span class="ruby-ivar">@type</span>)
-333:             <span class="ruby-ivar">@search</span> = <span class="ruby-constant">Search</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">ps</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
-334:         <span class="ruby-keyword kw">end</span>
+331:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">build_search</span>
+332:                         <span class="ruby-identifier">ps</span> = <span class="ruby-constant">Search</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@taxon</span>, <span class="ruby-ivar">@ortholog</span>, <span class="ruby-ivar">@type</span>)
+333:                         <span class="ruby-ivar">@search</span> = <span class="ruby-constant">Search</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">ps</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+334:                 <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -275,23 +276,23 @@
           <div class="method-source-code" id="M000126-source">
 <pre>
      <span class="ruby-comment cmt"># File seqminer.rb, line 304</span>
-304:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">dir_initialize</span>
-305:             <span class="ruby-identifier">dir_level1</span> = [<span class="ruby-value str">'genome'</span>, <span class="ruby-value str">'isolate'</span>]
-306:             <span class="ruby-identifier">dir_level2</span> = [<span class="ruby-value str">'search'</span>, <span class="ruby-value str">'sequence'</span>, <span class="ruby-value str">'fasta'</span>, <span class="ruby-value str">'scan'</span>, <span class="ruby-value str">'domain'</span>]
-307:             
-308:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ CREATE RESULT DIR STRUCTURE +&quot;</span>
-309:             <span class="ruby-comment cmt">#warn &quot;* &quot; + dir_result</span>
-310:             <span class="ruby-comment cmt">#dir_result.mkpath</span>
-311:             <span class="ruby-identifier">dir_level1</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">level1</span><span class="ruby-operator">|</span>
-312:                 <span class="ruby-identifier">dir_level2</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">level2</span><span class="ruby-operator">|</span>
-313:                     <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">items</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ortholog</span><span class="ruby-operator">|</span>
-314:                         <span class="ruby-identifier">dir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">level1</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">level2</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span>
-315:                         <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir</span>
-316:                         <span class="ruby-identifier">dir</span>.<span class="ruby-identifier">mkpath</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">dir</span>.<span class="ruby-identifier">exist?</span>
-317:                     <span class="ruby-keyword kw">end</span>
-318:                 <span class="ruby-keyword kw">end</span>
-319:             <span class="ruby-keyword kw">end</span>
-320:         <span class="ruby-keyword kw">end</span>
+304:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">dir_initialize</span>
+305:                         <span class="ruby-identifier">dir_level1</span> = [<span class="ruby-value str">'genome'</span>, <span class="ruby-value str">'isolate'</span>]
+306:                         <span class="ruby-identifier">dir_level2</span> = [<span class="ruby-value str">'search'</span>, <span class="ruby-value str">'sequence'</span>, <span class="ruby-value str">'fasta'</span>, <span class="ruby-value str">'scan'</span>, <span class="ruby-value str">'domain'</span>]
+307:                         
+308:                         <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ CREATE RESULT DIR STRUCTURE +&quot;</span>
+309:                         <span class="ruby-comment cmt">#warn &quot;* &quot; + dir_result</span>
+310:                         <span class="ruby-comment cmt">#dir_result.mkpath</span>
+311:                         <span class="ruby-identifier">dir_level1</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">level1</span><span class="ruby-operator">|</span>
+312:                                 <span class="ruby-identifier">dir_level2</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">level2</span><span class="ruby-operator">|</span>
+313:                                         <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">items</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ortholog</span><span class="ruby-operator">|</span>
+314:                                                 <span class="ruby-identifier">dir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">level1</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">level2</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span>
+315:                                                 <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dir</span>
+316:                                                 <span class="ruby-identifier">dir</span>.<span class="ruby-identifier">mkpath</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">dir</span>.<span class="ruby-identifier">exist?</span>
+317:                                         <span class="ruby-keyword kw">end</span>
+318:                                 <span class="ruby-keyword kw">end</span>
+319:                         <span class="ruby-keyword kw">end</span>
+320:                 <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -312,19 +313,19 @@
           <div class="method-source-code" id="M000125-source">
 <pre>
      <span class="ruby-comment cmt"># File seqminer.rb, line 300</span>
-300:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">dir_initialized?</span>
-301:             <span class="ruby-ivar">@dir_initialized</span>
-302:         <span class="ruby-keyword kw">end</span>
+300:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">dir_initialized?</span>
+301:                         <span class="ruby-ivar">@dir_initialized</span>
+302:                 <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000138" class="method-detail">
-        <a name="M000138"></a>
+      <div id="method-M000139" class="method-detail">
+        <a name="M000139"></a>
 
         <div class="method-heading">
-          <a href="#M000138" class="method-signature">
+          <a href="#M000139" class="method-signature">
           <span class="method-name">generate_alignments</span><span class="method-args">()</span>
           </a>
         </div>
@@ -336,12 +337,12 @@ the FASTA files for protein for sequences in the same gene family. Then
 runs Clustalw-mpi on the concatenated FASTA file. TODO: not implemented.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000138-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000138-source">
+            onclick="toggleCode('M000139-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000139-source">
 <pre>
-     <span class="ruby-comment cmt"># File seqminer.rb, line 398</span>
-398:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">generate_alignments</span>
-399:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 407</span>
+407:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">generate_alignments</span>
+408:                 <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -352,7 +353,7 @@ runs Clustalw-mpi on the concatenated FASTA file. TODO: not implemented.
 
         <div class="method-heading">
           <a href="#M000132" class="method-signature">
-          <span class="method-name">get_scan_results</span><span class="method-args">(eval = 0.001)</span>
+          <span class="method-name">get_scan_results</span><span class="method-args">(eval = 0.01)</span>
           </a>
         </div>
       
@@ -362,9 +363,11 @@ runs Clustalw-mpi on the concatenated FASTA file. TODO: not implemented.
           <div class="method-source-code" id="M000132-source">
 <pre>
      <span class="ruby-comment cmt"># File seqminer.rb, line 352</span>
-352:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_scan_results</span>(<span class="ruby-identifier">eval</span> = <span class="ruby-value">0</span><span class="ruby-value">.001</span>)
-353:             <span class="ruby-ivar">@scan_result</span> = <span class="ruby-identifier">scan</span>.<span class="ruby-identifier">parse</span> 
-354:         <span class="ruby-keyword kw">end</span>
+352:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_scan_results</span>(<span class="ruby-identifier">eval</span> = <span class="ruby-value">0</span><span class="ruby-value">.01</span>)
+353:                         <span class="ruby-ivar">@scan_result</span> = <span class="ruby-identifier">scan</span>.<span class="ruby-identifier">parse</span> 
+354:                         <span class="ruby-identifier">scan_result</span>.<span class="ruby-identifier">filter_domain_by_eval</span>(<span class="ruby-identifier">eval</span>)
+355:                         <span class="ruby-identifier">scan_result</span>.<span class="ruby-identifier">clean_up</span>
+356:                 <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -388,43 +391,13 @@ an Evalue thereshold).
             onclick="toggleCode('M000133-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000133-source">
 <pre>
-     <span class="ruby-comment cmt"># File seqminer.rb, line 357</span>
-357:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_search_results</span>(<span class="ruby-identifier">eval</span> = <span class="ruby-value">0</span><span class="ruby-value">.001</span>)
-358:             <span class="ruby-ivar">@result</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">parse</span>
-359:             <span class="ruby-ivar">@result</span> = <span class="ruby-identifier">result</span>.<span class="ruby-identifier">auto_merge</span>
-360:             <span class="ruby-identifier">result</span>.<span class="ruby-identifier">filter_by_eval</span>(<span class="ruby-identifier">eval</span>)
-361:             <span class="ruby-identifier">result</span>.<span class="ruby-identifier">clean_up</span>
-362:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000136" class="method-detail">
-        <a name="M000136"></a>
-
-        <div class="method-heading">
-          <a href="#M000136" class="method-signature">
-          <span class="method-name">report</span><span class="method-args">(completeness = 1)</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-<a href="Pipeline.html">Pipeline</a>-wise <a
-href="Pipeline.html#M000136">report</a>.
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000136-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000136-source">
-<pre>
-     <span class="ruby-comment cmt"># File seqminer.rb, line 380</span>
-380:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">report</span>(<span class="ruby-identifier">completeness</span> = <span class="ruby-value">1</span>)
-381:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">nil?</span>
-382:                 <span class="ruby-identifier">get_search_results</span>
-383:             <span class="ruby-keyword kw">end</span>
-384:             <span class="ruby-identifier">result</span>.<span class="ruby-identifier">report</span>(<span class="ruby-identifier">cut</span> = <span class="ruby-identifier">completeness</span>)
-385:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 359</span>
+359:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_search_results</span>(<span class="ruby-identifier">eval</span> = <span class="ruby-value">0</span><span class="ruby-value">.001</span>)
+360:                         <span class="ruby-ivar">@result</span> = <span class="ruby-identifier">search</span>.<span class="ruby-identifier">parse</span>
+361:                         <span class="ruby-ivar">@result</span> = <span class="ruby-identifier">result</span>.<span class="ruby-identifier">auto_merge</span>
+362:                         <span class="ruby-identifier">result</span>.<span class="ruby-identifier">filter_by_eval</span>(<span class="ruby-identifier">eval</span>)
+363:                         <span class="ruby-identifier">result</span>.<span class="ruby-identifier">clean_up</span>
+364:                 <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -435,6 +408,36 @@ href="Pipeline.html#M000136">report</a>.
 
         <div class="method-heading">
           <a href="#M000137" class="method-signature">
+          <span class="method-name">report</span><span class="method-args">(completeness = 1)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+<a href="Pipeline.html">Pipeline</a>-wise <a
+href="Pipeline.html#M000137">report</a>.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000137-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000137-source">
+<pre>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 389</span>
+389:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">report</span>(<span class="ruby-identifier">completeness</span> = <span class="ruby-value">1</span>)
+390:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">nil?</span>
+391:                                 <span class="ruby-identifier">get_search_results</span>
+392:                         <span class="ruby-keyword kw">end</span>
+393:                         <span class="ruby-identifier">result</span>.<span class="ruby-identifier">report</span>(<span class="ruby-identifier">cut</span> = <span class="ruby-identifier">completeness</span>)
+394:                 <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000138" class="method-detail">
+        <a name="M000138"></a>
+
+        <div class="method-heading">
+          <a href="#M000138" class="method-signature">
           <span class="method-name">report_summary</span><span class="method-args">()</span>
           </a>
         </div>
@@ -442,19 +445,19 @@ href="Pipeline.html#M000136">report</a>.
         <div class="method-description">
           <p>
 <a href="Pipeline.html">Pipeline</a>-wise summary <a
-href="Pipeline.html#M000136">report</a>.
+href="Pipeline.html#M000137">report</a>.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000137-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000137-source">
+            onclick="toggleCode('M000138-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000138-source">
 <pre>
-     <span class="ruby-comment cmt"># File seqminer.rb, line 388</span>
-388:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">report_summary</span>
-389:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">nil?</span>
-390:                 <span class="ruby-identifier">get_search_results</span>
-391:             <span class="ruby-keyword kw">end</span>
-392:             <span class="ruby-identifier">result</span>.<span class="ruby-identifier">report_summary</span>
-393:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 397</span>
+397:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">report_summary</span>
+398:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">nil?</span>
+399:                                 <span class="ruby-identifier">get_search_results</span>
+400:                         <span class="ruby-keyword kw">end</span>
+401:                         <span class="ruby-identifier">result</span>.<span class="ruby-identifier">report_summary</span>
+402:                 <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -475,14 +478,14 @@ href="Pipeline.html#M000136">report</a>.
           <div class="method-source-code" id="M000127-source">
 <pre>
      <span class="ruby-comment cmt"># File seqminer.rb, line 322</span>
-322:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run_all</span>
-323:             <span class="ruby-identifier">dir_initialize</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">dir_initialized?</span>
-324:             <span class="ruby-identifier">run_search</span>
-325:             <span class="ruby-identifier">get_search_results</span>
-326:             <span class="ruby-identifier">write_nelson</span>
-327:             <span class="ruby-identifier">write_fasta</span>
-328:             <span class="ruby-comment cmt">#run_domain_finder</span>
-329:         <span class="ruby-keyword kw">end</span>
+322:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run_all</span>
+323:                         <span class="ruby-identifier">dir_initialize</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">dir_initialized?</span>
+324:                         <span class="ruby-identifier">run_search</span>
+325:                         <span class="ruby-identifier">get_search_results</span>
+326:                         <span class="ruby-identifier">write_nelson</span>
+327:                         <span class="ruby-identifier">write_fasta</span>
+328:                         <span class="ruby-comment cmt">#run_domain_finder</span>
+329:                 <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -506,9 +509,9 @@ href="Pipeline.html#M000136">report</a>.
           <div class="method-source-code" id="M000131-source">
 <pre>
      <span class="ruby-comment cmt"># File seqminer.rb, line 347</span>
-347:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run_scan</span>
-348:             <span class="ruby-identifier">scan</span>.<span class="ruby-identifier">scan</span>
-349:         <span class="ruby-keyword kw">end</span>
+347:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run_scan</span>
+348:                         <span class="ruby-identifier">scan</span>.<span class="ruby-identifier">scan</span>
+349:                 <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -533,9 +536,9 @@ searches.
           <div class="method-source-code" id="M000129-source">
 <pre>
      <span class="ruby-comment cmt"># File seqminer.rb, line 337</span>
-337:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run_search</span>
-338:             <span class="ruby-identifier">search</span>.<span class="ruby-identifier">search</span>
-339:         <span class="ruby-keyword kw">end</span>
+337:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run_search</span>
+338:                         <span class="ruby-identifier">search</span>.<span class="ruby-identifier">search</span>
+339:                 <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -546,6 +549,32 @@ searches.
 
         <div class="method-heading">
           <a href="#M000135" class="method-signature">
+          <span class="method-name">write_domain</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000135-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000135-source">
+<pre>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 373</span>
+373:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_domain</span>
+374:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">scan_result</span>.<span class="ruby-identifier">nil?</span>
+375:                                 <span class="ruby-identifier">get_scan_results</span>
+376:                         <span class="ruby-keyword kw">end</span>
+377:                         <span class="ruby-identifier">scan_result</span>.<span class="ruby-identifier">write_domain</span>
+378:                 <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000136" class="method-detail">
+        <a name="M000136"></a>
+
+        <div class="method-heading">
+          <a href="#M000136" class="method-signature">
           <span class="method-name">write_fasta</span><span class="method-args">()</span>
           </a>
         </div>
@@ -553,19 +582,19 @@ searches.
         <div class="method-description">
           <p>
 <a href="Pipeline.html">Pipeline</a>-wise <a
-href="Pipeline.html#M000135">write_fasta</a>.
+href="Pipeline.html#M000136">write_fasta</a>.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000135-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000135-source">
+            onclick="toggleCode('M000136-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000136-source">
 <pre>
-     <span class="ruby-comment cmt"># File seqminer.rb, line 372</span>
-372:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_fasta</span>
-373:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">nil?</span>
-374:                 <span class="ruby-identifier">get_search_results</span>
-375:             <span class="ruby-keyword kw">end</span>
-376:             <span class="ruby-identifier">result</span>.<span class="ruby-identifier">write_fasta</span>
-377:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 381</span>
+381:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_fasta</span>
+382:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">nil?</span>
+383:                                 <span class="ruby-identifier">get_search_results</span>
+384:                         <span class="ruby-keyword kw">end</span>
+385:                         <span class="ruby-identifier">result</span>.<span class="ruby-identifier">write_fasta</span>
+386:                 <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -585,13 +614,13 @@ href="Pipeline.html#M000135">write_fasta</a>.
             onclick="toggleCode('M000134-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000134-source">
 <pre>
-     <span class="ruby-comment cmt"># File seqminer.rb, line 364</span>
-364:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_nelson</span>
-365:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">nil?</span>
-366:                 <span class="ruby-identifier">get_search_results</span>
-367:             <span class="ruby-keyword kw">end</span>
-368:             <span class="ruby-identifier">result</span>.<span class="ruby-identifier">write_nelson</span>
-369:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File seqminer.rb, line 366</span>
+366:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_nelson</span>
+367:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">nil?</span>
+368:                                 <span class="ruby-identifier">get_search_results</span>
+369:                         <span class="ruby-keyword kw">end</span>
+370:                         <span class="ruby-identifier">result</span>.<span class="ruby-identifier">write_nelson</span>
+371:                 <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

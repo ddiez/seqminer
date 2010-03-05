@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (Sequence::Set)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File sequence.rb, line 20</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
+                        <span class="ruby-keyword kw">super</span>()
+
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+                                <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+                        <span class="ruby-keyword kw">else</span>
+                                <span class="ruby-ivar">@config</span> = <span class="ruby-constant">Config</span><span class="ruby-operator">::</span><span class="ruby-constant">General</span>.<span class="ruby-identifier">new</span>
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-ivar">@dir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_sequence</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">name</span>
+                        <span class="ruby-ivar">@type</span> = <span class="ruby-identifier">type</span>
+                        <span class="ruby-ivar">@file</span> = <span class="ruby-ivar">@dir</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">type</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.fa&quot;</span>)
+                        
+<span class="ruby-comment cmt">#                       warn &quot;* file: &quot; + file</span>
+<span class="ruby-comment cmt">#                       total = `grep &quot;&gt;&quot; #{file} | wc -l`</span>
+<span class="ruby-comment cmt">#                       total.strip!</span>
+<span class="ruby-comment cmt">#                       puts &quot;* number sequences: &quot; + total</span>
+<span class="ruby-comment cmt">#                       number_read = 0</span>
+<span class="ruby-comment cmt">#                       pb = ProgressBar.new(file.to_s, 100)</span>
+                        <span class="ruby-identifier">fi</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FastaFormat</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">file</span>)
+                        <span class="ruby-identifier">fi</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span>
+                                <span class="ruby-identifier">seq</span> = <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">to_biosequence</span>
+                                <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">type</span>
+                                <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;gene&quot;</span>
+                                        <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">na</span>
+                                <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;protein&quot;</span>
+                                        <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">aa</span>
+                                <span class="ruby-keyword kw">end</span>
+                                <span class="ruby-identifier">add</span>(<span class="ruby-identifier">seq</span>, <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">accessions</span>[<span class="ruby-value">0</span>])
+<span class="ruby-comment cmt">#                               number_read += 1</span>
+<span class="ruby-comment cmt">#                               percent_finished = 100 * (number_read.to_f / total.to_f)</span>
+<span class="ruby-comment cmt">#                               pb.set(percent_finished)</span>
+                        <span class="ruby-keyword kw">end</span>
+<span class="ruby-comment cmt">#                       pb.finish</span>
+                <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

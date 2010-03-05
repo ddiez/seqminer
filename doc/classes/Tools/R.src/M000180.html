@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>build_cmd (Tools::R)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File tools.rb, line 209</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">build_cmd</span>
+                        <span class="ruby-comment cmt"># TODO: how to pass the script as stdin?</span>
+                        <span class="ruby-comment cmt"># For example, using pipes:</span>
+<span class="ruby-comment cmt">#                       def send_message message, netbiosname</span>
+<span class="ruby-comment cmt">#                         IO.popen &quot;smbclient -M #{netbiosname}&quot;, 'w' do |io|</span>
+<span class="ruby-comment cmt">#                           message.each_line do |line|</span>
+<span class="ruby-comment cmt">#                             io.write line</span>
+<span class="ruby-comment cmt">#                           end</span>
+<span class="ruby-comment cmt">#                         end</span>
+<span class="ruby-comment cmt">#                         raise 'smbclient failed' unless $?.success?</span>
+<span class="ruby-comment cmt">#                       end</span>
+                        <span class="ruby-identifier">cmd</span> = [<span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span>, <span class="ruby-value str">&quot;&lt;&quot;</span>, <span class="ruby-identifier">script</span>]
+                        <span class="ruby-ivar">@cmd</span> = <span class="ruby-identifier">cmd</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot; &quot;</span>)
+                <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

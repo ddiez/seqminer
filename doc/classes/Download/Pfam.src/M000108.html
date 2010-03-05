@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (Download::Pfam)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File download.rb, line 327</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
+                        <span class="ruby-ivar">@host</span> = <span class="ruby-value str">'ftp.sanger.ac.uk'</span>
+                        <span class="ruby-ivar">@base_dir</span> = <span class="ruby-value str">'/pub/databases/Pfam/releases/'</span>
+                        <span class="ruby-ivar">@release</span> = <span class="ruby-value str">'Pfam24.0'</span>
+                        <span class="ruby-ivar">@files</span> = [
+                                <span class="ruby-value str">'Pfam-A.seed.gz'</span>,
+                                <span class="ruby-value str">'Pfam-A.full.gz'</span>,
+                                <span class="ruby-value str">'Pfam-A.hmm.gz'</span>,
+                                <span class="ruby-value str">'Pfam-B.gz'</span>,
+                                <span class="ruby-value str">'relnotes.txt'</span>,
+                                <span class="ruby-value str">'userman.txt'</span>
+                        ]
+
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+                                <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:config</span>]
+                        <span class="ruby-keyword kw">else</span>
+                                <span class="ruby-ivar">@config</span> = <span class="ruby-constant">Config</span><span class="ruby-operator">::</span><span class="ruby-constant">General</span>.<span class="ruby-identifier">new</span>
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

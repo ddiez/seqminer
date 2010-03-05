@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>update (Config::General)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File config.rb, line 19</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>
+                        <span class="ruby-comment cmt"># Configuration.</span>
+                        <span class="ruby-ivar">@dir_config</span> = <span class="ruby-identifier">dir_home</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;etc&quot;</span>
+                        <span class="ruby-ivar">@file_taxon</span> = <span class="ruby-identifier">dir_config</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;taxon.txt&quot;</span>
+                        <span class="ruby-ivar">@file_ortholog</span> = <span class="ruby-identifier">dir_config</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;ortholog.txt&quot;</span>
+                        
+                        <span class="ruby-comment cmt"># Databases.</span>
+                        <span class="ruby-ivar">@dir_source</span> = <span class="ruby-identifier">dir_home</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;source&quot;</span>
+                        <span class="ruby-ivar">@dir_sequence</span> = <span class="ruby-identifier">dir_home</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;sequence&quot;</span>
+                        <span class="ruby-ivar">@dir_model</span> = <span class="ruby-identifier">dir_home</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;model&quot;</span>
+                        <span class="ruby-ivar">@dir_pfam</span> = <span class="ruby-identifier">dir_home</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;pfam&quot;</span>
+                        <span class="ruby-ivar">@dir_pfam_current</span> = <span class="ruby-ivar">@dir_pfam</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;current&quot;</span>
+                        
+                        <span class="ruby-comment cmt"># Results.</span>
+                        <span class="ruby-ivar">@dir_result</span> = <span class="ruby-identifier">dir_home</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;result&quot;</span>
+                        
+                        <span class="ruby-comment cmt"># Tools.</span>
+                        <span class="ruby-ivar">@dir_hmmer</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;/Users/diez/local/hmmer3/bin&quot;</span>)
+                        <span class="ruby-ivar">@dir_blast</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;/usr/local/ncbi/blast/bin&quot;</span>)
+                        <span class="ruby-ivar">@dir_meme</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;/Users/diez/local/meme/bin&quot;</span>)
+                        <span class="ruby-ivar">@dir_r</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;/usr/bin&quot;</span>)
+                        
+                        <span class="ruby-comment cmt"># Commit</span>
+                        <span class="ruby-ivar">@dir_commit</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;/Volumes/Biodev/projects/vardb/commit/&quot;</span>)
+                <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>download_spp (Download::Download)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File download.rb, line 150</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">download_spp</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* downloading spp &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">id</span>
+                        <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">source</span>
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;plasmodb&quot;</span>
+                                <span class="ruby-identifier">download_eupathdb</span>(<span class="ruby-value str">'plasmodb'</span>)
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;tritrypdb&quot;</span>
+                                <span class="ruby-identifier">download_eupathdb</span>(<span class="ruby-value str">'tritrypdb'</span>)
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;giardiadb&quot;</span>
+                                <span class="ruby-identifier">download_eupathdb</span>(<span class="ruby-value str">'giardiadb'</span>)
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;broad&quot;</span>
+                                <span class="ruby-identifier">download_broad</span>
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;ncbi&quot;</span>
+                                <span class="ruby-identifier">download_ncbi</span>
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

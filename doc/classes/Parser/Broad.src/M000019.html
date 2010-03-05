@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>parse (Parser::Broad)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File parser.rb, line 446</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parse</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* file: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">file</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* gff_file: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">gff_file</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* annotation_file: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">annot_file</span>
+                        
+                        <span class="ruby-identifier">genome</span> = <span class="ruby-constant">Genome</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">taxon</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:empty</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>})
+                        
+                        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* reading genbank file&quot;</span>
+                        <span class="ruby-identifier">p1</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">GenBank</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">file</span>)
+                        
+                        <span class="ruby-identifier">chrs</span> = {}
+                        <span class="ruby-identifier">map</span> = {}
+<span class="ruby-comment cmt">#                       refs = {}</span>
+                        <span class="ruby-identifier">p1</span>.<span class="ruby-identifier">each_entry</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">gb</span><span class="ruby-operator">|</span>
+                                <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">gb</span>.<span class="ruby-identifier">accession</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;&quot;</span>
+                                
+                                <span class="ruby-comment cmt"># Currently no references in these files.</span>
+<span class="ruby-comment cmt">#                               ref = []</span>
+<span class="ruby-comment cmt">#                               gb.references.each do |r|</span>
+<span class="ruby-comment cmt">#                                       puts r.pubmed if r.pubmed != &quot;&quot;</span>
+<span class="ruby-comment cmt">#                               end</span>
+                                
+<span class="ruby-comment cmt">#                               refs[gb.accession] = ref.join(&quot;;&quot;)</span>
+                                <span class="ruby-identifier">chrs</span>[<span class="ruby-identifier">gb</span>.<span class="ruby-identifier">accession</span>] = <span class="ruby-identifier">gb</span>.<span class="ruby-identifier">seq</span>
+                                <span class="ruby-identifier">id</span> = <span class="ruby-identifier">gb</span>.<span class="ruby-identifier">definition</span>
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">id</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/(supercont.+?) /</span>)
+                                        <span class="ruby-identifier">id</span> = <span class="ruby-identifier">id</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/(supercont.+?) /</span>)[<span class="ruby-value">0</span>].<span class="ruby-identifier">strip</span>
+                                        <span class="ruby-identifier">map</span>[<span class="ruby-identifier">id</span>] = <span class="ruby-identifier">gb</span>.<span class="ruby-identifier">accession</span>
+                                <span class="ruby-keyword kw">else</span>
+                                        <span class="ruby-identifier">map</span>[<span class="ruby-identifier">gb</span>.<span class="ruby-identifier">accession</span>] = <span class="ruby-identifier">gb</span>.<span class="ruby-identifier">accession</span>
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* subpercontigs: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">chrs</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
+                        
+                        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* reading GFF file&quot;</span>
+                        <span class="ruby-identifier">p2</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">GFF</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">gff_file</span>, <span class="ruby-value str">&quot;r&quot;</span>))
+                        <span class="ruby-identifier">p2</span>.<span class="ruby-identifier">records</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">record</span><span class="ruby-operator">|</span>
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;exon&quot;</span>
+                                        <span class="ruby-comment cmt"># skip aberrant features.</span>
+                                        <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">start</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">end</span>.<span class="ruby-identifier">to_i</span>
+                                        
+                                        <span class="ruby-identifier">chr</span> = <span class="ruby-identifier">record</span>.<span class="ruby-identifier">seqname</span>
+                                        <span class="ruby-identifier">chr</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp re">/(supercont1..+?)\%.+/</span>, <span class="ruby-value str">'\1'</span>)
+                                        <span class="ruby-identifier">chr</span> = <span class="ruby-identifier">map</span>[<span class="ruby-identifier">chr</span>]
+                                        
+                                        <span class="ruby-identifier">attr</span> = <span class="ruby-identifier">_parse_attributes</span>(<span class="ruby-identifier">record</span>.<span class="ruby-identifier">attributes</span>)
+                                        
+                                        <span class="ruby-identifier">gene</span> = <span class="ruby-identifier">genome</span>.<span class="ruby-identifier">get_gene_by_acc</span>(<span class="ruby-identifier">attr</span>[<span class="ruby-identifier">:id</span>])
+                                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">nil?</span>
+                                                <span class="ruby-identifier">gene</span> = <span class="ruby-constant">Genome</span><span class="ruby-operator">::</span><span class="ruby-constant">Gene</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">attr</span>[<span class="ruby-identifier">:id</span>])
+                                                <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">chromosome</span> = <span class="ruby-identifier">chr</span>
+                                                <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">source</span> = <span class="ruby-value str">&quot;broad&quot;</span>
+                                                <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">strand</span> = <span class="ruby-identifier">_get_strand</span>(<span class="ruby-identifier">record</span>.<span class="ruby-identifier">strand</span>).<span class="ruby-identifier">to_i</span>
+                                                <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">description</span> = <span class="ruby-identifier">attr</span>[<span class="ruby-identifier">:desc</span>]
+                                                <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">pseudogene</span> = <span class="ruby-identifier">attr</span>[<span class="ruby-identifier">:pseudo</span>]
+                                                <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">type</span> = <span class="ruby-value str">&quot;CDS&quot;</span>
+                                                <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">trans_table</span> = <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">trans_table</span>
+<span class="ruby-comment cmt">#                                               gene.references = refs[map[chr]]</span>
+                                                <span class="ruby-identifier">genome</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">gene</span>
+                                        <span class="ruby-keyword kw">end</span>
+                                        <span class="ruby-identifier">exon</span> = <span class="ruby-constant">Genome</span><span class="ruby-operator">::</span><span class="ruby-constant">Exon</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">gene</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
+                                        <span class="ruby-identifier">exon</span>.<span class="ruby-identifier">strand</span> = <span class="ruby-identifier">_get_strand</span>(<span class="ruby-identifier">record</span>.<span class="ruby-identifier">strand</span>).<span class="ruby-identifier">to_i</span>
+                                        <span class="ruby-identifier">exon</span>.<span class="ruby-identifier">from</span> = <span class="ruby-identifier">record</span>.<span class="ruby-identifier">start</span>.<span class="ruby-identifier">to_i</span>
+                                        <span class="ruby-identifier">exon</span>.<span class="ruby-identifier">to</span> = <span class="ruby-identifier">record</span>.<span class="ruby-identifier">end</span>.<span class="ruby-identifier">to_i</span>
+                                        <span class="ruby-identifier">gene</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">exon</span>
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">end</span>
+                        
+                        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;* reading annotation file&quot;</span>
+                        <span class="ruby-identifier">f</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">annot_file</span>, <span class="ruby-value str">&quot;r&quot;</span>)
+                        <span class="ruby-identifier">f</span>.<span class="ruby-identifier">each_line</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+                                <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/^LOCUS/</span>)
+                                <span class="ruby-identifier">id</span>, <span class="ruby-identifier">symbol</span>, <span class="ruby-identifier">synonim</span>, <span class="ruby-identifier">length</span>, <span class="ruby-identifier">start</span>, <span class="ruby-identifier">stop</span>, <span class="ruby-identifier">strand</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">chr</span>, <span class="ruby-identifier">annot</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp re">/\t/</span>)
+                                <span class="ruby-identifier">gene</span> = <span class="ruby-identifier">genome</span>.<span class="ruby-identifier">get_gene_by_acc</span>(<span class="ruby-identifier">id</span>)
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">nil?</span>
+                                        <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;WTF: I cannot find the damn gene!&quot;</span>
+                                <span class="ruby-keyword kw">end</span>
+                                <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">description</span> = <span class="ruby-identifier">name</span>
+                                <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">strand</span> = <span class="ruby-identifier">_get_strand</span>(<span class="ruby-identifier">strand</span>)
+                                <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">from</span> = <span class="ruby-identifier">start</span>.<span class="ruby-identifier">to_i</span>
+                                <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">to</span> = <span class="ruby-identifier">stop</span>.<span class="ruby-identifier">to_i</span>
+                                <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">sequence</span> = <span class="ruby-identifier">chrs</span>[<span class="ruby-identifier">gene</span>.<span class="ruby-identifier">chromosome</span>].<span class="ruby-identifier">subseq</span>(<span class="ruby-identifier">gene</span>.<span class="ruby-identifier">from</span>, <span class="ruby-identifier">gene</span>.<span class="ruby-identifier">to</span>)
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-identifier">f</span>.<span class="ruby-identifier">close</span>
+                        
+                        <span class="ruby-identifier">genome</span>.<span class="ruby-identifier">chromosome</span> = <span class="ruby-identifier">chrs</span>
+                        <span class="ruby-identifier">genome</span>.<span class="ruby-identifier">auto_clean</span>
+                        <span class="ruby-identifier">genome</span>
+                <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

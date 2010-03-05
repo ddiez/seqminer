@@ -134,17 +134,17 @@
 <pre>
     <span class="ruby-comment cmt"># File test_gff.rb, line 12</span>
 12: <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_parse_gene_attributes</span>(<span class="ruby-identifier">c</span>)
-13:     <span class="ruby-identifier">id</span> = <span class="ruby-keyword kw">nil</span>
-14:     <span class="ruby-identifier">desc</span> = <span class="ruby-value str">&quot;&quot;</span>
-15:     <span class="ruby-identifier">pseudo</span> = <span class="ruby-value">0</span>
-16:     <span class="ruby-identifier">f</span> = {}
-17:     <span class="ruby-identifier">c</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
-18:         <span class="ruby-identifier">f</span>[<span class="ruby-identifier">val</span>[<span class="ruby-value">0</span>]] = <span class="ruby-identifier">val</span>[<span class="ruby-value">1</span>]
-19:     <span class="ruby-keyword kw">end</span>
-20:     <span class="ruby-identifier">id</span> = <span class="ruby-identifier">f</span>[<span class="ruby-value str">&quot;ID&quot;</span>]
-21:     <span class="ruby-identifier">desc</span> = <span class="ruby-identifier">f</span>[<span class="ruby-value str">&quot;description&quot;</span>]
-22:     <span class="ruby-identifier">pseudo</span> = <span class="ruby-value">1</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">desc</span>.<span class="ruby-identifier">match</span>(<span class="ruby-value str">&quot;pseudogene&quot;</span>)
-23:     [<span class="ruby-identifier">id</span>, <span class="ruby-identifier">desc</span>, <span class="ruby-identifier">pseudo</span>]
+13:         <span class="ruby-identifier">id</span> = <span class="ruby-keyword kw">nil</span>
+14:         <span class="ruby-identifier">desc</span> = <span class="ruby-value str">&quot;&quot;</span>
+15:         <span class="ruby-identifier">pseudo</span> = <span class="ruby-value">0</span>
+16:         <span class="ruby-identifier">f</span> = {}
+17:         <span class="ruby-identifier">c</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
+18:                 <span class="ruby-identifier">f</span>[<span class="ruby-identifier">val</span>[<span class="ruby-value">0</span>]] = <span class="ruby-identifier">val</span>[<span class="ruby-value">1</span>]
+19:         <span class="ruby-keyword kw">end</span>
+20:         <span class="ruby-identifier">id</span> = <span class="ruby-identifier">f</span>[<span class="ruby-value str">&quot;ID&quot;</span>]
+21:         <span class="ruby-identifier">desc</span> = <span class="ruby-identifier">f</span>[<span class="ruby-value str">&quot;description&quot;</span>]
+22:         <span class="ruby-identifier">pseudo</span> = <span class="ruby-value">1</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">desc</span>.<span class="ruby-identifier">match</span>(<span class="ruby-value str">&quot;pseudogene&quot;</span>)
+23:         [<span class="ruby-identifier">id</span>, <span class="ruby-identifier">desc</span>, <span class="ruby-identifier">pseudo</span>]
 24: <span class="ruby-keyword kw">end</span>
 </pre>
           </div>

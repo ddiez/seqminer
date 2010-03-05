@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>download_eupathdb (Download::Download)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File download.rb, line 199</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">download_eupathdb</span>(<span class="ruby-identifier">db</span>)
+                        <span class="ruby-identifier">host</span> = {
+                                <span class="ruby-value str">'plasmodb'</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-value str">'plasmodb.org'</span>,
+                                <span class="ruby-value str">'giardiadb'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'giardiadb.org'</span>,
+                                <span class="ruby-value str">'tritrypdb'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'tritrypdb.org'</span>
+                        }
+                        
+                        <span class="ruby-identifier">current_release</span> = {
+                                <span class="ruby-value str">'plasmodb'</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-value str">'6.3'</span>,
+                                <span class="ruby-value str">'giardiadb'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'2.1'</span>,
+                                <span class="ruby-value str">'tritrypdb'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'2.0'</span>
+                        }
+                        
+                        <span class="ruby-identifier">release</span> = <span class="ruby-identifier">current_release</span>[<span class="ruby-identifier">db</span>]
+                        
+                        <span class="ruby-comment cmt"># Build dir/file/outdir/outfile, includes hacks to deal with file/directory structure inconsistencies.</span>
+                        <span class="ruby-identifier">dir</span> = <span class="ruby-constant">Pathname</span>(<span class="ruby-value str">&quot;common/downloads&quot;</span>)
+                        
+                        <span class="ruby-identifier">outdir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>
+                        <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">mkpath</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">outdir</span>.<span class="ruby-identifier">exist?</span>
+                        <span class="ruby-identifier">outfile</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gff&quot;</span>)
+                        
+                        <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">db</span>
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'plasmodb'</span>
+                                <span class="ruby-identifier">dir</span> =  <span class="ruby-identifier">dir</span> <span class="ruby-operator">+</span> (<span class="ruby-value str">&quot;release-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span>
+                                <span class="ruby-identifier">file</span> = <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_PlasmoDB-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gff&quot;</span>
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'giardiadb'</span>
+                                <span class="ruby-identifier">dir</span> =  <span class="ruby-identifier">dir</span> <span class="ruby-operator">+</span> (<span class="ruby-value str">&quot;release-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span>
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;giardia.lamblia_ATCC_50803&quot;</span>
+                                        <span class="ruby-identifier">dir</span> = <span class="ruby-value str">&quot;common/downloads/release-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;/&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;GintestinalisAssemblageA&quot;</span>
+                                <span class="ruby-keyword kw">end</span>
+                                <span class="ruby-identifier">file</span> = <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_GiardiaDB-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gff&quot;</span>
+                        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'tritrypdb'</span>
+                                <span class="ruby-identifier">dir</span> =  <span class="ruby-identifier">dir</span> <span class="ruby-operator">+</span> (<span class="ruby-value str">&quot;release-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span>
+                                <span class="ruby-identifier">file</span> = <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_TriTrypDB-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gff&quot;</span>
+                                        
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/trypanosoma.brucei/</span>)
+                                        <span class="ruby-identifier">file</span> = <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">strain</span>.<span class="ruby-identifier">capitalize</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_TriTrypDB-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gff&quot;</span>
+                                <span class="ruby-keyword kw">end</span>
+                                
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/leishmania.major_Friedlin/</span>)
+                                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">release</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;1.3&quot;</span>
+                                                <span class="ruby-identifier">file</span> = <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_TriTryDB-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gff&quot;</span>
+                                        <span class="ruby-keyword kw">end</span>                                
+                                <span class="ruby-keyword kw">end</span>
+                                
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;trypanosoma.cruzi_CL_Brener&quot;</span>
+                                        <span class="ruby-identifier">file</span> = <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;Esmeraldo&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_TriTrypDB-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gff&quot;</span>
+                                        <span class="ruby-identifier">outfile</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-Esmeraldo&quot;</span> <span class="ruby-operator">+</span>  <span class="ruby-value str">&quot;.gff&quot;</span>)
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">end</span>  
+
+                        <span class="ruby-identifier">http_download</span>(<span class="ruby-identifier">host</span>[<span class="ruby-identifier">db</span>], <span class="ruby-identifier">dir</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">outfile</span>)
+                        
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;trypanosoma.cruzi_CL_Brener&quot;</span>
+                                <span class="ruby-identifier">file</span> = <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">short_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;NonEsmeraldo&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_TriTrypDB-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">release</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.gff&quot;</span>
+                                <span class="ruby-identifier">outfile</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_source</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-NonEsmeraldo&quot;</span> <span class="ruby-operator">+</span>  <span class="ruby-value str">&quot;.gff&quot;</span>)
+                                <span class="ruby-identifier">http_download</span>(<span class="ruby-identifier">host</span>[<span class="ruby-identifier">db</span>], <span class="ruby-identifier">dir</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">outfile</span>)
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>scan (Scan::Set)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File scan.rb, line 47</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">scan</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Running scan +&quot;</span>
+                        <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">scan</span><span class="ruby-operator">|</span>
+                                <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">scan</span>.<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">type</span>
+                                <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'spp'</span>
+                                        <span class="ruby-identifier">dir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;genome/fasta&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">scan</span>.<span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span>
+                                        <span class="ruby-identifier">outdir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;genome/scan&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">scan</span>.<span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span>
+                                <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'clade'</span>
+                                        <span class="ruby-identifier">dir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;isolate/fasta&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">scan</span>.<span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span>
+                                        <span class="ruby-identifier">outdir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;isolate/scan&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">scan</span>.<span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span>
+                                <span class="ruby-keyword kw">end</span>
+                                <span class="ruby-identifier">file</span> = <span class="ruby-identifier">dir</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">scan</span>.<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">scan</span>.<span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_protein.fa&quot;</span>)
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">exist?</span>
+                                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* search domains in: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">file</span>
+                                        <span class="ruby-identifier">ts</span> = <span class="ruby-constant">Tools</span><span class="ruby-operator">::</span><span class="ruby-constant">Hmmer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;hmmscan&quot;</span>)
+                                        <span class="ruby-identifier">ts</span>.<span class="ruby-identifier">model</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_pfam_current</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;Pfam-A.hmm&quot;</span>
+                                        <span class="ruby-identifier">ts</span>.<span class="ruby-identifier">infile</span> = <span class="ruby-identifier">file</span>
+                                        <span class="ruby-identifier">ts</span>.<span class="ruby-identifier">outfile</span> = <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">scan</span>.<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">scan</span>.<span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_protein.log&quot;</span>)
+                                        <span class="ruby-identifier">ts</span>.<span class="ruby-identifier">table_file</span> = <span class="ruby-identifier">outdir</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">scan</span>.<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">scan</span>.<span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_protein.txt&quot;</span>)
+                                        <span class="ruby-identifier">ts</span>.<span class="ruby-identifier">debug</span>
+                                        <span class="ruby-identifier">res</span> = <span class="ruby-identifier">ts</span>.<span class="ruby-identifier">execute</span>
+                                        <span class="ruby-identifier">_check_result</span>(<span class="ruby-identifier">res</span>)
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

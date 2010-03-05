@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>search (Search::Set)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File search.rb, line 145</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">search</span>
+                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Running search +&quot;</span>
+                        <span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">search</span><span class="ruby-operator">|</span>
+                                <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">search</span>.<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">type</span>
+                                <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'spp'</span>
+                                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* search id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">search</span>.<span class="ruby-identifier">id</span>
+                                        <span class="ruby-identifier">hr</span> = <span class="ruby-constant">Tools</span><span class="ruby-operator">::</span><span class="ruby-constant">Hmmer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'hmmsearch'</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+                                        <span class="ruby-identifier">hr</span>.<span class="ruby-identifier">infile</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_sequence</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">search</span>.<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">search</span>.<span class="ruby-identifier">type</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.fa&quot;</span>)
+                                        <span class="ruby-identifier">hr</span>.<span class="ruby-identifier">model</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_model</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;hmm&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">search</span>.<span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">hmm</span>
+                                        <span class="ruby-identifier">hr</span>.<span class="ruby-identifier">outfile</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;genome/search&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">search</span>.<span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">search</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.log&quot;</span>)
+                                        <span class="ruby-identifier">hr</span>.<span class="ruby-identifier">debug</span>
+                                        <span class="ruby-identifier">res</span> = <span class="ruby-identifier">hr</span>.<span class="ruby-identifier">execute</span>
+                                        <span class="ruby-identifier">_check_result</span>(<span class="ruby-identifier">res</span>)
+                                <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'clade'</span>
+                                        <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* search id: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">search</span>.<span class="ruby-identifier">id</span>
+                                        <span class="ruby-identifier">st</span> = <span class="ruby-constant">Tools</span><span class="ruby-operator">::</span><span class="ruby-constant">Blast</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'tblastn'</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+                                        <span class="ruby-identifier">st</span>.<span class="ruby-identifier">pssm_file</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_model</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;pssm&quot;</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">search</span>.<span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.pssm&quot;</span>)
+                                        <span class="ruby-comment cmt">#st.seed_file = config.dir_model + &quot;pssm&quot; + (search.ortholog.name + &quot;.seed&quot;)</span>
+                                        <span class="ruby-identifier">st</span>.<span class="ruby-identifier">db</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_sequence</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">search</span>.<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">search</span>.<span class="ruby-identifier">type</span>.<span class="ruby-identifier">name</span>)
+                                        <span class="ruby-identifier">st</span>.<span class="ruby-identifier">outfile</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;isolate/search&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">search</span>.<span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">search</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.txt&quot;</span>)
+                                        <span class="ruby-identifier">st</span>.<span class="ruby-identifier">debug</span>
+                                        <span class="ruby-identifier">res</span> = <span class="ruby-identifier">st</span>.<span class="ruby-identifier">execute</span>
+                                        <span class="ruby-identifier">_check_result</span>(<span class="ruby-identifier">res</span>)
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

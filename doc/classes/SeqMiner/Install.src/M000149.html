@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>update_pssm (SeqMiner::Install)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File seqminer.rb, line 218</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update_pssm</span>
+                        <span class="ruby-identifier">typeset</span> = <span class="ruby-constant">Search</span><span class="ruby-operator">::</span><span class="ruby-constant">TypeSet</span>.<span class="ruby-identifier">new</span>
+                        <span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">each_ortholog</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>
+                                <span class="ruby-identifier">o</span>.<span class="ruby-identifier">debug</span>
+                                <span class="ruby-identifier">rs</span> = <span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
+                                <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* computing best hit&quot;</span>
+                                <span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">each_taxon</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+                                        <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">!=</span> <span class="ruby-value str">'spp'</span>
+                                        <span class="ruby-identifier">typeset</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">type</span><span class="ruby-operator">|</span>
+                                                <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">type</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">!=</span> <span class="ruby-value str">&quot;protein&quot;</span>
+                                                <span class="ruby-identifier">sid</span> = <span class="ruby-identifier">t</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">type</span>.<span class="ruby-identifier">name</span>
+                                                <span class="ruby-identifier">file</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_result</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;genome/search&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">sid</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.txt&quot;</span>) 
+                                                <span class="ruby-identifier">p</span> = <span class="ruby-constant">Result</span><span class="ruby-operator">::</span><span class="ruby-constant">HmmerParser</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>, <span class="ruby-identifier">:taxon</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">t</span>, <span class="ruby-identifier">:ortholog</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">o</span>})
+                                                <span class="ruby-identifier">p</span>.<span class="ruby-identifier">file</span> = <span class="ruby-identifier">file</span>
+                                                <span class="ruby-identifier">p</span>.<span class="ruby-identifier">result_id</span> = <span class="ruby-identifier">sid</span>
+                                                <span class="ruby-identifier">p</span>.<span class="ruby-identifier">type</span> = <span class="ruby-identifier">type</span>
+                                                <span class="ruby-identifier">r</span> = <span class="ruby-identifier">p</span>.<span class="ruby-identifier">parse</span>
+                                                <span class="ruby-identifier">rs</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">r</span>
+                                        <span class="ruby-keyword kw">end</span>
+                                <span class="ruby-keyword kw">end</span>
+                                <span class="ruby-comment cmt">#rs.debug</span>
+                                <span class="ruby-identifier">rs</span>.<span class="ruby-identifier">filter_by_eval</span>(<span class="ruby-value">0</span><span class="ruby-value">.001</span>)
+                                <span class="ruby-identifier">rs</span>.<span class="ruby-identifier">clean_up</span>
+                                <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">rs</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+                                <span class="ruby-comment cmt">#o.debug</span>
+                                <span class="ruby-comment cmt">#rs.debug</span>
+                                <span class="ruby-identifier">bh</span> = <span class="ruby-identifier">rs</span>.<span class="ruby-identifier">best_hit</span>
+                                <span class="ruby-identifier">bh</span>.<span class="ruby-identifier">debug</span>
+                                <span class="ruby-identifier">bh</span>.<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">debug</span>
+                                
+                                <span class="ruby-comment cmt"># Store the SEED sequence.</span>
+                                <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* updating seed sequences&quot;</span>
+                                <span class="ruby-identifier">sdb</span> = <span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">bh</span>.<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span>, <span class="ruby-value str">&quot;protein&quot;</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+                                <span class="ruby-identifier">seq</span> = <span class="ruby-identifier">sdb</span>.<span class="ruby-identifier">get_seq_by_acc</span>(<span class="ruby-identifier">bh</span>.<span class="ruby-identifier">id</span>)
+                                <span class="ruby-identifier">dir</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_model</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;pssm&quot;</span>
+                                <span class="ruby-identifier">dir</span>.<span class="ruby-identifier">mkpath</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">dir</span>.<span class="ruby-identifier">exist?</span>
+                                <span class="ruby-identifier">file</span> = <span class="ruby-identifier">dir</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">bh</span>.<span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.seed&quot;</span>)
+                                <span class="ruby-identifier">fo</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>, <span class="ruby-value str">&quot;w&quot;</span>)
+                                <span class="ruby-identifier">fo</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">seq</span>.<span class="ruby-identifier">to_fasta</span>(<span class="ruby-identifier">seq</span>.<span class="ruby-identifier">definition</span>, <span class="ruby-value">60</span>)
+                                <span class="ruby-identifier">fo</span>.<span class="ruby-identifier">close</span>
+                                
+                                <span class="ruby-comment cmt"># Run the search with the SEED and the genome.</span>
+                                <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* computing PSSM model for Blast+&quot;</span>
+                                <span class="ruby-identifier">pssm_file</span> = <span class="ruby-identifier">dir</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">bh</span>.<span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.pssm&quot;</span>)
+                                <span class="ruby-identifier">pgp_file</span> = <span class="ruby-identifier">dir</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">bh</span>.<span class="ruby-identifier">ortholog</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.pgp&quot;</span>)
+                                <span class="ruby-identifier">ts</span> = <span class="ruby-constant">Tools</span><span class="ruby-operator">::</span><span class="ruby-constant">Blast</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'psiblast'</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">config</span>})
+                                <span class="ruby-identifier">ts</span>.<span class="ruby-identifier">db</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_sequence</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">bh</span>.<span class="ruby-identifier">taxon</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;protein&quot;</span>
+                                <span class="ruby-identifier">ts</span>.<span class="ruby-identifier">seed_file</span> = <span class="ruby-identifier">file</span>
+                                <span class="ruby-identifier">ts</span>.<span class="ruby-identifier">pssm_file</span> = <span class="ruby-identifier">pssm_file</span>
+                                <span class="ruby-identifier">ts</span>.<span class="ruby-identifier">outfile</span> = <span class="ruby-identifier">pgp_file</span>
+                                <span class="ruby-identifier">ts</span>.<span class="ruby-identifier">debug</span>
+                                <span class="ruby-identifier">res</span> = <span class="ruby-identifier">ts</span>.<span class="ruby-identifier">execute</span>
+                                <span class="ruby-identifier">_check_result</span>(<span class="ruby-identifier">res</span>)
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

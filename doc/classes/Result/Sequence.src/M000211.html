@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>best_subhit (Result::Sequence)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File result.rb, line 200</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">best_subhit</span>
+                        <span class="ruby-comment cmt"># If there is a &quot;protein&quot; SubHit that will be the best one. This assumes that only</span>
+                        <span class="ruby-comment cmt"># one protein SubHit will be present. This may change in the future.</span>
+                        <span class="ruby-identifier">hp</span> = <span class="ruby-identifier">has_protein?</span>
+                        <span class="ruby-identifier">csh</span> = <span class="ruby-keyword kw">nil</span>
+                        <span class="ruby-identifier">cbe</span> = <span class="ruby-keyword kw">nil</span>
+                        <span class="ruby-identifier">each_sequencehit</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subhit</span><span class="ruby-operator">|</span>
+                                <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">subhit</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">hp</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">subhit</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;protein&quot;</span>
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">cbe</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">subhit</span>.<span class="ruby-identifier">eval</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">cbe</span>
+                                        <span class="ruby-identifier">csh</span> = <span class="ruby-identifier">subhit</span>
+                                        <span class="ruby-identifier">cbe</span> = <span class="ruby-identifier">subhit</span>.<span class="ruby-identifier">eval</span>
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">csh</span>
+                <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -88,11 +88,11 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000196">build_cmd</a>&nbsp;&nbsp;
-      <a href="#M000197">debug</a>&nbsp;&nbsp;
-      <a href="#M000195">execute</a>&nbsp;&nbsp;
-      <a href="#M000193">new</a>&nbsp;&nbsp;
-      <a href="#M000194">outfile=</a>&nbsp;&nbsp;
+      <a href="#M000197">build_cmd</a>&nbsp;&nbsp;
+      <a href="#M000198">debug</a>&nbsp;&nbsp;
+      <a href="#M000196">execute</a>&nbsp;&nbsp;
+      <a href="#M000194">new</a>&nbsp;&nbsp;
+      <a href="#M000195">outfile=</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -132,37 +132,37 @@
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000193" class="method-detail">
-        <a name="M000193"></a>
+      <div id="method-M000194" class="method-detail">
+        <a name="M000194"></a>
 
         <div class="method-heading">
-          <a href="#M000193" class="method-signature">
+          <a href="#M000194" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(tool, options = {:config =&gt; nil})</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000193-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000193-source">
+            onclick="toggleCode('M000194-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000194-source">
 <pre>
     <span class="ruby-comment cmt"># File tools.rb, line 35</span>
-35:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">tool</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
-36:             <span class="ruby-keyword kw">super</span>
-37:             
-38:             <span class="ruby-ivar">@path</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_hmmer</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">tool</span>
-39:             
-40:             <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">tool</span>
-41:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'hmmsearch'</span>
-42:                 <span class="ruby-ivar">@parameters</span> = <span class="ruby-value str">&quot;&quot;</span>
-43:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'hmmscan'</span>
-44:                 <span class="ruby-ivar">@parameters</span> = <span class="ruby-value str">&quot;&quot;</span>
-45:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'hmmalign'</span>
-46:                 <span class="ruby-ivar">@parameters</span> = <span class="ruby-value str">&quot;&quot;</span>
-47:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'hmmpress'</span>
-48:                 <span class="ruby-ivar">@parameters</span> = <span class="ruby-value str">&quot;&quot;</span>
-49:             <span class="ruby-keyword kw">end</span>
-50:         <span class="ruby-keyword kw">end</span>
+35:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">tool</span>, <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:config</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})
+36:                         <span class="ruby-keyword kw">super</span>
+37:                         
+38:                         <span class="ruby-ivar">@path</span> = <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dir_hmmer</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">tool</span>
+39:                         
+40:                         <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">tool</span>
+41:                         <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'hmmsearch'</span>
+42:                                 <span class="ruby-ivar">@parameters</span> = <span class="ruby-value str">&quot;&quot;</span>
+43:                         <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'hmmscan'</span>
+44:                                 <span class="ruby-ivar">@parameters</span> = <span class="ruby-value str">&quot;&quot;</span>
+45:                         <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'hmmalign'</span>
+46:                                 <span class="ruby-ivar">@parameters</span> = <span class="ruby-value str">&quot;&quot;</span>
+47:                         <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'hmmpress'</span>
+48:                                 <span class="ruby-ivar">@parameters</span> = <span class="ruby-value str">&quot;&quot;</span>
+49:                         <span class="ruby-keyword kw">end</span>
+50:                 <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -170,45 +170,12 @@
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000196" class="method-detail">
-        <a name="M000196"></a>
-
-        <div class="method-heading">
-          <a href="#M000196" class="method-signature">
-          <span class="method-name">build_cmd</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000196-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000196-source">
-<pre>
-    <span class="ruby-comment cmt"># File tools.rb, line 62</span>
-62:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">build_cmd</span>
-63:             <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">tool</span>
-64:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'hmmsearch'</span>
-65:                 <span class="ruby-identifier">cmd</span> = [<span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span>, <span class="ruby-value str">&quot;--domtblout&quot;</span>, <span class="ruby-identifier">table_file</span>, <span class="ruby-identifier">model</span>, <span class="ruby-identifier">infile</span>, <span class="ruby-value str">&quot;&gt;&quot;</span>, <span class="ruby-identifier">outfile</span>]
-66:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'hmmscan'</span>
-67:                 <span class="ruby-identifier">cmd</span> = [<span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span>, <span class="ruby-value str">&quot;--domtblout&quot;</span>, <span class="ruby-identifier">table_file</span>, <span class="ruby-identifier">model</span>, <span class="ruby-identifier">infile</span>, <span class="ruby-value str">&quot;&gt;&quot;</span>, <span class="ruby-identifier">outfile</span>]
-68:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'hmmalign'</span>
-69:                 <span class="ruby-identifier">cmd</span> = [<span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">model</span>, <span class="ruby-identifier">infile</span>, <span class="ruby-value str">&quot;&gt;&quot;</span>, <span class="ruby-identifier">outfile</span>]
-70:             <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'hmmpress'</span>
-71:                 <span class="ruby-identifier">cmd</span> = [<span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">model</span>, <span class="ruby-identifier">infile</span>, <span class="ruby-value str">&quot;&gt;&quot;</span>, <span class="ruby-identifier">outfile</span>]
-72:             <span class="ruby-keyword kw">end</span>
-73:             <span class="ruby-ivar">@cmd</span> = <span class="ruby-identifier">cmd</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot; &quot;</span>)
-74:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
       <div id="method-M000197" class="method-detail">
         <a name="M000197"></a>
 
         <div class="method-heading">
           <a href="#M000197" class="method-signature">
-          <span class="method-name">debug</span><span class="method-args">()</span>
+          <span class="method-name">build_cmd</span><span class="method-args">()</span>
           </a>
         </div>
       
@@ -217,20 +184,77 @@
             onclick="toggleCode('M000197-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000197-source">
 <pre>
+    <span class="ruby-comment cmt"># File tools.rb, line 62</span>
+62:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">build_cmd</span>
+63:                         <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">tool</span>
+64:                         <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'hmmsearch'</span>
+65:                                 <span class="ruby-identifier">cmd</span> = [<span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span>, <span class="ruby-value str">&quot;--domtblout&quot;</span>, <span class="ruby-identifier">table_file</span>, <span class="ruby-identifier">model</span>, <span class="ruby-identifier">infile</span>, <span class="ruby-value str">&quot;&gt;&quot;</span>, <span class="ruby-identifier">outfile</span>]
+66:                         <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'hmmscan'</span>
+67:                                 <span class="ruby-identifier">cmd</span> = [<span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span>, <span class="ruby-value str">&quot;--domtblout&quot;</span>, <span class="ruby-identifier">table_file</span>, <span class="ruby-identifier">model</span>, <span class="ruby-identifier">infile</span>, <span class="ruby-value str">&quot;&gt;&quot;</span>, <span class="ruby-identifier">outfile</span>]
+68:                         <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'hmmalign'</span>
+69:                                 <span class="ruby-identifier">cmd</span> = [<span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">model</span>, <span class="ruby-identifier">infile</span>, <span class="ruby-value str">&quot;&gt;&quot;</span>, <span class="ruby-identifier">outfile</span>]
+70:                         <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'hmmpress'</span>
+71:                                 <span class="ruby-identifier">cmd</span> = [<span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">model</span>, <span class="ruby-identifier">infile</span>, <span class="ruby-value str">&quot;&gt;&quot;</span>, <span class="ruby-identifier">outfile</span>]
+72:                         <span class="ruby-keyword kw">end</span>
+73:                         <span class="ruby-ivar">@cmd</span> = <span class="ruby-identifier">cmd</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot; &quot;</span>)
+74:                 <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000198" class="method-detail">
+        <a name="M000198"></a>
+
+        <div class="method-heading">
+          <a href="#M000198" class="method-signature">
+          <span class="method-name">debug</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000198-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000198-source">
+<pre>
     <span class="ruby-comment cmt"># File tools.rb, line 76</span>
-76:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
-77:             <span class="ruby-identifier">build_cmd</span>
-78:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Tool +&quot;</span>
-79:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* tool: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">tool</span>.<span class="ruby-identifier">to_s</span>
-80:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* path: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">to_s</span>
-81:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* model: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">model</span>.<span class="ruby-identifier">to_s</span>
-82:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* infile: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">infile</span>.<span class="ruby-identifier">to_s</span>
-83:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* outfile: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">outfile</span>.<span class="ruby-identifier">to_s</span>
-84:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* table_file: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">table_file</span>.<span class="ruby-identifier">to_s</span>
-85:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* parameters: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">to_s</span>
-86:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* cmd: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">cmd</span>.<span class="ruby-identifier">to_s</span>
-87:             <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;&quot;</span>
-88:         <span class="ruby-keyword kw">end</span>
+76:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+77:                         <span class="ruby-identifier">build_cmd</span>
+78:                         <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;+ Tool +&quot;</span>
+79:                         <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* tool: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">tool</span>.<span class="ruby-identifier">to_s</span>
+80:                         <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* path: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">to_s</span>
+81:                         <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* model: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">model</span>.<span class="ruby-identifier">to_s</span>
+82:                         <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* infile: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">infile</span>.<span class="ruby-identifier">to_s</span>
+83:                         <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* outfile: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">outfile</span>.<span class="ruby-identifier">to_s</span>
+84:                         <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* table_file: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">table_file</span>.<span class="ruby-identifier">to_s</span>
+85:                         <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* parameters: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">to_s</span>
+86:                         <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;* cmd: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">cmd</span>.<span class="ruby-identifier">to_s</span>
+87:                         <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;&quot;</span>
+88:                 <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000196" class="method-detail">
+        <a name="M000196"></a>
+
+        <div class="method-heading">
+          <a href="#M000196" class="method-signature">
+          <span class="method-name">execute</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000196-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000196-source">
+<pre>
+    <span class="ruby-comment cmt"># File tools.rb, line 57</span>
+57:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">execute</span>
+58:                         <span class="ruby-identifier">build_cmd</span>
+59:                         <span class="ruby-keyword kw">super</span>
+60:                 <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -241,7 +265,7 @@
 
         <div class="method-heading">
           <a href="#M000195" class="method-signature">
-          <span class="method-name">execute</span><span class="method-args">()</span>
+          <span class="method-name">outfile=</span><span class="method-args">(file)</span>
           </a>
         </div>
       
@@ -250,35 +274,11 @@
             onclick="toggleCode('M000195-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000195-source">
 <pre>
-    <span class="ruby-comment cmt"># File tools.rb, line 57</span>
-57:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">execute</span>
-58:             <span class="ruby-identifier">build_cmd</span>
-59:             <span class="ruby-keyword kw">super</span>
-60:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000194" class="method-detail">
-        <a name="M000194"></a>
-
-        <div class="method-heading">
-          <a href="#M000194" class="method-signature">
-          <span class="method-name">outfile=</span><span class="method-args">(file)</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000194-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000194-source">
-<pre>
     <span class="ruby-comment cmt"># File tools.rb, line 52</span>
-52:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">outfile=</span>(<span class="ruby-identifier">file</span>)
-53:             <span class="ruby-ivar">@outfile</span> = <span class="ruby-identifier">file</span>
-54:             <span class="ruby-ivar">@table_file</span> = <span class="ruby-identifier">outfile</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/\.log$/</span>, <span class="ruby-value str">&quot;.txt&quot;</span>)
-55:         <span class="ruby-keyword kw">end</span>
+52:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">outfile=</span>(<span class="ruby-identifier">file</span>)
+53:                         <span class="ruby-ivar">@outfile</span> = <span class="ruby-identifier">file</span>
+54:                         <span class="ruby-ivar">@table_file</span> = <span class="ruby-identifier">outfile</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/\.log$/</span>, <span class="ruby-value str">&quot;.txt&quot;</span>)
+55:                 <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
