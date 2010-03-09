@@ -409,7 +409,7 @@ module SeqMiner
 	end
 
 	class Stat
-		attr_accessor :taxon, :ortholog
+		attr_accessor :taxon, :ortholog, :family
 		attr_reader :config
 		
 		def initialize(options = {:config => nil})
@@ -422,6 +422,7 @@ module SeqMiner
 
 			@taxon = Taxon::Set.new(options = {:config => config})
 			@ortholog = Ortholog::Set.new(options = {:config => config})
+			@family = Family::Set.new(options = {:config => config})
 		end
 
 		def result_stat
@@ -441,6 +442,25 @@ module SeqMiner
 						end
 						puts o.name + "\t" + t.name + "\t" + t.type + "\t" + n.to_s
 					end
+				end
+			end
+		end
+		
+		def sequence_stat
+			ortholog.each_ortholog do |o|
+				taxon.each_taxon do |t|
+					r = Parser::Nelson.new(t, o, options = {:config => config})
+				end
+			end
+		end
+		
+		def family_stat
+			family.each_family do |f|
+				ts = Taxon::Set.new(options = {:config => config})
+				ts.filter_by_name(f.taxon)
+				o = ortholog.get_ortholog_by_name(f.ortholog)
+				ts.each_taxon do |taxon|
+					r = Parser::Nelson.new(taxon, o, options = {:config => config})
 				end
 			end
 		end
@@ -497,25 +517,25 @@ module SeqMiner
 					outdir.mkpath
 				end
 			
-			family.each_family do |f|
-				ts = Taxon::Set.new(options = {:config => config})
-				ts.filter_by_name(f.taxon)
-				ts.each_taxon do |taxon|
-					case taxon.type
-					when 'spp'
-						dir = config.dir_result + "genome" + type + f.ortholog
-					when 'clade'
-						dir = config.dir_result + "isolate" + type + f.ortholog
-					end
-					file = dir + (taxon.name + "-" + f.ortholog + ".txt")
-					warn "* commiting file: " + file
-					if file.exist?
-						File.cp(file, outdir)
-					else
-						raise("!!! file " + file + " does not exist!")
+				family.each_family do |f|
+					ts = Taxon::Set.new(options = {:config => config})
+					ts.filter_by_name(f.taxon)
+					ts.each_taxon do |taxon|
+						case taxon.type
+						when 'spp'
+							dir = config.dir_result + "genome" + type + f.ortholog
+						when 'clade'
+							dir = config.dir_result + "isolate" + type + f.ortholog
+						end
+						file = dir + (taxon.name + "-" + f.ortholog + ".txt")
+						warn "* commiting file: " + file
+						if file.exist?
+							File.cp(file, outdir)
+						else
+							raise("!!! file " + file + " does not exist!")
+						end
 					end
 				end
-			end
 			end
 		end
 		

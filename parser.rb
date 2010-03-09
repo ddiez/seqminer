@@ -716,4 +716,36 @@ module Parser
 			h
 		end
 	end
+	
+	class Nelson < Common
+		def initialize(taxon, ortholog, options  = {:config => nil})
+			super(taxon, options = {:config => options[:config]})
+			case taxon.type
+			when 'spp'
+				file = config.dir_result + "genome/sequence" + ortholog.name + (taxon.name + "-" + ortholog.name + ".txt")
+			when 'clade'
+				file = config.dir_result + "isolate/sequence" + ortholog.name + (taxon.name + "-" + ortholog.name + ".txt")
+			end
+			if file.exist?
+				_read_sequence(file)
+			end
+		end
+		
+		def _read_sequence(file)
+			head = []
+			data = {}
+			File.new(file, "r").each do |line|
+				if line =~ /SEQUENCE/
+					head = line.split("\t")
+					head.each {|h| data[h] = ""}
+				else
+					tmp = line.split("\t")
+					tmp.each_index do |i|
+						data[head[i]] = tmp[i]
+					end
+					puts data["SEQUENCE"] + "\t" + data["sequence"].length.to_s + "\t" + data["cds"].length.to_s + "\t" + data["translation"].length.to_s
+				end
+			end
+		end
+	end
 end
