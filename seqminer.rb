@@ -26,7 +26,7 @@ module SeqMiner
 		def initialize(options = {:config => nil})
 			
 			if ! options[:config]
-				@config = Config.new
+				@config = Config::General.new
 			else
 				@config = options[:config]
 			end
@@ -553,6 +553,23 @@ module SeqMiner
 		
 		def debug
 			config.debug
+		end
+	end
+
+	class Analysis
+		attr_reader :config
+		
+		def initialize(options = {:config => nil})
+			if options[:config]
+				@config = options[:config]
+			else
+				@config = Config::General.new
+			end
+		end
+
+		# This method computes the bigram for each domain in all sequence sets.
+		def bigram
+
 		end
 	end
 end

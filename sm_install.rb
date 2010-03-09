@@ -1,7 +1,9 @@
 require 'seqminer'
 
 sm = SeqMiner::Install.new
-#sm.install
+sm.config.basedir = "~/rasome"
+sm.config.debug
+sm.install
 
 #sm.taxon.filter_by_name("anaplasma.marginale")
 #sm.taxon.filter_by_name("babesia.bovis")
