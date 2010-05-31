@@ -574,6 +574,36 @@ module SeqMiner
 		def debug
 			config.debug
 		end
+		
+		# This is done now here, but it should probably be done in the Pipeline.
+		def align
+			family.each_family do |f|
+				outdir = config.dir_commit + "alignment"
+				if ! outdir.exist?
+					raise "ERROR: commit directory does not exist!"
+				end
+				ts = Taxon::Set.new(options = {:config => config})
+				ts.filter_by_name(f.taxon)
+				ts.each_taxon do |taxon|
+					case taxon.type
+					when 'spp'
+						dir = config.dir_result + "genome/fasta" + f.ortholog
+					when 'clade'
+						dir = config.dir_result + "isolate/fasta" + f.ortholog
+					end
+					#infile = dir + (taxon.name + "-" + f.ortholog + "_protein.fa")
+					infile = dir + (taxon.name + "-" + f.ortholog + "_cds.fa")
+					#outfile = outdir + (taxon.name + "-" + f.ortholog + "_protein.faln")
+					outfile = outdir + (taxon.name + "-" + f.ortholog + "_cds.faln")
+					if infile.exist?
+						warn "* aligning " + infile
+						system "mafft --quiet --auto #{infile} > #{outfile}"
+					else
+						raise("!!! file " + infile + " does not exist!")
+					end
+				end
+			end
+		end
 	end
 
 	class Analysis

@@ -83,11 +83,11 @@ module Download
 		def ncbi_download(term, db, ofile)
 			Bio::NCBI.default_email = "diez@kuicr.kyoto-u.ac.jp"
 			ncbi = Bio::NCBI::REST.new
-			
+
 			# WARNING: Still not tested! (see test_ncbi2.rb for details)
 			rid = ncbi.esearch(term, {:db => db}, limit = 0)
 			
-			res = ncbi.efetch(rid, {:db => db, :rettype => "gb", :retmode => "txt"})
+			res = ncbi.efetch(rid, {:db => db, :rettype => "gbwithparts", :retmode => "txt"})
 			out = File.open(ofile, "w")
 			out.puts res
 			out.close
@@ -204,9 +204,9 @@ module Download
 			}
 			
 			current_release = {
-				'plasmodb' =>  '6.3',
+				'plasmodb' =>  '6.4',
 				'giardiadb' => '2.1',
-				'tritrypdb' => '2.0'
+				'tritrypdb' => '2.2'
 			}
 			
 			release = current_release[db]
@@ -243,7 +243,7 @@ module Download
 				end
 				
 				if taxon.name == "trypanosoma.cruzi_CL_Brener"
-					file = taxon.short_name + "Esmeraldo" + "_TriTrypDB-" + release + ".gff"
+					file = taxon.short_name + "Esmeraldo-Like" + "_TriTrypDB-" + release + ".gff"
 					outfile = config.dir_source + taxon.name + (taxon.name + "-Esmeraldo" +  ".gff")
 				end
 			end	
@@ -251,7 +251,7 @@ module Download
 			http_download(host[db], dir, file, outfile)
 			
 			if taxon.name == "trypanosoma.cruzi_CL_Brener"
-				file = taxon.short_name + "NonEsmeraldo" + "_TriTrypDB-" + release + ".gff"
+				file = taxon.short_name + "NonEsmeraldo-Like" + "_TriTrypDB-" + release + ".gff"
 				outfile = config.dir_source + taxon.name + (taxon.name + "-NonEsmeraldo" +  ".gff")
 				http_download(host[db], dir, file, outfile)
 			end
