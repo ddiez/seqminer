@@ -81,19 +81,19 @@ module Download
 		# db:: Database to search.
 		# ofile:: File to save the download.
 		def ncbi_download(term, db, ofile)
-			Bio::NCBI.default_email = "diez@kuicr.kyoto-u.ac.jp"
-			ncbi = Bio::NCBI::REST.new
+			#Bio::NCBI.default_email = "diez@kuicr.kyoto-u.ac.jp"
+			#ncbi = Bio::NCBI::REST.new
 
-			# WARNING: Still not tested! (see test_ncbi2.rb for details)
-			rid = ncbi.esearch(term, {:db => db}, limit = 0)
+			## WARNING: Still not tested! (see test_ncbi2.rb for details)
+			#rid = ncbi.esearch(term, {:db => db}, limit = 0)
 			
-			res = ncbi.efetch(rid, {:db => db, :rettype => "gbwithparts", :retmode => "txt"})
-			out = File.open(ofile, "w")
-			out.puts res
-			out.close
+			#res = ncbi.efetch(rid, {:db => db, :rettype => "gbwithparts", :retmode => "txt"})
+			#out = File.open(ofile, "w")
+			#out.puts res
+			#out.close
 			
 			# Old method. Just uncomment (and comment out the code above) to revert to it.
-			#system("./ncbi_download.pl \"#{term}\" #{db} #{ofile}")
+			system("./ncbi_download.pl \"#{term}\" #{db} #{ofile}")
 		end
 	end
 

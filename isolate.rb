@@ -137,7 +137,7 @@ module Isolate
 				end
 			when "protein"
 				each_sequence do |seq|
-					next if seq.translation == ""
+					next if seq.translation.nil?
 					id = seq.id + " accession=" + seq.accession + ";source=" + seq.source + ";type=" + \
 						seq.type + ";trans_table=" + seq.trans_table.to_s + ";description=" + seq.description + ";"
 					fo.puts seq.translation.to_fasta(id, 60)

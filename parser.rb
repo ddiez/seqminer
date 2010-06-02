@@ -97,6 +97,7 @@ module Parser
 									
 									id = nil
 									acc = ""
+									desc = ""
 									if h['locus_tag']
 										# These are suspicious to be present in genome projects but there are some 
 										# situations where this is not the case so we maintain them.
@@ -104,6 +105,7 @@ module Parser
 										acc = h['locus_tag'][0]
 									elsif h['gene']
 										id = gb.accession + "|" + h['gene'][0]
+										desc = h['gene'][0]
 										#acc = h['gene'][0]
 									else
 										warn "******* NOT VALID TAG TO CREATE <gene> ENTRY IN LOCUS: " + gb.accession
@@ -124,7 +126,7 @@ module Parser
 									if h['note']
 										seq.description = h['note'][0]
 									else
-										seq.description = ""
+										seq.description = desc
 									end
 									seq.type = "gene"
 									seq.pseudogene = 1 if h['pseudo']
