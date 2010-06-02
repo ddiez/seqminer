@@ -85,6 +85,7 @@ module Download
 			#ncbi = Bio::NCBI::REST.new
 
 			## WARNING: Still not tested! (see test_ncbi2.rb for details)
+			## NOTE: works but need queue system (like the Perl implementation).
 			#rid = ncbi.esearch(term, {:db => db}, limit = 0)
 			
 			#res = ncbi.efetch(rid, {:db => db, :rettype => "gbwithparts", :retmode => "txt"})
