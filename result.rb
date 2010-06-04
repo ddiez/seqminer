@@ -440,6 +440,14 @@ module Result
 				pseudo = "FALSE"
 				pseudo = "TRUE" if iseq.pseudogene == 1
 				
+				# TODO: there are incoherences in the current implementation between isolate
+				# and gene sequences in terms of translation.
+				if iseq.translation.nil?
+					transl = ""
+				else
+					transl = iseq.translation
+				end
+				
 				of.puts iseq.id + "\t" +
 					iseq.accession + "\t" +
 					taxon.binomial + "." + fn + "\t" +
@@ -449,7 +457,7 @@ module Result
 					iseq.locus + "\t" +
 					iseq.gene + "\t" +
 					iseq.cds + "\t" +
-					iseq.translation + "\t" +
+					transl + "\t" +
 					pseudo + "\t" +
 					"psitblastn" + "\t" +
 					bh.score.to_s + "\t" +

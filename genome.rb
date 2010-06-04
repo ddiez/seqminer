@@ -8,6 +8,7 @@
 require 'config'
 require 'item'
 require 'sequence'
+require 'family' # for write_nelson() method.
 
 module Genome
 	include Item

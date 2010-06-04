@@ -326,6 +326,7 @@ module SeqMiner
 			write_nelson
 			write_fasta
 			#run_domain_finder
+			run_scan
 		end
 		
 		def build_search

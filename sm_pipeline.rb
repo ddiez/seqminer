@@ -16,11 +16,17 @@ sm = SeqMiner::Pipeline.new
 #sm.taxon.filter_by_type("spp")
 #sm.taxon.filter_by_type("clade")
 
+# If first time and not run_all()...
+#sm.dir_initialize
+
 # filter orthologs.
 #sm.ortholog.filter_by_name("msp2")
-sm.build_search
-sm.search.debug
+#sm.build_search
+#sm.search.debug
 #sm.run_all
+#sm.run_search
 #sm.write_fasta
 #sm.write_nelson
-sm.run_domain_finder
+sm.build_scan
+#sm.run_scan
+sm.write_domain

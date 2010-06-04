@@ -64,9 +64,10 @@ module Isolate
 					seq.description = description if description
 					gseq = gdb.get_seq_by_acc(id)
 					seq.sequence = gseq
-					seq.translation = ""
+					#seq.translation = nil
 					pseq = pdb.get_seq_by_acc(id)
-					seq.translation = pseq if ! pseq.nil?
+					#seq.translation = pseq if ! pseq.nil?
+					seq.translation = pseq
 					add(seq)
 				end
 			end
@@ -287,7 +288,9 @@ module Isolate
 		end
 		
 		def translation=(seq)
-			@translation = Bio::Sequence::AA.new(seq)
+			if !seq.nil?
+				@translation = Bio::Sequence::AA.new(seq)
+			end
 		end
 		
 		def translation
