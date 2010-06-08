@@ -595,22 +595,19 @@ module SeqMiner
 					when 'clade'
 						dir = config.dir_result + "isolate/fasta" + f.ortholog
 					end
-					#["protein", "cds"].each do |st|
-						#infile = dir + (taxon.name + "-" + f.ortholog + "_protein.fa")
-						infile = dir + (taxon.name + "-" + f.ortholog + "_cds.fa")
-						#outfile = outdir + (taxon.name + "-" + f.ortholog + "_protein.faln")
-						outfile = outdir + (taxon.name + "-" + f.ortholog + "_cds.faln")
+					["protein", "cds"].each do |st|
+						infile = dir + (taxon.name + "-" + f.ortholog + "_" + st + ".fa")
+						outfile = outdir + (taxon.name + "-" + f.ortholog + "_" + st + ".faln")
 						if infile.exist?
-							#warn "* aligning " + infile
-							#system "mafft --quiet --auto #{infile} > #{outfile}"
 							n += 1
 							j = Job.new(n)
+							#j.log = "* aligning " + infile
 							j.cmd = "mafft --quiet --auto #{infile} > #{outfile}"
 							q << j
 						else
 							raise("!!! file " + infile + " does not exist!")
 						end
-					#end
+					end
 				end
 			end
 			q.ncpu = 16
