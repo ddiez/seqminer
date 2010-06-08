@@ -16,6 +16,7 @@ require 'scan'
 require 'result'
 require 'download'
 require 'tools'
+require 'queue'
 
 module SeqMiner
 	class Install
@@ -578,6 +579,8 @@ module SeqMiner
 		
 		# This is done now here, but it should probably be done in the Pipeline.
 		def align
+			n = 0
+			q = Queue.new
 			family.each_family do |f|
 				outdir = config.dir_commit + "alignment"
 				if ! outdir.exist?
@@ -592,18 +595,27 @@ module SeqMiner
 					when 'clade'
 						dir = config.dir_result + "isolate/fasta" + f.ortholog
 					end
-					#infile = dir + (taxon.name + "-" + f.ortholog + "_protein.fa")
-					infile = dir + (taxon.name + "-" + f.ortholog + "_cds.fa")
-					#outfile = outdir + (taxon.name + "-" + f.ortholog + "_protein.faln")
-					outfile = outdir + (taxon.name + "-" + f.ortholog + "_cds.faln")
-					if infile.exist?
-						warn "* aligning " + infile
-						system "mafft --quiet --auto #{infile} > #{outfile}"
-					else
-						raise("!!! file " + infile + " does not exist!")
-					end
+					#["protein", "cds"].each do |st|
+						#infile = dir + (taxon.name + "-" + f.ortholog + "_protein.fa")
+						infile = dir + (taxon.name + "-" + f.ortholog + "_cds.fa")
+						#outfile = outdir + (taxon.name + "-" + f.ortholog + "_protein.faln")
+						outfile = outdir + (taxon.name + "-" + f.ortholog + "_cds.faln")
+						if infile.exist?
+							#warn "* aligning " + infile
+							#system "mafft --quiet --auto #{infile} > #{outfile}"
+							n += 1
+							j = Job.new(n)
+							j.cmd = "mafft --quiet --auto #{infile} > #{outfile}"
+							q << j
+						else
+							raise("!!! file " + infile + " does not exist!")
+						end
+					#end
 				end
 			end
+			q.ncpu = 16
+			q.debug
+			q.run
 		end
 	end
 

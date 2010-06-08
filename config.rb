@@ -39,7 +39,8 @@ module Config
 			@dir_r = Pathname.new("/usr/bin")
 			
 			# Commit
-			@dir_commit = Pathname.new("/Volumes/Biodev/projects/vardb/commit/")
+			#@dir_commit = Pathname.new("/Volumes/Biodev/projects/vardb/commit/")
+			@dir_commit = dir_home + "commit"
 		end
 		
 		def basedir=(dir)
