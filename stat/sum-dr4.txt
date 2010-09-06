@@ -1,0 +1,10 @@
+Family	Organism	Percentage
+var	plasmodium.falciparum	18.4445237245808
+porA	neisseria.meningitidis	5.12091038406828
+rifin_stevor	plasmodium.falciparum	4.42930153321976
+msp2_p44_map1_omp	anaplasma.marginale	3.03797468354430
+msp2_p44_map1_omp	anaplasma.phagocytophilum	2.3972602739726
+msp2_p44_map1_omp	ehrlichia.canis	1.78571428571429
+cir_bir_yir	plasmodium.berghei	0.127605274351340
+cir_bir_yir	plasmodium.yoelii	0.0612182430364249
+vir_kir	plasmodium.vivax	0.0490196078431373

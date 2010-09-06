@@ -720,7 +720,10 @@ module Parser
 	end
 	
 	class Nelson < Common
+		## TODO: This class is actually a bunch of hacks to get the statistics. It has to be properly written.
+		attr_reader :ortholog
 		def initialize(taxon, ortholog, options  = {:config => nil})
+			@ortholog = ortholog
 			super(taxon, options = {:config => options[:config]})
 			case taxon.type
 			when 'spp'
@@ -736,18 +739,21 @@ module Parser
 		def _read_sequence(file)
 			head = []
 			data = {}
+			n = 0
 			File.new(file, "r").each do |line|
 				if line =~ /SEQUENCE/
 					head = line.split("\t")
 					head.each {|h| data[h] = ""}
 				else
+					n += 1
 					tmp = line.split("\t")
 					tmp.each_index do |i|
 						data[head[i]] = tmp[i]
 					end
-					puts data["SEQUENCE"] + "\t" + data["sequence"].length.to_s + "\t" + data["cds"].length.to_s + "\t" + data["translation"].length.to_s
+					#puts data["SEQUENCE"] + "\t" + data["sequence"].length.to_s + "\t" + data["cds"].length.to_s + "\t" + data["translation"].length.to_s
 				end
 			end
+			puts ortholog.name + "\t" + taxon.name + "\t" + n.to_s
 		end
 	end
 end
