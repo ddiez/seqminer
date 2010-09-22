@@ -46,6 +46,8 @@ module Tools
 				@parameters = ""
 			when 'hmmpress'
 				@parameters = ""
+			when 'hmmfetch'
+				@parameters = ""
 			end
 		end
 		
@@ -69,6 +71,8 @@ module Tools
 				cmd = [path, parameters, model, infile, ">", outfile]
 			when 'hmmpress'
 				cmd = [path, parameters, model, infile, ">", outfile]
+			when 'hmmfetch'
+				cmd = [path, parameters, infile, model, ">", outfile]
 			end
 			@cmd = cmd.join(" ")
 		end

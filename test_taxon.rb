@@ -12,9 +12,9 @@ ts.debug
 #t.debug
 #
 #ts.filter_by_name(["plasmodium", "anaplasma"])
-ts.filter_by_name("plasmodium")
-ts.filter_by_type("spp")
-ts.debug
+#ts.filter_by_name("plasmodium")
+#ts.filter_by_type("spp")
+#ts.debug
 #t = ts.get_item_by_id("184922")
 #t.debug if ! t.nil?
 #

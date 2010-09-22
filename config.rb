@@ -12,7 +12,7 @@ module Config
 	
 		def initialize
 			# Basedir.
-			@dir_home = Pathname.new("/Volumes/Biodev/projects/vardb/dr-4")
+			@dir_home = Pathname.new("/Volumes/Biodev/projects/vardb/dr-5")
 			update
 		end
 		
@@ -33,8 +33,14 @@ module Config
 			@dir_result = dir_home + "result"
 			
 			# Tools.
-			@dir_hmmer = Pathname.new("/Users/diez/local/hmmer3/bin")
+			#@dir_hmmer = Pathname.new("/Users/diez/local/hmmer3/bin")
+			@dir_hmmer = Pathname.new("/Users/diez/local/hmmer-3.0b2/src")
 			@dir_blast = Pathname.new("/usr/local/ncbi/blast/bin")
+#			@dir_meme = Pathname.new("/Users/diez/local/meme/bin")
+#			@dir_r = Pathname.new("/usr/bin")
+			
+#			@dir_hmmer = Pathname.new("/home/diez/local/hmmer3/binaries")
+#			@dir_blast = Pathname.new("/home/diez/local/blast2/bin")
 			@dir_meme = Pathname.new("/Users/diez/local/meme/bin")
 			@dir_r = Pathname.new("/usr/bin")
 			

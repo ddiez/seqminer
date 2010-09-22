@@ -49,6 +49,7 @@ module SeqMiner
 			config.dir_pfam.mkpath
 			config.dir_result.mkpath
 			config.dir_config.mkpath
+			config.dir_commit.mkpath
 		end
 		
 		def create_base_dir
@@ -211,7 +212,22 @@ module SeqMiner
 		end
 		
 		def update_hmm
-			# TODO: not implemented
+			ortholog.each_ortholog do |o|
+				o.debug
+				hr = Tools::Hmmer.new('hmmfetch', options = {:config => config})
+				hr.infile = config.dir_pfam + "current" + "Pfam-A.hmm"
+				hr.model = o.hmm
+				hr.outfile = config.dir_model + "hmm" + o.hmm
+				hr.debug
+				res = hr.execute
+				if (! res) then
+					hr.infile = config.dir_model + "Extra.hmm"
+					res = hr.execute
+					_check_result(res)
+				else
+					_check_result(res)
+				end
+			end
 		end
 		
 		# This method computes the best hit for a series of genomic searches belonging to the same species and
@@ -227,8 +243,8 @@ module SeqMiner
 					typeset.each_value do |type|
 						next if type.name != "protein"
 						sid = t.name + "-" + o.name + "-" + type.name
-						file = config.dir_result + "genome/search" + o.name + (sid + ".txt") 
-						p = Result::HmmerParser.new(options = {:config => config, :taxon => t, :ortholog => o})
+						file = config.dir_result + "genome/search" + o.name + (sid + ".txt")
+						p = Result::HmmerParser.new(options = {:config => config, :taxon => t, :ortholog => o, :tool => "hmmsearch"})
 						p.file = file
 						p.result_id = sid
 						p.type = type
@@ -326,7 +342,6 @@ module SeqMiner
 			get_search_results
 			write_nelson
 			write_fasta
-			#run_domain_finder
 			run_scan
 		end
 		
@@ -541,6 +556,12 @@ module SeqMiner
 			end
 		end
 		
+		def filter
+			family.each_family do |f|
+				f.debug
+			end
+		end
+		
 		def stat_sequences
 			family.each_family do |f|
 				#outdir = config.dir_commit + f.ortholog
@@ -584,7 +605,8 @@ module SeqMiner
 			family.each_family do |f|
 				outdir = config.dir_commit + "alignment"
 				if ! outdir.exist?
-					raise "ERROR: commit directory does not exist!"
+					#raise "ERROR: commit directory does not exist!"
+					outdir.mkpath
 				end
 				ts = Taxon::Set.new(options = {:config => config})
 				ts.filter_by_name(f.taxon)

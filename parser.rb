@@ -50,7 +50,7 @@ module Parser
 				:nucest => config.dir_source + taxon.name + (taxon.name + "_nucest.gb")
 			}
 		end
-
+		
 		def parse
 			is = Isolate::Set.new(taxon, options = {:empty => true})
 			
@@ -283,6 +283,11 @@ module Parser
 				why << "complete genome"
 			end
 			
+			if entry.definition.match(/whole genome/)
+				ok = false
+				why << "complete genome"
+			end
+			
 			if entry.definition.match(/chromosome/)
 				ok = false
 				why << "chromosome"
@@ -345,7 +350,10 @@ module Parser
 							gene.trans_table = taxon.trans_table
 							gene.references = ref
 							genome << gene
-
+							
+							# not enough, sometimes some "gene" entries do not have the "pseudo" tag
+							# and end up without exons. added validate_exon() method.
+							# this chunk of code may be removed in favor of validate_exon()
 							if h['pseudo']
 								gene.pseudogene = 1
 								gene.type = "CDS" # or make another category?
@@ -367,14 +375,16 @@ module Parser
 						else
 							gene.description = h['product'][0] if h['product']
 							gene.type = feat.feature
-
-							locs = feat.locations
-							locs.each do |loc|
-								exon = Genome::Exon.new(gene.length + 1)
-								exon.strand = loc.strand
-								exon.from = loc.from
-								exon.to = loc.to
-								gene << exon
+							
+							if (gene.length == 0) then
+								locs = feat.locations
+								locs.each do |loc|
+									exon = Genome::Exon.new(gene.length + 1)
+									exon.strand = loc.strand
+									exon.from = loc.from
+									exon.to = loc.to
+									gene << exon
+								end
 							end
 						end
 					elsif feat.feature == "tRNA" or feat.feature == "rRNA" or feat.feature == "tmRNA" or \
@@ -401,14 +411,16 @@ module Parser
 								next if feat.feature == "mRNA"
 
 								gene.type = feat.feature
-
-								locs = feat.locations
-								locs.each do |loc|
-									exon = Genome::Exon.new(gene.length + 1)
-									exon.strand = loc.strand
-									exon.from = loc.from
-									exon.to = loc.to
-									gene << exon
+								
+								if (gene.length == 0) then
+									locs = feat.locations
+									locs.each do |loc|
+										exon = Genome::Exon.new(gene.length + 1)
+										exon.strand = loc.strand
+										exon.from = loc.from
+										exon.to = loc.to
+										gene << exon
+									end
 								end
 							end
 						end
@@ -430,6 +442,7 @@ module Parser
 			end
 			genome.chromosome = chr
 			genome.auto_clean
+			genome.validate_exons
 			genome
 		end
 	end

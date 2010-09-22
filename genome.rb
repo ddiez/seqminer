@@ -78,6 +78,24 @@ module Genome
 			end
 		end
 		
+		def validate_exons
+			# some "gene" entries do not have "pseudogene" tag and end up without exons and type
+			# we assume they are pseudogene (there is not CDS) and so we add an exons and apply
+			# pseudogene value.
+			each_gene do |gene|
+				if gene.length == 0 then
+					puts "WARNING: fixing gene " + gene.id + " (adding single exon, and pseudogene = true)"
+					exon = Genome::Exon.new(1)
+					exon.strand = gene.strand
+					exon.from = gene.from
+					exon.to = gene.to
+					gene.type = "CDS"
+					gene.pseudogene = 1
+					gene << exon
+				end
+			end
+		end
+		
 #		def _parse_desc(line)
 #			valid_fields = ["description", "pseudogene"]
 #			a = line.split(/=|;/)
@@ -400,6 +418,11 @@ module Genome
 		# This methods returns the splicing pattern in gene coordinates. In other words, it is used to extract
 		# the exonic sequence (and potentially the introns) from the gene sequence.
 		def splicing
+#			puts id
+#			puts from
+#			puts to
+#			puts length
+#			puts
 			loc = []
 			case strand
 			when 1
@@ -417,6 +440,7 @@ module Genome
 			loc = loc.join(",")
 			loc = "join(" + loc + ")" if length > 1
 			loc = "complement(" + loc + ")" if strand == -1
+			#puts loc
 			loc
 		end
 		

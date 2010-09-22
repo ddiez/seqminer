@@ -159,9 +159,12 @@ module Taxon
 				code << item.text
 			end
 			
+			# Maybe do other way: check for each id in the TaxonSet.
 			id.each_index do |index|
 				taxon = get_item_by_id(id[index])
-				taxon.trans_table = code[index].to_i
+				if (! taxon.nil?) then
+					taxon.trans_table = code[index].to_i
+				end
 			end
 		end
 		

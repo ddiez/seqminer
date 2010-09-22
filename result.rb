@@ -874,7 +874,7 @@ module Result
 	end
 	
 	class HmmerParser
-		attr_reader :taxon, :ortholog, :tool
+		attr_reader :taxon, :ortholog, :tool, :result
 		attr_accessor :file, :result_id, :type, :config
 		
 		def initialize(options = {:config => nil, :taxon => nil, :ortholog => nil, :empty => false, :tool => nil})
@@ -895,7 +895,7 @@ module Result
 		end
 		
 		def parse
-			result = Result.new(result_id, options = {:config => config})
+			@result = Result.new(result_id, options = {:config => config})
 			result.taxon = taxon if taxon
 			result.ortholog = ortholog if ortholog
 			result.tool = tool
@@ -1016,8 +1016,8 @@ module Result
 		# Prints some information for debugging.
 		def debug
 			warn "+ HmmerParser +"
-			warn "* file: " + @file
-			result.debug
+			warn "* file: " + @file.to_s
+			result.debug if ! result.nil?
 		end
 		
 		private
