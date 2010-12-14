@@ -205,9 +205,9 @@ module Download
 			}
 			
 			current_release = {
-				'plasmodb' =>  '6.5',
-				'giardiadb' => '2.2',
-				'tritrypdb' => '2.3'
+				'plasmodb' =>  '7.1',
+				'giardiadb' => '2.3',
+				'tritrypdb' => '2.5'
 			}
 			
 			release = current_release[db]
@@ -221,16 +221,16 @@ module Download
 			
 			case db
 			when 'plasmodb'
-				dir =  dir + ("release-" + release) + taxon.short_name
+				dir =  dir + ("release-" + release) + taxon.short_name + "gff"
 				file = taxon.short_name + "_PlasmoDB-" + release + ".gff"
 			when 'giardiadb'
-				dir =  dir + ("release-" + release) + taxon.short_name
+				dir =  dir + ("release-" + release) + taxon.short_name + "gff"
 				if taxon.name == "giardia.lamblia_ATCC_50803"
-					dir = "common/downloads/release-" + release + "/" + "GintestinalisAssemblageA"
+					dir = Pathname("common/downloads") + ("release-" + release) + "GintestinalisAssemblageA" + "gff"
 				end
 				file = taxon.short_name + "_GiardiaDB-" + release + ".gff"
 			when 'tritrypdb'
-				dir =  dir + ("release-" + release) + taxon.short_name
+				dir =  dir + ("release-" + release) + taxon.short_name + "gff"
 				file = taxon.short_name + "_TriTrypDB-" + release + ".gff"
 					
 				if taxon.name.match(/trypanosoma.brucei/)

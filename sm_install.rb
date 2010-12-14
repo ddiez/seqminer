@@ -1,9 +1,13 @@
 require 'seqminer'
 
 sm = SeqMiner::Install.new
-sm.config.basedir = "~/rasome"
-sm.config.debug
-sm.install
+
+#sm.config.debug
+#sm.install
+
+# 2. update Pfam.
+#sm.update_pfam
+#sm.process_pfam
 
 #sm.taxon.filter_by_name("anaplasma.marginale")
 #sm.taxon.filter_by_name("babesia.bovis")
@@ -15,9 +19,12 @@ sm.install
 #sm.taxon.filter_by_type("clade")
 #sm.taxon.debug
 
-#sm.update_pfam
-#sm.process_pfam
-#sm.update_sequences
+#sm.taxon.filter_by_type("spp")
+sm.taxon.filter_by_type("clade")
+sm.taxon.debug
+
+# 3. download sequences.
+sm.update_sequences
 
 #sm.process_sequences
 #sm.process_directories

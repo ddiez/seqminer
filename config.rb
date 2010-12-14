@@ -12,7 +12,7 @@ module Config
 	
 		def initialize
 			# Basedir.
-			@dir_home = Pathname.new("/Volumes/Biodev/projects/vardb/dr-5")
+			@dir_home = Pathname.new("/Volumes/Biodev/projects/vardb/dr-6")
 			update
 		end
 		
