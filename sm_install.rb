@@ -26,6 +26,7 @@ sm.taxon.debug
 # 3. download sequences.
 sm.update_sequences
 
+# 4. process sequences.
 #sm.process_sequences
 #sm.process_directories
 #sm.update_pssm

@@ -49,8 +49,8 @@ if ($count > 0) {
 			$factory->get_Response(-file => ">>$file");
 		};
 		if ($@) {
-			die "Server error: $@.  Try again later" if $retry == 5;
-			print STDERR "Server error, redo #$retry\n";
+			die "\nServer error: $@.  Try again later" if $retry == 5;
+			print STDERR "\nServer error, redo #$retry\n";
 			$retry++ && redo RETRIEVE_SEQS;
 		}
 		$retstart += $retmax;
