@@ -81,20 +81,41 @@ module Download
 		# db:: Database to search.
 		# ofile:: File to save the download.
 		def ncbi_download(term, db, ofile)
-			#Bio::NCBI.default_email = "diez@kuicr.kyoto-u.ac.jp"
-			#ncbi = Bio::NCBI::REST.new
+			#puts "* host: " + host
+			#puts "* dir: " + dir
+			puts "* db: " + db
+			puts "* ofile: " + ofile
+			Bio::NCBI.default_email = "diez@kuicr.kyoto-u.ac.jp"
+			ncbi = Bio::NCBI::REST.new
 
-			## WARNING: Still not tested! (see test_ncbi2.rb for details)
-			## NOTE: works but need queue system (like the Perl implementation).
-			#rid = ncbi.esearch(term, {:db => db}, limit = 0)
-			
-			#res = ncbi.efetch(rid, {:db => db, :rettype => "gbwithparts", :retmode => "txt"})
-			#out = File.open(ofile, "w")
-			#out.puts res
-			#out.close
-			
+			rid = ncbi.esearch(term, {:db => db}, limit = 0)
+
+			if(rid.length > 0)
+				retmax = 500
+				retstart = 0
+				
+				transferred = 0
+				pb = ProgressBar.new(ofile.basename.to_s, 100)
+				#ret = 0
+				out = File.open(ofile, "w")
+				while(retstart < rid.length)
+					rtmp = rid[retstart,retmax]
+					res = ncbi.efetch(rtmp, {:db => db, :rettype => "gbwithparts", :retmode => "txt"})
+					# TODO: add server ERROR check (like Perl script)
+					out.puts res
+					transferred += rtmp.length
+					if(transferred != 0)
+						percent_finished = 100 * (transferred.to_f / rid.length.to_f)
+						#puts percent_finished
+						pb.set(percent_finished.to_i)
+					end
+					retstart += retmax
+				end
+				out.close
+				puts
+			end
 			# Old method. Just uncomment (and comment out the code above) to revert to it.
-			system("./ncbi_download.pl \"#{term}\" #{db} #{ofile}")
+			#system("./ncbi_download.pl \"#{term}\" #{db} #{ofile}")
 		end
 	end
 
