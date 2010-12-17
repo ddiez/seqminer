@@ -16,7 +16,8 @@ require 'net/http'
 module Download
 	include Item
 	
-	class Common
+	class Base
+		include Common
 		# This method downloads a file using the FTP protocol.
 		# Parameters:
 		# host: Host name.
@@ -85,37 +86,38 @@ module Download
 			#puts "* dir: " + dir
 			puts "* db: " + db
 			puts "* ofile: " + ofile
-			Bio::NCBI.default_email = "diez@kuicr.kyoto-u.ac.jp"
-			ncbi = Bio::NCBI::REST.new
-
-			rid = ncbi.esearch(term, {:db => db}, limit = 0)
-
-			if(rid.length > 0)
-				retmax = 500
-				retstart = 0
-				
-				transferred = 0
-				pb = ProgressBar.new(ofile.basename.to_s, 100)
-				#ret = 0
-				out = File.open(ofile, "w")
-				while(retstart < rid.length)
-					rtmp = rid[retstart,retmax]
-					res = ncbi.efetch(rtmp, {:db => db, :rettype => "gbwithparts", :retmode => "txt"})
-					# TODO: add server ERROR check (like Perl script)
-					out.puts res
-					transferred += rtmp.length
-					if(transferred != 0)
-						percent_finished = 100 * (transferred.to_f / rid.length.to_f)
-						#puts percent_finished
-						pb.set(percent_finished.to_i)
-					end
-					retstart += retmax
-				end
-				out.close
-				puts
-			end
+#			Bio::NCBI.default_email = "diez@kuicr.kyoto-u.ac.jp"
+#			ncbi = Bio::NCBI::REST.new
+#
+#			rid = ncbi.esearch(term, {:db => db}, limit = 0)
+#
+#			if(rid.length > 0)
+#				retmax = 500
+#				retstart = 0
+#				
+#				transferred = 0
+#				pb = ProgressBar.new(ofile.basename.to_s, 100)
+#				#ret = 0
+#				out = File.open(ofile, "w")
+#				while(retstart < rid.length)
+#					rtmp = rid[retstart,retmax]
+#					res = ncbi.efetch(rtmp, {:db => db, :rettype => "gbwithparts", :retmode => "txt"})
+#					# TODO: add server ERROR check (like Perl script)
+#					out.puts res
+#					transferred += rtmp.length
+#					if(transferred != 0)
+#						percent_finished = 100 * (transferred.to_f / rid.length.to_f)
+#						#puts percent_finished
+#						pb.set(percent_finished.to_i)
+#					end
+#					retstart += retmax
+#				end
+#				out.close
+#				puts
+#			end
 			# Old method. Just uncomment (and comment out the code above) to revert to it.
-			#system("./ncbi_download.pl \"#{term}\" #{db} #{ofile}")
+			res = system("./ncbi_download.pl \"#{term}\" #{db} #{ofile}")
+			_check_result(res)
 		end
 	end
 
@@ -149,7 +151,7 @@ module Download
 		end
 	end
 
-	class Download < Common
+	class Download < Base
 		attr_accessor :taxon
 		attr_reader :id, :config
 		
@@ -342,7 +344,7 @@ module Download
 		end
 	end
 
-	class Pfam < Common
+	class Pfam < Base
 		attr_accessor :host, :base_dir, :release, :dir, :files
 		attr_reader :config
 
