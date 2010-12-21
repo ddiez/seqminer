@@ -67,7 +67,17 @@ module Item
 			items.delete(i.id)
 			ids.delete(i.id)
 		end
-
+		
+		# TODO: not tested.
+		# filter itemsets by index.
+#		def filter_by_index(i)
+#			x0 = i - 1
+#			x1 = ids.length - 1
+#			idtmp = ids[x0..x1]
+#			items = @items[idtmp]
+#			ids = @ids[x0..x1]
+#		end	
+		
 		def debug
 			warn "* length: " + self.length.to_s
 #			each_value do |item|

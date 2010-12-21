@@ -37,8 +37,8 @@ if ($count > 0) {
 
 	my ($retmax, $retstart) = (500, 0);
 	my $retry = 0;
+	RETRIEVE_SEQS:
 	while ($retstart < $count) {
-		RETRIEVE_SEQS:
 		$factory->set_parameters(-retmax => $retmax,
 								-retstart => $retstart);
 		eval{
@@ -49,7 +49,7 @@ if ($count > 0) {
 			$factory->get_Response(-file => ">>$file");
 		};
 		if ($@) {
-			die "\nServer error: $@.  Try again later" if $retry == 5;
+			die "\nServer error: $@.  Try again later" if $retry == 10;
 			print STDERR "\nServer error, redo #$retry\n";
 			$retry++ && redo RETRIEVE_SEQS;
 		}

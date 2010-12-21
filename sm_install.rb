@@ -14,21 +14,27 @@ sm = SeqMiner::Install.new
 #sm.taxon.filter_by_name("plasmodium.falciparum")
 #sm.taxon.filter_by_name("plasmodium.yoelii")
 #sm.taxon.filter_by_name("trypanosoma.brucei")
+#sm.taxon.filter_by_name("mycobacterium.tuberculosis_F11")
 #sm.taxon.filter_by_source("ncbi")
 #sm.taxon.filter_by_type("spp")
 #sm.taxon.filter_by_type("clade")
 #sm.taxon.debug
 
-#sm.taxon.filter_by_type("spp")
-sm.taxon.filter_by_type("clade")
+sm.taxon.filter_by_type("spp")
+#sm.taxon.filter_by_type("clade")
 sm.taxon.debug
 
 # 3. download sequences.
-sm.update_sequences
+#sm.update_sequences
 
 # 4. process sequences.
-#sm.process_sequences
+sm.process_sequences
 
-#
+# 5. process directories.
 #sm.process_directories
+
+# 6. update HMM models.
+#sm.update_hmm
+
+# 7. update PSSM models.
 #sm.update_pssm
