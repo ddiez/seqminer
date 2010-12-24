@@ -286,6 +286,13 @@ module Download
 			db = "genome"
 			term = "txid" + taxon.id
 			
+			# WGS projects must be downloaded this way:
+			
+			if taxon.name == "borrelia.burgdorferi_80a"
+				term += "[Organism:exp]+biomol genomic[properties]"
+				db = "nuccore"
+			end
+			
 			if taxon.name == "babesia.bovis_T2Bo"
 				term += "[Organism:exp]+biomol genomic[properties]"
 				db = "nuccore"

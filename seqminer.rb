@@ -343,6 +343,8 @@ module SeqMiner
 			write_nelson
 			write_fasta
 			run_scan
+			get_scan_results
+			write_domain
 		end
 		
 		def build_search
