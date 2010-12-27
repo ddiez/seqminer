@@ -17,7 +17,7 @@ module Tools
 			if options[:config]
 				@config = options[:config]
 			else
-				@config = Config::General.new(project)
+				@config = Config::General.new(options[:project])
 			end
 			
 			@tool = tool

@@ -71,7 +71,7 @@ module Scan
 		end
 		
 		def parse
-			rs = Result::Set.new
+			rs = Result::Set.new(options = {:config => config})
 			
 			transferred = 0
 			pb = ProgressBar.new("Scan results", 100)
@@ -86,7 +86,7 @@ module Scan
 				end
 				file = dir + (scan.taxon.name + "-" + scan.ortholog.name + "_protein.txt")
 				if file.exist?
-					rp = Result::HmmerParser.new(options = {:tool => 'hmmscan'})
+					rp = Result::HmmerParser.new(options = {:tool => 'hmmscan', :config => config})
 					rp.file = file
 					rp.result_id = scan.taxon.name + "-" + scan.ortholog.name
 					rp.type = "protein"

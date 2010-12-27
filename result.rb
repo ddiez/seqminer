@@ -626,13 +626,14 @@ module Result
 	end
 
 	class Set < Set
-		def initialize(options = {:config => nil})
+		attr_reader :config
+		def initialize(options = {:config => nil, :project => nil})
 			super()
 			
 			if options[:config]
 				@config = options[:config]
 			else
-				@config = Config::General.new
+				@config = Config::General.new(options[:project])
 			end
 		end
 		
@@ -658,7 +659,7 @@ module Result
 		end
 		
 		def auto_merge
-			rs = Set.new
+			rs = Set.new(options = {:config => config})
 			each_result do |result|
 				id = result.taxon.name + "-" + result.ortholog.name
 				r = rs.get_item_by_id(id)
@@ -877,11 +878,11 @@ module Result
 		attr_reader :taxon, :ortholog, :tool, :result
 		attr_accessor :file, :result_id, :type, :config
 		
-		def initialize(options = {:config => nil, :taxon => nil, :ortholog => nil, :empty => false, :tool => nil})
+		def initialize(options = {:config => nil, :taxon => nil, :ortholog => nil, :empty => false, :tool => nil, :project => nil})
 			if options[:config]
 				@config = options[:config]
 			else
-				@config = Config::General.new
+				@config = Config::General.new(options[:project])
 			end
 			
 			

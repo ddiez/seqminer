@@ -23,14 +23,17 @@ sm = SeqMiner::Pipeline.new("vardb-dr-6")
 #sm.write_fasta
 
 # scan
-sm.build_scan
-sm.run_scan
-sm.get_scan_results
-sm.write_domain
+#sm.build_scan
+#sm.run_scan
+#sm.get_scan_results
+#sm.write_domain
 
 
-#sm.get_results(eval = 0.01)
-# TODO:
+# TODO: check all the reports.
+# TODO: report to vardb dir.
+# report
+sm.build_search
+sm.get_search_results(eval = 0.01)
 #sm.report
 #sm.report(0.8)
-#sm.report_summary
+sm.report_summary

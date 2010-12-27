@@ -171,7 +171,7 @@ module Search
 
 		# this method parses results from a search.
 		def parse
-			rs = Result::Set.new
+			rs = Result::Set.new(options = {:config => config})
 			
 			transferred = 0
 			pb = ProgressBar.new("Search results", 100)
@@ -180,7 +180,7 @@ module Search
 				when 'spp'
 					file = config.dir_result + "genome/search" + search.ortholog.name + (search.id + ".txt")
 					
-					rp = Result::HmmerParser.new(options = {:tool => 'hmmsearch'})
+					rp = Result::HmmerParser.new(options = {:tool => 'hmmsearch', :config => config})
 					rp.file = file
 					rp.result_id = search.id
 					rp.type = search.type.name
@@ -193,7 +193,7 @@ module Search
 				when 'clade'
 					file = config.dir_result + "isolate/search" + search.ortholog.name + (search.id + ".txt")
 					
-					rp = Result::BlastParser.new(options = {:tool => 'psitblastn'})
+					rp = Result::BlastParser.new(options = {:tool => 'psitblastn', :config => config})
 					rp.file = file
 					rp.result_id = search.id
 					rp.type = search.type.name
