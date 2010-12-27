@@ -24,14 +24,14 @@ module SeqMiner
 
 		attr_reader :project, :config, :taxon, :ortholog
 
-		def initialize(options = {:config => nil})
-			
+		def initialize(project, options = {:config => nil})
+
 			if ! options[:config]
-				@config = Config::General.new
+				@config = Config::General.new(project)
 			else
 				@config = options[:config]
 			end
-			
+		
 			@taxon = Taxon::Set.new(options = {:config => config})
 			@ortholog = Ortholog::Set.new(options = {:config => config})
 		end
@@ -295,12 +295,12 @@ module SeqMiner
 		attr_accessor :taxon, :ortholog, :search, :result, :scan_result, :scan
 		attr_reader :config
 		
-		def initialize(options = {:config => nil})
+		def initialize(project, options = {:config => nil})
 
 			if options[:config]
 				@config = options[:config]
 			else
-				@config = Config::General.new
+				@config = Config::General.new(project)
 			end
 
 			config.debug
@@ -338,10 +338,14 @@ module SeqMiner
 
 		def run_all
 			dir_initialize if ! dir_initialized?
+			# search for sequences.
+			build_search
 			run_search
 			get_search_results
 			write_nelson
 			write_fasta
+			# search for domains.
+			build_scan
 			run_scan
 			get_scan_results
 			write_domain

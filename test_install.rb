@@ -1,6 +1,8 @@
 require 'seqminer'
 
-sm = SeqMiner::Install.new
+sm = SeqMiner::Install.new("vardb-dr-6")
+#sm = SeqMiner::Install.new("rasome-3")
+sm.config.debug
 #sm.install
 
 
@@ -29,4 +31,4 @@ sm = SeqMiner::Install.new
 
 #sm.update_hmm
 # need to run hmm search first for this:
-sm.update_pssm
+#sm.update_pssm

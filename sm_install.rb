@@ -1,6 +1,6 @@
 require 'seqminer'
 
-sm = SeqMiner::Install.new
+sm = SeqMiner::Install.new("vardb-dr-6")
 
 #sm.config.debug
 #sm.install

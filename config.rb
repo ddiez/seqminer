@@ -9,10 +9,36 @@ module Config
 		attr_accessor :dir_hmmer, :dir_blast, :dir_meme, :dir_r
 		# Files.
 		attr_reader :file_taxon, :file_ortholog
+
+		def _read_project(name)
+			r = {}
+			File.open("/home/diez/.seqminer/projects").each do |line|
+				line.chop!
+				project, dir = line.split("\t")
+				if(project == name)
+					r['name'] = project
+					r['dir'] = dir
+				end
+			end
+			r
+		end
+		
+		def _read_tools
+			r = {}
+			File.open("/home/diez/.seqminer/config/tools").each do |line|
+				line.chop!
+				tool, dir = line.split("\t")
+				r[tool] = dir
+			end
+			r
+		end
 	
-		def initialize
+		def initialize(project_name)
+			p = _read_project(project_name)
+			@project = p['name']
 			# Basedir.
-			@dir_home = Pathname.new("/Volumes/Biodev/projects/vardb/dr-6")
+			#@dir_home = Pathname.new("/Volumes/Biodev/projects/vardb/dr-6")
+			@dir_home = Pathname.new(p['dir'])
 			update
 		end
 		
@@ -39,11 +65,24 @@ module Config
 #			@dir_meme = Pathname.new("/Users/diez/local/meme/bin")
 #			@dir_r = Pathname.new("/usr/bin")
 			
-			@dir_hmmer = Pathname.new("/home/diez/local/hmmer3/binaries")
-			@dir_blast = Pathname.new("/home/diez/local/blast2/bin")
-			@dir_meme = Pathname.new("/Users/diez/local/meme/bin")
+			@dir_hmmer = Pathname.new("/usr/local/hmmer3/binaries")
+			@dir_blast = Pathname.new("/usr/local/blast2/bin")
+			@dir_meme = Pathname.new("/usr/local/meme/bin")
 			@dir_r = Pathname.new("/usr/bin")
-			
+
+			t = _read_tools
+			if ! t["hmmer"].nil?
+				@dir_hmmer = Pathname.new(t["hmmer"])
+			end	
+			if ! t["blast"].nil?
+				@dir_blast = Pathname.new(t["blast"])
+			end
+			if ! t["meme"].nil?
+				@dir_meme = Pathname.new(t["meme"])
+			end
+			if ! t["r"].nil?
+				@dir_r = Pathname.new(t["r"])
+			end
 			# Commit
 			@dir_commit = dir_home + "commit"
 		end
@@ -66,10 +105,11 @@ module Config
 			warn "* dir_model: " + dir_model
 			warn "* dir_pfam: " + dir_pfam
 			warn "* dir_result: " + dir_result
+			warn "* dir_commit: " + dir_commit
 			warn "* dir_hmmer: " + dir_hmmer
 			warn "* dir_blast: " + dir_blast
 			warn "* dir_meme: " + dir_meme
-			warn "* dir_commit: " + dir_commit
+			warn "* dir_r: " + dir_r
 			warn ""
 		end
 	end

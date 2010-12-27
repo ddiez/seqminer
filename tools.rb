@@ -13,11 +13,11 @@ module Tools
 		attr_accessor :infile, :outfile, :tool, :cmd
 		attr_reader :path, :config, :parameters
 		
-		def initialize(tool, options = {:config => nil})
+		def initialize(tool, options = {:config => nil, :project => nil})
 			if options[:config]
 				@config = options[:config]
 			else
-				@config = Config::General.new
+				@config = Config::General.new(project)
 			end
 			
 			@tool = tool

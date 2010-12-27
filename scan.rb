@@ -58,7 +58,7 @@ module Scan
 				file = dir + (scan.taxon.name + "-" + scan.ortholog.name + "_protein.fa")
 				if file.exist?
 					warn "* search domains in: " + file
-					ts = Tools::Hmmer.new("hmmscan")
+					ts = Tools::Hmmer.new("hmmscan", options = {:config => config})
 					ts.model = config.dir_pfam_current + "Pfam-A.hmm"
 					ts.infile = file
 					ts.outfile = outdir + (scan.taxon.name + "-" + scan.ortholog.name + "_protein.log")
