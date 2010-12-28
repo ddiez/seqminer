@@ -9,9 +9,11 @@
 
 require 'seqminer'
 # 1. create object.
-c = SeqMiner::Commit.new
+c = SeqMiner::Commit.new("vardb-dr-6")
 c.debug
 # 2. commit files to directory
-c.commit
+#c.commit
 # 3. get stats.
-c.stat_sequences
+#c.stat_sequences
+# 4. obtain alignments.
+c.align

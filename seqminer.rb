@@ -514,14 +514,16 @@ module SeqMiner
 	
 	# This class helps commit the file to a given directory, either for uploading into the database or othe uses.
 	class Commit
+		include Common
+		
 		attr_reader :config, :family
 		
-		def initialize(options = {:config => nil})
+		def initialize(project, options = {:config => nil})
 
 			if options[:config]
 				@config = options[:config]
 			else
-				@config = Config::General.new
+				@config = Config::General.new(project)
 			end
 
 			@family = Family::Set.new(options = {:config => config})
@@ -555,7 +557,7 @@ module SeqMiner
 						if file.exist?
 							File.cp(file, outdir)
 						else
-							raise("!!! file " + file + " does not exist!")
+							puts "WARNING:".blink.red.bold + (" file " + file + " does not exist!").bold
 						end
 					end
 				end
@@ -589,12 +591,12 @@ module SeqMiner
 					if gene_file.exist?
 						system "grep \">\" #{gene_file} >> #{outdir}/gene_list.txt"
 					else
-						raise("!!! file " + gene_file + " does not exist!")
+						puts "WARNING:".blink.red.bold + (" file " + gene_file + " does not exist!").bold
 					end
-					if gene_file.exist?
+					if protein_file.exist?
 						system "grep \">\" #{protein_file} >> #{outdir}/protein_list.txt"
 					else
-						raise("!!! file " + protein_file + " does not exist!")
+						puts "WARNING:".blink.red.bold + (" file " + protein_file + " does not exist!").bold
 					end
 				end
 			end
@@ -633,7 +635,7 @@ module SeqMiner
 							j.cmd = "mafft --quiet --auto #{infile} > #{outfile}"
 							q << j
 						else
-							raise("!!! file " + infile + " does not exist!")
+							puts "WARNING:".blink.red.bold + (" file " + infile + " does not exist!").bold
 						end
 					end
 				end
