@@ -44,6 +44,57 @@ module Family
 			end
 		end
 		
+		def filter_by_taxon(filter)
+			dt = []
+			each_family do |family|
+				m = false
+				filter.each do |f|
+					if family.taxon.match(/#{f}/)
+						m = true
+						break
+					end
+				end
+				dt << family if ! m
+			end
+			dt.each do |family|
+				delete(family)
+			end
+		end
+		
+		def filter_by_ortholog(filter)
+			dt = []
+			each_family do |family|
+				m = false
+				filter.each do |f|
+					if family.ortholog.match(/#{f}/)
+						m = true
+						break
+					end
+				end
+				dt << family if ! m
+			end
+			dt.each do |family|
+				delete(family)
+			end
+		end
+		
+		def filter_by_name(filter)
+			dt = []
+			each_family do |family|
+				m = false
+				filter.each do |f|
+					if family.name.match(/#{f}/)
+						m = true
+						break
+					end
+				end
+				dt << family if ! m
+			end
+			dt.each do |family|
+				delete(family)
+			end
+		end
+		
 		def debug
 			warn "+ FamilySet +"
 			warn "* length: " + length.to_s

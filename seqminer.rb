@@ -516,7 +516,7 @@ module SeqMiner
 	class Commit
 		include Common
 		
-		attr_reader :config, :family
+		attr_reader :config, :family, :taxon#, :ortholog
 		
 		def initialize(project, options = {:config => nil})
 
@@ -527,6 +527,8 @@ module SeqMiner
 			end
 
 			@family = Family::Set.new(options = {:config => config})
+			@taxon = Taxon::Set.new(options = {:config => config})
+			#@ortholog = Ortholog::Set.new(options = {:config => config})
 		end
 		
 		def commit
@@ -543,7 +545,8 @@ module SeqMiner
 				end
 			
 				family.each_family do |f|
-					ts = Taxon::Set.new(options = {:config => config})
+					#ts = Taxon::Set.new(options = {:config => config})
+					ts = @taxon
 					ts.filter_by_name(f.taxon)
 					ts.each_taxon do |taxon|
 						case taxon.type
@@ -577,7 +580,8 @@ module SeqMiner
 				if ! outdir.exist?
 					raise "ERROR: commit directory does not exist!"
 				end
-				ts = Taxon::Set.new(options = {:config => config})
+				#ts = Taxon::Set.new(options = {:config => config})
+				ts = @taxon
 				ts.filter_by_name(f.taxon)
 				ts.each_taxon do |taxon|
 					case taxon.type
@@ -607,7 +611,12 @@ module SeqMiner
 		end
 		
 		# This is done now here, but it should probably be done in the Pipeline.
-		def align
+		def align(what = ["protein", "cds"])
+			
+			def _check_nseq(file)
+				`grep ">" #{file} | wc -l`.to_i
+			end
+			
 			n = 0
 			q = Queue.new
 			family.each_family do |f|
@@ -616,7 +625,8 @@ module SeqMiner
 					#raise "ERROR: commit directory does not exist!"
 					outdir.mkpath
 				end
-				ts = Taxon::Set.new(options = {:config => config})
+				#ts = Taxon::Set.new(options = {:config => config})
+				ts = @taxon
 				ts.filter_by_name(f.taxon)
 				ts.each_taxon do |taxon|
 					case taxon.type
@@ -625,15 +635,28 @@ module SeqMiner
 					when 'clade'
 						dir = config.dir_result + "isolate/fasta" + f.ortholog
 					end
-					["protein", "cds"].each do |st|
+					what.each do |st|
 						infile = dir + (taxon.name + "-" + f.ortholog + "_" + st + ".fa")
 						outfile = outdir + (taxon.name + "-" + f.ortholog + "_" + st + ".faln")
 						if infile.exist?
-							n += 1
-							j = Job.new(n)
-							#j.log = "* aligning " + infile
-							j.cmd = "mafft --quiet --auto #{infile} > #{outfile}"
-							q << j
+							nseq = _check_nseq(infile)
+							if(nseq > 1)
+								if(nseq < 20000)
+									n += 1
+									j = Job.new(n)
+									#j.log = "* aligning " + infile
+									j.cmd = "mafft --auto #{infile} > #{outfile}"
+									q << j
+								else
+									n += 1
+									j = Job.new(n)
+									#j.log = "* aligning " + infile
+									j.cmd = "mafft --parttree #{infile} > #{outfile}"
+									q << j
+								end
+							else
+								puts "WARNING:".blink.green.bold + (" skipping file " + infile + " (only one sequence)").bold
+							end
 						else
 							puts "WARNING:".blink.red.bold + (" file " + infile + " does not exist!").bold
 						end
