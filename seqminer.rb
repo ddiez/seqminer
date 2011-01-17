@@ -612,11 +612,6 @@ module SeqMiner
 		
 		# This is done now here, but it should probably be done in the Pipeline.
 		def align(what = ["protein", "cds"])
-			
-			def _check_nseq(file)
-				`grep ">" #{file} | wc -l`.to_i
-			end
-			
 			n = 0
 			q = Queue.new
 			family.each_family do |f|
@@ -666,6 +661,9 @@ module SeqMiner
 			q.ncpu = 16
 			q.debug
 			q.run
+		end
+		
+		def meme
 		end
 	end
 

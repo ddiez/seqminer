@@ -29,4 +29,9 @@ module Common
 			exit if exitonfail
 		end
 	end
+	
+	# quickly checks the number of sequences in a FASTA file.
+	def _check_nseq(file)
+		`grep ">" #{file} | wc -l`.to_i
+	end
 end
