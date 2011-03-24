@@ -1,6 +1,7 @@
 require 'seqminer'
 
-sm = SeqMiner::Install.new("vardb-dr-6")
+sm = SeqMiner::Install.new("vardb-dr-7")
+#sm = SeqMiner::Install.new("rasome-3")
 
 #sm.config.debug
 #sm.install
@@ -19,15 +20,17 @@ sm = SeqMiner::Install.new("vardb-dr-6")
 #sm.taxon.filter_by_name("mycobacterium.tuberculosis_F11")
 #sm.taxon.filter_by_source("ncbi")
 #sm.taxon.filter_by_type("spp")
-#sm.taxon.filter_by_type("clade")
+sm.taxon.filter_by_type("clade")
 #sm.taxon.debug
 
 #sm.taxon.filter_by_type("spp")
 #sm.taxon.filter_by_type("clade")
 sm.taxon.debug
 
+#sm.ortholog.debug
+
 # 3. download sequences.
-#sm.update_sequences
+sm.update_sequences
 
 # 4. process sequences.
 #sm.process_sequences

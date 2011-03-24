@@ -32,7 +32,8 @@ module SeqMiner
 				@config = options[:config]
 			end
 		
-			@taxon = Taxon::Set.new(options = {:config => config})
+#			@taxon = Taxon::Set.new(options = {:config => config, :update_ncbi_info => true})
+			@taxon = Taxon::Set.new(options = {:config => config, :update_ncbi_info => false})
 			@ortholog = Ortholog::Set.new(options = {:config => config})
 		end
 		

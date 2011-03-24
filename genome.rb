@@ -21,7 +21,7 @@ module Genome
 		attr_accessor :chromosome
 		attr_reader :config, :name, :file, :taxon
 
-		def initialize(taxon, options = {:empty => false, :config => nil})
+		def initialize(taxon, options = {:empty => false, :config => nil, :project => nil})
 			super()
 			
 			@taxon = taxon
@@ -31,7 +31,7 @@ module Genome
 			if options[:config]
 				@config = options[:config]
 			else
-				@config = Config::General.new
+				@config = Config::General.new(options[:project])
 			end
 
 			if options[:empty]

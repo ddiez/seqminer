@@ -21,7 +21,7 @@ module Parser
 		attr_accessor :file, :name
 		attr_reader :config, :taxon, :subtype
 		
-		def initialize(taxon, options = {:config => nil})
+		def initialize(taxon, options = {:config => nil, :project => nil})
 			if options[:subtype]
 				@subtype = options[:subtype]
 			else
@@ -31,7 +31,7 @@ module Parser
 			if options[:config]
 				@config = options[:config]
 			else
-				@config = Config::General.new
+				@config = Config::General.new(options[:project])
 			end
 		
 			@taxon = taxon	
@@ -313,7 +313,7 @@ module Parser
 		end
 
 		def parse
-			genome = Genome::Set.new(taxon, options = {:empty => true})
+			genome = Genome::Set.new(taxon, options = {:config => config, :empty => true})
 
 			warn "* processing Genbank file: " + file
 			p = Bio::GenBank.open(file)
@@ -336,6 +336,7 @@ module Parser
 				gb.features.each do |feat|
 					if feat.feature == "gene"
 						h = feat.to_hash
+						
 						id = h['locus_tag']
 						gene = genome.get_gene_by_acc(id[0])
 						if gene.nil?

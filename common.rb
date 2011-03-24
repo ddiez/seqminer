@@ -34,4 +34,38 @@ module Common
 	def _check_nseq(file)
 		`grep ">" #{file} | wc -l`.to_i
 	end
+	
+	def _check_nseq_gb(file)
+		`grep "LOCUS" #{file} | wc -l`.to_i
+	end
+	
+	def _check_file_size(file)
+		File.size(file)
+	end
+	
+	def _check_download(file, nt, type)
+		#puts "number of sequences to download: " + nt.to_s
+		# check if file exists.
+		if File.exists?(file)
+			#puts "File exists, checking number of sequences... "
+			case type
+				when 'gb': n = _check_nseq_gb(file)
+				when 'size': n = _check_file_size(file)
+			end
+			#puts "n = " + n.to_s
+			if nt == n
+				#puts ">>>> File already downloaded!"
+				warn ["[DONE]".green.bold, "Using existing file- skipping"].join(" ")
+				return false
+			else
+				#puts "File truncated or number of sequences updated! Redownloading..."
+				warn ["[DOWNLOAD]".red.bold, "Existing file truncated or sequence number updated- redownloading"].join(" ")
+				return true
+			end
+		else
+			#puts "File doesn't exists, downloading..."
+			warn ["[DOWNLOAD]".blue.bold, "File does not exist- downloading"].join(" ")
+			return true
+		end
+	end	
 end

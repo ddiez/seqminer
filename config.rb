@@ -12,7 +12,7 @@ module Config
 
 		def _read_project(name)
 			r = {}
-			File.open("/home/diez/.seqminer/projects").each do |line|
+			File.open(ENV['HOME']+"/.seqminer/projects").each do |line|
 				line.chop!
 				project, dir = line.split("\t")
 				if(project == name)
@@ -25,7 +25,7 @@ module Config
 		
 		def _read_tools
 			r = {}
-			File.open("/home/diez/.seqminer/config/tools").each do |line|
+			File.open(ENV['HOME']+"/.seqminer/config/tools").each do |line|
 				line.chop!
 				tool, dir = line.split("\t")
 				r[tool] = dir

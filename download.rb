@@ -59,19 +59,24 @@ module Download
 			req = Net::HTTP::Get.new("/" + dir + "/" + file)
 			transferred = 0
 			http.request(req) do |resp|
-				pb = ProgressBar.new(file, 100)
 				filesize = resp.content_length
-				f = File.open(ofile, 'w')
-				resp.read_body do |data|
-					transferred += data.size
-					if(transferred != 0)
-						percent_finished = 100 * (transferred.to_f / filesize.to_f)
-						pb.set(percent_finished)
+				
+				if _check_download(ofile, filesize, "size")
+					pb = ProgressBar.new(file, 100)
+					f = File.open(ofile, 'w')
+					resp.read_body do |data|
+						transferred += data.size
+						if(transferred != 0)
+							percent_finished = 100 * (transferred.to_f / filesize.to_f)
+							pb.set(percent_finished)
+						end
+						f.write(data)
 					end
-					f.write(data)
+					f.close
+					pb.finish
+				else
+					break
 				end
-				f.close
-				pb.finish
 			end
 		end
 		
@@ -86,38 +91,39 @@ module Download
 			#puts "* dir: " + dir
 			puts "* db: " + db
 			puts "* ofile: " + ofile
-#			Bio::NCBI.default_email = "diez@kuicr.kyoto-u.ac.jp"
-#			ncbi = Bio::NCBI::REST.new
-#
-#			rid = ncbi.esearch(term, {:db => db}, limit = 0)
-#
-#			if(rid.length > 0)
-#				retmax = 500
-#				retstart = 0
-#				
-#				transferred = 0
-#				pb = ProgressBar.new(ofile.basename.to_s, 100)
-#				#ret = 0
-#				out = File.open(ofile, "w")
-#				while(retstart < rid.length)
-#					rtmp = rid[retstart,retmax]
-#					res = ncbi.efetch(rtmp, {:db => db, :rettype => "gbwithparts", :retmode => "txt"})
-#					# TODO: add server ERROR check (like Perl script)
-#					out.puts res
-#					transferred += rtmp.length
-#					if(transferred != 0)
-#						percent_finished = 100 * (transferred.to_f / rid.length.to_f)
-#						#puts percent_finished
-#						pb.set(percent_finished.to_i)
-#					end
-#					retstart += retmax
-#				end
-#				out.close
-#				puts
-#			end
+			Bio::NCBI.default_email = "diez@kuicr.kyoto-u.ac.jp"
+			ncbi = Bio::NCBI::REST.new
+			rid = ncbi.esearch(term, {:db => db}, limit = 0)
+				
+			if rid.length > 0
+				if _check_download(ofile, rid.length, "gb")
+					retmax = 500
+					retstart = 0
+					
+					transferred = 0
+					pb = ProgressBar.new(ofile.basename.to_s, 100)
+					#ret = 0
+					out = File.open(ofile, "w")
+					while(retstart < rid.length)
+						rtmp = rid[retstart,retmax]
+						res = ncbi.efetch(rtmp, {:db => db, :rettype => "gbwithparts", :retmode => "txt"})
+						# TODO: add server ERROR check (like Perl script)
+						out.puts res
+						transferred += rtmp.length
+						if(transferred != 0)
+							percent_finished = 100 * (transferred.to_f / rid.length.to_f)
+							#puts percent_finished
+							pb.set(percent_finished.to_i)
+						end
+						retstart += retmax
+					end
+					out.close
+					puts
+				end
+			end
 			# Old method. Just uncomment (and comment out the code above) to revert to it.
-			res = system("./ncbi_download.pl \"#{term}\" #{db} #{ofile}")
-			_check_result(res)
+#			res = system("./ncbi_download.pl \"#{term}\" #{db} #{ofile}")
+#			_check_result(res)
 		end
 	end
 
@@ -198,7 +204,7 @@ module Download
 			outdir = config.dir_source + taxon.name
 			outdir.mkpath if ! outdir.exist?
 			outfile = outdir + (taxon.name + "_nuccore.gb")
-			outfile.unlink if outfile.exist?
+			#outfile.unlink if outfile.exist?
 			
 			term = "txid" + taxon.id + "[Organism:exp]"
 			
@@ -209,7 +215,7 @@ module Download
 			outdir = config.dir_source + taxon.name
 			outdir.mkpath if ! outdir.exist?
 			outfile = outdir + (taxon.name + "_nucest.gb")
-			outfile.unlink if outfile.exist?
+			#outfile.unlink if outfile.exist?
 			
 			term = "txid" + taxon.id + "[Organism:exp]"
 			
@@ -230,7 +236,7 @@ module Download
 			current_release = {
 				'plasmodb' =>  '7.1',
 				'giardiadb' => '2.3',
-				'tritrypdb' => '2.5'
+				'tritrypdb' => '3.0'
 			}
 			
 			release = current_release[db]
@@ -244,7 +250,18 @@ module Download
 			
 			case db
 			when 'plasmodb'
-				dir =  dir + ("release-" + release) + taxon.short_name + "gff"
+				dir =  dir + ("release-" + release) + taxon.short_name + "gff/data"
+				
+				# hack to fix repository inconsistencies.
+				if taxon.name.match(/vivax/)
+					dir =  Pathname("common/downloads") + ("release-" + release) + taxon.short_name + "gff"
+				end
+				
+				# hack to fix repository inconsistencies.
+				if taxon.name.match(/yoelii/)
+					dir =  Pathname("common/downloads") + ("release-" + release) + taxon.short_name + "gff"
+				end
+				
 				file = taxon.short_name + "_PlasmoDB-" + release + ".gff"
 			when 'giardiadb'
 				dir =  dir + ("release-" + release) + taxon.short_name + "gff"
@@ -261,6 +278,7 @@ module Download
 				end
 				
 				if taxon.name.match(/leishmania.major_Friedlin/)
+					file = taxon.short_name + "Friedlin_TriTrypDB-" + release + ".gff"
 					if release == "1.3"
 						file = taxon.short_name + "_TriTryDB-" + release + ".gff"
 					end				
@@ -311,7 +329,7 @@ module Download
 			outdir = config.dir_source + taxon.name
 			outdir.mkpath if ! outdir.exist?
 			outfile = config.dir_source + taxon.name + (taxon.name + ".gb")
-			outfile.unlink if outfile.exist?
+			#outfile.unlink if outfile.exist?
 			
 			ncbi_download(term, db, outfile)
 		end

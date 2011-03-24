@@ -16,11 +16,11 @@ module Taxon
 	
 	class Set < Set
 		attr_reader :config
-		def initialize(options = { :empty => false, :config => nil, :update_ncbi_info => false })
+		def initialize(options = { :empty => false, :config => nil, :update_ncbi_info => false, :project => nil})
 			super()
 			
 			if ! options[:config]
-				@config = Config::General.new
+				@config = Config::General.new(options[:project])
 			else
 				@config = options[:config]
 			end
