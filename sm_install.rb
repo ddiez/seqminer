@@ -11,7 +11,7 @@ sm = SeqMiner::Install.new("vardb-dr-7")
 #sm.process_pfam
 
 #sm.taxon.filter_by_name("anaplasma.marginale")
-#sm.taxon.filter_by_name("borrelia.burgdorferi_80a")
+#sm.taxon.filter_by_name("borrelia.burgdorferi")
 #sm.taxon.filter_by_name("babesia.bovis")
 #sm.taxon.filter_by_name("plasmodium.falciparum")
 #sm.taxon.filter_by_name("plasmodium.yoelii")
@@ -30,10 +30,10 @@ sm.taxon.debug
 #sm.ortholog.debug
 
 # 3. download sequences.
-sm.update_sequences
+#sm.update_sequences
 
 # 4. process sequences.
-#sm.process_sequences
+sm.process_sequences
 
 # 5. process directories.
 #sm.process_directories

@@ -52,7 +52,7 @@ module Parser
 		end
 		
 		def parse
-			is = Isolate::Set.new(taxon, options = {:empty => true})
+			is = Isolate::Set.new(taxon, options = {:empty => true, :config => config})
 			
 			feats = []
 			chrs = {}
@@ -313,7 +313,7 @@ module Parser
 		end
 
 		def parse
-			genome = Genome::Set.new(taxon, options = {:config => config, :empty => true})
+			genome = Genome::Set.new(taxon, options = {:empty => true, :config => config})
 
 			warn "* processing Genbank file: " + file
 			p = Bio::GenBank.open(file)
@@ -464,7 +464,7 @@ module Parser
 			puts "* gff_file: " + gff_file
 			puts "* annotation_file: " + annot_file
 			
-			genome = Genome::Set.new(taxon, options = {:empty => true})
+			genome = Genome::Set.new(taxon, options = {:empty => true, :config => config})
 			
 			puts "* reading genbank file"
 			p1 = Bio::GenBank.open(file)
@@ -594,7 +594,7 @@ module Parser
 		def parse
 			puts "* file: " + file
 			
-			genome = Genome::Set.new(taxon, options = {:empty => true})
+			genome = Genome::Set.new(taxon, options = {:empty => true, :config => config})
 
 			warn "* processing GFF file: " + file
 			p = Bio::GFF::GFF3.new(File.open(file, "r"))

@@ -94,6 +94,8 @@ module Download
 			Bio::NCBI.default_email = "diez@kuicr.kyoto-u.ac.jp"
 			ncbi = Bio::NCBI::REST.new
 			rid = ncbi.esearch(term, {:db => db}, limit = 0)
+			
+			puts "* n: " + rid.length.to_s
 				
 			if rid.length > 0
 				if _check_download(ofile, rid.length, "gb")
