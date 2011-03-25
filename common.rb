@@ -32,11 +32,17 @@ module Common
 	
 	# quickly checks the number of sequences in a FASTA file.
 	def _check_nseq(file)
-		`grep ">" #{file} | wc -l`.to_i
+		`grep "^>" #{file} | wc -l`.to_i
 	end
 	
 	def _check_nseq_gb(file)
-		`grep "LOCUS" #{file} | wc -l`.to_i
+		nl = `grep "^LOCUS" #{file} | wc -l`.to_i
+		ne = `grep "^\/\/" #{file} | wc -l`.to_i
+		if ne == nl
+			return ne
+		else
+			return -1
+		end
 	end
 	
 	def _check_file_size(file)
@@ -52,7 +58,12 @@ module Common
 				when 'gb': n = _check_nseq_gb(file)
 				when 'size': n = _check_file_size(file)
 			end
-			#puts "n = " + n.to_s
+			warn "nseq: " + n.to_s.blue.bold
+			warn "nseq2d: " + nt.to_s.blue.bold
+			if n == -1
+				warn ["[DOWNLOAD]".red.bold, "File was corrupred!- redownloading"].join(" ")
+				return false
+			end
 			if nt == n
 				#puts ">>>> File already downloaded!"
 				warn ["[DONE]".green.bold, "Using existing file- skipping"].join(" ")
