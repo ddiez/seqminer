@@ -10,15 +10,15 @@
 require 'seqminer'
 
 # 1.1 create pipelie object.
-sm = SeqMiner::Pipeline.new("vardb-dr-6")
+sm = SeqMiner::Pipeline.new("vardb-dr-7")
 
 # 1.2 optional: filter taxons.
-sm.taxon.filter_by_name("bordetella")
+#sm.taxon.filter_by_name("anaplasma.marginale")
 #sm.taxon.filter_by_type("spp")
 sm.taxon.debug
 
 # 1.3 optional: filter families.
-sm.ortholog.filter_by_name("prn")
+#sm.ortholog.filter_by_name("msp2_p44_map1_omp")
 sm.ortholog.debug
 
 ## run all.
@@ -27,17 +27,19 @@ sm.ortholog.debug
 
 ## run step by step (instead of run_all above)
 # 2.2 optional: search
-sm.build_search
+#sm.dir_initialize
+#sm.build_search
+#sm.search.debug
 #sm.run_search
-sm.get_search_results
-sm.write_nelson
+#sm.get_search_results
+#sm.write_nelson
 #sm.write_fasta
 
 # 2.3 optional: scan (requires search above)
-#sm.build_scan
+sm.build_scan
 #sm.run_scan
-#sm.get_scan_results
-#sm.write_domain
+sm.get_scan_results
+sm.write_domain
 
 # 3.1 report
 # TODO: check all the reports.

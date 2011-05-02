@@ -378,7 +378,7 @@ module Download
 		def initialize(options = {:config => nil})
 			@host = 'ftp.sanger.ac.uk'
 			@base_dir = '/pub/databases/Pfam/releases/'
-			@release = 'Pfam24.0'
+			@release = 'Pfam25.0'
 			@files = [
 				'Pfam-A.seed.gz',
 				'Pfam-A.full.gz',

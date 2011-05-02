@@ -98,7 +98,7 @@ module SeqMiner
 				if file.file?
 					if file.extname == ".hmm"
 						puts "* hmmpress: " + file
-						ts = Tools::Hmmer("hmmpress")
+						ts = Tools::Hmmer.new('hmmpress', options = {:config => config})
 						ts.infile = file
 						ts.debug
 						res = ts.execute
@@ -546,9 +546,10 @@ module SeqMiner
 				end
 			
 				family.each_family do |f|
-					#ts = Taxon::Set.new(options = {:config => config})
-					ts = @taxon
+					ts = Taxon::Set.new(options = {:config => config})
+					#ts = @taxon
 					ts.filter_by_name(f.taxon)
+					ts.debug
 					ts.each_taxon do |taxon|
 						case taxon.type
 						when 'spp'
@@ -568,6 +569,7 @@ module SeqMiner
 			end
 		end
 		
+		# TODO:?	
 		def filter
 			family.each_family do |f|
 				f.debug
@@ -581,8 +583,8 @@ module SeqMiner
 				if ! outdir.exist?
 					raise "ERROR: commit directory does not exist!"
 				end
-				#ts = Taxon::Set.new(options = {:config => config})
-				ts = @taxon
+				ts = Taxon::Set.new(options = {:config => config})
+				#ts = @taxon
 				ts.filter_by_name(f.taxon)
 				ts.each_taxon do |taxon|
 					case taxon.type
@@ -621,8 +623,8 @@ module SeqMiner
 					#raise "ERROR: commit directory does not exist!"
 					outdir.mkpath
 				end
-				#ts = Taxon::Set.new(options = {:config => config})
-				ts = @taxon
+				ts = Taxon::Set.new(options = {:config => config})
+				#ts = @taxon
 				ts.filter_by_name(f.taxon)
 				ts.each_taxon do |taxon|
 					case taxon.type

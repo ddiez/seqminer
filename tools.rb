@@ -70,7 +70,7 @@ module Tools
 			when 'hmmalign'
 				cmd = [path, parameters, model, infile, ">", outfile]
 			when 'hmmpress'
-				cmd = [path, parameters, model, infile, ">", outfile]
+				cmd = [path, parameters, infile]
 			when 'hmmfetch'
 				cmd = [path, parameters, infile, model, ">", outfile]
 			end
