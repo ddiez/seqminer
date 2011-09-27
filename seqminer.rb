@@ -237,7 +237,7 @@ module SeqMiner
 			typeset = Search::TypeSet.new
 			ortholog.each_ortholog do |o|
 				o.debug
-				rs = Result::Set.new
+				rs = Result::Set.new(options = {:config => config})
 				warn "* computing best hit"
 				taxon.each_taxon do |t|
 					next if t.type != 'spp'

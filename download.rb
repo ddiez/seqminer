@@ -236,9 +236,9 @@ module Download
 			}
 			
 			current_release = {
-				'plasmodb' =>  '7.1',
+				'plasmodb' =>  '7.2',
 				'giardiadb' => '2.3',
-				'tritrypdb' => '3.0'
+				'tritrypdb' => '3.1'
 			}
 			
 			release = current_release[db]

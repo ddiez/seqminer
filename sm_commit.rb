@@ -9,7 +9,7 @@
 
 require 'seqminer'
 # 1. create object.
-c = SeqMiner::Commit.new("vardb-dr-7")
+c = SeqMiner::Commit.new("vardb-dr-8")
 c.debug
 
 # filter by several family parameters.

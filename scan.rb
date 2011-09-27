@@ -99,7 +99,7 @@ module Scan
 				end
 				transferred += 1
 				percent_finished = 100 * (transferred.to_f / length.to_f)
-				pb.set(percent_finished)
+				pb.set(percent_finished.to_i)
 			end
 			pb.finish
 			rs

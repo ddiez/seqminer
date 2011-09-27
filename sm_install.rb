@@ -1,6 +1,6 @@
 require 'seqminer'
 
-sm = SeqMiner::Install.new("vardb-dr-8")
+sm = SeqMiner::Install.new("vardb-dr-9")
 #sm = SeqMiner::Install.new("rasome-3")
 
 sm.config.debug
@@ -39,7 +39,7 @@ sm.config.debug
 #sm.process_directories
 
 # 6. update HMM models.
-sm.update_hmm
+#sm.update_hmm
 
 # 7. update PSSM models.
 # this has a limitation. it requires first to run an hmmer search to select the best seed.
