@@ -4,23 +4,24 @@ module Config
 	class General
 		# Directories.
 		attr_accessor :dir_home, :dir_result, :dir_commit
-		attr_reader :dir_source, :dir_sequence, :dir_model, :dir_pfam, :dir_pfam_current, :dir_config
+		attr_reader :dir_source, :dir_sequence, :dir_model, :dir_pfam, :dir_pfam_current, :dir_config, :db_host, :db_release
 		# Tools directories.
 		attr_accessor :dir_hmmer, :dir_blast, :dir_meme, :dir_r
 		# Files.
 		attr_reader :file_taxon, :file_ortholog
 
 		def _read_project(name)
-			r = {}
+			p = {}
+			p['name'] = name
+			p['dir'] = nil
 			File.open(ENV['HOME']+"/.seqminer/projects").each do |line|
 				line.chop!
 				project, dir = line.split("\t")
 				if(project == name)
-					r['name'] = project
-					r['dir'] = dir
+					p['dir'] = dir
 				end
 			end
-			r
+			p
 		end
 		
 		def _read_tools
@@ -32,9 +33,30 @@ module Config
 			end
 			r
 		end
+		
+		def _read_databases
+			h = {} # host
+			r = {} # release
+			File.open(ENV['HOME']+"/.seqminer/config/databases").each do |line|
+				line.chop!
+				db, rel, host = line.split("\t")
+				h[db] = host
+				r[db] = rel
+			end
+			[h, r]
+		end
 	
 		def initialize(project_name)
 			p = _read_project(project_name)
+			if p['dir'].nil?
+				puts
+				puts "ERROR: unkown project name '" + project_name + "'!"
+				puts
+				puts ">  check your config file in ~/.seqminer/projects and"
+				puts ">  the project name in sm_install.rb or sm_search.rb"
+				puts
+				exit
+			end
 			@project = p['name']
 			# Basedir.
 			#@dir_home = Pathname.new("/Volumes/Biodev/projects/vardb/dr-6")
@@ -54,6 +76,10 @@ module Config
 			@dir_model = dir_home + "model"
 			@dir_pfam = dir_home + "pfam"
 			@dir_pfam_current = @dir_pfam + "current"
+			
+			(h, r) = _read_databases
+			@db_host = h
+			@db_release = r
 			
 			# Results.
 			@dir_result = dir_home + "result"
@@ -110,6 +136,11 @@ module Config
 			warn "* dir_blast: " + dir_blast
 			warn "* dir_meme: " + dir_meme
 			warn "* dir_r: " + dir_r
+			warn "* db_host: "
+			warn ""
+			db_host.each_pair do |db, host|
+				puts "  -" + db + ":\t" + host + "\t(" + db_release[db] + ")"
+			end
 			warn ""
 		end
 	end

@@ -30,7 +30,7 @@ sm.config.debug
 #sm.ortholog.debug
 
 # 3. download sequences.
-#sm.update_sequences
+sm.update_sequences
 
 # 4. process sequences.
 #sm.process_sequences

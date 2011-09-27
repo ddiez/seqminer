@@ -229,17 +229,19 @@ module Download
 		end
 		
 		def download_eupathdb(db)
-			host = {
-				'plasmodb' =>  'plasmodb.org',
-				'giardiadb' => 'giardiadb.org',
-				'tritrypdb' => 'tritrypdb.org'
-			}
+			#host = {
+			#	'plasmodb' =>  'plasmodb.org',
+			#	'giardiadb' => 'giardiadb.org',
+			#	'tritrypdb' => 'tritrypdb.org'
+			#}
 			
-			current_release = {
-				'plasmodb' =>  '7.2',
-				'giardiadb' => '2.3',
-				'tritrypdb' => '3.1'
-			}
+			#current_release = {
+			#	'plasmodb' =>  '7.2',
+			#	'giardiadb' => '2.3',
+			#	'tritrypdb' => '3.1'
+			#}
+			host = config.db_host
+			current_release = config.db_release
 			
 			release = current_release[db]
 			
