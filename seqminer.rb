@@ -24,7 +24,7 @@ module SeqMiner
 
 		attr_reader :project, :config, :taxon, :ortholog
 
-		def initialize(project, options = {:config => nil})
+		def initialize(project = nil, options = {:config => nil})
 
 			if ! options[:config]
 				@config = Config::General.new(project)
@@ -224,10 +224,8 @@ module SeqMiner
 				if (! res) then
 					hr.infile = config.dir_model + "Extra.hmm"
 					res = hr.execute
-					_check_result(res)
-				else
-					_check_result(res)
 				end
+				_check_result(res)
 			end
 		end
 		
@@ -296,7 +294,7 @@ module SeqMiner
 		attr_accessor :taxon, :ortholog, :search, :result, :scan_result, :scan
 		attr_reader :config
 		
-		def initialize(project, options = {:config => nil})
+		def initialize(project = nil, options = {:config => nil})
 
 			if options[:config]
 				@config = options[:config]

@@ -1,6 +1,8 @@
 require 'seqminer'
 
 sm = SeqMiner::Install.new("vardb-dr-9")
+#sm = SeqMiner::Install.new()
+#sm = SeqMiner::Install.new("test1")
 #sm = SeqMiner::Install.new("rasome-3")
 
 sm.config.debug
@@ -30,7 +32,7 @@ sm.config.debug
 #sm.ortholog.debug
 
 # 3. download sequences.
-sm.update_sequences
+#sm.update_sequences
 
 # 4. process sequences.
 #sm.process_sequences

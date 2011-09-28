@@ -296,6 +296,7 @@ module Download
 
 			http_download(host[db], dir, file, outfile)
 			
+			# Extra download.
 			if taxon.name == "trypanosoma.cruzi_CL_Brener"
 				file = taxon.short_name + "NonEsmeraldo-Like" + "_TriTrypDB-" + release + ".gff"
 				outfile = config.dir_source + taxon.name + (taxon.name + "-NonEsmeraldo" +  ".gff")

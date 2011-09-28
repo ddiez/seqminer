@@ -114,7 +114,7 @@ module Taxon
 		def update_ncbi_info(file = nil)
 			if length == 0
 				warn "WARNING: no taxons in the set [skipping]"
-				return
+				return -1
 			end
 			warn "* loading NCBI information"
 			
@@ -144,26 +144,60 @@ module Taxon
 		# This function reads a taxonomy file from NCBI (default: $SM_HOME/etc/ncbi_taxonomy.xml) and optionally
 		# forces an update.
 		def load_ncbi_info(update = false)
-			update_ncbi_info if update
-			
-			file = config.dir_config + "ncbi_taxonomy.xml"
-			doc = REXML::Document.new(file.read)
-			
-			id = []
-			code = []
-			
-			doc.elements.each('TaxaSet/Taxon/TaxId') do |item|
-				id << item.text
-			end
-			doc.elements.each('TaxaSet/Taxon/GeneticCode/GCId') do |item|
-				code << item.text
+			def _parse_ncbi_taxonomy(file)
+				doc = REXML::Document.new(file.read)
+				
+				tax = {}
+				tax['id'] = []
+				tax['code'] = []
+				#id = []
+				#code = []
+				
+				doc.elements.each('TaxaSet/Taxon/TaxId') do |item|
+					tax['id'] << item.text
+				end
+				doc.elements.each('TaxaSet/Taxon/GeneticCode/GCId') do |item|
+					tax['code'] << item.text
+				end
+				
+				#[id, code]
+				tax
 			end
 			
 			# Maybe do other way: check for each id in the TaxonSet.
-			id.each_index do |index|
-				taxon = get_item_by_id(id[index])
-				if (! taxon.nil?) then
-					taxon.trans_table = code[index].to_i
+			def _parse_taxonomy(tax)
+				tax['id'].each_index do |index|
+					taxon = get_item_by_id(tax['id'][index])
+					if (! taxon.nil?) then
+						taxon.trans_table = tax['code'][index].to_i
+					else
+						# then there is a taxon not in the file: we need to update:
+						puts "WARNING: a taxon not in the ncbi taxonomy (" + tax['id'] + ") was detected. redownloading ncbi taxonomy file..."
+						return nil
+					end
+				end
+				return true
+			end
+			
+			res1 = update_ncbi_info if update
+			
+			file = config.dir_config + "ncbi_taxonomy.xml"
+			res1 = update_ncbi_info if ! file.exist?
+			
+			# OPTIONAL: maybe it is worth download the entire taxonomy? (maybe from ftp).
+			return if res1 == -1 # i.e. there are no taxons in taxon.txt
+			
+			tax = {}
+			tax = _parse_ncbi_taxonomy(file)
+			res2 = _parse_taxonomy(tax)
+			
+			if res2.nil?
+				update_ncbi_info
+				tax = _parse_ncbi_taxonomy(file)
+				res2 = _parse_taxonomy(tax)
+				if res2.nil?
+					puts "ERROR: something is wrong with the ncbi taxonomy file."
+					exit
 				end
 			end
 		end

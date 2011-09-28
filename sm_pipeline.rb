@@ -10,7 +10,8 @@
 require 'seqminer'
 
 # 1.1 create pipelie object.
-sm = SeqMiner::Pipeline.new("vardb-dr-8")
+#sm = SeqMiner::Pipeline.new()
+sm = SeqMiner::Pipeline.new("vardb-dr-9")
 
 # 1.2 optional: filter taxons.
 #sm.taxon.filter_by_name("anaplasma.marginale")
@@ -28,13 +29,13 @@ sm.ortholog.debug
 
 ## run step by step (instead of run_all above)
 # 2.2 optional: search
-#sm.dir_initialize
-#sm.build_search
-#sm.search.debug
-#sm.run_search
-#sm.get_search_results
-#sm.write_nelson
-#sm.write_fasta
+sm.dir_initialize
+sm.build_search
+sm.search.debug
+sm.run_search
+sm.get_search_results
+sm.write_nelson
+sm.write_fasta
 
 # 2.3 optional: scan (requires search above)
 #sm.build_scan

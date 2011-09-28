@@ -4,32 +4,53 @@ module Config
 	class General
 		# Directories.
 		attr_accessor :dir_home, :dir_result, :dir_commit
-		attr_reader :dir_source, :dir_sequence, :dir_model, :dir_pfam, :dir_pfam_current, :dir_config, :db_host, :db_release
+		attr_reader :dir_source, :dir_sequence, :dir_model, :dir_pfam, :dir_pfam_current, :dir_config, :db_host, :db_release, :dir_etc, :dir_etc_local
 		# Tools directories.
 		attr_accessor :dir_hmmer, :dir_blast, :dir_meme, :dir_r
 		# Files.
 		attr_reader :file_taxon, :file_ortholog
 
 		def _read_project(name)
+			if name.nil?
+				puts "* no project selected. listing all projects in config files:"
+				puts
+			end
 			p = {}
 			p['name'] = name
 			p['dir'] = nil
-			File.open(ENV['HOME']+"/.seqminer/projects").each do |line|
-				line.chop!
-				project, dir = line.split("\t")
-				if(project == name)
-					p['dir'] = dir
+			[@dir_etc, @dir_etc_local].each do |loc|
+				File.open(loc + "projects").each do |line|
+					line.chop!
+					project, dir = line.split("\t")
+					if name.nil?
+						puts project + "\t" + dir
+					else
+						if(project == name)
+							p['dir'] = dir
+						end
+					end
 				end
 			end
-			p
+			if name.nil?
+				puts "exiting..."
+				exit
+			else
+				p
+			end
 		end
 		
 		def _read_tools
 			r = {}
-			File.open(ENV['HOME']+"/.seqminer/config/tools").each do |line|
-				line.chop!
-				tool, dir = line.split("\t")
-				r[tool] = dir
+			[@dir_etc, @dir_etc_local].each do |loc|
+				File.open(loc + "config/tools").each do |line|
+					line.chop!
+					tool, dir = line.split("\t")
+					if dir == "-"
+						r[tool] = ""
+					else
+						r[tool] = dir
+					end
+				end
 			end
 			r
 		end
@@ -37,16 +58,53 @@ module Config
 		def _read_databases
 			h = {} # host
 			r = {} # release
-			File.open(ENV['HOME']+"/.seqminer/config/databases").each do |line|
-				line.chop!
-				db, rel, host = line.split("\t")
-				h[db] = host
-				r[db] = rel
+			[@dir_etc, @dir_etc_local].each do |loc|
+				File.open(loc + "config/databases").each do |line|
+					line.chop!
+					db, rel, host = line.split("\t")
+					h[db] = host
+					r[db] = rel
+				end
 			end
 			[h, r]
 		end
+		
+		def _check_project_dir(dir)
+			if ! dir.exist?
+				#puts "ERROR: project directory does not exists, use install option to create a basic structure."
+				#exit
+				puts "WARNING: project directory does not exists," 
+				puts "         a basic structure will be created at:"
+				puts "         " + dir
+				puts "         you need to populate the files taxon.txt and ortholog.txt at etc with"
+				puts "         valid values."
+				_init_project_dir
+			end
+		end
+		
+		def _init_project_dir
+			@dir_home.mkpath
+			@dir_config.mkpath
+			# taxon file.
+			File.open(@dir_config + "taxon.txt", 'w')  do |f|
+				f.puts("# taxon file")
+			end
+			# ortholog file.
+			File.open(@dir_config + "ortholog.txt", 'w')  do |f|
+				f.puts("# ortholog file")
+			end
+			# family file.
+			File.open(@dir_config + "family.txt", 'w')  do |f|
+				f.puts("# family file")
+			end
+			@dir_source.mkpath
+			@dir_sequence.mkpath
+			@dir_result.mkpath
+		end
 	
 		def initialize(project_name)
+			@dir_etc = File.expand_path(File.dirname(__FILE__))+"/etc/"
+			@dir_etc_local = ENV['HOME']+"/.seqminer/"
 			p = _read_project(project_name)
 			if p['dir'].nil?
 				puts
@@ -62,6 +120,7 @@ module Config
 			#@dir_home = Pathname.new("/Volumes/Biodev/projects/vardb/dr-6")
 			@dir_home = Pathname.new(p['dir'])
 			update
+			_check_project_dir(@dir_home)
 		end
 		
 		def update
@@ -136,7 +195,7 @@ module Config
 			warn "* dir_blast: " + dir_blast
 			warn "* dir_meme: " + dir_meme
 			warn "* dir_r: " + dir_r
-			warn "* db_host: "
+			warn "* databases: "
 			warn ""
 			db_host.each_pair do |db, host|
 				puts "  -" + db + ":\t" + host + "\t(" + db_release[db] + ")"
