@@ -9,7 +9,8 @@
 
 require 'seqminer'
 # 1. create object.
-c = SeqMiner::Commit.new("vardb-dr-8")
+#c = SeqMiner::Commit.new()
+c = SeqMiner::Commit.new("vardb-dr-9")
 c.debug
 
 # filter by several family parameters.
@@ -27,5 +28,11 @@ c.debug
 # 3. get stats.
 #c.stat_sequences
 # 4. obtain alignments.
-#c.align(what = "cds")
-c.align
+#    NOTE: 'align' uses module queue.rb to send multiple alignment jobs in multicore
+#    or multiple cpu machines. the default is ncpu = 1. queue.rb does not take into
+#    account other users or processes that may be running so choose a sensible
+#    paramenter for your system! 
+c.align(what = "protein", ncpu = 16)
+#c.align(what = "cds", ncpu = 16)
+# alternatively do it all at once.
+#c.align(ncpu = 16)

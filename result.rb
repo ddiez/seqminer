@@ -699,7 +699,8 @@ module Result
 		
 		# Produces a tabulated report.
 		def report(cut = 1)
-			puts "hit_name\tsearch_id\ttaxon\tortholog\tnsubhits\tndomains\tmin_completeness\tmax_completeness\tfragment\tcomplete\tcoherent\tbest_eval\tbest_score"
+			f = File.open(config.dir_home + "report.txt", "w")
+			f.puts "hit_name\tsearch_id\ttaxon\tortholog\tnsubhits\tndomains\tmin_completeness\tmax_completeness\tfragment\tcomplete\tcoherent\tbest_eval\tbest_score"
 			each_value do |result|
 				next if ! (result.length > 0)
 				result.each_sequence do |hit|
@@ -710,20 +711,23 @@ module Result
 					
 					bsh = hit.best_subhit
 					
-					puts hit.id + "\t" + result.taxon.name + "." + result.ortholog.name + "\t" + result.taxon.name + "\t" + result.ortholog.name + "\t" + hit.length.to_s + "\t" + \
+					f.puts hit.id + "\t" + result.taxon.name + "." + result.ortholog.name + "\t" + result.taxon.name + "\t" + result.ortholog.name + "\t" + hit.length.to_s + "\t" + \
 						dl.to_s + "\t" + "%.2f" % hit.min_completeness + "\t" + "%.2f" % hit.max_completeness + "\t" + \
 						hit.has_fragment?(cut).to_s.upcase + "\t" + hit.has_complete?(cut).to_s.upcase + "\t" + hit.coherent?.to_s.upcase + "\t" + \
 						bsh.eval.to_s + "\t" + bsh.score.to_s
 				end
 			end
+			f.close
 		end
 		
 		# Produces a tabulated summary.
 		def report_summary
-			puts "taxon\tortholog\tcount"
+			f = File.open(config.dir_home + "summary.txt", "w")
+			f.puts "taxon\tortholog\tcount"
 			each_value do |result|
-				puts result.taxon.kegg_name + "\t" + result.ortholog.name + "\t" + result.length.to_s if result.length > 0
+				f.puts result.taxon.kegg_name + "\t" + result.ortholog.name + "\t" + result.length.to_s if result.length > 0
 			end
+			f.close
 		end
 
 		# Exports data in format suitable for varDB (a.k.a. Nelson format).

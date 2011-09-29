@@ -10,8 +10,8 @@
 require 'seqminer'
 
 # 1.1 create pipelie object.
-#sm = SeqMiner::Pipeline.new()
-sm = SeqMiner::Pipeline.new("vardb-dr-9")
+sm = SeqMiner::Pipeline.new()
+#sm = SeqMiner::Pipeline.new("vardb-dr-9")
 
 # 1.2 optional: filter taxons.
 #sm.taxon.filter_by_name("anaplasma.marginale")
@@ -29,25 +29,27 @@ sm.ortholog.debug
 
 ## run step by step (instead of run_all above)
 # 2.2 optional: search
-sm.dir_initialize
-sm.build_search
-sm.search.debug
-sm.run_search
-sm.get_search_results
-sm.write_nelson
-sm.write_fasta
+#sm.dir_initialize
+#sm.build_search
+#sm.search.debug
+#sm.run_search
+#sm.get_search_results
+#sm.write_nelson
+#sm.write_fasta
 
 # 2.3 optional: scan (requires search above)
+# run `sh clean_empty_fasta.sh` in vardb-x directory
 #sm.build_scan
 #sm.run_scan
 #sm.get_scan_results
 #sm.write_domain
 
 # 3.1 report
-# TODO: check all the reports.
-# TODO: report to vardb dir.
+# TODO: check WHICH report are needed and fix implementation!
 #sm.build_search
 #sm.get_search_results(eval = 0.01)
+# report NOT working.
 #sm.report
 #sm.report(0.8)
+# summary working- but uselful?
 #sm.report_summary

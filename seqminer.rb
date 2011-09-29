@@ -19,6 +19,9 @@ require 'tools'
 require 'queue'
 
 module SeqMiner
+	
+	# This class contains methods to help on the install process, creating the structures and updating databases and
+	# obtaining source datasets. It is not yet fully automatize and may require some manual intervention.
 	class Install
 		include Common
 
@@ -288,6 +291,7 @@ module SeqMiner
 		end
 	end
 	
+	# This class contains the basic methods to search sequences and scan for domains. Its the core of the pipeline.
 	class Pipeline
 		include Common
 
@@ -430,16 +434,18 @@ module SeqMiner
 		end
 	end
 
+	# This class contains methods to generate statistics and reports about the pipeline results. It is not known at
+	# this point how much of it is working. Have to take a look a it in more detail.
 	class Stat
 		attr_accessor :taxon, :ortholog, :family
 		attr_reader :config
 		
-		def initialize(options = {:config => nil})
+		def initialize(project = nil, options = {:config => nil})
 
 			if options[:config]
 				@config = options[:config]
 			else
-				@config = Config::General.new
+				@config = Config::General.new(project)
 			end
 
 			@taxon = Taxon::Set.new(options = {:config => config})
@@ -512,12 +518,13 @@ module SeqMiner
 	end
 	
 	# This class helps commit the file to a given directory, either for uploading into the database or othe uses.
+	# The output goes into the 'commit' directory in the project folder.
 	class Commit
 		include Common
 		
 		attr_reader :config, :family, :taxon#, :ortholog
 		
-		def initialize(project, options = {:config => nil})
+		def initialize(project = nil, options = {:config => nil})
 
 			if options[:config]
 				@config = options[:config]
@@ -612,7 +619,7 @@ module SeqMiner
 		end
 		
 		# This is done now here, but it should probably be done in the Pipeline.
-		def align(what = ["protein", "cds"])
+		def align(what = ["protein", "cds"], ncpu = 1)
 			n = 0
 			q = Queue.new
 			family.each_family do |f|
@@ -659,7 +666,7 @@ module SeqMiner
 					end
 				end
 			end
-			q.ncpu = 16
+			q.ncpu = ncpu
 			q.debug
 			q.run
 		end
@@ -667,7 +674,9 @@ module SeqMiner
 		def meme
 		end
 	end
-
+	
+	# This experimental class does not contain anything yet. It is supposed to contain methods helping/automatizing
+	# analyses done with the sequences, domains and other information obtained from the pipeline.
 	class Analysis
 		attr_reader :config
 		

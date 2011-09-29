@@ -136,23 +136,16 @@ module Config
 			@dir_pfam = dir_home + "pfam"
 			@dir_pfam_current = @dir_pfam + "current"
 			
-			(h, r) = _read_databases
-			@db_host = h
-			@db_release = r
+			(@db_host, @db_release) = _read_databases
 			
 			# Results.
 			@dir_result = dir_home + "result"
 			
 			# Tools.
-			#@dir_hmmer = Pathname.new("/Users/diez/local/hmmer3/bin")
-#			@dir_hmmer = Pathname.new("/Users/diez/local/hmmer-3.0b2/src")
-#			@dir_blast = Pathname.new("/usr/local/ncbi/blast/bin")
-#			@dir_meme = Pathname.new("/Users/diez/local/meme/bin")
-#			@dir_r = Pathname.new("/usr/bin")
-			
-			@dir_hmmer = Pathname.new("/usr/local/hmmer3/binaries")
-			@dir_blast = Pathname.new("/usr/local/blast2/bin")
-			@dir_meme = Pathname.new("/usr/local/meme/bin")
+			# TODO: alternative define them as "" and hope them to be in the PATH.		
+			@dir_hmmer = Pathname.new("/usr/local/bin")
+			@dir_blast = Pathname.new("/usr/local/bin")
+			@dir_meme = Pathname.new("/usr/local/bin")
 			@dir_r = Pathname.new("/usr/bin")
 
 			t = _read_tools

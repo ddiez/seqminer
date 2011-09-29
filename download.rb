@@ -226,6 +226,49 @@ module Download
 
 		def download_broad
 			download_ncbi
+			
+			return
+			# TODO: finish and test.
+			# this are hacks for each species.
+			if taxon.name == "plasmodium.falciparum_dd2"
+				outdir = config.dir_source + taxon.name
+				
+				host = "www.broadinstitute.org"
+				dir = "annotation/genome/plasmodium_falciparum_spp/download/"
+				
+				# gtf file.
+				file = "?sp=EATranscriptsGtf&sp=SPF_DD2_V1&sp=S.zip"
+				outfile = config.dir_source + taxon.name + (taxon.name + ".gff")
+				# TODO: unzip and rename.
+				
+				
+				http_download(host, dir, file, outfile)
+				
+				# pfam2gene file.
+				file = "?sp=EAProteinFamilytoGenes&sp=SPF_DD2_V1&sp=S.zip"
+				outfile = config.dir_source + taxon.name + (taxon.name + ".txt")
+				
+				http_download(host, dir, file, outfile)
+			end
+			
+			if taxon.name == "plasmodium.falciparum_hb3"
+				outdir = config.dir_source + taxon.name
+								
+				host = "www.broadinstitute.org"
+				dir = "annotation/genome/plasmodium_falciparum_spp/download/"
+				
+				# gtf file.
+				file = "?sp=EATranscriptsGtf&sp=SPF_HB3_V1&sp=S.zip"
+				outfile = config.dir_source + taxon.name + (taxon.name + ".zip")
+				
+				http_download(host, dir, file, outfile)
+
+				# pfam2gene file.
+				file = "?sp=EAProteinFamilytoGenes&sp=SPF_DD2_V1&sp=S.zip"
+				outfile = config.dir_source + taxon.name + (taxon.name + ".zip")
+				
+				http_download(host, dir, file, outfile)
+			end
 		end
 		
 		def download_eupathdb(db)

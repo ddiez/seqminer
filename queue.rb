@@ -1,4 +1,16 @@
-
+# queue.rb
+#
+# Description: this modules enables to create a queue useful to send multiple jobs
+#   in multicore or multiple CPU environments. It is a very simple implementation
+#   and so it does not consider other users and/or processes. Uses sensible ncpu
+#   parameters for your system.
+#
+# Author: Diego Diez
+# Contact: diego10ruiz@gmail.com
+# Licence: GPL3
+#
+# Usage:
+#
 
 class Job
 	attr_reader :id, :pid
