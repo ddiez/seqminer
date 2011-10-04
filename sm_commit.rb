@@ -32,7 +32,7 @@ c.debug
 #    or multiple cpu machines. the default is ncpu = 1. queue.rb does not take into
 #    account other users or processes that may be running so choose a sensible
 #    paramenter for your system! 
-c.align(what = "protein", ncpu = 16)
-#c.align(what = "cds", ncpu = 16)
+#c.align(what = "protein", ncpu = 16)
+c.align(what = "cds", ncpu = 16)
 # alternatively do it all at once.
 #c.align(ncpu = 16)
