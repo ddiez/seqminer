@@ -3,7 +3,7 @@ require 'pathname'
 module Config
 	class General
 		# Directories.
-		attr_accessor :dir_home, :dir_result, :dir_commit
+		attr_accessor :dir_home, :dir_result, :dir_commit, :dir_import
 		attr_reader :dir_source, :dir_sequence, :dir_model, :dir_pfam, :dir_pfam_current, :dir_config, :db_host, :db_release, :dir_etc, :dir_etc_local
 		# Tools directories.
 		attr_accessor :dir_hmmer, :dir_blast, :dir_meme, :dir_r
@@ -69,13 +69,13 @@ module Config
 			[h, r]
 		end
 		
-		def _check_project_dir(dir)
-			if ! dir.exist?
+		def _check_project_dir
+			if ! dir_home.exist?
 				#puts "ERROR: project directory does not exists, use install option to create a basic structure."
 				#exit
-				puts "WARNING: project directory does not exists," 
+				puts "INFO: project directory does not exists," 
 				puts "         a basic structure will be created at:"
-				puts "         " + dir
+				puts "         " + dir_home
 				puts "         you need to populate the files taxon.txt and ortholog.txt at etc with"
 				puts "         valid values."
 				_init_project_dir
@@ -86,25 +86,63 @@ module Config
 			@dir_home.mkpath
 			@dir_config.mkpath
 			# taxon file.
-			File.open(@dir_config + "taxon.txt", 'w')  do |f|
-				f.puts("# taxon file")
+			if (@dir_import)
+				puts "* import_database: " + dir_import
+				["taxon.txt", "ortholog.txt", "family.txt"].each do |f|
+					file1 = dir_import + "etc" + f
+					file2 = dir_home + "etc" + f
+					cmd = "cp -v " + file1 + " " + file2
+				system cmd
+				end
+
+				@dir_model.mkpath
+				["Extra.hmm", "hmm", "pssm"].each do |f|
+					file1 = @dir_import + "model" + f
+					file2 = @dir_model + "."
+					cmd = "cp -rfv " + file1 + " " + file2
+					system cmd
+				end
+
+				@dir_pfam.mkpath
+				file1 = @dir_pfam_current
+				file2 = @dir_pfam + "current"
+				cmd = "ln -sv " + file1 + " " + file2
+				system cmd
+			else
+				File.open(@dir_config + "taxon.txt", 'w')  do |f|
+					f.puts("# taxon file")
+				end
+				# ortholog file.
+				File.open(@dir_config + "ortholog.txt", 'w')  do |f|
+					f.puts("# ortholog file")
+				end
+				# family file.
+				File.open(@dir_config + "family.txt", 'w')  do |f|
+					f.puts("# family file")
+				end
+				
+				@dir_model.mkpath
+				(@dir_model + "hmm").mkpath
+				(@dir_model + "pssm").mkpath
+				@dir_pfam.mkpath
 			end
-			# ortholog file.
-			File.open(@dir_config + "ortholog.txt", 'w')  do |f|
-				f.puts("# ortholog file")
-			end
-			# family file.
-			File.open(@dir_config + "family.txt", 'w')  do |f|
-				f.puts("# family file")
-			end
+			
 			@dir_source.mkpath
 			@dir_sequence.mkpath
 			@dir_result.mkpath
+			@dir_commit.mkpath
 		end
 	
-		def initialize(project_name)
+		def initialize(project_name, import_name = nil)
 			@dir_etc = File.expand_path(File.dirname(__FILE__))+"/etc/"
 			@dir_etc_local = ENV['HOME']+"/.seqminer/"
+			if import_name
+				pi = _read_project(import_name)
+				@dir_import = Pathname.new(pi['dir'])
+			else
+				@dir_import = nil
+			end
+
 			p = _read_project(project_name)
 			if p['dir'].nil?
 				puts
@@ -120,7 +158,7 @@ module Config
 			#@dir_home = Pathname.new("/Volumes/Biodev/projects/vardb/dr-6")
 			@dir_home = Pathname.new(p['dir'])
 			update
-			_check_project_dir(@dir_home)
+			_check_project_dir
 		end
 		
 		def update
@@ -134,7 +172,8 @@ module Config
 			@dir_sequence = dir_home + "sequence"
 			@dir_model = dir_home + "model"
 			@dir_pfam = dir_home + "pfam"
-			@dir_pfam_current = @dir_pfam + "current"
+			@dir_pfam_home = Pathname.new("/Volumes/Biodev/db/pfam")
+			@dir_pfam_current = @dir_pfam_home + "current"
 			
 			(@db_host, @db_release) = _read_databases
 			

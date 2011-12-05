@@ -1,12 +1,9 @@
 require 'seqminer'
 
-sm = SeqMiner::Install.new("vardb-dr-9")
-#sm = SeqMiner::Install.new()
-#sm = SeqMiner::Install.new("test1")
-#sm = SeqMiner::Install.new("rasome-3")
+#sm = SeqMiner::Install.new(nil)
+sm = SeqMiner::Install.new("vardb-dr-10", options = {:import => "vardb-dr-9" })
 
 sm.config.debug
-#sm.install
 
 # 2. update Pfam.
 #sm.update_pfam

@@ -1,0 +1,13 @@
+# plasmodb
+plasmodium.falciparum_IT	eupathdb	http://plasmodb.org/common/downloads/Current_Release/PfalciparumIT/gff/data/
+plasmodium.falciparum_3d7	eupathdb	http://plasmodb.org/common/downloads/Current_Release/Pfalciparum/gff/data/
+plasmodium.knowlesi_h	eupathdb	http://plasmodb.org/common/downloads/Current_Release/Pfalciparum/gff/data/
+plasmodium.vivax_salvador1	eupathdb	http://plasmodb.org/common/downloads/Current_Release/Pfalciparum/gff/data/
+plasmodium.yoelii_17xnl	eupathdb	http://plasmodb.org/common/downloads/Current_Release/Pfalciparum/gff/data/
+plasmodium.chabaudi_as	eupathdb	http://plasmodb.org/common/downloads/Current_Release/Pfalciparum/gff/data/
+plasmodium.berghei_anka	eupathdb	http://plasmodb.org/common/downloads/Current_Release/Pfalciparum/gff/data/
+# tritrypdb
+leishmania.major_Friedlin	eupathdb	http://plasmodb.org/common/downloads/Current_Release/Pfalciparum/gff/data/
+trypanosoma.cruzi_CL_Brener	eupathdb
+# giardiadb
+giardia.lamblia_ATCC_50803	eupathdb	http://plasmodb.org/common/downloads/Current_Release/Pfalciparum/gff/data/

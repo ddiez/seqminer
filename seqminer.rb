@@ -27,45 +27,25 @@ module SeqMiner
 
 		attr_reader :project, :config, :taxon, :ortholog
 
-		def initialize(project = nil, options = {:config => nil})
+		def initialize(project = nil, options = {:config => nil, :import => nil})
+
+			if options[:import]
+				project_import = options[:import]
+			else
+				project_import = nil
+			end
 
 			if ! options[:config]
-				@config = Config::General.new(project)
+				@config = Config::General.new(project, project_import)
 			else
 				@config = options[:config]
 			end
-		
+
 #			@taxon = Taxon::Set.new(options = {:config => config, :update_ncbi_info => true})
 			@taxon = Taxon::Set.new(options = {:config => config, :update_ncbi_info => false})
 			@ortholog = Ortholog::Set.new(options = {:config => config})
 		end
-		
-		def install
-			create_dir_structure
-			update_databases
-		end
-		
-		def create_dir_structure
-			create_base_dir
-			config.dir_source.mkpath
-			config.dir_model.mkpath
-			config.dir_sequence.mkpath
-			config.dir_pfam.mkpath
-			config.dir_result.mkpath
-			config.dir_config.mkpath
-			config.dir_commit.mkpath
-		end
-		
-		def create_base_dir
-			if config.dir_home.exist?
-				warn "ERROR: target directory already exists. Incompatible with instalation."
-				exit
-			else
-				warn "* creating dir_home: " + config.dir_home
-				config.dir_home.mkpath
-			end
-		end
-		
+
 		def update_databases
 			update_pfam
 			process_pfam
