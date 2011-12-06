@@ -152,7 +152,7 @@ module Config
 				
 			if import_name
 				pi = _read_project(import_name)
-				puts pi['dir']
+				#puts pi['dir']
 				@dir_import = Pathname.new(pi['dir'])
 			else
 				@dir_import = nil

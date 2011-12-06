@@ -1,3 +1,12 @@
+#!/usr/bin/env ruby
+#
+# SeqMiner is a tool for mining sequence information. It aims to
+# help detect sequences belonging to specific protein families.
+#
+# Author::    Diego Diez  (mailto:diego10ruiz@gmail.com)
+# Copyright:: Copyright (c) 2010
+# License::   Distributes under the same terms as Ruby
+
 require 'seqminer'
 
 # 1. Install/Load project.
@@ -17,7 +26,7 @@ sm.config.debug
 # EXAMPLES: filtering to focus on some species/clade.
 #sm.taxon.filter_by_name("anaplasma.marginale")
 #sm.taxon.filter_by_name("borrelia.burgdorferi")
-#sm.taxon.filter_by_name("babesia.bovis")
+sm.taxon.filter_by_name("babesia.bovis")
 #sm.taxon.filter_by_name("plasmodium.falciparum")
 #sm.taxon.filter_by_name("plasmodium.yoelii")
 #sm.taxon.filter_by_name("plasmodium.vivax")
