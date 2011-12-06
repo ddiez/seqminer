@@ -91,7 +91,7 @@ module Download
 			#puts "* dir: " + dir
 			puts "* db: " + db
 			puts "* ofile: " + ofile
-			Bio::NCBI.default_email = "diez@kuicr.kyoto-u.ac.jp"
+			Bio::NCBI.default_email = "vardb@kuicr.kyoto-u.ac.jp"
 			ncbi = Bio::NCBI::REST.new
 			rid = ncbi.esearch(term, {:db => db}, limit = 0)
 			

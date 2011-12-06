@@ -136,12 +136,6 @@ module Config
 		def initialize(project_name, import_name = nil)
 			@dir_etc = File.expand_path(File.dirname(__FILE__))+"/etc/"
 			@dir_etc_local = ENV['HOME']+"/.seqminer/"
-			if import_name
-				pi = _read_project(import_name)
-				@dir_import = Pathname.new(pi['dir'])
-			else
-				@dir_import = nil
-			end
 
 			p = _read_project(project_name)
 			if p['dir'].nil?
@@ -154,14 +148,21 @@ module Config
 				exit
 			end
 			@project = p['name']
-			# Basedir.
-			#@dir_home = Pathname.new("/Volumes/Biodev/projects/vardb/dr-6")
 			@dir_home = Pathname.new(p['dir'])
-			update
+				
+			if import_name
+				pi = _read_project(import_name)
+				puts pi['dir']
+				@dir_import = Pathname.new(pi['dir'])
+			else
+				@dir_import = nil
+			end
+			
+			_update_variables
 			_check_project_dir
 		end
 		
-		def update
+		def _update_variables
 			# Configuration.
 			@dir_config = dir_home + "etc"
 			@file_taxon = dir_config + "taxon.txt"
