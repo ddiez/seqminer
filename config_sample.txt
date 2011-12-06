@@ -1,9 +1,0 @@
-# This file contains information about a seqminer project. Basically the most
-# important parameter is the project home. Then most directories are referred
-# to this one.
-# The file is created automatically when creating a new project, and stored in
-# the project's config directory $PROJECT_HOME/etc/config.txt
-# The project reference itself is stored in the file projects.txt stored in
-# ~/seqminer/projects.txt
-
-dir_home=/Volumes/Biodev/projects/vardb/dr-3
