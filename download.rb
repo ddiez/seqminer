@@ -90,6 +90,7 @@ module Download
 			#puts "* host: " + host
 			#puts "* dir: " + dir
 			puts "* db: " + db
+			puts "* term: " + term
 			puts "* ofile: " + ofile
 			Bio::NCBI.default_email = "vardb@kuicr.kyoto-u.ac.jp"
 			ncbi = Bio::NCBI::REST.new
