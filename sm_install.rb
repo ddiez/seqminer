@@ -38,8 +38,8 @@ sm.config.debug
 #sm.taxon.debug
 
 # EXAMPLES: filtering to focus on type of sequences.
-sm.taxon.filter_by_type("spp")
-#sm.taxon.filter_by_type("clade")
+#sm.taxon.filter_by_type("spp")
+sm.taxon.filter_by_type("clade")
 sm.taxon.debug
 
 # 3.1 download.

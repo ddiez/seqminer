@@ -107,13 +107,23 @@ module Download
 					#puts r
 					rid = rid + ncbi.esearch(r+"[BioProject]", {:db => 'nuccore'}, limit = 0)
 				end
+				db = "nuccore"
 			elsif type == "wgs"
 				term += "[Organism:exp]+biomol genomic[properties]"
 				rid = ncbi.esearch(term, {:db => 'nuccore'}, limit = 0)
+				db = "nuccore"
+			elsif type == "nuccore"
+				term += "[Organism:exp]"
+				rid = ncbi.esearch(term, {:db => 'nuccore'}, limit = 0)
+				db = "nuccore"
+			elsif type == "nucest"
+				term += "[Organism:exp]"
+				rid = ncbi.esearch(term, {:db => 'nucest'}, limit = 0)
+				db = "nucest"
 			end
 			
 			puts "* n: " + rid.length.to_s
-			puts "* ids (nuccore): " + rid.join(",")
+			#puts "* ids (nuccore): " + rid.join(",")
 				
 			if rid.length > 0
 				if _check_download(ofile, rid.length, "gb")
@@ -126,7 +136,7 @@ module Download
 					out = File.open(ofile, "w")
 					while(retstart < rid.length)
 						rtmp = rid[retstart,retmax]
-						res = ncbi.efetch(rtmp, {:db => 'nuccore', :rettype => "gbwithparts", :retmode => "txt"})
+						res = ncbi.efetch(rtmp, {:db => db, :rettype => "gbwithparts", :retmode => "txt"})
 							
 						if res.empty?
 							warn "[ERROR] data returned by server is empty!".bold.on_red.white
@@ -231,9 +241,9 @@ module Download
 			outfile = outdir + (taxon.name + "_nuccore.gb")
 			#outfile.unlink if outfile.exist?
 			
-			term = "txid" + taxon.id + "[Organism:exp]"
+			term = "txid" + taxon.id
 			
-			ncbi_download(term, "nuccore", outfile)
+			ncbi_download(term, outfile, "nuccore")
 		end
 
 		def download_nucest
@@ -242,9 +252,9 @@ module Download
 			outfile = outdir + (taxon.name + "_nucest.gb")
 			#outfile.unlink if outfile.exist?
 			
-			term = "txid" + taxon.id + "[Organism:exp]"
+			term = "txid" + taxon.id
 			
-			ncbi_download(term, "nucest", outfile)
+			ncbi_download(term, outfile, "nucest")
 		end
 
 		def download_broad
