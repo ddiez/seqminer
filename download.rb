@@ -86,17 +86,34 @@ module Download
 		# term:: Term to search.
 		# db:: Database to search.
 		# ofile:: File to save the download.
-		def ncbi_download(term, db, ofile)
+		#def ncbi_download(term, db, ofile, type)
+		def ncbi_download(term, ofile, type)
 			#puts "* host: " + host
 			#puts "* dir: " + dir
-			puts "* db: " + db
+			#puts "* db: " + db
 			puts "* term: " + term
 			puts "* ofile: " + ofile
 			Bio::NCBI.default_email = "vardb@kuicr.kyoto-u.ac.jp"
 			ncbi = Bio::NCBI::REST.new
-			rid = ncbi.esearch(term, {:db => db}, limit = 0)
+			
+			rid = []
+			if type == "refseq"
+				term += " AND RefSeq Genome[Project Data Type]"
+				# get BioProject ids:
+				res = ncbi.esearch(term, {:db => 'bioproject'}, limit = 0)
+				puts "* ids: " + res.join(",").to_s
+				# search on nuccore for these:
+				res.each do |r|
+					puts r
+					rid = rid + ncbi.esearch(r+"[BioProject]", {:db => 'nuccore'}, limit = 0)
+				end
+			elsif type == "wgs"
+				term += "[Organism:exp]+biomol genomic[properties]"
+				rid = ncbi.esearch(term, {:db => 'nuccore'}, limit = 0)
+			end
 			
 			puts "* n: " + rid.length.to_s
+			puts "* ids: " + rid.join(",")
 				
 			if rid.length > 0
 				if _check_download(ofile, rid.length, "gb")
@@ -109,7 +126,7 @@ module Download
 					out = File.open(ofile, "w")
 					while(retstart < rid.length)
 						rtmp = rid[retstart,retmax]
-						res = ncbi.efetch(rtmp, {:db => db, :rettype => "gbwithparts", :retmode => "txt"})
+						res = ncbi.efetch(rtmp, {:db => 'nuccore', :rettype => "gbwithparts", :retmode => "txt"})
 							
 						if res.empty?
 							warn "[ERROR] data returned by server is empty!".bold.on_red.white
@@ -355,29 +372,34 @@ module Download
 
 		# Methods to download Genome sequences from NCBI (usually RefSeq).
 		def download_ncbi
-			db = "genome"
+#			db = "nuccore"
 			term = "txid" + taxon.id
+			type = "refseq"
 						
 			# WGS projects must be downloaded this way:
 			
 			if taxon.name == "borrelia.burgdorferi_80a"
-				term += "[Organism:exp]+biomol genomic[properties]"
-				db = "nuccore"
+#				term += "[Organism:exp]+biomol genomic[properties]"
+#				db = "nuccore"
+				type = "wgs"
 			end
 			
 			if taxon.name == "babesia.bovis_T2Bo"
-				term += "[Organism:exp]+biomol genomic[properties]"
-				db = "nuccore"
+#				term += "[Organism:exp]+biomol genomic[properties]"
+#				db = "nuccore"
+				type = "wgs"
 			end
 			
 			if taxon.name == "plasmodium.falciparum_dd2"
-				term += "[Organism:exp]+biomol genomic[properties]"
-				db = "nuccore"
+#				term += "[Organism:exp]+biomol genomic[properties]"
+#				db = "nuccore"
+				type = "wgs"
 			end
 			
 			if taxon.name == "plasmodium.falciparum_hb3"
-				term += "[Organism:exp]+biomol genomic[properties]"
-				db = "nuccore"
+#				term += "[Organism:exp]+biomol genomic[properties]"
+#				db = "nuccore"
+				type = "wgs"
 			end
 			
 			outdir = config.dir_source + taxon.name
@@ -385,7 +407,8 @@ module Download
 			outfile = config.dir_source + taxon.name + (taxon.name + ".gb")
 			#outfile.unlink if outfile.exist?
 			
-			ncbi_download(term, db, outfile)
+			#ncbi_download(term, db, outfile, type)
+			ncbi_download(term, outfile, type)
 		end
 
 		def eupathdb_process_source(infile)

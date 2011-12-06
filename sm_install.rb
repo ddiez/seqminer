@@ -24,9 +24,9 @@ sm.config.debug
 
 # 3. update source sequences.
 # EXAMPLES: filtering to focus on some species/clade.
-sm.taxon.filter_by_name("anaplasma.marginale")
+#sm.taxon.filter_by_name("anaplasma.marginale")
 #sm.taxon.filter_by_name("borrelia.burgdorferi")
-#sm.taxon.filter_by_name("babesia.bovis")
+sm.taxon.filter_by_name("babesia.bovis")
 #sm.taxon.filter_by_name("plasmodium.falciparum")
 #sm.taxon.filter_by_name("plasmodium.yoelii")
 #sm.taxon.filter_by_name("plasmodium.vivax")
