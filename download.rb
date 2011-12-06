@@ -101,10 +101,10 @@ module Download
 				term += " AND RefSeq Genome[Project Data Type]"
 				# get BioProject ids:
 				res = ncbi.esearch(term, {:db => 'bioproject'}, limit = 0)
-				puts "* ids: " + res.join(",").to_s
-				# search on nuccore for these:
+				puts "* ids (bioproject): " + res.join(",").to_s
+				# search on nuccore:
 				res.each do |r|
-					puts r
+					#puts r
 					rid = rid + ncbi.esearch(r+"[BioProject]", {:db => 'nuccore'}, limit = 0)
 				end
 			elsif type == "wgs"
@@ -113,7 +113,7 @@ module Download
 			end
 			
 			puts "* n: " + rid.length.to_s
-			puts "* ids: " + rid.join(",")
+			puts "* ids (nuccore): " + rid.join(",")
 				
 			if rid.length > 0
 				if _check_download(ofile, rid.length, "gb")
