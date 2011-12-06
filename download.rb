@@ -109,6 +109,11 @@ module Download
 					while(retstart < rid.length)
 						rtmp = rid[retstart,retmax]
 						res = ncbi.efetch(rtmp, {:db => db, :rettype => "gbwithparts", :retmode => "txt"})
+							
+						if res.empty?
+							warn "[ERROR] data returned by server is empty!".bold.on_red.white
+							return
+						end
 						# TODO: add server ERROR check (like Perl script)
 						out.puts res
 						transferred += rtmp.length
@@ -351,7 +356,7 @@ module Download
 		def download_ncbi
 			db = "genome"
 			term = "txid" + taxon.id
-			
+						
 			# WGS projects must be downloaded this way:
 			
 			if taxon.name == "borrelia.burgdorferi_80a"
