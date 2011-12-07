@@ -131,7 +131,14 @@ module Parser
 									seq.type = "gene"
 									seq.pseudogene = 1 if h['pseudo']
 									seq.sequence = gb.seq.subseq(seq.from, seq.to)
-									is << seq
+									# there could be newer sequences. try replace:
+									if is.items.has_key?(seq.id)
+										warn "[REPLACE]".red + " another sequence with id: " + seq.id + " was found."
+										is.replace(seq)
+									else
+										is << seq
+									end
+									#is << seq
 									fa += 1
 								elsif feat.feature == "CDS"
 									h = feat.to_hash

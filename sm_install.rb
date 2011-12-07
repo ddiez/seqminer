@@ -50,10 +50,10 @@ sm.taxon.debug
 
 # 3.1 download.
 # RUN:
-sm.update_sequences
+#sm.update_sequences
 # 3.2 process sequences.
 # RUN:
-#sm.process_sequences
+sm.process_sequences
 # 3.3 process directories.
 # RUN:
 #sm.process_directories
