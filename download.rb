@@ -30,16 +30,18 @@ module Download
 			ftp.chdir(dir)
 					
 			filesize = ftp.size(file)
-			transferred = 0
-			pb = ProgressBar.new(file, 100)
-			ftp.getbinaryfile(file, ofile, 1024) do |data|
-				transferred += data.size
-				if transferred != 0
-					percent_finished = 100 * (transferred.to_f / filesize.to_f)
-					pb.set(percent_finished)
+			if _check_download_size(ofile, filesize)
+				transferred = 0
+				pb = ProgressBar.new(file, 100)
+				ftp.getbinaryfile(file, ofile, 1024) do |data|
+					transferred += data.size
+					if transferred != 0
+						percent_finished = 100 * (transferred.to_f / filesize.to_f)
+						pb.set(percent_finished)
+					end
 				end
+				pb.finish
 			end
-			pb.finish
 			ftp.close
 		end
 		
@@ -61,7 +63,7 @@ module Download
 			http.request(req) do |resp|
 				filesize = resp.content_length
 				
-				if _check_download(ofile, filesize, "size")
+				if _check_download_size(ofile, filesize)
 					pb = ProgressBar.new(file, 100)
 					f = File.open(ofile, 'w')
 					resp.read_body do |data|
@@ -126,14 +128,16 @@ module Download
 			#puts "* ids (nuccore): " + rid.join(",")
 				
 			if rid.length > 0
-				if _check_download(ofile, rid.length, "gb")
+				rid = _check_download_gb(ofile, rid)
+				#if _check_download(ofile, rid.length, "gb")
+				if rid.length > 0
 					retmax = 500
 					retstart = 0
 					
 					transferred = 0
 					pb = ProgressBar.new(ofile.basename.to_s, 100)
 					#ret = 0
-					out = File.open(ofile, "w")
+					out = File.open(ofile, "a")
 					while(retstart < rid.length)
 						rtmp = rid[retstart,retmax]
 						res = ncbi.efetch(rtmp, {:db => db, :rettype => "gbwithparts", :retmode => "txt"})

@@ -12,7 +12,7 @@ require 'seqminer'
 # 1. Install/Load project.
 #sm = SeqMiner::Install.new(nil)
 # RUN:
-sm = SeqMiner::Install.new("vardb-dr-10", options = {:import => "vardb-dr-9" })
+sm = SeqMiner::Install.new("vardb-dr-10", options = {:import => "vardb-dr-9", :import_source => true})
 sm.config.debug
 
 # 2. update Pfam (NOT NEEDED IF NOT UPDATED!)
@@ -23,7 +23,8 @@ sm.config.debug
 #sm.ortholog.debug
 
 # 3. update source sequences.
-# EXAMPLES: filtering to focus on some species/clade.
+# FILTERS: filtering to focus on some species/clade.
+# This is useful to debug or install a single species
 #sm.taxon.filter_by_name("anaplasma.marginale")
 #sm.taxon.filter_by_name("borrelia.burgdorferi")
 #sm.taxon.filter_by_name("babesia.bovis")
@@ -37,9 +38,14 @@ sm.config.debug
 #sm.taxon.filter_by_type("clade")
 #sm.taxon.debug
 
-# EXAMPLES: filtering to focus on type of sequences.
+# FILTERS: filtering to focus on type of sequences.
+# This is useful to debug. In general it is a good idea to run each step for 'spp' and 'clade'
+# separately since they use different framework and so the source of problems use to be diff-
+# erent. This way you can isolate better potential problems.
 #sm.taxon.filter_by_type("spp")
-sm.taxon.filter_by_type("clade")
+#sm.taxon.filter_by_type("clade")
+
+# to check taxons included after filtering:
 sm.taxon.debug
 
 # 3.1 download.

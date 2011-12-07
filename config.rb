@@ -102,6 +102,13 @@ module Config
 					cmd = "cp -rfv " + file1 + " " + file2
 					system cmd
 				end
+				
+				if @import_source
+					file1 = dir_import + "source"
+					file2 = dir_home + "."
+					cmd = "cp -rfv " + file1 + " " + file2
+					system cmd
+				end
 
 				@dir_pfam.mkpath
 				file1 = @dir_pfam_current
@@ -133,7 +140,7 @@ module Config
 			@dir_commit.mkpath
 		end
 	
-		def initialize(project_name, import_name = nil)
+		def initialize(project_name, import_name = nil, import_source = false)
 			@dir_etc = File.expand_path(File.dirname(__FILE__))+"/etc/"
 			@dir_etc_local = ENV['HOME']+"/.seqminer/"
 
@@ -154,6 +161,7 @@ module Config
 				pi = _read_project(import_name)
 				#puts pi['dir']
 				@dir_import = Pathname.new(pi['dir'])
+				@import_source = import_source
 			else
 				@dir_import = nil
 			end
