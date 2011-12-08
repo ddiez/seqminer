@@ -103,6 +103,14 @@ module Common
 		end
 	end
 	
+	# this function check for duplicated entries in GenBank files (same LOCUS, different version and GI)
+	# and writes a new file that only uses the latest version of an entry, and writes discarded version
+	# into a file.
+	def _check_duplicates_gb(file)
+		puts "* check duplicates: " + file
+		system "./check_duplicates_gb.pl " + file
+	end
+	
 #	def _check_download(file, nt, type)
 #		#puts "number of sequences to download: " + nt.to_s
 #		# check if file exists.

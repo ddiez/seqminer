@@ -118,7 +118,13 @@ module Genome
 		def auto_clean
 			dg = []
 			each_gene do |gene|
-				dg << gene if gene.size < 5
+				s = gene.size
+				if s == -1
+					warn "[WARNING]".on_red.white + " no sequence data for " + gene.id.red + " (will autoclean)"
+					dg << gene
+				else
+					dg << gene if gene.size < 5
+				end
 			end
 			dg.each do |i|
 				delete(i)
@@ -184,6 +190,7 @@ module Genome
 				end
 			when 'genome'
 				chromosome.each_pair do |id, chr|
+					next if ! chr # filter chromosomes with no sequence data.
 					next if chr.length == 0 # to filter non-contig segments.
 					fo.puts chr.to_fasta(id, 60)
 				end
@@ -376,7 +383,11 @@ module Genome
 		end
 		
 		def size
-			sequence.length
+			if sequence
+				sequence.length
+			else
+				-1
+			end
 		end
 		
 		def location_original

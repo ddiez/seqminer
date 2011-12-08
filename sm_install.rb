@@ -30,12 +30,10 @@ sm.config.debug
 #sm.taxon.filter_by_name("babesia.bovis")
 #sm.taxon.filter_by_name("plasmodium.falciparum")
 #sm.taxon.filter_by_name("plasmodium.yoelii")
+#sm.taxon.filter_by_name("plasmodium.berghei_anka")
 #sm.taxon.filter_by_name("plasmodium.vivax")
 #sm.taxon.filter_by_name("trypanosoma.brucei")
 #sm.taxon.filter_by_name("mycobacterium.tuberculosis_F11")
-#sm.taxon.filter_by_source("ncbi")
-#sm.taxon.filter_by_type("spp")
-#sm.taxon.filter_by_type("clade")
 #sm.taxon.debug
 
 # FILTERS: filtering to focus on type of sequences.
@@ -53,7 +51,7 @@ sm.taxon.debug
 #sm.update_sequences
 # 3.2 process sequences.
 # RUN:
-sm.process_sequences
+#sm.process_sequences
 # 3.3 process directories.
 # RUN:
 #sm.process_directories

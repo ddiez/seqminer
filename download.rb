@@ -34,10 +34,15 @@ module Download
 				transferred = 0
 				pb = ProgressBar.new(file, 100)
 				ftp.getbinaryfile(file, ofile, 1024) do |data|
-					transferred += data.size
-					if transferred != 0
-						percent_finished = 100 * (transferred.to_f / filesize.to_f)
-						pb.set(percent_finished)
+					if data
+						transferred += data.size
+						if transferred != 0
+							percent_finished = 100 * (transferred.to_f / filesize.to_f)
+							pb.set(percent_finished)
+						end
+					else
+						warn "[ERROR] data returned by server is empty!".bold.on_red.white
+						return
 					end
 				end
 				pb.finish
@@ -67,12 +72,17 @@ module Download
 					pb = ProgressBar.new(file, 100)
 					f = File.open(ofile, 'w')
 					resp.read_body do |data|
-						transferred += data.size
-						if(transferred != 0)
-							percent_finished = 100 * (transferred.to_f / filesize.to_f)
-							pb.set(percent_finished)
+						if data
+							transferred += data.size
+							if(transferred != 0)
+								percent_finished = 100 * (transferred.to_f / filesize.to_f)
+								pb.set(percent_finished)
+							end
+							f.write(data)
+						else
+							warn "[ERROR] data returned by server is empty!".bold.on_red.white
+							return
 						end
-						f.write(data)
 					end
 					f.close
 					pb.finish
@@ -160,6 +170,7 @@ module Download
 					puts
 				end
 			end
+			_check_duplicates_gb(ofile)
 			# Old method. Just uncomment (and comment out the code above) to revert to it.
 #			res = system("./ncbi_download.pl \"#{term}\" #{db} #{ofile}")
 #			_check_result(res)

@@ -58,7 +58,7 @@ module Parser
 			chrs = {}
 			files.each_pair do |type, file|
 				next if ! file.exist?
-				warn "* processing Genbank [" + type.to_s + "] file: " + file
+				puts "* processing Genbank [" + type.to_s + "] file: " + file
 				p = Bio::GenBank.open(file)
 				
 				skip = File.new(config.dir_source + taxon.name + (type.to_s + "_skip.txt"), "w")
@@ -108,7 +108,7 @@ module Parser
 										desc = h['gene'][0]
 										#acc = h['gene'][0]
 									else
-										warn "******* NOT VALID TAG TO CREATE <gene> ENTRY IN LOCUS: " + gb.accession
+										warn "[WARNING]".on_red.white + "******* NOT VALID TAG TO CREATE <gene> ENTRY IN LOCUS: " + gb.accession
 										next
 									end
 									
@@ -218,7 +218,7 @@ module Parser
 										end
 										seq.translation = h['translation'][0] if h['translation']
 									else
-										warn "++++++++++ ERROR MAPING <CDS> TO <gene> OR CREATING <gene> IN LOCUS: " + gb.accession
+										warn "[WARNING]".on_red.white + " ERROR MAPING <CDS> TO <gene> OR CREATING <gene> IN LOCUS: " + gb.accession
 										next
 									end
 								else
@@ -322,7 +322,7 @@ module Parser
 		def parse
 			genome = Genome::Set.new(taxon, options = {:empty => true, :config => config})
 
-			warn "* processing Genbank file: " + file
+			puts "* processing Genbank file: " + file
 			p = Bio::GenBank.open(file)
 
 			chr = {}
@@ -379,7 +379,7 @@ module Parser
 						gene = genome.get_gene_by_acc(id[0])
 						gene.trans_table = h['trans_table'] if h['trans_table']
 						if gene.nil?
-							warn "ERROR: gene #{id} not found for this CDS!"
+							warn "[WARNING]".on_red.white + " gene #{id} not found for this CDS!"
 						else
 							gene.description = h['product'][0] if h['product']
 							gene.type = feat.feature
@@ -406,7 +406,7 @@ module Parser
 							id = h['locus_tag']
 							gene = genome.get_gene_by_acc(id[0])
 							if gene.nil?
-								warn "ERROR: gene #{id} not found for this CDS!"
+								warn "[WARNING]".on_red.white + " gene #{id} not found for this CDS!"
 							else
 								if h['product']
 									gene.description = h['product'][0]
@@ -603,7 +603,7 @@ module Parser
 			
 			genome = Genome::Set.new(taxon, options = {:empty => true, :config => config})
 
-			warn "* processing GFF file: " + file
+			puts "* processing GFF file: " + file
 			p = Bio::GFF::GFF3.new(File.open(file, "r"))
 
 			sequences = {}
@@ -626,7 +626,12 @@ module Parser
 					gene.to = record.end.to_i
 					gene.description = attr[:desc]
 					gene.pseudogene = attr[:pseudo]
-					gene.sequence = sequences[record.seqname].subseq(record.start, record.end)
+					seq = sequences[record.seqname]
+					if ! seq
+						warn "[WARNING]".on_red.white.blink + " no sequence data for " + (gene.id.red + " (" + record.seqname + ")").red
+					else
+						gene.sequence = sequences[record.seqname].subseq(record.start, record.end)
+					end
 					gene.trans_table = taxon.trans_table
 					genome << gene
 				elsif record.feature == "exon"
@@ -639,7 +644,7 @@ module Parser
 						exon.to = record.end.to_i
 						gene << exon
 					else
-						raise "ERROR: parent " + attr[:parent] + " not found for child " + attr[:id]
+						raise "[WARNING]".on_red.white + " parent " + attr[:parent] + " not found for child " + attr[:id]
 					end
 				elsif record.feature == "CDS" or record.feature == "tRNA" or record.feature == "rRNA" or \
 					record.feature == "snRNA" or record.feature == "transcript" or record.feature == "ncRNA" or \
@@ -654,7 +659,7 @@ module Parser
 							gene.type = record.feature
 						end
 					else
-						raise "ERROR: parent " + attr[:parent] + " not found for child " + attr[:id]
+						raise "[WARNING]".on_red.white + " parent " + attr[:parent] + " not found for child " + attr[:id]
 					end
 				elsif record.feature == "mRNA"
 					# skip this.

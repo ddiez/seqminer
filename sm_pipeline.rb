@@ -31,12 +31,12 @@ sm.ortholog.debug
 ## run step by step (instead of run_all above)
 # 2.2 optional: search
 #sm.dir_initialize
-#sm.build_search
-#sm.search.debug
+sm.build_search
+sm.search.debug
 #sm.run_search
-#sm.get_search_results
-#sm.write_nelson
-#sm.write_fasta
+sm.get_search_results
+sm.write_nelson
+sm.write_fasta
 
 # 2.3 optional: scan (requires search above)
 # run `sh clean_empty_fasta.sh` in vardb-x directory
@@ -45,7 +45,7 @@ sm.ortholog.debug
 #sm.get_scan_results
 #sm.write_domain
 
-# 3.1 report
+# 3.1 report (SKIP THIS PART!!)
 # TODO: check WHICH report are needed and fix implementation!
 #sm.build_search
 #sm.get_search_results(eval = 0.01)
