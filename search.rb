@@ -173,8 +173,9 @@ module Search
 		def parse
 			rs = Result::Set.new(options = {:config => config})
 			
+			warn "* parsing search results ..."
 			transferred = 0
-			pb = ProgressBar.new("Search results", 100)
+			pb = ProgressBar.new("Progress", 100)
 			step = 1/length
 			each_value do |search|
 				case search.taxon.type

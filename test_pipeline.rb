@@ -1,7 +1,6 @@
 require 'seqminer'
 
-sm = SeqMiner::Pipeline.new
-#sm.dir_initialize
+sm = SeqMiner::Pipeline.new("vardb-dr-10")
 #sm.taxon.filter_by_name(["anaplasma.marginale", "plasmodium.falciparum"])
 #sm.taxon.filter_by_type("spp")
 #sm.taxon.filter_by_type("clade")
@@ -30,13 +29,13 @@ sm = SeqMiner::Pipeline.new
 #	dh.debug
 #end
 
-sm.build_scan
+#sm.build_scan
 #sm.run_scan
 
 
 #sm.get_scan_results
-sm.taxon.debug
-sm.write_domain
+#sm.taxon.debug
+#sm.write_domain
 #rs = sm.scan_result
 #r = rs.get_item_by_id("plasmodium.falciparum_3d7-var")
 #r.debug

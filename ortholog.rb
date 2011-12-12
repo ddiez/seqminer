@@ -12,15 +12,17 @@ module Ortholog
 	include Item
 
 	class Set < Set
-		attr_reader :config
+		include Common
+		attr_reader :config, :file_log
 		def initialize(options = {:empty => false, :config => nil})
 			super()
 
 			if ! options[:config]
-				@config = Config::General.new
+				@config = Config::General.new(options[:project])
 			else
 				@config = options[:config]
 			end
+			@file_log = config.file_log
 			
 			if ! options[:empty]
 				of = config.file_ortholog
@@ -30,9 +32,10 @@ module Ortholog
 					next if line == ""
 					next if line =~ /^#/
 					name, hmm = line.split("\t")
-					#warn "* Ortholog: " + name
+					#info "* Ortholog: " + name
 	
 					ortholog = Ortholog.new(name, hmm)
+					ortholog.file_log = file_log
 					self.add(ortholog)
 				end
 				file.close
@@ -70,29 +73,34 @@ module Ortholog
 		end
 
 		def debug
-			warn "+ Ortholog Set+"
-			warn "* length: " + length.to_s
+			info "+ Ortholog Set+"
+			info "* length: " + length.to_s
 			each_value do |ortholog|
 				ortholog.debug
 			end
-			warn ""
+			info
 		end
 	end
 
 	class Ortholog < Item
-		attr_accessor :hmm, :name
+		include Common
+		attr_accessor :hmm, :name, :file_log
 
 		def initialize (name, hmm)
 			super(name.to_s + "." + hmm.to_s)
 			@name = name
 			@hmm = hmm
 		end
+		
+		def file_log=(file)
+			@file_log = file
+		end
 
 		def debug
-			warn "+ Ortholog +"
-			warn "* id: " + id
-			warn "* name: " + name
-			warn "* hmm: " + hmm
+			info "+ Ortholog +"
+			info "* id: " + id
+			info "* name: " + name
+			info "* hmm: " + hmm
 		end
 	end
 end

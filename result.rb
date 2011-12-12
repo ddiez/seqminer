@@ -12,6 +12,7 @@ require 'sequence'
 require 'taxon'
 require 'ortholog'
 require 'family'
+require 'common'
 
 module Result
 	include Item

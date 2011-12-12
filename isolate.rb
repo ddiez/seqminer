@@ -117,6 +117,7 @@ module Isolate
 		# sequences; i.e. the reverse complement if necesary), protein (tranlated from the CDS) or 6frame (6 possible
 		# translations based upon frame and strand).
 		def write_fasta(type, file = nil)
+			
 			if file
 				fo = File.new(file, "w")
 			else
@@ -160,6 +161,14 @@ module Isolate
 				end
 			end
 			fo.close
+			
+			# check the file contains something!
+			if file 
+				if File.size(file) == 0
+					warn "[WARNING]".red + " deleting empty file: " + file
+					File.unlink file
+				end
+			end
 		end
 		
 		def write_table(file = nil)

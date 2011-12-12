@@ -1,6 +1,6 @@
 require 'ortholog'
 
-os = Ortholog::Set.new
+os = Ortholog::Set.new(options = {:project => "vardb-dr-10"})
 #o = Ortholog::Ortholog.new("var", "PFEMP")
 #o.debug
 #os.add(o)
@@ -10,5 +10,5 @@ os = Ortholog::Set.new
 os.debug
 
 #os.filter_by_name(["var", "vir"])
-os.filter_by_name("var")
-os.debug
+#os.filter_by_name("var")
+#os.debug

@@ -58,7 +58,7 @@ module Parser
 			chrs = {}
 			files.each_pair do |type, file|
 				next if ! file.exist?
-				puts "* processing Genbank [" + type.to_s + "] file: " + file
+				warn "* processing Genbank [" + type.to_s + "] file: " + file
 				p = Bio::GenBank.open(file)
 				
 				skip = File.new(config.dir_source + taxon.name + (type.to_s + "_skip.txt"), "w")
@@ -322,7 +322,7 @@ module Parser
 		def parse
 			genome = Genome::Set.new(taxon, options = {:empty => true, :config => config})
 
-			puts "* processing Genbank file: " + file
+			warn "* processing Genbank file: " + file
 			p = Bio::GenBank.open(file)
 
 			chr = {}
@@ -443,9 +443,9 @@ module Parser
 						end
 					end
 				end
-				puts "+++ " + gb.accession if u.length > 0
+				warn "+++ " + gb.accession if u.length > 0
 				u.each_pair do |feat, count|
-					puts "+++ " + feat + ": " + count.to_s
+					warn "+++ " + feat + ": " + count.to_s
 				end
 			end
 			genome.chromosome = chr
@@ -467,13 +467,13 @@ module Parser
 		end
 
 		def parse
-			puts "* file: " + file
-			puts "* gff_file: " + gff_file
-			puts "* annotation_file: " + annot_file
+			warn "* file: " + file
+			warn "* gff_file: " + gff_file
+			warn "* annotation_file: " + annot_file
 			
 			genome = Genome::Set.new(taxon, options = {:empty => true, :config => config})
 			
-			puts "* reading genbank file"
+			warn "* reading genbank file"
 			p1 = Bio::GenBank.open(file)
 			
 			chrs = {}
@@ -485,7 +485,7 @@ module Parser
 				# Currently no references in these files.
 #				ref = []
 #				gb.references.each do |r|
-#					puts r.pubmed if r.pubmed != ""
+#					warn r.pubmed if r.pubmed != ""
 #				end
 				
 #				refs[gb.accession] = ref.join(";")
@@ -498,9 +498,9 @@ module Parser
 					map[gb.accession] = gb.accession
 				end
 			end
-			puts "* subpercontigs: " + chrs.length.to_s
+			warn "* subpercontigs: " + chrs.length.to_s
 			
-			puts "* reading GFF file"
+			warn "* reading GFF file"
 			p2 = Bio::GFF.new(File.open(gff_file, "r"))
 			p2.records.each do |record|
 				if record.feature == "exon"
@@ -534,7 +534,7 @@ module Parser
 				end
 			end
 			
-			puts "* reading annotation file"
+			warn "* reading annotation file"
 			f = File.open(annot_file, "r")
 			f.each_line do |line|
 				next if line.match(/^LOCUS/)
@@ -599,11 +599,11 @@ module Parser
 		end
 
 		def parse
-			puts "* file: " + file
+			warn "* file: " + file
 			
 			genome = Genome::Set.new(taxon, options = {:empty => true, :config => config})
 
-			puts "* processing GFF file: " + file
+			warn "* processing GFF file: " + file
 			p = Bio::GFF::GFF3.new(File.open(file, "r"))
 
 			sequences = {}
@@ -776,10 +776,10 @@ module Parser
 					tmp.each_index do |i|
 						data[head[i]] = tmp[i]
 					end
-					#puts data["SEQUENCE"] + "\t" + data["sequence"].length.to_s + "\t" + data["cds"].length.to_s + "\t" + data["translation"].length.to_s
+					#warn data["SEQUENCE"] + "\t" + data["sequence"].length.to_s + "\t" + data["cds"].length.to_s + "\t" + data["translation"].length.to_s
 				end
 			end
-			puts ortholog.name + "\t" + taxon.name + "\t" + n.to_s
+			warn ortholog.name + "\t" + taxon.name + "\t" + n.to_s
 		end
 	end
 end

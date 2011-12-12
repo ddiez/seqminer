@@ -32,7 +32,7 @@ module Sequence
 #			warn "* file: " + file
 #			total = `grep ">" #{file} | wc -l`
 #			total.strip!
-#			puts "* number sequences: " + total
+#			warn "* number sequences: " + total
 #			number_read = 0
 #			pb = ProgressBar.new(file.to_s, 100)
 			fi = Bio::FastaFormat.open(file)

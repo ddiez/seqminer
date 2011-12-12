@@ -25,7 +25,7 @@ module SeqMiner
 	class Install
 		include Common
 
-		attr_reader :project, :config, :taxon, :ortholog
+		attr_reader :project, :config, :taxon, :ortholog, :file_log
 
 		def initialize(project = nil, options = {:config => nil, :import => nil})
 
@@ -40,10 +40,20 @@ module SeqMiner
 			else
 				@config = options[:config]
 			end
+			
+			config.file_log = "log_install.txt"	
+			@file_log = config.file_log 
+			#config.debug
 
 #			@taxon = Taxon::Set.new(options = {:config => config, :update_ncbi_info => true})
 			@taxon = Taxon::Set.new(options = {:config => config, :update_ncbi_info => false})
-			@ortholog = Ortholog::Set.new(options = {:config => config})
+			@ortholog = Ortholog::Set.new(options = {:config => config})			
+			#taxon.debug
+			#ortholog.debug
+		end
+		
+		def file_log
+			config.file_log
 		end
 
 		def update_databases
@@ -69,7 +79,7 @@ module SeqMiner
 				file = config.dir_pfam_current + entry
 				if file.file?
 					if file.extname == ".gz"
-						puts "* gunzip: " + file
+						info "* gunzip: " + file
 						res = system("gunzip #{file}")
 					end
 				end
@@ -80,7 +90,7 @@ module SeqMiner
 				file = config.dir_pfam_current + entry
 				if file.file?
 					if file.extname == ".hmm"
-						puts "* hmmpress: " + file
+						_info "* hmmpress: " + file
 						ts = Tools::Hmmer.new('hmmpress', options = {:config => config})
 						ts.infile = file
 						ts.debug
@@ -110,7 +120,7 @@ module SeqMiner
 		
 		# This method will generate the approapriate databases for use with BLAST-like programs.
 		def process_blast(t)
-			warn "* formatting: " + t.name
+			info "* formatting: " + t.name
 			dir = config.dir_sequence + t.name
 			Dir.chdir(dir)
 			
@@ -130,12 +140,12 @@ module SeqMiner
 		end
 		
 		def process_spp(t)
-			puts "* source: " + t.source
-			puts "* dir: " + (config.dir_source + t.name)
+			info "* source: " + t.source
+			info "* dir: " + (config.dir_source + t.name)
 			
 			case t.source
 			when "plasmodb", "giardiadb", "tritrypdb"
-				puts "* parser: eupathdb"
+				info "* parser: eupathdb"
 				if t.name == "trypanosoma.cruzi_CL_Brener"
 					p = Parser::Eupathdb.new(t, options = {:config => config, :subtype => "Esmeraldo"})
 				else
@@ -144,7 +154,7 @@ module SeqMiner
 			when "broad"
 				p = Parser::Broad.new(t, options = {:config => config})
 			when "ncbi"
-				puts "* parser: refseq"
+				info "* parser: refseq"
 				p = Parser::Refseq.new(t, options = {:config => config})
 			end
 			g = p.parse
@@ -152,23 +162,23 @@ module SeqMiner
 			
 			outdir = config.dir_sequence + t.name
 			outdir.mkpath if ! outdir.exist?
-			warn "* writing gene FASTA file"
+			info "* writing gene FASTA file"
 			g.write_fasta("gene", outdir + "gene.fa")
-			warn "* writing CDS FASTA file"
+			info "* writing CDS FASTA file"
 			g.write_fasta("cds", outdir + "cds.fa")
-			warn "* writing protein FASTA file"
+			info "* writing protein FASTA file"
 			g.write_fasta("protein", outdir + "protein.fa")
-			warn "* writing 6frame FASTA file"
+			info "* writing 6frame FASTA file"
 			g.write_fasta("6frame", outdir + "6frame.fa")
-			warn "* writing genome FASTA file"
+			info "* writing genome FASTA file"
 			g.write_fasta("genome", outdir + "genome.fa")
-			warn "* writing genome TABLE file"
+			info "* writing genome TABLE file"
 			g.write_table(outdir + "genome.txt")
 		end
 		
 		def process_clade(t)
-			puts "* source: " + t.source
-			puts "* dir: " + (config.dir_source + t.name)
+			info "* source: " + t.source
+			info "* dir: " + (config.dir_source + t.name)
 			
 			p = Parser::GenbankIsolate.new(t, options = {:config => config})
 			i = p.parse
@@ -176,17 +186,17 @@ module SeqMiner
 			outdir = config.dir_sequence + t.name
 			outdir.mkpath if ! outdir.exist?
 			
-			warn "* writing gene FASTA file"
+			info "* writing gene FASTA file"
 			i.write_fasta("gene", outdir + "gene.fa")
-			warn "* writing CDS file"
+			info "* writing CDS file"
 			i.write_fasta("cds", outdir + "cds.fa")
-			warn "* writing protein FASTA file"
+			info "* writing protein FASTA file"
 			i.write_fasta("protein", outdir + "protein.fa")
-			warn "* writing 6frame FASTA file"
+			info "* writing 6frame FASTA file"
 			i.write_fasta("6frame", outdir + "6frame.fa")
-			warn "* writing isolate FASTA file"
+			info "* writing isolate FASTA file"
 			i.write_fasta("isolate", outdir + "isolate.fa")
-			warn "* writing isolate TABLE file"
+			info "* writing isolate TABLE file"
 			i.write_table(outdir + "isolate.txt")
 		end
 		
@@ -269,6 +279,10 @@ module SeqMiner
 				_check_result(res)
 			end
 		end
+		
+		def debug
+			config.debug
+		end
 	end
 	
 	# This class contains the basic methods to search sequences and scan for domains. Its the core of the pipeline.
@@ -285,8 +299,10 @@ module SeqMiner
 			else
 				@config = Config::General.new(project)
 			end
-
-			config.debug
+			
+			config.file_log = "log_pipeline.txt"	
+			@file_log = config.file_log 
+			#config.debug
 
 			@taxon = Taxon::Set.new(options = {:config => config})
 			@ortholog = Ortholog::Set.new(options = {:config => config})
@@ -294,33 +310,36 @@ module SeqMiner
 			build_search
 			build_scan
 			
-			@dir_initialized = false
+			#@dir_initialized = false
+			dir_initialize
 		end
 
-		def dir_initialized?
-			@dir_initialized
-		end
+		#def dir_initialized?
+		#	@dir_initialized
+		#end
 		
 		def dir_initialize
 			dir_level1 = ['genome', 'isolate']
 			dir_level2 = ['search', 'sequence', 'fasta', 'scan', 'domain']
 			
-			warn "+ CREATE RESULT DIR STRUCTURE +"
-			#warn "* " + dir_result
+			#info "+ CREATE RESULT DIR STRUCTURE +"
+			#info "* " + dir_result
 			#dir_result.mkpath
 			dir_level1.each do |level1|
 				dir_level2.each do |level2|
 					ortholog.items.each_value do |ortholog|
 						dir = config.dir_result + level1 + level2 + ortholog.name
-						warn "* " + dir
-						dir.mkpath if ! dir.exist?
+						if ! dir.exist?
+							info "* creating dir: " + dir
+							dir.mkpath
+						end
 					end
 				end
 			end
 		end
 
 		def run_all
-			dir_initialize if ! dir_initialized?
+			#dir_initialize if ! dir_initialized?
 			# search for sequences.
 			build_search
 			run_search
@@ -416,6 +435,7 @@ module SeqMiner
 
 	# This class contains methods to generate statistics and reports about the pipeline results. It is not known at
 	# this point how much of it is working. Have to take a look a it in more detail.
+	# TODO: implement/rework
 	class Stat
 		attr_accessor :taxon, :ortholog, :family
 		attr_reader :config
@@ -433,6 +453,7 @@ module SeqMiner
 			@family = Family::Set.new(options = {:config => config})
 		end
 
+		# TODO: log stats to file instead of stdout.
 		def result_stat
 			puts "Ortholog\tTaxon\tType\tCount"
 			ortholog.each_ortholog do |o|
@@ -511,6 +532,9 @@ module SeqMiner
 			else
 				@config = Config::General.new(project)
 			end
+			
+			config.file_log = "log_commit.txt"	
+			@file_log = config.file_log 
 
 			@family = Family::Set.new(options = {:config => config})
 			@taxon = Taxon::Set.new(options = {:config => config})
@@ -519,7 +543,7 @@ module SeqMiner
 		
 		def commit
 			if ! config.dir_commit.exist?
-				warn "* creating output directory: " + config.dir_commit
+				info "* creating output directory: " + config.dir_commit
 				config.dir_commit.mkpath
 			end
 			
@@ -543,11 +567,11 @@ module SeqMiner
 							dir = config.dir_result + "isolate" + type + f.ortholog
 						end
 						file = dir + (taxon.name + "-" + f.ortholog + ".txt")
-						warn "* commiting file: " + file
+						info "* commiting file: " + file
 						if file.exist?
 							File.cp(file, outdir)
 						else
-							puts "WARNING:".blink.red.bold + (" file " + file + " does not exist!").bold
+							warn "file " + file + " does not exist!"
 						end
 					end
 				end
@@ -583,12 +607,12 @@ module SeqMiner
 					if gene_file.exist?
 						system "grep \">\" #{gene_file} >> #{outdir}/gene_list.txt"
 					else
-						puts "WARNING:".blink.red.bold + (" file " + gene_file + " does not exist!").bold
+						warn "file " + gene_file + " does not exist!"
 					end
 					if protein_file.exist?
 						system "grep \">\" #{protein_file} >> #{outdir}/protein_list.txt"
 					else
-						puts "WARNING:".blink.red.bold + (" file " + protein_file + " does not exist!").bold
+						warn "file " + protein_file + " does not exist!"
 					end
 				end
 			end
@@ -596,6 +620,7 @@ module SeqMiner
 		
 		def debug
 			config.debug
+			family.debug
 		end
 		
 		# This is done now here, but it should probably be done in the Pipeline.
@@ -638,10 +663,10 @@ module SeqMiner
 									q << j
 								end
 							else
-								puts "WARNING:".blink.green.bold + (" skipping file " + infile + " (only one sequence)").bold
+								warn "skipping file " + infile + " (only one sequence)"
 							end
 						else
-							puts "WARNING:".blink.red.bold + (" file " + infile + " does not exist!").bold
+							warn "file " + infile + " does not exist!"
 						end
 					end
 				end

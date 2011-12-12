@@ -7,12 +7,15 @@
 
 require 'item'
 require 'config'
+require 'common'
 
 module Family
 	include Item
 	
 	class Set < Set
-		attr_reader :config
+		include Common
+		
+		attr_reader :config, :file_log
 		
 		def initialize(options = {:config => config})
 			super()
@@ -22,6 +25,7 @@ module Family
 			else
 				@config = Config::General.new
 			end
+			@file_log = config.file_log
 			
 			file = config.dir_config + "family.txt"
 			fo = File.open(file)
@@ -33,6 +37,7 @@ module Family
 				family.name = fn
 				family.taxon = t
 				family.ortholog = o
+				family.file_log = file_log
 				self << family
 			end
 			fo.close
@@ -96,8 +101,8 @@ module Family
 		end
 		
 		def debug
-			warn "+ FamilySet +"
-			warn "* length: " + length.to_s
+			info "+ FamilySet +"
+			info "* length: " + length.to_s
 			each_family do |family|
 				family.debug
 			end
@@ -105,18 +110,23 @@ module Family
 	end
 	
 	class Family < Item
-		attr_accessor :name, :taxon, :ortholog
+		include Common
+		attr_accessor :name, :taxon, :ortholog, :file_log
 		
 		def initialize(id)
 			super
 		end
 		
+		def file_log=(file)
+			@file_log = file
+		end
+
 		def debug
-			warn "+ Family +"
-			warn "* id: " + id
-			warn "* taxon: " + taxon
-			warn "* ortholog: " + ortholog
-			warn "* name: " + name
+			info "+ Family +"
+			info "* id: " + id
+			info "* taxon: " + taxon
+			info "* ortholog: " + ortholog
+			info "* name: " + name
 		end
 	end
 end

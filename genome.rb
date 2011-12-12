@@ -84,7 +84,7 @@ module Genome
 			# pseudogene value.
 			each_gene do |gene|
 				if gene.length == 0 then
-					puts "WARNING: fixing gene " + gene.id + " (adding single exon, and pseudogene = true)"
+					warn "[WARNING]".red + " fixing gene " + gene.id + " (adding single exon, and pseudogene = true)"
 					exon = Genome::Exon.new(1)
 					exon.strand = gene.strand
 					exon.from = gene.from
@@ -147,6 +147,7 @@ module Genome
 		end
 		
 		def write_fasta(type, file = nil)
+
 			if file
 				fo = File.new(file, "w")
 			else
@@ -196,6 +197,15 @@ module Genome
 				end
 			end
 			fo.close
+
+			# check the file contains something!
+			if file
+				if File.size(file) == 0
+					warn "[WARNING]".red + " deleting empty file: " + file
+					File.unlink file
+				end
+			end
+
 		end
 
 		def write_gff(file = nil)
@@ -429,11 +439,10 @@ module Genome
 		# This methods returns the splicing pattern in gene coordinates. In other words, it is used to extract
 		# the exonic sequence (and potentially the introns) from the gene sequence.
 		def splicing
-#			puts id
-#			puts from
-#			puts to
-#			puts length
-#			puts
+#			warn id
+#			warn from
+#			warn to
+#			warn length
 			loc = []
 			case strand
 			when 1
@@ -451,7 +460,7 @@ module Genome
 			loc = loc.join(",")
 			loc = "join(" + loc + ")" if length > 1
 			loc = "complement(" + loc + ")" if strand == -1
-			#puts loc
+			#warn loc
 			loc
 		end
 		

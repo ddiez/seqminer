@@ -22,14 +22,14 @@ class Job
 	end
 	
 	def run
-		#puts "job id: #{id}"
+		#warn "job id: #{id}"
 		@pid = fork { system "#{cmd}" }
 		#@pid = fork { sleep 5 }
 	end
 
 	def debug
-		puts "* id: " + id.to_s
-		puts "* cmd: " + cmd
+		warn "* id: " + id.to_s
+		warn "* cmd: " + cmd
 	end
 end
 
@@ -52,8 +52,8 @@ class Queue
 	end
 
 	def debug
-		puts "* JOBS: " + length.to_s
-		puts "* NCPUS: " + ncpu.to_s
+		warn "* JOBS: " + length.to_s
+		warn "* NCPUS: " + ncpu.to_s
 		jobs.each do |j|
 			j.debug
 		end
@@ -72,11 +72,11 @@ class Queue
 				#job = Job.new(cj)
 				#job.cmd = jobs[job.id]
 				job = @jobs[cj]
-				puts "++ Starting job #{cj + 1}"
-				puts "++ " + Time.now.to_s
+				warn "++ Starting job #{cj + 1}"
+				warn "++ " + Time.now.to_s
 				job.run
 				pid = job.pid
-				puts "++ Job PID: #{pid}"
+				warn "++ Job PID: #{pid}"
 				
 				cj+=1
 				n += 1
@@ -85,10 +85,9 @@ class Queue
 			end
 			if n == ncpus or sj == njobs
 				cpid = Process.wait
-				puts "-- Finished job #{pids[cpid]}."
-				puts "-- " + Time.now.to_s
-				puts "-- Job PID: #{cpid}"
-				puts
+				warn "-- Finished job #{pids[cpid]}."
+				warn "-- " + Time.now.to_s
+				warn "-- Job PID: #{cpid}\n"
 				n -= 1
 				fj += 1
 			end
@@ -98,7 +97,7 @@ class Queue
 		ima = Time.now
 
 		#pids.each_pair do |key,val|
-		#	puts "#{val}: #{key}"
+		#	warn "#{val}: #{key}"
 		#end
 	end
 end

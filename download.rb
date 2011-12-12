@@ -24,7 +24,7 @@ module Download
 		# dir:: Directory in the server.
 		# file:: File to download
 		# ofile:: File to save the download.
-		def ftp_download(host, dir, file, ofile)
+		def ftp_download(host, dir, file, ofile, file_log)
 			ftp = Net::FTP.new(host)
 			ftp.login
 			ftp.chdir(dir)
@@ -41,7 +41,7 @@ module Download
 							pb.set(percent_finished)
 						end
 					else
-						warn "[ERROR] data returned by server is empty!".bold.on_red.white
+						error "data returned by server is empty!"
 						return
 					end
 				end
@@ -56,11 +56,11 @@ module Download
 		# dir:: Directory in the server.
 		# file:: File to download
 		# ofile:: File to save the download.
-		def http_download(host, dir, file, ofile)
-			puts "* host: " + host
-			puts "* dir: " + dir
-			puts "* file: " + file
-			puts "* ofile: " + ofile
+		def http_download(host, dir, file, ofile, file_log)
+			info "* host: " + host
+			info "* dir: " + dir
+			info "* file: " + file
+			info "* ofile: " + ofile
 			
 			http = Net::HTTP.start(host)
 			req = Net::HTTP::Get.new("/" + dir + "/" + file)
@@ -80,7 +80,7 @@ module Download
 							end
 							f.write(data)
 						else
-							warn "[ERROR] data returned by server is empty!".bold.on_red.white
+							error "data returned by server is empty!"
 							return
 						end
 					end
@@ -99,12 +99,12 @@ module Download
 		# db:: Database to search.
 		# ofile:: File to save the download.
 		#def ncbi_download(term, db, ofile, type)
-		def ncbi_download(term, ofile, type)
-			#puts "* host: " + host
-			#puts "* dir: " + dir
-			#puts "* db: " + db
-			puts "* term: " + term
-			puts "* ofile: " + ofile
+		def ncbi_download(term, ofile, type, file_log)
+			#info "* host: " + host
+			#info "* dir: " + dir
+			#info "* db: " + db
+			info "* term: " + term
+			info "* ofile: " + ofile
 			Bio::NCBI.default_email = "vardb@kuicr.kyoto-u.ac.jp"
 			ncbi = Bio::NCBI::REST.new
 			
@@ -113,10 +113,10 @@ module Download
 				term += " AND RefSeq Genome[Project Data Type]"
 				# get BioProject ids:
 				res = ncbi.esearch(term, {:db => 'bioproject'}, limit = 0)
-				puts "* ids (bioproject): " + res.join(",").to_s
+				info "* ids (bioproject): " + res.join(",").to_s
 				# search on nuccore:
 				res.each do |r|
-					#puts r
+					#info r
 					rid = rid + ncbi.esearch(r+"[BioProject]", {:db => 'nuccore'}, limit = 0)
 				end
 				db = "nuccore"
@@ -134,8 +134,8 @@ module Download
 				db = "nucest"
 			end
 			
-			puts "* n: " + rid.length.to_s
-			#puts "* ids (nuccore): " + rid.join(",")
+			info "* n: " + rid.length.to_s
+			#info "* ids (nuccore): " + rid.join(",")
 				
 			if rid.length > 0
 				rid = _check_download_gb(ofile, rid)
@@ -153,7 +153,7 @@ module Download
 						res = ncbi.efetch(rtmp, {:db => db, :rettype => "gbwithparts", :retmode => "txt"})
 							
 						if res.empty?
-							warn "[ERROR] data returned by server is empty!".bold.on_red.white
+							error "data returned by server is empty!"
 							return
 						end
 						# TODO: add server ERROR check (like Perl script)
@@ -161,13 +161,13 @@ module Download
 						transferred += rtmp.length
 						if(transferred != 0)
 							percent_finished = 100 * (transferred.to_f / rid.length.to_f)
-							#puts percent_finished
+							#info percent_finished
 							pb.set(percent_finished.to_i)
 						end
 						retstart += retmax
 					end
 					out.close
-					puts
+					info
 				end
 			end
 			_check_duplicates_gb(ofile)
@@ -178,7 +178,8 @@ module Download
 	end
 
 	class Set < Set
-		attr_reader :config
+		include Common
+		attr_reader :config, :file_log
 		def initialize(ts = nil, options = {:empty => false, :config => nil})
 			super()
 
@@ -187,6 +188,7 @@ module Download
 			else
 				@config = options[:config]
 			end
+			@file_log = config.file_log
 
 			if ! options[:empty]
 				if ts.nil?
@@ -205,17 +207,27 @@ module Download
 				d.execute
 			end
 		end
+		
+		def debug
+			info "* download set"
+			info "* length: " + length.to_s
+			each_value do |d|
+				d.debug
+			end
+		end
 	end
 
 	class Download < Base
+		include Common
 		attr_accessor :taxon
-		attr_reader :id, :config
+		attr_reader :id, :config, :file_log
 		
 		# Config here is required and inherited from the Set.
-		def initialize(id, config)
+		def initialize(id, c)
 			@id = id
 			#super(id)
-			@config = config
+			@config = c
+			@file_log = config.file_log
 		end
 
 		def execute
@@ -228,7 +240,7 @@ module Download
 		end
 
 		def download_spp
-			puts "* downloading spp " + id
+			info "* downloading spp " + id
 			case taxon.source
 			when "plasmodb"
 				download_eupathdb('plasmodb')
@@ -244,9 +256,9 @@ module Download
 		end
 
 		def download_clade
-			puts "* downloading clade (nuccore) " + id
+			info "* downloading clade (nuccore) " + id
 			download_nuccore
-			puts "* downloading clade (nucest) " + id
+			info "* downloading clade (nucest) " + id
 			download_nucest
 		end
 
@@ -258,7 +270,7 @@ module Download
 			
 			term = "txid" + taxon.id
 			
-			ncbi_download(term, outfile, "nuccore")
+			ncbi_download(term, outfile, "nuccore", file_log)
 		end
 
 		def download_nucest
@@ -269,7 +281,7 @@ module Download
 			
 			term = "txid" + taxon.id
 			
-			ncbi_download(term, outfile, "nucest")
+			ncbi_download(term, outfile, "nucest", file_log)
 		end
 
 		def download_broad
@@ -385,13 +397,13 @@ module Download
 				end
 			end	
 
-			http_download(host[db], dir, file, outfile)
+			http_download(host[db], dir, file, outfile, file_log)
 			
 			# Extra download.
 			if taxon.name == "trypanosoma.cruzi_CL_Brener"
 				file = taxon.short_name + "NonEsmeraldo-Like" + "_TriTrypDB-" + release + ".gff"
 				outfile = config.dir_source + taxon.name + (taxon.name + "-NonEsmeraldo" +  ".gff")
-				http_download(host[db], dir, file, outfile)
+				http_download(host[db], dir, file, outfile, file_log)
 			end
 		end
 
@@ -433,7 +445,7 @@ module Download
 			#outfile.unlink if outfile.exist?
 			
 			#ncbi_download(term, db, outfile, type)
-			ncbi_download(term, outfile, type)
+			ncbi_download(term, outfile, type, file_log)
 		end
 
 		def eupathdb_process_source(infile)
@@ -467,7 +479,7 @@ module Download
 		end
 
 		def debug
-			puts "* download id: " + id
+			info "* download id: " + id
 		end
 	end
 

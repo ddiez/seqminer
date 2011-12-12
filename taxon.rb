@@ -15,7 +15,8 @@ module Taxon
 	include Item
 	
 	class Set < Set
-		attr_reader :config
+		include Common
+		attr_reader :config, :file_log
 		def initialize(options = { :empty => false, :config => nil, :update_ncbi_info => false, :project => nil})
 			super()
 			
@@ -24,7 +25,8 @@ module Taxon
 			else
 				@config = options[:config]
 			end
-
+			@file_log = config.file_log
+			
 			if ! options[:empty]
 				tf = config.file_taxon
 				file = File.open(tf)
@@ -36,6 +38,7 @@ module Taxon
 					#warn "* Taxon: " + id.to_s
 	
 					taxon = Taxon.new(id, name1, name2, strain, type, source)
+					taxon.file_log = file_log
 					add(taxon)
 				end
 				file.close
@@ -172,7 +175,7 @@ module Taxon
 						taxon.trans_table = tax['code'][index].to_i
 					else
 						# then there is a taxon not in the file: we need to update:
-						puts "WARNING: a taxon not in the ncbi taxonomy (" + tax['id'] + ") was detected. redownloading ncbi taxonomy file..."
+						warn "[WARNING]".red + " a taxon not in the ncbi taxonomy (" + tax['id'] + ") was detected. redownloading ncbi taxonomy file..."
 						return nil
 					end
 				end
@@ -196,24 +199,25 @@ module Taxon
 				tax = _parse_ncbi_taxonomy(file)
 				res2 = _parse_taxonomy(tax)
 				if res2.nil?
-					puts "ERROR: something is wrong with the ncbi taxonomy file."
+					warn "[ERROR]".red + " something is wrong with the ncbi taxonomy file."
 					exit
 				end
 			end
 		end
 		
 		def debug
-			warn "+ Taxon Set +"
-			warn "* length: " + length.to_s
+			info "+ Taxon Set +"
+			info "* length: " + length.to_s
 			each_taxon do |taxon|
 				taxon.debug
 			end
-			warn ""
+			info
 		end
 	end
 
 	class Taxon < Item
-		attr_accessor :name, :strain, :binomial, :type, :source, :kegg_name, :short_name, :trans_table
+		include Common
+		attr_accessor :name, :strain, :binomial, :type, :source, :kegg_name, :short_name, :trans_table, :file_log
 
 		def initialize (id, name1, name2, strain, type, source)
 			super(id)
@@ -229,14 +233,17 @@ module Taxon
 			@trans_table = 1
 		end
 		
+		def file_log=(file)
+			@file_log = file
+		end
 
 		def debug
-			warn "+ Taxon +"
-			warn "* taxon_id: " + id
-			warn "* organism: " + name
-			warn "* type: " + type
-			warn "* source: " + source
-			warn "* trans_table: " + trans_table.to_s
+			info "+ Taxon +"
+			info "* taxon_id: " + id
+			info "* organism: " + name
+			info "* type: " + type
+			info "* source: " + source
+			info "* trans_table: " + trans_table.to_s
 		end
 	end
 end

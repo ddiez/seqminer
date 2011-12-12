@@ -1,9 +1,11 @@
 require 'pathname'
-
+require 'common'
 module Config
+
 	class General
+		include Common
 		# Directories.
-		attr_accessor :dir_home, :dir_result, :dir_commit, :dir_import
+		attr_accessor :dir_home, :dir_result, :dir_commit, :dir_import, :dir_log, :file_log
 		attr_reader :dir_source, :dir_sequence, :dir_model, :dir_pfam, :dir_pfam_current, :dir_config, :db_host, :db_release, :dir_etc, :dir_etc_local
 		# Tools directories.
 		attr_accessor :dir_hmmer, :dir_blast, :dir_meme, :dir_r
@@ -12,8 +14,9 @@ module Config
 
 		def _read_project(name)
 			if name.nil?
-				puts "* no project selected. listing all projects in config files:"
-				puts
+				info
+				info "* no project selected. listing all projects in config files:"
+				info
 			end
 			p = {}
 			p['name'] = name
@@ -23,7 +26,7 @@ module Config
 					line.chop!
 					project, dir = line.split("\t")
 					if name.nil?
-						puts project + "\t" + dir
+						info project + "\t" + dir
 					else
 						if(project == name)
 							p['dir'] = dir
@@ -32,7 +35,7 @@ module Config
 				end
 			end
 			if name.nil?
-				puts "exiting..."
+				info
 				exit
 			else
 				p
@@ -71,13 +74,13 @@ module Config
 		
 		def _check_project_dir
 			if ! dir_home.exist?
-				#puts "ERROR: project directory does not exists, use install option to create a basic structure."
+				#warn "ERROR: project directory does not exists, use install option to create a basic structure."
 				#exit
-				puts "INFO: project directory does not exists," 
-				puts "         a basic structure will be created at:"
-				puts "         " + dir_home
-				puts "         you need to populate the files taxon.txt and ortholog.txt at etc with"
-				puts "         valid values."
+				warn "INFO: project directory does not exists," 
+				warn "         a basic structure will be created at:"
+				warn "         " + dir_home
+				warn "         you need to populate the files taxon.txt and ortholog.txt at etc with"
+				warn "         valid values."
 				_init_project_dir
 			end
 		end
@@ -85,9 +88,18 @@ module Config
 		def _init_project_dir
 			@dir_home.mkpath
 			@dir_config.mkpath
-			# taxon file.
-			if (@dir_import)
-				puts "* import_database: " + dir_import
+			@dir_model.mkpath
+			@dir_source.mkpath
+			@dir_sequence.mkpath
+			@dir_result.mkpath
+			@dir_commit.mkpath
+			@dir_log.mkpath
+			@dir_pfam.mkpath
+
+			# import files from previous release.
+			if @dir_import
+				# config.
+				warn "* import_database: " + dir_import
 				["taxon.txt", "ortholog.txt", "family.txt"].each do |f|
 					file1 = dir_import + "etc" + f
 					file2 = dir_home + "etc" + f
@@ -95,14 +107,15 @@ module Config
 				system cmd
 				end
 
-				@dir_model.mkpath
+				# model.
 				["Extra.hmm", "hmm", "pssm"].each do |f|
 					file1 = @dir_import + "model" + f
 					file2 = @dir_model + "."
 					cmd = "cp -rfv " + file1 + " " + file2
 					system cmd
 				end
-				
+			
+				# source.
 				if @import_source
 					file1 = dir_import + "source"
 					file2 = dir_home + "."
@@ -110,12 +123,12 @@ module Config
 					system cmd
 				end
 
-				@dir_pfam.mkpath
+				# pfam.
 				file1 = @dir_pfam_current
 				file2 = @dir_pfam + "current"
 				cmd = "ln -sv " + file1 + " " + file2
 				system cmd
-			else
+			else # otherwise create empty config files.
 				File.open(@dir_config + "taxon.txt", 'w')  do |f|
 					f.puts("# taxon file")
 				end
@@ -128,16 +141,10 @@ module Config
 					f.puts("# family file")
 				end
 				
-				@dir_model.mkpath
+				# model.
 				(@dir_model + "hmm").mkpath
 				(@dir_model + "pssm").mkpath
-				@dir_pfam.mkpath
 			end
-			
-			@dir_source.mkpath
-			@dir_sequence.mkpath
-			@dir_result.mkpath
-			@dir_commit.mkpath
 		end
 	
 		def initialize(project_name, import_name = nil, import_source = false)
@@ -146,12 +153,9 @@ module Config
 
 			p = _read_project(project_name)
 			if p['dir'].nil?
-				puts
-				puts "ERROR: unkown project name '" + project_name + "'!"
-				puts
-				puts ">  check your config file in ~/.seqminer/projects and"
-				puts ">  the project name in sm_install.rb or sm_search.rb"
-				puts
+				error "\nERROR: unkown project name '" + project_name + "'!\n"
+				error ">  check your config file in ~/.seqminer/projects and"
+				error ">  the project name in sm_install.rb or sm_search.rb\n"
 				exit
 			end
 			@project = p['name']
@@ -159,7 +163,7 @@ module Config
 				
 			if import_name
 				pi = _read_project(import_name)
-				#puts pi['dir']
+				#warn pi['dir']
 				@dir_import = Pathname.new(pi['dir'])
 				@import_source = import_source
 			else
@@ -175,6 +179,10 @@ module Config
 			@dir_config = dir_home + "etc"
 			@file_taxon = dir_config + "taxon.txt"
 			@file_ortholog = dir_config + "ortholog.txt"
+		
+			# Log.
+			@dir_log = dir_home + "log"
+			@file_log = dir_log + "log.txt"
 			
 			# Databases.
 			@dir_source = dir_home + "source"
@@ -221,27 +229,37 @@ module Config
 		def basedir
 			@dir_home
 		end
-	
+		
+		def file_log=(file)
+			@file_log = dir_log + file
+		end
+		
+		def info msg = ""
+			_info msg, file_log
+		end
+			
 		def debug
-			warn "+ Config +"
-			warn "* dir_home: " + dir_home
-			warn "* dir_config: " + dir_config
-			warn "* dir_source: " + dir_source
-			warn "* dir_sequence: " + dir_sequence
-			warn "* dir_model: " + dir_model
-			warn "* dir_pfam: " + dir_pfam
-			warn "* dir_result: " + dir_result
-			warn "* dir_commit: " + dir_commit
-			warn "* dir_hmmer: " + dir_hmmer
-			warn "* dir_blast: " + dir_blast
-			warn "* dir_meme: " + dir_meme
-			warn "* dir_r: " + dir_r
-			warn "* databases: "
-			warn ""
+			info "+ Config +"
+			info "* dir_home: " + dir_home
+			info "* dir_config: " + dir_config
+			info "* dir_source: " + dir_source
+			info "* dir_sequence: " + dir_sequence
+			info "* dir_model: " + dir_model
+			info "* dir_pfam: " + dir_pfam
+			info "* dir_result: " + dir_result
+			info "* dir_commit: " + dir_commit
+			info "* dir_hmmer: " + dir_hmmer
+			info "* dir_blast: " + dir_blast
+			info "* dir_meme: " + dir_meme
+			info "* dir_r: " + dir_r
+			info "* dir_log: " + dir_log
+			info "* file_log: " + file_log
+			info "* databases: "
+			info
 			db_host.each_pair do |db, host|
-				puts "  -" + db + ":\t" + host + "\t(" + db_release[db] + ")"
+				info "  -" + db + ":\t" + host + "\t(" + db_release[db] + ")"
 			end
-			warn ""
+			info
 		end
 	end
 end

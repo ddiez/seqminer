@@ -1,5 +1,5 @@
 require 'seqminer'
 
-c = SeqMiner::Commit.new
+c = SeqMiner::Commit.new("vardb-dr-10")
 c.debug
-c.commit
+#c.commit

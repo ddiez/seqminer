@@ -18,11 +18,11 @@ sm = SeqMiner::Pipeline.new("vardb-dr-10")
 #sm.taxon.filter_by_name("anaplasma.marginale")
 #sm.taxon.filter_by_type("spp")
 #sm.taxon.filter_by_type("clade")
-sm.taxon.debug
+#sm.taxon.debug
 
 # 1.3 optional: filter families.
 #sm.ortholog.filter_by_name("msp2_p44_map1_omp")
-sm.ortholog.debug
+#sm.ortholog.debug
 
 ## run all.
 # 2.1 run search, get results, write reports, run scan, get results, write reports.
@@ -30,20 +30,17 @@ sm.ortholog.debug
 
 ## run step by step (instead of run_all above)
 # 2.2 optional: search
-#sm.dir_initialize
 sm.build_search
-sm.search.debug
 #sm.run_search
-sm.get_search_results
-sm.write_nelson
+#sm.write_nelson
 sm.write_fasta
 
 # 2.3 optional: scan (requires search above)
 # run `sh clean_empty_fasta.sh` in vardb-x directory
-#sm.build_scan
-#sm.run_scan
-#sm.get_scan_results
-#sm.write_domain
+sm.build_scan
+sm.run_scan
+sm.get_scan_results
+sm.write_domain
 
 # 3.1 report (SKIP THIS PART!!)
 # TODO: check WHICH report are needed and fix implementation!
