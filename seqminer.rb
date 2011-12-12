@@ -27,16 +27,16 @@ module SeqMiner
 
 		attr_reader :project, :config, :taxon, :ortholog, :file_log
 
-		def initialize(project = nil, options = {:config => nil, :import => nil})
+		def initialize(project = nil, options = {:config => nil, :import => nil, :import_source => nil})
 
-			if options[:import]
-				project_import = options[:import]
-			else
-				project_import = nil
-			end
-
+			#if options[:import]
+			#	project_import = options[:import]
+			#else
+			#	project_import = nil
+			#end
+			
 			if ! options[:config]
-				@config = Config::General.new(project, project_import)
+				@config = Config::General.new(project, options[:import], options[:import_source])
 			else
 				@config = options[:config]
 			end

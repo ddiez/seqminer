@@ -16,6 +16,10 @@ end
 module Common
 	private
 	
+	def error msg = ""
+		_error msg, file_log
+	end
+	
 	def warn msg = ""
 		_warn msg, file_log
 	end
@@ -58,9 +62,9 @@ module Common
 	# msg:: Error message to append to error report.
 	def _check_result(res, exitonfail = true, msg = "an error has occurred")
 		if res
-			warn "[DONE]".green.bold
+			info "[DONE]".green.bold
 		else
-			warn ["[FAIL]", msg].join(" ").blink.red.bold
+			info ["[FAIL]", msg].join(" ").blink.red.bold
 			exit if exitonfail
 		end
 	end
@@ -105,17 +109,17 @@ module Common
 			end
 			
 			gid = _check_seq_gb(file, rid)
-			warn "* downloaded: " + gid.length.to_s.blue
+			info "* downloaded: " + gid.length.to_s.blue
 			rid = rid - gid
-			warn "* remaining: " + rid.length.to_s.red
+			info "* remaining: " + rid.length.to_s.red
 			
 			if rid.length == 0
-				warn ["[DONE]".green.bold, "Using existing file- skipping"].join(" ")
+				info "* " + "[DONE]".green.bold + "using existing file- skipping"
 			else
-				warn ["[DOWNLOAD]".red.bold, "Existing file truncated but seems OK- downloading rest of sequences"].join(" ")
+				info "* " + "[DOWNLOAD]".red.bold + "existing file truncated but seems OK- downloading rest of sequences"
 			end
 		else
-			warn ["[DOWNLOAD]".blue.bold, "File does not exist- downloading"].join(" ")
+			info "* " + "[DOWNLOAD]".blue.bold + "file does not exist- downloading"
 		end
 		return rid
 	end
@@ -123,17 +127,17 @@ module Common
 	def _check_download_size(file, fsize)
 		if File.exists?(file)
 			s = _check_file_size(file)
-			warn "* downloaded: " + s.to_s.blue
+			info "* downloaded: " + s.to_s.blue
 			if s != fsize
-				warn ["[DOWNLOAD]".red.bold, "File was corrupred!- redownloading"].join(" ")
+				info "* " + "[DOWNLOAD]".red.bold + "file was corrupred!- redownloading"
 				File.unlink file
 				return true
 			else
-				warn ["[DONE]".green.bold, "Using existing file- skipping"].join(" ")
+				info "* " + "[DONE]".green.bold + "using existing file- skipping"
 				return false
 			end
 		else
-			warn ["[DOWNLOAD]".blue.bold, "File does not exist- downloading"].join(" ")
+			info "* " + "[DOWNLOAD]".blue.bold + "file does not exist- downloading"
 			return true
 		end
 	end
@@ -142,7 +146,7 @@ module Common
 	# and writes a new file that only uses the latest version of an entry, and writes discarded version
 	# into a file.
 	def _check_duplicates_gb(file)
-		warn "* check duplicates: " + file
+		info "* check duplicates: " + file
 		system "./check_duplicates_gb.pl " + file
 	end
 	

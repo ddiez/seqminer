@@ -74,13 +74,11 @@ module Config
 		
 		def _check_project_dir
 			if ! dir_home.exist?
-				#warn "ERROR: project directory does not exists, use install option to create a basic structure."
-				#exit
-				warn "INFO: project directory does not exists," 
-				warn "         a basic structure will be created at:"
-				warn "         " + dir_home
-				warn "         you need to populate the files taxon.txt and ortholog.txt at etc with"
-				warn "         valid values."
+				_warn "INFO: project home directory does not exists,", nil 
+				_warn "         a basic structure will be created at:", nil
+				_warn "         " + dir_home, nil
+				_warn "         you need to populate the files taxon.txt and ortholog.txt at etc with", nil
+				_warn "         valid values.", nil
 				_init_project_dir
 			end
 		end
@@ -153,9 +151,11 @@ module Config
 
 			p = _read_project(project_name)
 			if p['dir'].nil?
-				error "\nERROR: unkown project name '" + project_name + "'!\n"
+				error
+				error "unkown project name '" + project_name + "'!\n"
 				error ">  check your config file in ~/.seqminer/projects and"
 				error ">  the project name in sm_install.rb or sm_search.rb\n"
+				error
 				exit
 			end
 			@project = p['name']

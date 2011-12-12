@@ -15,7 +15,8 @@ require 'seqminer'
 # :import => specify a project to import data from; usually the previous release
 # :import_source => specify if the source directory is also imported; usually true
 # :cleanup_log => specify if the log file (log_install.txt) should be created new; usually true
-sm = SeqMiner::Install.new("vardb-dr-10", options = {:import => "vardb-dr-9", :import_source => true, :cleanup_log => true})
+#sm = SeqMiner::Install.new("vardb-dr-10", options = {:import => "vardb-dr-9", :import_source => true, :cleanup_log => true})
+sm = SeqMiner::Install.new("vardb-dr-11", options = {:import => "vardb-dr-10", :import_source => true, :cleanup_log => true})
 sm.debug
 
 # 2. update Pfam (NOT NEEDED IF NOT UPDATED!)
@@ -53,7 +54,7 @@ sm.debug
 
 # RUN:
 # 3.1 download source sequences.
-#sm.update_sequences
+sm.update_sequences
 # 3.2 process sequences into common format.
 #sm.process_sequences
 # 3.3 create blast databases.
