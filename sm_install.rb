@@ -12,7 +12,7 @@ require 'seqminer'
 # 1. Install/Load project.
 #sm = SeqMiner::Install.new(nil)
 # RUN:
-sm = SeqMiner::Install.new("vardb-dr-10", options = {:import => "vardb-dr-9", :import_source => true})
+sm = SeqMiner::Install.new("vardb-dr-10", options = {:import => "vardb-dr-9", :import_source => true, :cleanup_log => true})
 sm.config.debug
 
 # 2. update Pfam (NOT NEEDED IF NOT UPDATED!)

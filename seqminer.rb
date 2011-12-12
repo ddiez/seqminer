@@ -42,7 +42,11 @@ module SeqMiner
 			end
 			
 			config.file_log = "log_install.txt"	
-			@file_log = config.file_log 
+			@file_log = config.file_log
+			
+			if options[:cleanup_log]
+				File.unlink file_log if file_log.exist? 
+			end
 			#config.debug
 
 #			@taxon = Taxon::Set.new(options = {:config => config, :update_ncbi_info => true})
@@ -301,7 +305,11 @@ module SeqMiner
 			end
 			
 			config.file_log = "log_pipeline.txt"	
-			@file_log = config.file_log 
+			@file_log = config.file_log
+			
+			if options[:cleanup_log]
+				File.unlink file_log if file_log.exist? 
+			end
 			#config.debug
 
 			@taxon = Taxon::Set.new(options = {:config => config})
@@ -523,7 +531,7 @@ module SeqMiner
 	class Commit
 		include Common
 		
-		attr_reader :config, :family, :taxon#, :ortholog
+		attr_reader :config, :family, :taxon, :file_log#, :ortholog
 		
 		def initialize(project = nil, options = {:config => nil})
 
@@ -534,7 +542,11 @@ module SeqMiner
 			end
 			
 			config.file_log = "log_commit.txt"	
-			@file_log = config.file_log 
+			@file_log = config.file_log
+			
+			if options[:cleanup_log]
+				File.unlink file_log if file_log.exist? 
+			end
 
 			@family = Family::Set.new(options = {:config => config})
 			@taxon = Taxon::Set.new(options = {:config => config})
@@ -589,9 +601,9 @@ module SeqMiner
 			family.each_family do |f|
 				#outdir = config.dir_commit + f.ortholog
 				outdir = config.dir_commit
-				if ! outdir.exist?
-					raise "ERROR: commit directory does not exist!"
-				end
+				#if ! outdir.exist?
+				#	error "commit directory does not exist!"
+				#end
 				ts = Taxon::Set.new(options = {:config => config})
 				#ts = @taxon
 				ts.filter_by_name(f.taxon)

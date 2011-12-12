@@ -12,7 +12,7 @@ require 'seqminer'
 # 1.1 create pipelie object.
 #sm = SeqMiner::Pipeline.new()
 #sm = SeqMiner::Pipeline.new("vardb-dr-9")
-sm = SeqMiner::Pipeline.new("vardb-dr-10")
+sm = SeqMiner::Pipeline.new("vardb-dr-10", options = {:cleanup_log => true})
 
 # 1.2 optional: filter taxons.
 #sm.taxon.filter_by_name("anaplasma.marginale")
