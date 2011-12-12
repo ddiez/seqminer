@@ -12,18 +12,24 @@ require 'seqminer'
 # 1. Install/Load project.
 #sm = SeqMiner::Install.new(nil)
 # RUN:
+# :import => specify a project to import data from; usually the previous release
+# :import_source => specify if the source directory is also imported; usually true
+# :cleanup_log => specify if the log file (log_install.txt) should be created new; usually true
 sm = SeqMiner::Install.new("vardb-dr-10", options = {:import => "vardb-dr-9", :import_source => true, :cleanup_log => true})
-sm.config.debug
+sm.debug
 
 # 2. update Pfam (NOT NEEDED IF NOT UPDATED!)
 # RUN:
 #sm.update_pfam
 #sm.process_pfam
 
-#sm.ortholog.debug
-
 # 3. update source sequences.
-# FILTERS: filtering to focus on some species/clade.
+# this step will:
+# - download sequences from sources (plasmodb, ncbi).
+# - process source data into common format.
+# - create blast databases from FASTA files.
+
+# OPTIONAL: filtering to focus on some species/clade.
 # This is useful to debug or install a single species
 #sm.taxon.filter_by_name("anaplasma.marginale")
 #sm.taxon.filter_by_name("borrelia.burgdorferi")
@@ -34,9 +40,8 @@ sm.config.debug
 #sm.taxon.filter_by_name("plasmodium.vivax")
 #sm.taxon.filter_by_name("trypanosoma.brucei")
 #sm.taxon.filter_by_name("mycobacterium.tuberculosis_F11")
-#sm.taxon.debug
 
-# FILTERS: filtering to focus on type of sequences.
+# OPTIONAL: filtering to focus on type of sequences.
 # This is useful to debug. In general it is a good idea to run each step for 'spp' and 'clade'
 # separately since they use different framework and so the source of problems use to be diff-
 # erent. This way you can isolate better potential problems.
@@ -44,32 +49,27 @@ sm.config.debug
 #sm.taxon.filter_by_type("clade")
 
 # to check taxons included after filtering:
-sm.taxon.debug
+#sm.taxon.debug
 
-# 3.1 download.
 # RUN:
+# 3.1 download source sequences.
 #sm.update_sequences
-# 3.2 process sequences.
-# RUN:
+# 3.2 process sequences into common format.
 #sm.process_sequences
-# 3.3 process directories.
-# RUN:
+# 3.3 create blast databases.
 #sm.process_directories
 
-# 4. update HMM models (ONLY NEEDED IF NEW SPECIES/FAMILIES/PFAM !)
+# OPTIONAL:
+# 4. update models for searches (ONLY NEEDED IF NEW SPECIES/FAMILIES/PFAM !) 
+# 4.1 update HMM models.
 #sm.update_hmm
-
-# 4. update PSSM models (ONLY NEEDED IF NEW SPECIES/FAMILIES/PFAM !).
+# 4.2 update PSSM models.
 # this has a limitation. it requires first to run an hmmer search to select the best seed.
-# alternatives?
-# a) specify a suitable seed.
-# b) others...?
-# 4.1 get seq
-# RUN:
+# - get HMM sequences:
 #sm2 = SeqMiner::Pipeline.new
 #sm2.dir_initialize
 #sm2.taxon.filter_by_type("spp")
 #sm2.build_search
 #sm2.search.search
-# RUN:
+# - update models.
 #sm.update_pssm
