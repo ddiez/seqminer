@@ -114,12 +114,12 @@ module Common
 			info "* remaining: " + rid.length.to_s.red
 			
 			if rid.length == 0
-				info "* " + "[DONE]".green.bold + "using existing file- skipping"
+				info "* " + "[DONE]".green.bold + " using existing file- skipping"
 			else
-				info "* " + "[DOWNLOAD]".red.bold + "existing file truncated but seems OK- downloading rest of sequences"
+				info "* " + "[DOWNLOAD]".red.bold + " existing file truncated but seems OK- downloading rest of sequences"
 			end
 		else
-			info "* " + "[DOWNLOAD]".blue.bold + "file does not exist- downloading"
+			info "* " + "[DOWNLOAD]".blue.bold + " file does not exist- downloading"
 		end
 		return rid
 	end
@@ -129,15 +129,15 @@ module Common
 			s = _check_file_size(file)
 			info "* downloaded: " + s.to_s.blue
 			if s != fsize
-				info "* " + "[DOWNLOAD]".red.bold + "file was corrupred!- redownloading"
+				info "* " + "[DOWNLOAD]".red.bold + " file was corrupred!- redownloading"
 				File.unlink file
 				return true
 			else
-				info "* " + "[DONE]".green.bold + "using existing file- skipping"
+				info "* " + "[DONE]".green.bold + " using existing file- skipping"
 				return false
 			end
 		else
-			info "* " + "[DOWNLOAD]".blue.bold + "file does not exist- downloading"
+			info "* " + "[DOWNLOAD]".blue.bold + " file does not exist- downloading"
 			return true
 		end
 	end

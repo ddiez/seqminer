@@ -15,13 +15,14 @@ module Config
 		def _read_project(name)
 			if name.nil?
 				info
-				info "* no project selected. listing all projects in config files:"
+				info "* INFO: no project selected- available projects:"
 				info
 			end
 			p = {}
 			p['name'] = name
 			p['dir'] = nil
 			[@dir_etc, @dir_etc_local].each do |loc|
+				info "* file: " + loc + "projects"
 				File.open(loc + "projects").each do |line|
 					line.chop!
 					project, dir = line.split("\t")
@@ -33,7 +34,11 @@ module Config
 						end
 					end
 				end
+				info
 			end
+			
+			info "* Either choose one of these projects or add a new one\n  to the config files."
+			
 			if name.nil?
 				info
 				exit

@@ -10,44 +10,36 @@
 require 'seqminer'
 
 # 1.1 create pipelie object.
-#sm = SeqMiner::Pipeline.new()
-#sm = SeqMiner::Pipeline.new("vardb-dr-9")
-sm = SeqMiner::Pipeline.new("vardb-dr-10", options = {:cleanup_log => true})
+sm = SeqMiner::Pipeline.new()
+#sm = SeqMiner::Pipeline.new("vardb-dr-10", options = {:cleanup_log => true})
 
-# 1.2 optional: filter taxons.
+# RUN ALL
+# run search, get results, write reports, run scan, get results, write reports.
+# if it fails you may need to run each step one by one.
+#sm.run_all
+
+
+########################################################################################
+# OPTIONAL: filter taxons.
 #sm.taxon.filter_by_name("anaplasma.marginale")
 #sm.taxon.filter_by_type("spp")
 #sm.taxon.filter_by_type("clade")
 #sm.taxon.debug
 
-# 1.3 optional: filter families.
+# OPTIONAL: filter families.
 #sm.ortholog.filter_by_name("msp2_p44_map1_omp")
 #sm.ortholog.debug
 
-## run all.
-# 2.1 run search, get results, write reports, run scan, get results, write reports.
-#sm.run_all
-
 ## run step by step (instead of run_all above)
 # 2.2 optional: search
-sm.build_search
+#sm.build_search
 #sm.run_search
 #sm.write_nelson
-sm.write_fasta
+#sm.write_fasta
 
 # 2.3 optional: scan (requires search above)
 # run `sh clean_empty_fasta.sh` in vardb-x directory
-sm.build_scan
-sm.run_scan
-sm.get_scan_results
-sm.write_domain
-
-# 3.1 report (SKIP THIS PART!!)
-# TODO: check WHICH report are needed and fix implementation!
-#sm.build_search
-#sm.get_search_results(eval = 0.01)
-# report NOT working.
-#sm.report
-#sm.report(0.8)
-# summary working- but uselful?
-#sm.report_summary
+#sm.build_scan
+#sm.run_scan
+#sm.get_scan_results
+#sm.write_domain

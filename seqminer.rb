@@ -56,6 +56,15 @@ module SeqMiner
 			#ortholog.debug
 		end
 		
+		def install_basic
+			# download sequence data
+			update_sequences
+			# process sequences into common format.
+			process_sequences
+			# create blast databases.
+			process_directories
+		end
+		
 		def file_log
 			config.file_log
 		end
@@ -347,7 +356,6 @@ module SeqMiner
 		end
 
 		def run_all
-			#dir_initialize if ! dir_initialized?
 			# search for sequences.
 			build_search
 			run_search
@@ -551,6 +559,12 @@ module SeqMiner
 			@family = Family::Set.new(options = {:config => config})
 			@taxon = Taxon::Set.new(options = {:config => config})
 			#@ortholog = Ortholog::Set.new(options = {:config => config})
+		end
+		
+		def commit_all
+			commit
+			stat_sequences
+			align(what = "protein", ncpu = 16)
 		end
 		
 		def commit

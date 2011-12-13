@@ -11,8 +11,18 @@ require 'seqminer'
 # 1. create object.
 #c = SeqMiner::Commit.new()
 c = SeqMiner::Commit.new("vardb-dr-10", options = {:cleanup_log => true})
-c.debug
+#c.debug
 
+# COMMIT ALL
+# this will attempt to copy sequence and domain files, generate the stats files
+# and the alignments for proteins.
+# [WARNING] sometimes happens for combinations of species/family that are 
+# expected but the pipeline did not find anything. this happens specially in 
+# genomes of borrelia.burgodorferi, and other bacteria where the number of AV
+# genes per genome is very low or just a single genome.
+c.commit_all
+
+# if the above fails you may need to run each step one by one.
 # OPTIONAL:
 # filter by several family parameters.
 #c.family.debug
