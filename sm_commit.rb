@@ -15,7 +15,7 @@ c = SeqMiner::Commit.new("vardb-dr-10", options = {:cleanup_log => true})
 
 # COMMIT ALL
 # this will attempt to copy sequence and domain files, generate the stats files
-# and the alignments for proteins.
+# and the alignments for proteins and CDS.
 # [WARNING] sometimes happens for combinations of species/family that are 
 # expected but the pipeline did not find anything. this happens specially in 
 # genomes of borrelia.burgodorferi, and other bacteria where the number of AV

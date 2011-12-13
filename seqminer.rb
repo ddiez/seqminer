@@ -57,12 +57,27 @@ module SeqMiner
 		end
 		
 		def install_basic
-			# download sequence data
+			# update source sequences.
 			update_sequences
-			# process sequences into common format.
 			process_sequences
-			# create blast databases.
 			process_directories
+		end
+		
+		def install_all
+			# update pfam database
+			update_pfam
+			process_pfam
+			# update source sequences
+			update_sequences
+			process_sequences
+			process_directories
+			# update models
+			update_hmm
+			sm = SeqMiner::Pipeline.new(project, options = {:cleanup_log => false})
+			sm.taxon.filter_by_type("spp")
+			sm.build_search
+			sm.search.search
+			update_pssm
 		end
 		
 		def file_log
@@ -565,6 +580,7 @@ module SeqMiner
 			commit
 			stat_sequences
 			align(what = "protein", ncpu = 16)
+			align(what = "cds", ncpu = 16)
 		end
 		
 		def commit

@@ -24,10 +24,10 @@ sm = SeqMiner::Install.new()
 # this is true when no new families or species are added compared to the imported project.
 #sm.install_basic
 
-# INSTALL COMPLETE
+# INSTALL ALL
 # this runs all the steps below.
 # it may break, in which case it is better to run them one by one
-#sm.install_complete
+#sm.install_all
 
 # 2. update Pfam (NOT NEEDED IF NOT UPDATED!)
 # RUN:
