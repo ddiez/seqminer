@@ -22,7 +22,7 @@ module Config
 			p['name'] = name
 			p['dir'] = nil
 			[@dir_etc, @dir_etc_local].each do |loc|
-				info "* file: " + loc + "projects"
+				info "* file: " + loc + "projects" if ! name
 				File.open(loc + "projects").each do |line|
 					line.chop!
 					project, dir = line.split("\t")
@@ -34,12 +34,11 @@ module Config
 						end
 					end
 				end
-				info
+				info if ! name
 			end
 			
-			info "* Either choose one of these projects or add a new one\n  to the config files."
-			
 			if name.nil?
+				info "* Either choose one of these projects or add a new one\n  to the config files."
 				info
 				exit
 			else

@@ -672,6 +672,7 @@ module SeqMiner
 			options[:type] ||= ["protein", "cds"]
 			ncpu = options[:ncpu]
 			what = options[:type]
+				
 			n = 0
 			q = Queue.new
 			family.each_family do |f|
