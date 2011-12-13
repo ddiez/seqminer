@@ -20,7 +20,7 @@ c = SeqMiner::Commit.new("vardb-dr-10", options = {:cleanup_log => true})
 # expected but the pipeline did not find anything. this happens specially in 
 # genomes of borrelia.burgodorferi, and other bacteria where the number of AV
 # genes per genome is very low or just a single genome.
-c.commit_all
+#c.commit_all
 
 # if the above fails you may need to run each step one by one.
 # OPTIONAL:
@@ -46,7 +46,7 @@ c.commit_all
 #    or multiple cpu machines. the default is ncpu = 1. queue.rb does not take into
 #    account other users or processes that may be running so choose a sensible
 #    paramenter for your system! 
-#c.align(what = "protein", ncpu = 16)
-#c.align(what = "cds", ncpu = 16)
+#c.align(:type => "protein", :ncpu => 16)
+#c.align(:type => "cds", :ncpu => 16)
 # alternatively do it all at once.
-#c.align(ncpu = 16)
+c.align(:ncpu => 16)

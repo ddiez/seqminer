@@ -9,9 +9,9 @@
 
 require 'seqminer'
 
-# 1. Install/Load project.
+# 1. INITIALIZE
+# Load project and optionally import data from previous one.
 sm = SeqMiner::Install.new()
-# RUN:
 # :import => specify a project to import data from; usually the previous release
 # :import_source => specify if the source directory is also imported; usually true
 # :cleanup_log => specify if the log file (log_install.txt) should be created new; usually true
@@ -20,7 +20,7 @@ sm = SeqMiner::Install.new()
 #sm.debug
 
 # INSTALL BASIC
-# this install option will run all steps in 3, and assumes steps 2 and 4 are not needed.
+# this install option will run only steps in 3, and assumes steps 2 and 4 are not needed.
 # this is true when no new families or species are added compared to the imported project.
 #sm.install_basic
 

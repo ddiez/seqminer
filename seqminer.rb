@@ -579,8 +579,9 @@ module SeqMiner
 		def commit_all
 			commit
 			stat_sequences
-			align(what = "protein", ncpu = 16)
-			align(what = "cds", ncpu = 16)
+			align(ncpu = 16)
+			#align(what = "protein", ncpu = 16)
+			#align(what = "cds", ncpu = 16)
 		end
 		
 		def commit
@@ -666,7 +667,11 @@ module SeqMiner
 		end
 		
 		# This is done now here, but it should probably be done in the Pipeline.
-		def align(what = ["protein", "cds"], ncpu = 1)
+		def align(options = {})
+			options[:ncpu] ||= 1
+			options[:type] ||= ["protein", "cds"]
+			ncpu = options[:ncpu]
+			what = options[:type]
 			n = 0
 			q = Queue.new
 			family.each_family do |f|
