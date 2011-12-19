@@ -119,6 +119,16 @@ module Config
 			
 				# source.
 				if @import_source
+					# import commit files (for files not in the pipeline)
+					dirs = ["othersequence", "othersequenceremoved", "genomes", "pfam", "subgroups"]
+					dirs.each do |dir1|
+						dir1 = dir_import + "commit" + dir1
+						dir2 = dir_home + "commit" + "."
+						cmd = "cp -rfv " + dir1 + " " + dir2
+						system cmd
+					end
+					
+					# import source files (for files in the pipeline)
 					file1 = dir_import + "source"
 					file2 = dir_home + "."
 					cmd = "cp -rfv " + file1 + " " + file2
