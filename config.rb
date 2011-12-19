@@ -193,7 +193,7 @@ module Config
 			@dir_sequence = dir_home + "sequence"
 			@dir_model = dir_home + "model"
 			@dir_pfam = dir_home + "pfam"
-			@dir_pfam_home = Pathname.new("/Volumes/Biodev/db/pfam")
+			@dir_pfam_home = Pathname.new("/Volumes/varDB/pfam")
 			@dir_pfam_current = @dir_pfam_home + "current"
 			
 			(@db_host, @db_release) = _read_databases
